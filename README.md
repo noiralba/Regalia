@@ -427,19 +427,93 @@ Själva routingstrukturen byggs vidare under projektets utveckling.
 
 # Databas
 
-Projektet ska använda MySQL.
+Projektet använder MySQL.
 
-Backend använder paketet:
+MySQL-databasen ligger på en extern server och backend ansluter till den med paketet:
 
 ```text
 mysql2
 ```
 
-för att kommunicera med MySQL-databasen.
+Själva databasanslutningen finns i:
 
-MySQL-anslutningen är ännu inte färdigkopplad.
+```text
+backend/db.js
+```
 
-När vi får databasens anslutningsuppgifter läggs de i varje utvecklares lokala `.env`.
+`db.js` skapar en connection pool med `mysql2/promise`.
+
+Förenklat ser flödet ut så här:
+
+```text
+Express backend
+      │
+      ▼
+backend/db.js
+      │
+      ▼
+mysql2 connection pool
+      │
+      ▼
+MySQL-server
+      │
+      ▼
+webapp
+```
+
+En connection pool används så att backend kan återanvända databasanslutningar när flera API-routes senare behöver läsa eller skriva data.
+
+Anslutningsuppgifterna hämtas från den lokala:
+
+```text
+backend/.env
+```
+
+via `dotenv`.
+
+Exempel på vilka miljövariabler som används:
+
+```env
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+```
+
+De riktiga värdena finns aldrig i koden eller i GitHub.
+
+MySQL-servern använder ett självsignerat SSL-certifikat. Därför används följande SSL-inställning enligt instruktionerna för projektets databasserver:
+
+```js
+ssl: {
+  rejectUnauthorized: false,
+}
+```
+
+Databasanslutningen har verifierats från Node-backend med SQL-frågan:
+
+```sql
+SELECT NOW() AS now;
+```
+
+Databasen returnerade ett korrekt svar, vilket verifierar att följande delar fungerar tillsammans:
+
+```text
+.env
+ ↓
+dotenv
+ ↓
+mysql2/promise
+ ↓
+SSL
+ ↓
+MySQL-server
+ ↓
+webapp
+```
+
+Databasanslutningen är alltså klar. Själva tabellerna och projektets SQL-frågor byggs vidare utifrån ER-modellen.
 
 ---
 
