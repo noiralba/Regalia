@@ -30,6 +30,7 @@ Projektet består av en frontend, en backend och en MySQL-databas.
 - bcrypt
 - uuid
 - dotenv
+- cors
 
 ### Utvecklingsmiljö
 
@@ -223,6 +224,7 @@ Här installeras bland annat:
 - bcrypt
 - uuid
 - dotenv
+- cors
 
 ---
 
