@@ -12,3 +12,8 @@ app.get("/api", (req, res) => {
 app.listen(port, () => {
   console.log(`Backend kör på http://localhost:${port}`);
 });
+
+// Det här är liknar grundupplägget som Express visar i sin "Hello-world"-guide.
+// Skapa Express (), definera en route och starta servern med app.listen(...)
+// Källa: https://expressjs.com/en/starter/hello-world/
+//Maria
