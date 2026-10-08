@@ -1,0 +1,922 @@
+{
+  "nowShowing": [
+    {
+  "id": "the-odyssey",
+  "title": "The Odyssey",
+  "productionYear": 2026,
+
+  "categories": [
+    "Äventyr",
+    "Action",
+    "Drama",
+    "Fantasy"
+  ],
+
+  "ageRating": 11,
+
+  "duration": 180,
+
+  "language": {
+    "original": "Engelska",
+    "subtitles": "Svenska"
+  },
+
+  "posterImage": "https://cdng.europosters.eu/pod_public/1300/321147.jpg",
+
+  "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
+
+  "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
+
+  "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
+
+  "director": {
+    "name": "Christopher Nolan",
+    "image": "/images/people/christopher-nolan.jpg"
+  },
+
+  "cast": [
+    {
+      "name": "Matt Damon",
+      "character": "Odysseus",
+      "image": "/images/people/matt-damon.jpg"
+    },
+    {
+      "name": "Anne Hathaway",
+      "character": "Penelope",
+      "image": "/images/people/anne-hathaway.jpg"
+    },
+    {
+      "name": "Tom Holland",
+      "character": "Telemachus",
+      "image": "/images/people/tom-holland.jpg"
+    },
+    {
+      "name": "Zendaya",
+      "character": "Athena",
+      "image": "/images/people/zendaya.jpg"
+    },
+    {
+      "name": "Robert Pattinson",
+      "character": "Atinous",
+      "image": "/images/people/robert-pattinson.jpg"
+    }
+  ]
+},
+    {
+      "id": "digger",
+      "title": "Digger",
+      "productionYear": 2026,
+
+      "categories": [
+        "Drama",
+        "Komedi",
+        "Satir"
+      ],
+
+      "ageRating": 11,
+
+      "duration": 129,
+
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/digger-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=qORTe1wW3Wg",
+
+      "shortDescription": "En mäktig oljemiljardär försöker övertyga världen om att han är mänsklighetens räddare innan katastrofen han själv orsakat förstör allt.",
+
+      "longDescription": "Digger Rockwell är världens mäktigaste man och en av världens rikaste oljemiljardärer. När en katastrof som han själv har orsakat hotar att förändra världen försöker han desperat övertyga mänskligheten om att han är dess räddare. Filmen är en mörk och satirisk berättelse om makt, girighet, miljökatastrofer och ansvar.",
+
+      "director": {
+        "name": "Alejandro G. Iñárritu",
+        "image": "/images/people/alejandro-inarritu.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Tom Cruise",
+          "character": "Digger Rockwell",
+          "image": "/images/people/tom-cruise.jpg"
+        },
+        {
+          "name": "Riz Ahmed",
+          "character": "Ganesh",
+          "image": "/images/people/riz-ahmed.jpg"
+        },
+        {
+          "name": "John Goodman",
+          "character": "President Compson",
+          "image": "/images/people/john-goodman.jpg"
+        },
+        {
+          "name": "Sandra Hüller",
+          "character": "Emma Rockwell",
+          "image": "/images/people/sandra-huller.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "verity",
+      "title": "Verity",
+      "productionYear": 2026,
+
+      "categories": [
+        "Thriller",
+        "Mystery",
+        "Drama"
+      ],
+
+      "ageRating": 15,
+
+      "duration": 117,
+
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/verity-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=xdPMKhjMSFs",
+
+      "shortDescription": "En ung författare upptäcker mörka hemligheter när hon flyttar in hos den berömda författaren Verity Crawford.",
+
+      "longDescription": "Lowen Ashleigh får i uppdrag att slutföra bokserien åt den berömda författaren Verity Crawford efter att en olycka gjort Verity oförmögen att skriva. När Lowen flyttar in hos familjen hittar hon ett manuskript som avslöjar mörka och skrämmande hemligheter. Snart börjar hon tvivla på vad som egentligen är sant.",
+
+      "director": {
+        "name": "Michael Showalter",
+        "image": "/images/people/michael-showalter.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Anne Hathaway",
+          "character": "Verity Crawford",
+          "image": "/images/people/anne-hathaway.jpg"
+        },
+        {
+          "name": "Dakota Johnson",
+          "character": "Lowen Ashleigh",
+          "image": "/images/people/dakota-johnson.jpg"
+        },
+        {
+          "name": "Josh Hartnett",
+          "character": "Jeremy Crawford",
+          "image": "/images/people/josh-hartnett.jpg"
+        },
+        {
+          "name": "Ismael Cruz Cordova",
+          "character": "Okänd",
+          "image": "/images/people/ismael-cruz-cordova.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "resident-evil",
+      "title": "Resident Evil",
+      "productionYear": 2026,
+
+      "categories": [
+        "Action",
+        "Skräck",
+        "Thriller"
+      ],
+
+      "ageRating": 15,
+
+      "duration": 94,
+
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/resident-evil-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=mNd1gb19A-c",
+
+      "shortDescription": "Den medicinske kuriren Bryan dras ovetande in i en intensiv kamp för överlevnad.",
+
+      "longDescription": "Den medicinske kuriren Bryan dras ovetande in i en intensiv kamp för överlevnad i en skoningslös kamp mot klockan. Resident Evil är en actionfylld skräckfilm som tar tittarna med på en spännande resa genom en värld fylld av faror och mysterier.",
+
+      "director": {
+        "name": "Zach Cregger",
+        "image": "/images/people/zach-cregger.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Austin Abrams",
+          "character": "Bryan",
+          "image": "/images/people/austin-abrams.jpg"
+        },
+        {
+          "name": "Zach Cherry",
+          "character": "Carl",
+          "image": "/images/people/zach-cherry.jpg"
+        },
+        {
+          "name": "Kali Reis",
+          "character": "Maxine",
+          "image": "/images/people/kali-reis.jpg"
+        },
+        {
+          "name": "Paul Walter Hauser",
+          "character": "Paul",
+          "image": "/images/people/paul-walter-hauser.jpg"
+        },
+        {
+          "name": "Will Merrick",
+          "character": "Dave",
+          "image": "/images/people/will-merrick.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "fjord",
+      "title": "Fjord",
+      "productionYear": 2026,
+
+      "categories": [
+        "Drama",
+        "Familj",
+        "Thriller"
+      ],
+
+      "ageRating": null,
+
+      "duration": 146,
+
+      "language": {
+        "original": "Norska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/fjord-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=0gdRZZVoinM",
+
+      "shortDescription": "En familj flyttar till Norge för att börja om, men en konflikt med en grannfamilj förändrar allt.",
+
+      "longDescription": "Det rumänsk-norska paret Mihai och Lisbeth flyttar till Norge med sina barn efter att Mihais föräldrar gått bort. De lär känna grannfamiljen Halberg och relationerna blir allt närmare. Men när parets dotter Elia kommer till skolan med blåmärken väcks misstankar och snart hamnar de båda familjerna i en konflikt om uppfostran, tro och frihet.",
+
+      "director": {
+        "name": "Cristian Mungiu",
+        "image": "/images/people/cristian-mungiu.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Sebastian Stan",
+          "character": "Mihai Gheorghiu",
+          "image": "/images/people/sebastian-stan.jpg"
+        },
+        {
+          "name": "Renate Reinsve",
+          "character": "Lisbeth Gheorghiu",
+          "image": "/images/people/renate-reinsve.jpg"
+        },
+        {
+          "name": "Lisa Carlehed",
+          "character": "Mia",
+          "image": "/images/people/lisa-carlehed.jpg"
+        },
+        {
+          "name": "Ellen Dorrit Petersen",
+          "character": "Gunda",
+          "image": "/images/people/ellen-dorrit-petersen.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "bortglömda-ön",
+      "title": "Bortglömda ön",
+      "productionYear": 2026,
+
+      "categories": [
+        "Äventyr",
+        "Komedi",
+        "Familj"
+      ],
+
+      "ageRating": 7,
+
+      "duration": 109,
+
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/bortglömda-ön-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=Ri2KipSRQ4E",
+
+      "shortDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor.",
+
+      "longDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor. När de firar sin sista kväll tillsammans, råkar Jo och Raissa hitta en mystisk portal som transporterar dem till den fantastiska ön Nakali, full av de magiska och mytologiska väsen som hört berättelser om under uppväxten i sina filippinska familjer. En del av de här varelserna blir vänner, andra blir fiender. I sällskap med den välmenande men olyckliga hunden Raww och ett litet men mäktiga gäng kompisar, måste Jo och Raissa möta Den Fruktande Manananggal, den mest skräckinjagande varelsen på ön. När de upptäcker att priset för att återvända hem är att förlora alla minnena av deras vänskap, måste Jo och Raissa skynda sig att hitta ett sätt att lämna ön innan de helt glömmer bort varandra, för evigt.",
+
+      "director": {
+        "name": "Joel Crawford",
+        "image": "/images/people/joel-crawford.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "H.E.R",
+          "character": "Jo",
+          "image": "/images/people/her.jpg"
+        },
+        {
+          "name": "Liza Soberano",
+          "character": "Raissa",
+          "image": "/images/people/liza-soberano.jpg"
+        },
+        {
+          "name": "Dave Franco",
+          "character": "Raww",
+          "image": "/images/people/dave-franco.jpg"
+        },
+        {
+          "name": "Jenny Slate",
+          "character": "Batiba",
+          "image": "/images/people/jenny-slate.jpg"
+        }
+      ]
+    }
+  ],
+
+  "upcoming": [
+      {
+      "id": "arkipelag",
+      "title": "Arkipelag",
+      "productionYear": 2026,
+      "releaseDate": "2026-10-09",
+
+      "categories": [
+        "Drama",
+        "Komedi"
+      ],
+
+      "ageRating": 15,
+
+      "duration": 107,
+
+      "language": {
+        "original": "Svenska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/arkipelag-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=ke00C6G7ewg",
+
+      "shortDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö där lek snabbt övergår i maktkamp.",
+
+      "longDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö. När de blir strandsatta tillsammans med en stökig högstadieklass väcks gamla tonårstrauman till liv. Snart börjar både ungdomar och vuxna tvingas fundera över gränsen mellan lek, maktkamp, offer och förövare.",
+
+      "director": {
+        "name": "Alex Schulman",
+        "image": "/images/people/alex-schulman.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Gustaf Skarsgård",
+          "character": "Pappa",
+          "image": "/images/people/gustaf-skarsgard.jpg"
+        },
+        {
+          "name": "Fares Fares",
+          "character": "Pappa",
+          "image": "/images/people/fares-fares.jpg"
+        },
+        {
+          "name": "Linus Wahlgren",
+          "character": "Pappa",
+          "image": "/images/people/linus-wahlgren.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "nelly-rapp-porten-till-underjorden",
+      "title": "Nelly Rapp - Porten till underjorden",
+      "productionYear": 2026,
+      "releaseDate": "2026-10-16",
+
+      "categories": [
+        "Fantasy",
+        "Komedi",
+        "Familj",
+        "Äventyr"
+      ],
+
+      "ageRating": 11,
+
+      "duration": 84,
+
+      "language": {
+        "original": "Svenska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/nelly-rapp-porten-till-underjorden-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=hA6Ep3Nmx2c",
+
+      "shortDescription": "Nelly måste stoppa en uråldrig vampyr från att öppna porten till underjorden.",
+
+      "longDescription": "När Nelly återförenas med sin mamma får hon veta att en uråldrig vampyr planerar att öppna porten till underjorden. Där väntar en slumrande ondska som hotar att släppas fri. Tillsammans med Valle och London måste Nelly försöka stoppa vampyren innan katastrofen är ett faktum.",
+
+      "director": {
+        "name": "Johan Rosell",
+        "image": "/images/people/johan-rosell.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Matilda Gross",
+          "character": "Nelly Rapp",
+          "image": "/images/people/matilda-gross.jpg"
+        },
+        {
+          "name": "Marianne Mörck",
+          "character": "Lena-Sleva",
+          "image": "/images/people/marianne-morck.jpg"
+        },
+        {
+          "name": "Johan Rheborg",
+          "character": "Hannibal",
+          "image": "/images/people/johan-rheborg.jpg"
+        },
+        {
+          "name": "Malin Levanon",
+          "character": "Hekla",
+          "image": "/images/people/malin-levanon.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "wildwood",
+      "title": "Wildwood",
+      "productionYear": 2026,
+      "releaseDate": "2026-10-23",
+
+      "categories": [
+        "Animerat",
+        "Fantasy",
+        "Äventyr",
+        "Action"
+      ],
+
+      "ageRating": 11,
+
+      "duration": 110,
+
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/wildwood-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=dtr5JL1zkiM",
+
+      "shortDescription": "En flicka ger sig in i en magisk och farlig skog för att rädda sin lillebror.",
+
+      "longDescription": "Prue McKeel kastas in i ett mystiskt och farligt äventyr när hennes lillebror försvinner in i Wildwood, en förbjuden skog fylld av magiska varelser och hemligheter. Tillsammans med sin vän Curtis måste hon ge sig in i den okända världen för att hitta sin bror och upptäcka vad som egentligen döljer sig bakom skogen.",
+
+      "director": {
+        "name": "Travis Knight",
+        "image": "/images/people/travis-knight.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Peyton Elizabeth Lee",
+          "character": "Prue McKeel",
+          "image": "/images/people/peyton-elizabeth-lee.jpg"
+        },
+        {
+          "name": "Jacob Tremblay",
+          "character": "Curtis Mehlberg",
+          "image": "/images/people/jacob-tremblay.jpg"
+        },
+        {
+          "name": "Carey Mulligan",
+          "character": "Alexandra",
+          "image": "/images/people/carey-mulligan.jpg"
+        },
+        {
+          "name": "Mahershala Ali",
+          "character": "Brenden",
+          "image": "/images/people/mahershala-ali.jpg"
+        },
+        {
+          "name": "Angela Bassett",
+          "character": "The General",
+          "image": "/images/people/angela-bassett.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "hunger-games-sunrise-on-the-reaping",
+      "title": "The Hunger Games: Sunrise on the Reaping",
+      "productionYear": 2026,
+      "releaseDate": "2026-11-20",
+
+      "categories": [
+        "Action",
+        "Äventyr",
+        "Sci-Fi",
+        "Drama",
+        "Fantasy"
+      ],
+
+      "ageRating": 15,
+
+      "duration": 150,
+
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/hunger-games-sunrise-on-the-reaping-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=fS35YSjopjE",
+
+      "shortDescription": "Haymitch kastas in i den 50:e Hungerspelen, där han måste kämpa för sitt liv i Panems brutala arena.",
+
+      "longDescription": "Berättelsen utspelar sig 24 år före den första Hunger Games-filmen och börjar på morgonen då den 50:e upplagan av Hungerspelen ska lottas. Haymitch Abernathy väljs ut som deltagare och tvingas in i en brutal kamp där han måste försöka överleva samtidigt som han bildar en oväntad allians med Maysilee Donner.",
+
+      "director": {
+        "name": "Francis Lawrence",
+        "image": "/images/people/francis-lawrence.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Joseph Zada",
+          "character": "Haymitch Abernathy",
+          "image": "/images/people/joseph-zada.jpg"
+        },
+        {
+          "name": "Mckenna Grace",
+          "character": "Maysilee Donner",
+          "image": "/images/people/mckenna-grace.jpg"
+        },
+        {
+          "name": "Elle Fanning",
+          "character": "Effie Trinket",
+          "image": "/images/people/elle-fanning.jpg"
+        },
+        {
+          "name": "Ralph Fiennes",
+          "character": "President Snow",
+          "image": "/images/people/ralph-fiennes.jpg"
+        },
+        {
+          "name": "Jesse Plemons",
+          "character": "Plutarch Heavensbee",
+          "image": "/images/people/jesse-plemons.jpg"
+        }
+      ]
+    },
+
+    {
+      "id": "avengers-doomsday",
+      "title": "Avengers: Doomsday",
+      "productionYear": 2026,
+      "releaseDate": "2026-12-16",
+
+      "categories": [
+        "Action",
+        "Äventyr",
+        "Sci-Fi",
+        "Superhjälte"
+      ],
+
+      "ageRating": 11,
+
+      "duration": 150,
+
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+
+      "posterImage": "/images/movies/avengers-doomsday-poster.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=irVNGjRFZGk",
+
+      "shortDescription": "Marvels Avengers återvänder för att möta ett nytt hot som kan förändra hela universum.",
+
+      "longDescription": "Avengers: Doomsday samlar flera av Marvels hjältar när ett nytt och mycket stort hot dyker upp. Filmen blir nästa stora kapitel i Marvel Cinematic Universe och samlar en omfattande ensemble av både nya och välbekanta karaktärer.",
+
+      "director": {
+        "name": "Anthony Russo & Joe Russo",
+        "image": "/images/people/russo-brothers.jpg"
+      },
+
+      "cast": [
+        {
+          "name": "Robert Downey Jr.",
+          "character": "Doctor Doom",
+          "image": "/images/people/robert-downey-jr.jpg"
+        },
+        {
+          "name": "Chris Hemsworth",
+          "character": "Thor",
+          "image": "/images/people/chris-hemsworth.jpg"
+        },
+        {
+          "name": "Anthony Mackie",
+          "character": "Captain America",
+          "image": "/images/people/anthony-mackie.jpg"
+        },
+        {
+          "name": "Florence Pugh",
+          "character": "Yelena Belova",
+          "image": "/images/people/florence-pugh.jpg"
+        },
+        {
+          "name": "Tom Holland",
+          "character": "Spider-Man",
+          "image": "/images/people/tom-holland.jpg"
+        }
+      ]
+    }
+  ],
+
+  "specialEvents": [
+    {
+      "id": "halloween-classic-night",
+      "eventType": "Halloween",
+      "title": "Halloween Classic Night",
+      "movieTitle": "Halloween",
+      "productionYear": 1978,
+      "eventDate": "2026-10-24",
+      "categories": [
+        "Skräck",
+        "Slasher",
+        "Klassiker"
+      ],
+      "ageRating":  15,
+
+      "duration": 91,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/halloween-classic-night.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=3JsrH8eUVOo",
+
+      "shortDescription": "Fira Halloween med John Carpenters ikoniska skräckklassiker Halloween.",
+      "longDescription": "En mörk Halloweenkväll återvänder Michael Myers till Haddonfield efter flera år på institution. Upplev en av skräckfilmshistoriens mest ikoniska filmer på stor duk i en exklusiv Halloweenvisning."
+    },
+
+    {
+      "id": "halloween-horror-marathon",
+      "eventType": "Halloween",
+      "title": "Horror Marathon",
+      "movieTitle": "The Conjuring",
+      "productionYear": 2013,
+      "eventDate": "2026-10-24",
+      "categories": [
+        "Skräck",
+        "Övernaturlig",
+        "Thriller"
+      ],
+      "ageRating": 15,
+      "duration": 112,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/horror-marathon.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=ejMMn0t58Lc",
+
+      "shortDescription": "En klassisk spökhistoria för dig som vågar stanna kvar när lamporna släcks.",
+      "longDescription": "Ed och Lorraine Warren hjälper en familj som flyttat in i ett hus där något mörkt och övernaturligt verkar ha vaknat. Se filmen tillsammans med andra skräckälskare under en sen Halloweenvisning."
+    },
+
+    {
+      "id": "halloween-family",
+      "eventType": "Halloween",
+      "title": "Halloween för hela familjen",
+      "movieTitle": "Hocus Pocus",
+      "productionYear": 1993,
+      "eventDate": "2026-10-25",
+      "categories": [
+        "Fantasy",
+        "Komedi",
+        "Familj"
+      ],
+      "ageRating": 7,
+      "duration": 96,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/hocus-pocus-halloween.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=F4e6YQFrt1s",
+
+      "shortDescription": "En magisk Halloweenvisning för hela familjen med de tre busiga Sanderson-systrarna.",
+      "longDescription": "När tre häxor återuppstår på Halloween måste en grupp barn försöka stoppa dem innan de sprider kaos över staden. En färgstark Halloweenklassiker för både barn och vuxna."
+    },
+
+    {
+      "id": "halloween-nightmare",
+      "eventType": "Halloween",
+      "title": "Nightmare Before Halloween",
+      "movieTitle": "The Nightmare Before Christmas",
+      "productionYear": 1993,
+      "eventDate": "2026-10-25",
+      "categories": [
+        "Animerat",
+        "Fantasy",
+        "Musikal"
+      ],
+      "ageRating": 7,
+      "duration": 77,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/nightmare-before-christmas.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=wr6N_hZyBCk",
+
+      "shortDescription": "Följ med Jack Skellington när Halloween möter julens magi.",
+      "longDescription": "Jack Skellington, kungen av Halloween Town, har tröttnat på samma gamla Halloweenfirande. När han upptäcker Christmas Town bestämmer han sig för att själv skapa jul – med minst sagt kaotiska konsekvenser."
+    },
+
+    {
+      "id": "halloween-scream-night",
+      "eventType": "Halloween",
+      "title": "Scream Night",
+      "movieTitle": "Scream",
+      "productionYear": 1996,
+      "eventDate": "2026-10-30",
+      "categories": [
+        "Skräck",
+        "Slasher",
+        "Mystery"
+      ],
+      "ageRating": 15,
+      "duration": 111,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/scream-night.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=i3J6ACKQ7K0",
+
+      "shortDescription": "Ghostface är tillbaka – upplev den ikoniska slasherklassikern på stor duk.",
+      "longDescription": "En mystisk mördare börjar terrorisera en liten stad och använder skräckfilmernas regler för att välja sina offer. Upplev Wes Cravens moderna skräckklassiker under en exklusiv Halloweenkväll."
+    },
+
+    {
+      "id": "halloween-beetlejuice",
+      "eventType": "Halloween",
+      "title": "Beetlejuice Halloween Party",
+      "movieTitle": "Beetlejuice",
+      "productionYear": 1988,
+      "eventDate": "2026-10-30",
+      "categories": [
+        "Fantasy",
+        "Komedi",
+        "Skräck"
+      ],
+      "ageRating": 11,
+      "duration": 92,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/beetlejuice-halloween.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=ickbVzajrk0",
+
+      "shortDescription": "En färgstark Halloweenkväll fylld av mörk humor, spöken och Beetlejuice.",
+      "longDescription": "Ett nygift par dör i en olycka och upptäcker att deras hus fortfarande är deras hem. När en ny familj flyttar in försöker de få hjälp av den kaotiske och excentriske Beetlejuice."
+    },
+
+    {
+      "id": "halloween-exorcist",
+      "eventType": "Halloween",
+      "title": "Midnight Horror",
+      "movieTitle": "The Exorcist",
+      "productionYear": 1973,
+      "eventDate": "2026-10-31",
+      "categories": [
+        "Skräck",
+        "Övernaturlig",
+        "Klassiker"
+      ],
+      "ageRating": 15,
+      "duration": 123,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/exorcist-midnight.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=BU2eYAO31Cc",
+
+      "shortDescription": "Vågar du möta natten med en av skräckfilmens mest ikoniska filmer?",
+      "longDescription": "När en ung flicka börjar uppvisa allt mer skrämmande beteende söker hennes mamma desperat efter hjälp. En legendarisk skräckklassiker visas vid midnatt på Halloween."
+    },
+
+    {
+      "id": "halloween-coraline",
+      "eventType": "Halloween",
+      "title": "Coraline Spooky Afternoon",
+      "movieTitle": "Coraline",
+      "productionYear": 2009,
+      "eventDate": "2026-10-31",
+      "categories": [
+        "Animerat",
+        "Fantasy",
+        "Skräck"
+      ],
+      "ageRating": 11,
+      "duration": 100,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/coraline-halloween.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=m9bOpeuvNwY",
+
+      "shortDescription": "Coraline upptäcker en annan värld bakom en hemlig dörr – men allt är inte som det verkar.",
+      "longDescription": "Coraline upptäcker en hemlig dörr i sitt nya hem som leder till en alternativ värld. Där verkar allt vara bättre än hemma, men snart upptäcker hon att den perfekta världen döljer en mörk hemlighet."
+    },
+
+    {
+      "id": "halloween-rocky-horror",
+      "eventType": "Halloween",
+      "title": "Rocky Horror Halloween",
+      "movieTitle": "The Rocky Horror Picture Show",
+      "productionYear": 1975,
+      "eventDate": "2026-10-31",
+      "categories": [
+        "Musikal",
+        "Komedi",
+        "Kultfilm"
+      ],
+      "ageRating": 15,
+      "duration": 105,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/rocky-horror-halloween.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=JWoYy4Ah81s&list=RDJWoYy4Ah81s&start_radio=1",
+      "shortDescription": "En galen Halloweenkväll med kultfilmen som aldrig går ur tiden.",
+      "longDescription": "När Brad och Janet får problem med bilen söker de skydd i ett mystiskt slott. Där möter de den excentriske Dr. Frank-N-Furter och dras in i en natt de sent kommer att glömma."
+    },
+
+    {
+      "id": "halloween-shining",
+      "eventType": "Halloween",
+      "title": "The Shining – Haunted Cinema",
+      "movieTitle": "The Shining",
+      "productionYear": 1980,
+      "eventDate": "2026-10-31",
+      "categories": [
+        "Skräck",
+        "Psykologisk thriller",
+        "Klassiker"
+      ],
+      "ageRating": 15,
+      "duration": 138,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/the-shining-halloween.jpg",
+
+      "trailerUrl": "https://www.youtube.com/watch?v=S014oGZiSdI",
+
+      "shortDescription": "Fira Halloween med Stanley Kubricks ikoniska psykologiska skräckklassiker.",
+      "longDescription": "Jack Torrance tar med sin familj till ett isolerat hotell där han ska arbeta som vaktmästare under vintern. När hotellets mörka historia börjar göra sig påmind förändras allt."
+    }
+  ]
+}
+
