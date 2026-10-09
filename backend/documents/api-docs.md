@@ -1,6 +1,8 @@
 # Regalia API – Documentaion
 
-Bas-URL: `http://localhost:3000`
+Follow this examples and document all the respones for CRUD!
+
+Base-URL: `http://localhost:3000`
 
 
 # Movies
@@ -8,7 +10,7 @@ Bas-URL: `http://localhost:3000`
 
 Get all the movies from database.
 
-**Svar:** `200 OK`
+**Respons:** `200 OK`
 
 ```json
 //An example of how you can document an endpoint
