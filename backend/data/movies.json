@@ -284,6 +284,51 @@
       "id": "de414ebc-d7ce-5219-914e-d5fee6428226",
       "name": "Florence Pugh",
       "image": "/images/people/florence-pugh.jpg"
+    },
+    {
+      "id": "e1bdeadc-090d-48c1-a81b-204e3d90fe94",
+      "name": "John Carpenter",
+      "image": "/images/people/john-carpenter.jpg"
+    },
+    {
+      "id": "40a9cff9-4eaf-48b0-a054-4fb136ae1dd6",
+      "name": "James Wan",
+      "image": "/images/people/james-wan.jpg"
+    },
+    {
+      "id": "03d341ee-8d53-4a34-82d0-20ccf8901bc9",
+      "name": "Kenny Ortega",
+      "image": "/images/people/kenny-ortega.jpg"
+    },
+    {
+      "id": "0e8f5c3e-9856-4fa7-b187-ea2babe4b8de",
+      "name": "Henry Selick",
+      "image": "/images/people/henry-selick.jpg"
+    },
+    {
+      "id": "1932590b-2056-4be9-9ec0-b443fa6d8f61",
+      "name": "Wes Craven",
+      "image": "/images/people/wes-craven.jpg"
+    },
+    {
+      "id": "23930651-81b8-40bd-b5d8-cdfa158ecc6d",
+      "name": "Tim Burton",
+      "image": "/images/people/tim-burton.jpg"
+    },
+    {
+      "id": "f49933d6-433d-4dd7-8c6a-c51856f61eb4",
+      "name": "William Friedkin",
+      "image": "/images/people/william-friedkin.jpg"
+    },
+    {
+      "id": "ad86a093-3309-4795-bcff-f7a24e590f53",
+      "name": "Jim Sharman",
+      "image": "/images/people/jim-sharman.jpg"
+    },
+    {
+      "id": "61d94730-a7b2-4c4d-b164-c4b33325c5c3",
+      "name": "Stanley Kubrick",
+      "image": "/images/people/stanley-kubrick.jpg"
     }
   ],
   "categories": [
@@ -555,7 +600,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=3JsrH8eUVOo",
       "shortDescription": "Fira Halloween med John Carpenters ikoniska skräckklassiker Halloween.",
       "longDescription": "En mörk Halloweenkväll återvänder Michael Myers till Haddonfield efter flera år på institution. Upplev en av skräckfilmshistoriens mest ikoniska filmer på stor duk i en exklusiv Halloweenvisning.",
-      "director_id": null
+      "director_id": "e1bdeadc-090d-48c1-a81b-204e3d90fe94"
     },
     {
       "id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
@@ -571,7 +616,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=ejMMn0t58Lc",
       "shortDescription": "En klassisk spökhistoria för dig som vågar stanna kvar när lamporna släcks.",
       "longDescription": "Ed och Lorraine Warren hjälper en familj som flyttat in i ett hus där något mörkt och övernaturligt verkar ha vaknat. Se filmen tillsammans med andra skräckälskare under en sen Halloweenvisning.",
-      "director_id": null
+      "director_id": "40a9cff9-4eaf-48b0-a054-4fb136ae1dd6"
     },
     {
       "id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
@@ -587,7 +632,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=F4e6YQFrt1s",
       "shortDescription": "En magisk Halloweenvisning för hela familjen med de tre busiga Sanderson-systrarna.",
       "longDescription": "När tre häxor återuppstår på Halloween måste en grupp barn försöka stoppa dem innan de sprider kaos över staden. En färgstark Halloweenklassiker för både barn och vuxna.",
-      "director_id": null
+      "director_id": "03d341ee-8d53-4a34-82d0-20ccf8901bc9"
     },
     {
       "id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
@@ -603,7 +648,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=wr6N_hZyBCk",
       "shortDescription": "Följ med Jack Skellington när Halloween möter julens magi.",
       "longDescription": "Jack Skellington, kungen av Halloween Town, har tröttnat på samma gamla Halloweenfirande. När han upptäcker Christmas Town bestämmer han sig för att själv skapa jul – med minst sagt kaotiska konsekvenser.",
-      "director_id": null
+      "director_id": "0e8f5c3e-9856-4fa7-b187-ea2babe4b8de"
     },
     {
       "id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
@@ -619,7 +664,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=i3J6ACKQ7K0",
       "shortDescription": "Ghostface är tillbaka – upplev den ikoniska slasherklassikern på stor duk.",
       "longDescription": "En mystisk mördare börjar terrorisera en liten stad och använder skräckfilmernas regler för att välja sina offer. Upplev Wes Cravens moderna skräckklassiker under en exklusiv Halloweenkväll.",
-      "director_id": null
+      "director_id": "1932590b-2056-4be9-9ec0-b443fa6d8f61"
     },
     {
       "id": "7982d999-171a-5e70-9e4c-a1033c462d98",
@@ -635,7 +680,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=ickbVzajrk0",
       "shortDescription": "En färgstark Halloweenkväll fylld av mörk humor, spöken och Beetlejuice.",
       "longDescription": "Ett nygift par dör i en olycka och upptäcker att deras hus fortfarande är deras hem. När en ny familj flyttar in försöker de få hjälp av den kaotiske och excentriske Beetlejuice.",
-      "director_id": null
+      "director_id": "23930651-81b8-40bd-b5d8-cdfa158ecc6d"
     },
     {
       "id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
@@ -651,7 +696,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=BU2eYAO31Cc",
       "shortDescription": "Vågar du möta natten med en av skräckfilmens mest ikoniska filmer?",
       "longDescription": "När en ung flicka börjar uppvisa allt mer skrämmande beteende söker hennes mamma desperat efter hjälp. En legendarisk skräckklassiker visas vid midnatt på Halloween.",
-      "director_id": null
+      "director_id": "f49933d6-433d-4dd7-8c6a-c51856f61eb4"
     },
     {
       "id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
@@ -667,7 +712,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=m9bOpeuvNwY",
       "shortDescription": "Coraline upptäcker en annan värld bakom en hemlig dörr – men allt är inte som det verkar.",
       "longDescription": "Coraline upptäcker en hemlig dörr i sitt nya hem som leder till en alternativ värld. Där verkar allt vara bättre än hemma, men snart upptäcker hon att den perfekta världen döljer en mörk hemlighet.",
-      "director_id": null
+      "director_id": "0e8f5c3e-9856-4fa7-b187-ea2babe4b8de"
     },
     {
       "id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
@@ -683,7 +728,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=JWoYy4Ah81s&list=RDJWoYy4Ah81s&start_radio=1",
       "shortDescription": "En galen Halloweenkväll med kultfilmen som aldrig går ur tiden.",
       "longDescription": "När Brad och Janet får problem med bilen söker de skydd i ett mystiskt slott. Där möter de den excentriske Dr. Frank-N-Furter och dras in i en natt de sent kommer att glömma.",
-      "director_id": null
+      "director_id": "ad86a093-3309-4795-bcff-f7a24e590f53"
     },
     {
       "id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
@@ -699,7 +744,7 @@
       "trailerUrl": "https://www.youtube.com/watch?v=S014oGZiSdI",
       "shortDescription": "Fira Halloween med Stanley Kubricks ikoniska psykologiska skräckklassiker.",
       "longDescription": "Jack Torrance tar med sin familj till ett isolerat hotell där han ska arbeta som vaktmästare under vintern. När hotellets mörka historia börjar göra sig påmind förändras allt.",
-      "director_id": null
+      "director_id": "61d94730-a7b2-4c4d-b164-c4b33325c5c3"
     }
   ],
   "movie_categories": [
