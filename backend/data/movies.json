@@ -1,0 +1,1221 @@
+{
+  "persons": [
+    {
+      "id": "bab4795d-c38e-51c4-a013-f931be094a4c",
+      "name": "Christopher Nolan",
+      "image": "/images/people/christopher-nolan.jpg"
+    },
+    {
+      "id": "3bfa2956-71ff-57e2-a06f-e2e3551f557d",
+      "name": "Matt Damon",
+      "image": "/images/people/matt-damon.jpg"
+    },
+    {
+      "id": "aa8966cf-2ace-58ec-ab2a-022a434331da",
+      "name": "Anne Hathaway",
+      "image": "/images/people/anne-hathaway.jpg"
+    },
+    {
+      "id": "50cc397c-1346-59da-b5e7-ca09db7b3ec6",
+      "name": "Tom Holland",
+      "image": "/images/people/tom-holland.jpg"
+    },
+    {
+      "id": "326a53c0-8380-577d-8d48-13b9d3585078",
+      "name": "Zendaya",
+      "image": "/images/people/zendaya.jpg"
+    },
+    {
+      "id": "d8a9a853-7399-579b-aa15-63cf9a4e7d1e",
+      "name": "Robert Pattinson",
+      "image": "/images/people/robert-pattinson.jpg"
+    },
+    {
+      "id": "98444e80-98ad-5c03-80de-2abd73692930",
+      "name": "Alejandro G. Iñárritu",
+      "image": "/images/people/alejandro-inarritu.jpg"
+    },
+    {
+      "id": "f84f442b-ab1e-55ad-a3a8-d94137cfab15",
+      "name": "Tom Cruise",
+      "image": "/images/people/tom-cruise.jpg"
+    },
+    {
+      "id": "f94b2694-289a-5795-83d3-8a533118cef6",
+      "name": "Riz Ahmed",
+      "image": "/images/people/riz-ahmed.jpg"
+    },
+    {
+      "id": "69fd18da-b9cc-52bf-a6a5-aceb338a3fde",
+      "name": "John Goodman",
+      "image": "/images/people/john-goodman.jpg"
+    },
+    {
+      "id": "36b9d41c-015f-55c7-951b-a05076904747",
+      "name": "Sandra Hüller",
+      "image": "/images/people/sandra-huller.jpg"
+    },
+    {
+      "id": "a866b4d3-6591-5ef7-96c4-0bfa7d419932",
+      "name": "Michael Showalter",
+      "image": "/images/people/michael-showalter.jpg"
+    },
+    {
+      "id": "4a5e9f1e-8dd3-588a-acf2-84048f0e8139",
+      "name": "Dakota Johnson",
+      "image": "/images/people/dakota-johnson.jpg"
+    },
+    {
+      "id": "36ea9dc2-7019-5d6f-9044-3d9f5f7c7e54",
+      "name": "Josh Hartnett",
+      "image": "/images/people/josh-hartnett.jpg"
+    },
+    {
+      "id": "733d223f-cac5-57fd-95c5-162f0855485c",
+      "name": "Ismael Cruz Cordova",
+      "image": "/images/people/ismael-cruz-cordova.jpg"
+    },
+    {
+      "id": "b811763b-bef3-5e8f-b32c-d93f61d94cc4",
+      "name": "Zach Cregger",
+      "image": "/images/people/zach-cregger.jpg"
+    },
+    {
+      "id": "3d07287a-44f2-5f16-a6fa-d9f73ed2f71b",
+      "name": "Austin Abrams",
+      "image": "/images/people/austin-abrams.jpg"
+    },
+    {
+      "id": "9068c8bb-b1b8-5882-ba83-48085559bf83",
+      "name": "Zach Cherry",
+      "image": "/images/people/zach-cherry.jpg"
+    },
+    {
+      "id": "58de83c4-813a-53de-a9e0-808af158f96a",
+      "name": "Kali Reis",
+      "image": "/images/people/kali-reis.jpg"
+    },
+    {
+      "id": "2dfe4325-d49a-575b-9cdc-06176b3f3cb2",
+      "name": "Paul Walter Hauser",
+      "image": "/images/people/paul-walter-hauser.jpg"
+    },
+    {
+      "id": "48dc4077-9cc8-58e2-8889-bae02c08d2e5",
+      "name": "Will Merrick",
+      "image": "/images/people/will-merrick.jpg"
+    },
+    {
+      "id": "80fc4e70-3109-5b7c-b03e-de1788cce0bc",
+      "name": "Cristian Mungiu",
+      "image": "/images/people/cristian-mungiu.jpg"
+    },
+    {
+      "id": "59dfca93-c119-56e4-8b4f-7a44b64ba189",
+      "name": "Sebastian Stan",
+      "image": "/images/people/sebastian-stan.jpg"
+    },
+    {
+      "id": "71d0654c-6af4-588a-be6a-6e254fb044e9",
+      "name": "Renate Reinsve",
+      "image": "/images/people/renate-reinsve.jpg"
+    },
+    {
+      "id": "50387bdc-db83-5f1b-8d2b-2cab3d366a88",
+      "name": "Lisa Carlehed",
+      "image": "/images/people/lisa-carlehed.jpg"
+    },
+    {
+      "id": "d9ce0794-3e98-57cc-a4b9-9ad85ac83008",
+      "name": "Ellen Dorrit Petersen",
+      "image": "/images/people/ellen-dorrit-petersen.jpg"
+    },
+    {
+      "id": "34cead7e-4ba6-5482-ba3e-68a2006d66ef",
+      "name": "Joel Crawford",
+      "image": "/images/people/joel-crawford.jpg"
+    },
+    {
+      "id": "a56875b3-3a16-50d2-b41a-1822f0ca36c5",
+      "name": "H.E.R",
+      "image": "/images/people/her.jpg"
+    },
+    {
+      "id": "9a57ec04-7d00-58d5-b497-b9816e3af23d",
+      "name": "Liza Soberano",
+      "image": "/images/people/liza-soberano.jpg"
+    },
+    {
+      "id": "bd370e5a-6855-57cf-8e51-d47443da3d32",
+      "name": "Dave Franco",
+      "image": "/images/people/dave-franco.jpg"
+    },
+    {
+      "id": "422645e9-90f1-5e8f-8071-cdd72028e90c",
+      "name": "Jenny Slate",
+      "image": "/images/people/jenny-slate.jpg"
+    },
+    {
+      "id": "b272b14e-fe62-5ed0-a8d3-62f8ee295589",
+      "name": "Alex Schulman",
+      "image": "/images/people/alex-schulman.jpg"
+    },
+    {
+      "id": "80c84257-6613-58cc-9911-31e5d45967b3",
+      "name": "Gustaf Skarsgård",
+      "image": "/images/people/gustaf-skarsgard.jpg"
+    },
+    {
+      "id": "9d5a525c-e208-5fd7-861d-e2c016fd2fde",
+      "name": "Fares Fares",
+      "image": "/images/people/fares-fares.jpg"
+    },
+    {
+      "id": "a18b8b20-3ebc-5bc5-bc92-5b3069acad4b",
+      "name": "Linus Wahlgren",
+      "image": "/images/people/linus-wahlgren.jpg"
+    },
+    {
+      "id": "efc84425-3cd3-50c8-90dd-359fb8219398",
+      "name": "Johan Rosell",
+      "image": "/images/people/johan-rosell.jpg"
+    },
+    {
+      "id": "cd7da75a-bd05-5505-a840-b294c5b5d1ad",
+      "name": "Matilda Gross",
+      "image": "/images/people/matilda-gross.jpg"
+    },
+    {
+      "id": "06492ce8-3ff4-5c07-a576-92bcce8fc995",
+      "name": "Marianne Mörck",
+      "image": "/images/people/marianne-morck.jpg"
+    },
+    {
+      "id": "a93b309e-ad8e-5ed7-9562-30ea46c559a9",
+      "name": "Johan Rheborg",
+      "image": "/images/people/johan-rheborg.jpg"
+    },
+    {
+      "id": "8eac55e2-1bd7-52b3-9f22-253981befef3",
+      "name": "Malin Levanon",
+      "image": "/images/people/malin-levanon.jpg"
+    },
+    {
+      "id": "094ddac6-0fe2-5d3e-a512-11853573d562",
+      "name": "Travis Knight",
+      "image": "/images/people/travis-knight.jpg"
+    },
+    {
+      "id": "29551dbe-f2e4-518b-a712-855e3e750ae5",
+      "name": "Peyton Elizabeth Lee",
+      "image": "/images/people/peyton-elizabeth-lee.jpg"
+    },
+    {
+      "id": "7a2edf47-a3ff-5656-9315-58ae51f65645",
+      "name": "Jacob Tremblay",
+      "image": "/images/people/jacob-tremblay.jpg"
+    },
+    {
+      "id": "f412fa92-3ea2-5eee-814d-3baac267174a",
+      "name": "Carey Mulligan",
+      "image": "/images/people/carey-mulligan.jpg"
+    },
+    {
+      "id": "ddfdc62d-8463-53bc-ad02-28fe806e3d85",
+      "name": "Mahershala Ali",
+      "image": "/images/people/mahershala-ali.jpg"
+    },
+    {
+      "id": "62ec4c94-ecf5-5573-bfb9-266d704150a3",
+      "name": "Angela Bassett",
+      "image": "/images/people/angela-bassett.jpg"
+    },
+    {
+      "id": "e6149c0d-26d0-5362-9541-1626f5264f6b",
+      "name": "Francis Lawrence",
+      "image": "/images/people/francis-lawrence.jpg"
+    },
+    {
+      "id": "43b3a8d7-e5ba-50ef-bfff-707c87e82123",
+      "name": "Joseph Zada",
+      "image": "/images/people/joseph-zada.jpg"
+    },
+    {
+      "id": "b755dfaf-4617-5c3e-8d61-b1edd23b31aa",
+      "name": "Mckenna Grace",
+      "image": "/images/people/mckenna-grace.jpg"
+    },
+    {
+      "id": "36be58dc-2667-5565-88ab-9a92aa08a6a1",
+      "name": "Elle Fanning",
+      "image": "/images/people/elle-fanning.jpg"
+    },
+    {
+      "id": "05635986-ff6f-50d6-98a0-99c7fdee4ae2",
+      "name": "Ralph Fiennes",
+      "image": "/images/people/ralph-fiennes.jpg"
+    },
+    {
+      "id": "f1b7dcbf-a0e0-5be8-835c-89106a6397d9",
+      "name": "Jesse Plemons",
+      "image": "/images/people/jesse-plemons.jpg"
+    },
+    {
+      "id": "8fc64bc1-2fdd-59c7-b2b3-05f0b5cf24ac",
+      "name": "Anthony Russo & Joe Russo",
+      "image": "/images/people/russo-brothers.jpg"
+    },
+    {
+      "id": "288d68d3-8546-5acc-af8c-bc1930ee6adb",
+      "name": "Robert Downey Jr.",
+      "image": "/images/people/robert-downey-jr.jpg"
+    },
+    {
+      "id": "1a628df8-a17c-5548-b03a-77320030e69e",
+      "name": "Chris Hemsworth",
+      "image": "/images/people/chris-hemsworth.jpg"
+    },
+    {
+      "id": "e188fa12-f837-5bae-9ed9-da8c6488e0eb",
+      "name": "Anthony Mackie",
+      "image": "/images/people/anthony-mackie.jpg"
+    },
+    {
+      "id": "de414ebc-d7ce-5219-914e-d5fee6428226",
+      "name": "Florence Pugh",
+      "image": "/images/people/florence-pugh.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a",
+      "name": "Äventyr"
+    },
+    {
+      "id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e",
+      "name": "Action"
+    },
+    {
+      "id": "6c53da68-d281-50e5-a726-b23408c3a023",
+      "name": "Drama"
+    },
+    {
+      "id": "dba6c569-587b-5ee3-bacd-8dea188dac52",
+      "name": "Fantasy"
+    },
+    {
+      "id": "38def3d1-7cf4-54a9-be9f-063943d3e65e",
+      "name": "Komedi"
+    },
+    {
+      "id": "f7c4d547-92bd-5701-b41f-9c3f46fc09f5",
+      "name": "Satir"
+    },
+    {
+      "id": "be63c9b1-8923-5b6c-886c-74a778165c8e",
+      "name": "Thriller"
+    },
+    {
+      "id": "725e8e44-02b5-5e19-8478-d3dcdb807d11",
+      "name": "Mystery"
+    },
+    {
+      "id": "c6fdc34e-4d08-5d58-9742-9771a47151c4",
+      "name": "Skräck"
+    },
+    {
+      "id": "055bbf2a-7277-52b8-a148-41af23755261",
+      "name": "Familj"
+    },
+    {
+      "id": "506caaa7-dddc-5991-a489-1d6a63c8345b",
+      "name": "Animerat"
+    },
+    {
+      "id": "9e12ab75-f4d7-528a-8b93-ed25a7e6a509",
+      "name": "Sci-Fi"
+    },
+    {
+      "id": "059ed231-394a-564b-97a0-6c922eaac530",
+      "name": "Superhjälte"
+    },
+    {
+      "id": "9976319c-1be4-53ae-9a3b-473b319fd8f4",
+      "name": "Slasher"
+    },
+    {
+      "id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469",
+      "name": "Klassiker"
+    },
+    {
+      "id": "22a55866-bdb1-50a6-8cb2-d95f31663afe",
+      "name": "Övernaturlig"
+    },
+    {
+      "id": "e9ea480f-9001-5b8a-8a8a-a81d9828ea2b",
+      "name": "Musikal"
+    },
+    {
+      "id": "1ecc17ba-70e1-5ee0-818f-838aa1091b07",
+      "name": "Kultfilm"
+    },
+    {
+      "id": "0dc06b5c-8430-56e6-943b-a7a6de52d2a9",
+      "name": "Psykologisk thriller"
+    }
+  ],
+  "movies": [
+    {
+      "id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "title": "The Odyssey",
+      "productionYear": 2026,
+      "ageRating": 11,
+      "duration": 180,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "https://cdng.europosters.eu/pod_public/1300/321147.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
+      "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
+      "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
+      "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c"
+    },
+    {
+      "id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "title": "Digger",
+      "productionYear": 2026,
+      "ageRating": 11,
+      "duration": 129,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/digger-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=qORTe1wW3Wg",
+      "shortDescription": "En mäktig oljemiljardär försöker övertyga världen om att han är mänsklighetens räddare innan katastrofen han själv orsakat förstör allt.",
+      "longDescription": "Digger Rockwell är världens mäktigaste man och en av världens rikaste oljemiljardärer. När en katastrof som han själv har orsakat hotar att förändra världen försöker han desperat övertyga mänskligheten om att han är dess räddare. Filmen är en mörk och satirisk berättelse om makt, girighet, miljökatastrofer och ansvar.",
+      "director_id": "98444e80-98ad-5c03-80de-2abd73692930"
+    },
+    {
+      "id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "title": "Verity",
+      "productionYear": 2026,
+      "ageRating": 15,
+      "duration": 117,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/verity-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=xdPMKhjMSFs",
+      "shortDescription": "En ung författare upptäcker mörka hemligheter när hon flyttar in hos den berömda författaren Verity Crawford.",
+      "longDescription": "Lowen Ashleigh får i uppdrag att slutföra bokserien åt den berömda författaren Verity Crawford efter att en olycka gjort Verity oförmögen att skriva. När Lowen flyttar in hos familjen hittar hon ett manuskript som avslöjar mörka och skrämmande hemligheter. Snart börjar hon tvivla på vad som egentligen är sant.",
+      "director_id": "a866b4d3-6591-5ef7-96c4-0bfa7d419932"
+    },
+    {
+      "id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "title": "Resident Evil",
+      "productionYear": 2026,
+      "ageRating": 15,
+      "duration": 94,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/resident-evil-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=mNd1gb19A-c",
+      "shortDescription": "Den medicinske kuriren Bryan dras ovetande in i en intensiv kamp för överlevnad.",
+      "longDescription": "Den medicinske kuriren Bryan dras ovetande in i en intensiv kamp för överlevnad i en skoningslös kamp mot klockan. Resident Evil är en actionfylld skräckfilm som tar tittarna med på en spännande resa genom en värld fylld av faror och mysterier.",
+      "director_id": "b811763b-bef3-5e8f-b32c-d93f61d94cc4"
+    },
+    {
+      "id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "title": "Fjord",
+      "productionYear": 2026,
+      "ageRating": null,
+      "duration": 146,
+      "language": {
+        "original": "Norska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/fjord-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=0gdRZZVoinM",
+      "shortDescription": "En familj flyttar till Norge för att börja om, men en konflikt med en grannfamilj förändrar allt.",
+      "longDescription": "Det rumänsk-norska paret Mihai och Lisbeth flyttar till Norge med sina barn efter att Mihais föräldrar gått bort. De lär känna grannfamiljen Halberg och relationerna blir allt närmare. Men när parets dotter Elia kommer till skolan med blåmärken väcks misstankar och snart hamnar de båda familjerna i en konflikt om uppfostran, tro och frihet.",
+      "director_id": "80fc4e70-3109-5b7c-b03e-de1788cce0bc"
+    },
+    {
+      "id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "title": "Bortglömda ön",
+      "productionYear": 2026,
+      "ageRating": 7,
+      "duration": 109,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/bortglömda-ön-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=Ri2KipSRQ4E",
+      "shortDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor.",
+      "longDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor. När de firar sin sista kväll tillsammans, råkar Jo och Raissa hitta en mystisk portal som transporterar dem till den fantastiska ön Nakali, full av de magiska och mytologiska väsen som hört berättelser om under uppväxten i sina filippinska familjer. En del av de här varelserna blir vänner, andra blir fiender. I sällskap med den välmenande men olyckliga hunden Raww och ett litet men mäktiga gäng kompisar, måste Jo och Raissa möta Den Fruktande Manananggal, den mest skräckinjagande varelsen på ön. När de upptäcker att priset för att återvända hem är att förlora alla minnena av deras vänskap, måste Jo och Raissa skynda sig att hitta ett sätt att lämna ön innan de helt glömmer bort varandra, för evigt.",
+      "director_id": "34cead7e-4ba6-5482-ba3e-68a2006d66ef"
+    },
+    {
+      "id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+      "title": "Arkipelag",
+      "productionYear": 2026,
+      "ageRating": 15,
+      "duration": 107,
+      "language": {
+        "original": "Svenska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/arkipelag-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=ke00C6G7ewg",
+      "shortDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö där lek snabbt övergår i maktkamp.",
+      "longDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö. När de blir strandsatta tillsammans med en stökig högstadieklass väcks gamla tonårstrauman till liv. Snart börjar både ungdomar och vuxna tvingas fundera över gränsen mellan lek, maktkamp, offer och förövare.",
+      "director_id": "b272b14e-fe62-5ed0-a8d3-62f8ee295589"
+    },
+    {
+      "id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "title": "Nelly Rapp - Porten till underjorden",
+      "productionYear": 2026,
+      "ageRating": 11,
+      "duration": 84,
+      "language": {
+        "original": "Svenska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/nelly-rapp-porten-till-underjorden-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=hA6Ep3Nmx2c",
+      "shortDescription": "Nelly måste stoppa en uråldrig vampyr från att öppna porten till underjorden.",
+      "longDescription": "När Nelly återförenas med sin mamma får hon veta att en uråldrig vampyr planerar att öppna porten till underjorden. Där väntar en slumrande ondska som hotar att släppas fri. Tillsammans med Valle och London måste Nelly försöka stoppa vampyren innan katastrofen är ett faktum.",
+      "director_id": "efc84425-3cd3-50c8-90dd-359fb8219398"
+    },
+    {
+      "id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "title": "Wildwood",
+      "productionYear": 2026,
+      "ageRating": 11,
+      "duration": 110,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/wildwood-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=dtr5JL1zkiM",
+      "shortDescription": "En flicka ger sig in i en magisk och farlig skog för att rädda sin lillebror.",
+      "longDescription": "Prue McKeel kastas in i ett mystiskt och farligt äventyr när hennes lillebror försvinner in i Wildwood, en förbjuden skog fylld av magiska varelser och hemligheter. Tillsammans med sin vän Curtis måste hon ge sig in i den okända världen för att hitta sin bror och upptäcka vad som egentligen döljer sig bakom skogen.",
+      "director_id": "094ddac6-0fe2-5d3e-a512-11853573d562"
+    },
+    {
+      "id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "title": "The Hunger Games: Sunrise on the Reaping",
+      "productionYear": 2026,
+      "ageRating": 15,
+      "duration": 150,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/hunger-games-sunrise-on-the-reaping-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=fS35YSjopjE",
+      "shortDescription": "Haymitch kastas in i den 50:e Hungerspelen, där han måste kämpa för sitt liv i Panems brutala arena.",
+      "longDescription": "Berättelsen utspelar sig 24 år före den första Hunger Games-filmen och börjar på morgonen då den 50:e upplagan av Hungerspelen ska lottas. Haymitch Abernathy väljs ut som deltagare och tvingas in i en brutal kamp där han måste försöka överleva samtidigt som han bildar en oväntad allians med Maysilee Donner.",
+      "director_id": "e6149c0d-26d0-5362-9541-1626f5264f6b"
+    },
+    {
+      "id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "title": "Avengers: Doomsday",
+      "productionYear": 2026,
+      "ageRating": 11,
+      "duration": 150,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/movies/avengers-doomsday-poster.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=irVNGjRFZGk",
+      "shortDescription": "Marvels Avengers återvänder för att möta ett nytt hot som kan förändra hela universum.",
+      "longDescription": "Avengers: Doomsday samlar flera av Marvels hjältar när ett nytt och mycket stort hot dyker upp. Filmen blir nästa stora kapitel i Marvel Cinematic Universe och samlar en omfattande ensemble av både nya och välbekanta karaktärer.",
+      "director_id": "8fc64bc1-2fdd-59c7-b2b3-05f0b5cf24ac"
+    },
+    {
+      "id": "b316b362-d7c8-5129-8e60-23f098d5c9e4",
+      "title": "Halloween",
+      "productionYear": 1978,
+      "ageRating": 15,
+      "duration": 91,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/halloween-classic-night.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=3JsrH8eUVOo",
+      "shortDescription": "Fira Halloween med John Carpenters ikoniska skräckklassiker Halloween.",
+      "longDescription": "En mörk Halloweenkväll återvänder Michael Myers till Haddonfield efter flera år på institution. Upplev en av skräckfilmshistoriens mest ikoniska filmer på stor duk i en exklusiv Halloweenvisning.",
+      "director_id": null
+    },
+    {
+      "id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
+      "title": "The Conjuring",
+      "productionYear": 2013,
+      "ageRating": 15,
+      "duration": 112,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/horror-marathon.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=ejMMn0t58Lc",
+      "shortDescription": "En klassisk spökhistoria för dig som vågar stanna kvar när lamporna släcks.",
+      "longDescription": "Ed och Lorraine Warren hjälper en familj som flyttat in i ett hus där något mörkt och övernaturligt verkar ha vaknat. Se filmen tillsammans med andra skräckälskare under en sen Halloweenvisning.",
+      "director_id": null
+    },
+    {
+      "id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
+      "title": "Hocus Pocus",
+      "productionYear": 1993,
+      "ageRating": 7,
+      "duration": 96,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/hocus-pocus-halloween.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=F4e6YQFrt1s",
+      "shortDescription": "En magisk Halloweenvisning för hela familjen med de tre busiga Sanderson-systrarna.",
+      "longDescription": "När tre häxor återuppstår på Halloween måste en grupp barn försöka stoppa dem innan de sprider kaos över staden. En färgstark Halloweenklassiker för både barn och vuxna.",
+      "director_id": null
+    },
+    {
+      "id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
+      "title": "The Nightmare Before Christmas",
+      "productionYear": 1993,
+      "ageRating": 7,
+      "duration": 77,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/nightmare-before-christmas.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=wr6N_hZyBCk",
+      "shortDescription": "Följ med Jack Skellington när Halloween möter julens magi.",
+      "longDescription": "Jack Skellington, kungen av Halloween Town, har tröttnat på samma gamla Halloweenfirande. När han upptäcker Christmas Town bestämmer han sig för att själv skapa jul – med minst sagt kaotiska konsekvenser.",
+      "director_id": null
+    },
+    {
+      "id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
+      "title": "Scream",
+      "productionYear": 1996,
+      "ageRating": 15,
+      "duration": 111,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/scream-night.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=i3J6ACKQ7K0",
+      "shortDescription": "Ghostface är tillbaka – upplev den ikoniska slasherklassikern på stor duk.",
+      "longDescription": "En mystisk mördare börjar terrorisera en liten stad och använder skräckfilmernas regler för att välja sina offer. Upplev Wes Cravens moderna skräckklassiker under en exklusiv Halloweenkväll.",
+      "director_id": null
+    },
+    {
+      "id": "7982d999-171a-5e70-9e4c-a1033c462d98",
+      "title": "Beetlejuice",
+      "productionYear": 1988,
+      "ageRating": 11,
+      "duration": 92,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/beetlejuice-halloween.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=ickbVzajrk0",
+      "shortDescription": "En färgstark Halloweenkväll fylld av mörk humor, spöken och Beetlejuice.",
+      "longDescription": "Ett nygift par dör i en olycka och upptäcker att deras hus fortfarande är deras hem. När en ny familj flyttar in försöker de få hjälp av den kaotiske och excentriske Beetlejuice.",
+      "director_id": null
+    },
+    {
+      "id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
+      "title": "The Exorcist",
+      "productionYear": 1973,
+      "ageRating": 15,
+      "duration": 123,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/exorcist-midnight.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=BU2eYAO31Cc",
+      "shortDescription": "Vågar du möta natten med en av skräckfilmens mest ikoniska filmer?",
+      "longDescription": "När en ung flicka börjar uppvisa allt mer skrämmande beteende söker hennes mamma desperat efter hjälp. En legendarisk skräckklassiker visas vid midnatt på Halloween.",
+      "director_id": null
+    },
+    {
+      "id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
+      "title": "Coraline",
+      "productionYear": 2009,
+      "ageRating": 11,
+      "duration": 100,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/coraline-halloween.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=m9bOpeuvNwY",
+      "shortDescription": "Coraline upptäcker en annan värld bakom en hemlig dörr – men allt är inte som det verkar.",
+      "longDescription": "Coraline upptäcker en hemlig dörr i sitt nya hem som leder till en alternativ värld. Där verkar allt vara bättre än hemma, men snart upptäcker hon att den perfekta världen döljer en mörk hemlighet.",
+      "director_id": null
+    },
+    {
+      "id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
+      "title": "The Rocky Horror Picture Show",
+      "productionYear": 1975,
+      "ageRating": 15,
+      "duration": 105,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/rocky-horror-halloween.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=JWoYy4Ah81s&list=RDJWoYy4Ah81s&start_radio=1",
+      "shortDescription": "En galen Halloweenkväll med kultfilmen som aldrig går ur tiden.",
+      "longDescription": "När Brad och Janet får problem med bilen söker de skydd i ett mystiskt slott. Där möter de den excentriske Dr. Frank-N-Furter och dras in i en natt de sent kommer att glömma.",
+      "director_id": null
+    },
+    {
+      "id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
+      "title": "The Shining",
+      "productionYear": 1980,
+      "ageRating": 15,
+      "duration": 138,
+      "language": {
+        "original": "Engelska",
+        "subtitles": "Svenska"
+      },
+      "posterImage": "/images/events/the-shining-halloween.jpg",
+      "trailerUrl": "https://www.youtube.com/watch?v=S014oGZiSdI",
+      "shortDescription": "Fira Halloween med Stanley Kubricks ikoniska psykologiska skräckklassiker.",
+      "longDescription": "Jack Torrance tar med sin familj till ett isolerat hotell där han ska arbeta som vaktmästare under vintern. När hotellets mörka historia börjar göra sig påmind förändras allt.",
+      "director_id": null
+    }
+  ],
+  "movie_categories": [
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+    },
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+    },
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+    },
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+    },
+    {
+      "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+    },
+    {
+      "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "category_id": "f7c4d547-92bd-5701-b41f-9c3f46fc09f5"
+    },
+    {
+      "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+    },
+    {
+      "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "category_id": "725e8e44-02b5-5e19-8478-d3dcdb807d11"
+    },
+    {
+      "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+    },
+    {
+      "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+    },
+    {
+      "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+    },
+    {
+      "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+    },
+    {
+      "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+    },
+    {
+      "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+    },
+    {
+      "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+    },
+    {
+      "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+      "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+    },
+    {
+      "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+      "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "category_id": "506caaa7-dddc-5991-a489-1d6a63c8345b"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "category_id": "9e12ab75-f4d7-528a-8b93-ed25a7e6a509"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "category_id": "9e12ab75-f4d7-528a-8b93-ed25a7e6a509"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "category_id": "059ed231-394a-564b-97a0-6c922eaac530"
+    },
+    {
+      "movie_id": "b316b362-d7c8-5129-8e60-23f098d5c9e4",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "b316b362-d7c8-5129-8e60-23f098d5c9e4",
+      "category_id": "9976319c-1be4-53ae-9a3b-473b319fd8f4"
+    },
+    {
+      "movie_id": "b316b362-d7c8-5129-8e60-23f098d5c9e4",
+      "category_id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469"
+    },
+    {
+      "movie_id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
+      "category_id": "22a55866-bdb1-50a6-8cb2-d95f31663afe"
+    },
+    {
+      "movie_id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
+      "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+    },
+    {
+      "movie_id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
+      "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+    },
+    {
+      "movie_id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
+      "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+    },
+    {
+      "movie_id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
+      "category_id": "506caaa7-dddc-5991-a489-1d6a63c8345b"
+    },
+    {
+      "movie_id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
+      "category_id": "e9ea480f-9001-5b8a-8a8a-a81d9828ea2b"
+    },
+    {
+      "movie_id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
+      "category_id": "9976319c-1be4-53ae-9a3b-473b319fd8f4"
+    },
+    {
+      "movie_id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
+      "category_id": "725e8e44-02b5-5e19-8478-d3dcdb807d11"
+    },
+    {
+      "movie_id": "7982d999-171a-5e70-9e4c-a1033c462d98",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "7982d999-171a-5e70-9e4c-a1033c462d98",
+      "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+    },
+    {
+      "movie_id": "7982d999-171a-5e70-9e4c-a1033c462d98",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
+      "category_id": "22a55866-bdb1-50a6-8cb2-d95f31663afe"
+    },
+    {
+      "movie_id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
+      "category_id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469"
+    },
+    {
+      "movie_id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
+      "category_id": "506caaa7-dddc-5991-a489-1d6a63c8345b"
+    },
+    {
+      "movie_id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
+      "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+    },
+    {
+      "movie_id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
+      "category_id": "e9ea480f-9001-5b8a-8a8a-a81d9828ea2b"
+    },
+    {
+      "movie_id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
+      "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+    },
+    {
+      "movie_id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
+      "category_id": "1ecc17ba-70e1-5ee0-818f-838aa1091b07"
+    },
+    {
+      "movie_id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
+      "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+    },
+    {
+      "movie_id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
+      "category_id": "0dc06b5c-8430-56e6-943b-a7a6de52d2a9"
+    },
+    {
+      "movie_id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
+      "category_id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469"
+    }
+  ],
+  "movie_cast": [
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "person_id": "3bfa2956-71ff-57e2-a06f-e2e3551f557d",
+      "character_name": "Odysseus"
+    },
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "person_id": "aa8966cf-2ace-58ec-ab2a-022a434331da",
+      "character_name": "Penelope"
+    },
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "person_id": "50cc397c-1346-59da-b5e7-ca09db7b3ec6",
+      "character_name": "Telemachus"
+    },
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "person_id": "326a53c0-8380-577d-8d48-13b9d3585078",
+      "character_name": "Athena"
+    },
+    {
+      "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+      "person_id": "d8a9a853-7399-579b-aa15-63cf9a4e7d1e",
+      "character_name": "Atinous"
+    },
+    {
+      "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "person_id": "f84f442b-ab1e-55ad-a3a8-d94137cfab15",
+      "character_name": "Digger Rockwell"
+    },
+    {
+      "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "person_id": "f94b2694-289a-5795-83d3-8a533118cef6",
+      "character_name": "Ganesh"
+    },
+    {
+      "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "person_id": "69fd18da-b9cc-52bf-a6a5-aceb338a3fde",
+      "character_name": "President Compson"
+    },
+    {
+      "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+      "person_id": "36b9d41c-015f-55c7-951b-a05076904747",
+      "character_name": "Emma Rockwell"
+    },
+    {
+      "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "person_id": "aa8966cf-2ace-58ec-ab2a-022a434331da",
+      "character_name": "Verity Crawford"
+    },
+    {
+      "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "person_id": "4a5e9f1e-8dd3-588a-acf2-84048f0e8139",
+      "character_name": "Lowen Ashleigh"
+    },
+    {
+      "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "person_id": "36ea9dc2-7019-5d6f-9044-3d9f5f7c7e54",
+      "character_name": "Jeremy Crawford"
+    },
+    {
+      "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+      "person_id": "733d223f-cac5-57fd-95c5-162f0855485c",
+      "character_name": "Okänd"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "person_id": "3d07287a-44f2-5f16-a6fa-d9f73ed2f71b",
+      "character_name": "Bryan"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "person_id": "9068c8bb-b1b8-5882-ba83-48085559bf83",
+      "character_name": "Carl"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "person_id": "58de83c4-813a-53de-a9e0-808af158f96a",
+      "character_name": "Maxine"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "person_id": "2dfe4325-d49a-575b-9cdc-06176b3f3cb2",
+      "character_name": "Paul"
+    },
+    {
+      "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+      "person_id": "48dc4077-9cc8-58e2-8889-bae02c08d2e5",
+      "character_name": "Dave"
+    },
+    {
+      "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "person_id": "59dfca93-c119-56e4-8b4f-7a44b64ba189",
+      "character_name": "Mihai Gheorghiu"
+    },
+    {
+      "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "person_id": "71d0654c-6af4-588a-be6a-6e254fb044e9",
+      "character_name": "Lisbeth Gheorghiu"
+    },
+    {
+      "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "person_id": "50387bdc-db83-5f1b-8d2b-2cab3d366a88",
+      "character_name": "Mia"
+    },
+    {
+      "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+      "person_id": "d9ce0794-3e98-57cc-a4b9-9ad85ac83008",
+      "character_name": "Gunda"
+    },
+    {
+      "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "person_id": "a56875b3-3a16-50d2-b41a-1822f0ca36c5",
+      "character_name": "Jo"
+    },
+    {
+      "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "person_id": "9a57ec04-7d00-58d5-b497-b9816e3af23d",
+      "character_name": "Raissa"
+    },
+    {
+      "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "person_id": "bd370e5a-6855-57cf-8e51-d47443da3d32",
+      "character_name": "Raww"
+    },
+    {
+      "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+      "person_id": "422645e9-90f1-5e8f-8071-cdd72028e90c",
+      "character_name": "Batiba"
+    },
+    {
+      "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+      "person_id": "80c84257-6613-58cc-9911-31e5d45967b3",
+      "character_name": "Pappa"
+    },
+    {
+      "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+      "person_id": "9d5a525c-e208-5fd7-861d-e2c016fd2fde",
+      "character_name": "Pappa"
+    },
+    {
+      "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+      "person_id": "a18b8b20-3ebc-5bc5-bc92-5b3069acad4b",
+      "character_name": "Pappa"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "person_id": "cd7da75a-bd05-5505-a840-b294c5b5d1ad",
+      "character_name": "Nelly Rapp"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "person_id": "06492ce8-3ff4-5c07-a576-92bcce8fc995",
+      "character_name": "Lena-Sleva"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "person_id": "a93b309e-ad8e-5ed7-9562-30ea46c559a9",
+      "character_name": "Hannibal"
+    },
+    {
+      "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+      "person_id": "8eac55e2-1bd7-52b3-9f22-253981befef3",
+      "character_name": "Hekla"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "person_id": "29551dbe-f2e4-518b-a712-855e3e750ae5",
+      "character_name": "Prue McKeel"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "person_id": "7a2edf47-a3ff-5656-9315-58ae51f65645",
+      "character_name": "Curtis Mehlberg"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "person_id": "f412fa92-3ea2-5eee-814d-3baac267174a",
+      "character_name": "Alexandra"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "person_id": "ddfdc62d-8463-53bc-ad02-28fe806e3d85",
+      "character_name": "Brenden"
+    },
+    {
+      "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+      "person_id": "62ec4c94-ecf5-5573-bfb9-266d704150a3",
+      "character_name": "The General"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "person_id": "43b3a8d7-e5ba-50ef-bfff-707c87e82123",
+      "character_name": "Haymitch Abernathy"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "person_id": "b755dfaf-4617-5c3e-8d61-b1edd23b31aa",
+      "character_name": "Maysilee Donner"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "person_id": "36be58dc-2667-5565-88ab-9a92aa08a6a1",
+      "character_name": "Effie Trinket"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "person_id": "05635986-ff6f-50d6-98a0-99c7fdee4ae2",
+      "character_name": "President Snow"
+    },
+    {
+      "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+      "person_id": "f1b7dcbf-a0e0-5be8-835c-89106a6397d9",
+      "character_name": "Plutarch Heavensbee"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "person_id": "288d68d3-8546-5acc-af8c-bc1930ee6adb",
+      "character_name": "Doctor Doom"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "person_id": "1a628df8-a17c-5548-b03a-77320030e69e",
+      "character_name": "Thor"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "person_id": "e188fa12-f837-5bae-9ed9-da8c6488e0eb",
+      "character_name": "Captain America"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "person_id": "de414ebc-d7ce-5219-914e-d5fee6428226",
+      "character_name": "Yelena Belova"
+    },
+    {
+      "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+      "person_id": "50cc397c-1346-59da-b5e7-ca09db7b3ec6",
+      "character_name": "Spider-Man"
+    }
+  ]
+}
