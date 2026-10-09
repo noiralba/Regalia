@@ -30,3 +30,13 @@ Get all the movies from database.
       "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c"
     }
 ```
+
+**Fel:** `404 Not Found`
+
+```json 
+//An example of how to document 404-respons
+
+{
+    "fel": "Filmen hittades inte"
+}
+```
