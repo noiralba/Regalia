@@ -236,7 +236,7 @@
       "image": "/images/people/francis-lawrence.jpg"
     },
     {
-      "id": "43b3a8d7-e5ba-50ef-bfff-707c87e82123",
+      "id": "43b3a8d7-e5ba-50ef-bfff-707c87e82123", 
       "name": "Joseph Zada",
       "image": "/images/people/joseph-zada.jpg"
     },
@@ -420,7 +420,7 @@
         "original": "Engelska",
         "subtitles": "Svenska"
       },
-      "posterImage": "/images/movies/https://cdng.europosters.eu/pod_public/1300/321147.jpg",
+      "posterImage": "/images/movies/odyssey-poster.jpg",
       "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
       "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
       "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
