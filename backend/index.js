@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
+const apiRoutes = require("./routes/app");
 
 const app = express();
 const port = 3000;
@@ -12,6 +13,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use("/api", apiRoutes);
 
 app.get("/api", (req, res) => {
   res.json({ message: "Regalia API fungerar" });
