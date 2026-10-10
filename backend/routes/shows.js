@@ -12,4 +12,6 @@ router.get("/", async (req, res) => {
   }
 });
 
+//här måste jag till en getbyid
+// sen kalla på den
 module.exports = router;
