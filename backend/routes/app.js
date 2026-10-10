@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-// Här kopplar vi in våra routes
+const showsRoutes = require("./shows");
+const bookingsRoutes = require("./bookings");
+
+router.use("/shows", showsRoutes);
+router.use("/bookings", bookingsRoutes);
 
 module.exports = router;
