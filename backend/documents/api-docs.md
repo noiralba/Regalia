@@ -3,6 +3,7 @@
 Follow this examples and document all the respones for CRUD!
 
 # Mall
+
 ### GET /movies
 
 Get all the movies from database.
@@ -12,33 +13,34 @@ Get all the movies from database.
 ```json
 //An example of how you can document an endpoint
 
-    {
-      "id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
-      "title": "The Odyssey",
-      "productionYear": 2026,
-      "ageRating": 11,
-      "duration": 180,
-      "language": {
-        "original": "Engelska",
-        "subtitles": "Svenska"
-      },
-      "posterImage": "https://cdng.europosters.eu/pod_public/1300/321147.jpg",
-      "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
-      "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
-      "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
-      "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c"
-    }
+{
+  "id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+  "title": "The Odyssey",
+  "productionYear": 2026,
+  "ageRating": 11,
+  "duration": 180,
+  "language": {
+    "original": "Engelska",
+    "subtitles": "Svenska"
+  },
+  "posterImage": "https://cdng.europosters.eu/pod_public/1300/321147.jpg",
+  "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
+  "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
+  "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
+  "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c"
+}
 ```
 
 **Status:** `404 Not Found`
 
-```json 
+```json
 //An example of how to document 404-respons
 
 {
-    "error": "Filmen hittades inte"
+  "error": "Filmen hittades inte"
 }
 ```
+
 ---
 
 # Regalia API
@@ -428,3 +430,151 @@ Base-URL: `http://localhost:3000`
   "error": "Film hittades inte"
 }
 ```
+
+---
+
+## Users
+
+Base URL: `http://localhost:3000/api`
+
+## Current security status
+
+All `/api/users`endpoints are currently blocked by temporary middleware.
+
+**Status:** `403 Forbidden`
+
+```json
+{
+  "error": "Åtkomst till användare är inte tillåten ännu"
+}
+```
+
+Authentication and authorization must be implemented before these endpoints are made accessible. Users must not be allowed to access or modify other users' accounts without permission.
+
+### POST /users
+
+Creates a new user. The backend generates a UUID, hashes the password using bcrypt, and automatically assigns the role `customer`.
+
+**Request body:**
+
+```json
+{
+  "first_name": "Anna",
+  "last_name": "Testsson",
+  "email": "anna.testsson@example.com",
+  "password": "ExamplePassword123!"
+}
+```
+
+**Status:** `201 Created`
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "first_name": "Anna",
+  "last_name": "Testsson",
+  "email": "anna.testsson@example.com"
+}
+```
+
+The password and its hash are never returned in the response. The client cannot choose the user's role.
+
+**Other responses:**
+
+- `400 Bad Request` - Missing, invalid or excessively long fields.
+- `409 Conflict` - Email address already exists.
+- `500 Internal Server Error` - Database or server error.
+
+### GET /users/:id
+
+Returns a user by ID without exposing the password hash.
+
+**Example:** `GET /api/users/550e8400-e29b-41d4-a716-446655440000`
+
+**Status:** `200 OK`
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "first_name": "Anna",
+  "last_name": "Testsson",
+  "email": "anna.testsson@example.com"
+}
+```
+
+**Status:** `404 Not Found`
+
+```json
+{
+  "error": "Användaren hittades inte."
+}
+```
+
+**Other responses:**
+
+- `500 Internal Server Error` – Database or server error.
+
+### PATCH /users/:id
+
+Updates an existing user's first name, last name or email.
+
+Only `first_name`, `last_name` and `email` are allowed. Password changes are not supported by this endpoint.
+
+**Example:** `PATCH /api/users/550e8400-e29b-41d4-a716-446655440000`
+
+**Request body:**
+
+```json
+{
+  "first_name": "Eva"
+}
+```
+
+**Status:** `200 OK`
+
+```json
+{
+  "message": "Användaren uppdaterades."
+}
+```
+
+**Other responses:**
+
+- `400 Bad Request` – Missing, invalid or disallowed fields.
+- `404 Not Found` – User not found.
+- `409 Conflict` – Email address already exists.
+- `500 Internal Server Error` – Database or server error.
+
+### DELETE /users/:id
+
+Deletes a user by ID.
+
+**Example:** `DELETE /api/users/550e8400-e29b-41d4-a716-446655440000`
+
+**Status:** `204 No Content`
+
+No response body is returned.
+
+**Status:** `404 Not Found`
+
+```json
+{
+  "error": "Användaren hittades inte."
+}
+```
+
+**Other responses:**
+
+- `409 Conflict` – The user cannot be deleted because of related database records.
+- `500 Internal Server Error` – Database or server error.
+
+### Testing status
+
+- JavaScript syntax check: passed.
+- Automated unit tests with mocked database: 8 passed.
+- MySQL integration test: POST, GET, PATCH and DELETE passed against the `webapp` database using a temporary test user.
+- Password hashing and default `customer` role verified against MySQL.
+- Thunder Client: verified that GET, POST, PATCH and DELETE are blocked with status 403.
+- Full HTTP testing of CRUD after authentication and authorization: pending.
+
+The integration test invokes the route handlers directly and does not test authentication, authorization or the complete HTTP request flow.
