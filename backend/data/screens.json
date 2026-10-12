@@ -1,26 +1,12 @@
 [
   {
-    "name": "Stora Salongen",
-    "seatsPerRow": [
-      8,
-      9,
-      10,
-      10,
-      10,
-      10,
-      12,
-      12
-    ]
+    "id": "a3f1c8d2-6b74-4e91-8f25-3d7a9c0b1e56",
+    "name": "Stora salongen",
+    "capacity": 81
   },
   {
-    "name": "Lilla Salongen",
-    "seatsPerRow": [
-      6,
-      8,
-      9,
-      10,
-      10,
-      12
-    ]
+    "id": "e12b4f68-9a31-47cd-b205-6f8e3a1d7c94",
+    "name": "Lila salongen",
+    "capacity": 55
   }
 ]

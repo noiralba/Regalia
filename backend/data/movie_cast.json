@@ -1,0 +1,242 @@
+[
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "person_id": "3bfa2956-71ff-57e2-a06f-e2e3551f557d",
+    "character_name": "Odysseus"
+  },
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "person_id": "aa8966cf-2ace-58ec-ab2a-022a434331da",
+    "character_name": "Penelope"
+  },
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "person_id": "50cc397c-1346-59da-b5e7-ca09db7b3ec6",
+    "character_name": "Telemachus"
+  },
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "person_id": "326a53c0-8380-577d-8d48-13b9d3585078",
+    "character_name": "Athena"
+  },
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "person_id": "d8a9a853-7399-579b-aa15-63cf9a4e7d1e",
+    "character_name": "Atinous"
+  },
+  {
+    "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+    "person_id": "f84f442b-ab1e-55ad-a3a8-d94137cfab15",
+    "character_name": "Digger Rockwell"
+  },
+  {
+    "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+    "person_id": "f94b2694-289a-5795-83d3-8a533118cef6",
+    "character_name": "Ganesh"
+  },
+  {
+    "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+    "person_id": "69fd18da-b9cc-52bf-a6a5-aceb338a3fde",
+    "character_name": "President Compson"
+  },
+  {
+    "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+    "person_id": "36b9d41c-015f-55c7-951b-a05076904747",
+    "character_name": "Emma Rockwell"
+  },
+  {
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "person_id": "aa8966cf-2ace-58ec-ab2a-022a434331da",
+    "character_name": "Verity Crawford"
+  },
+  {
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "person_id": "4a5e9f1e-8dd3-588a-acf2-84048f0e8139",
+    "character_name": "Lowen Ashleigh"
+  },
+  {
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "person_id": "36ea9dc2-7019-5d6f-9044-3d9f5f7c7e54",
+    "character_name": "Jeremy Crawford"
+  },
+  {
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "person_id": "733d223f-cac5-57fd-95c5-162f0855485c",
+    "character_name": "Okänd"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "person_id": "3d07287a-44f2-5f16-a6fa-d9f73ed2f71b",
+    "character_name": "Bryan"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "person_id": "9068c8bb-b1b8-5882-ba83-48085559bf83",
+    "character_name": "Carl"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "person_id": "58de83c4-813a-53de-a9e0-808af158f96a",
+    "character_name": "Maxine"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "person_id": "2dfe4325-d49a-575b-9cdc-06176b3f3cb2",
+    "character_name": "Paul"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "person_id": "48dc4077-9cc8-58e2-8889-bae02c08d2e5",
+    "character_name": "Dave"
+  },
+  {
+    "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+    "person_id": "59dfca93-c119-56e4-8b4f-7a44b64ba189",
+    "character_name": "Mihai Gheorghiu"
+  },
+  {
+    "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+    "person_id": "71d0654c-6af4-588a-be6a-6e254fb044e9",
+    "character_name": "Lisbeth Gheorghiu"
+  },
+  {
+    "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+    "person_id": "50387bdc-db83-5f1b-8d2b-2cab3d366a88",
+    "character_name": "Mia"
+  },
+  {
+    "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+    "person_id": "d9ce0794-3e98-57cc-a4b9-9ad85ac83008",
+    "character_name": "Gunda"
+  },
+  {
+    "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+    "person_id": "a56875b3-3a16-50d2-b41a-1822f0ca36c5",
+    "character_name": "Jo"
+  },
+  {
+    "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+    "person_id": "9a57ec04-7d00-58d5-b497-b9816e3af23d",
+    "character_name": "Raissa"
+  },
+  {
+    "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+    "person_id": "bd370e5a-6855-57cf-8e51-d47443da3d32",
+    "character_name": "Raww"
+  },
+  {
+    "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+    "person_id": "422645e9-90f1-5e8f-8071-cdd72028e90c",
+    "character_name": "Batiba"
+  },
+  {
+    "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+    "person_id": "80c84257-6613-58cc-9911-31e5d45967b3",
+    "character_name": "Pappa"
+  },
+  {
+    "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+    "person_id": "9d5a525c-e208-5fd7-861d-e2c016fd2fde",
+    "character_name": "Pappa"
+  },
+  {
+    "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+    "person_id": "a18b8b20-3ebc-5bc5-bc92-5b3069acad4b",
+    "character_name": "Pappa"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "person_id": "cd7da75a-bd05-5505-a840-b294c5b5d1ad",
+    "character_name": "Nelly Rapp"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "person_id": "06492ce8-3ff4-5c07-a576-92bcce8fc995",
+    "character_name": "Lena-Sleva"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "person_id": "a93b309e-ad8e-5ed7-9562-30ea46c559a9",
+    "character_name": "Hannibal"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "person_id": "8eac55e2-1bd7-52b3-9f22-253981befef3",
+    "character_name": "Hekla"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "person_id": "29551dbe-f2e4-518b-a712-855e3e750ae5",
+    "character_name": "Prue McKeel"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "person_id": "7a2edf47-a3ff-5656-9315-58ae51f65645",
+    "character_name": "Curtis Mehlberg"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "person_id": "f412fa92-3ea2-5eee-814d-3baac267174a",
+    "character_name": "Alexandra"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "person_id": "ddfdc62d-8463-53bc-ad02-28fe806e3d85",
+    "character_name": "Brenden"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "person_id": "62ec4c94-ecf5-5573-bfb9-266d704150a3",
+    "character_name": "The General"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "person_id": "43b3a8d7-e5ba-50ef-bfff-707c87e82123",
+    "character_name": "Haymitch Abernathy"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "person_id": "b755dfaf-4617-5c3e-8d61-b1edd23b31aa",
+    "character_name": "Maysilee Donner"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "person_id": "36be58dc-2667-5565-88ab-9a92aa08a6a1",
+    "character_name": "Effie Trinket"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "person_id": "05635986-ff6f-50d6-98a0-99c7fdee4ae2",
+    "character_name": "President Snow"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "person_id": "f1b7dcbf-a0e0-5be8-835c-89106a6397d9",
+    "character_name": "Plutarch Heavensbee"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "person_id": "288d68d3-8546-5acc-af8c-bc1930ee6adb",
+    "character_name": "Doctor Doom"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "person_id": "1a628df8-a17c-5548-b03a-77320030e69e",
+    "character_name": "Thor"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "person_id": "e188fa12-f837-5bae-9ed9-da8c6488e0eb",
+    "character_name": "Captain America"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "person_id": "de414ebc-d7ce-5219-914e-d5fee6428226",
+    "character_name": "Yelena Belova"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "person_id": "50cc397c-1346-59da-b5e7-ca09db7b3ec6",
+    "character_name": "Spider-Man"
+  }
+]

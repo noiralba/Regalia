@@ -1,0 +1,30 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "booking_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "show_id": "b6e3a912-4d87-42fc-9a51-7c2e8f0d6b34",
+    "seat_id": "fb1e8536-7f82-f01a-2fd7-5d3e2f1f6c98",
+    "ticket_type_id": "1a9d5e63-f274-48b1-83c6-2e7f4a0d9b52"
+  },
+  {
+    "id": "8a3c9e12-4f76-4d51-bd23-8f7e6a1c5b40",
+    "booking_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "show_id": "b6e3a912-4d87-42fc-9a51-7c2e8f0d6b34",
+    "seat_id": "ac2f9647-8f93-a12b-3fd8-6d4e3f2f7d09",
+    "ticket_type_id": "8f2c4a71-3d96-4b05-ae18-7c9d2f6b1a43"
+  },
+  {
+    "id": "3b7d1e89-fa54-4c12-98ab-fd654e3b2a10",
+    "booking_id": "9f8e7d6c-5b4a-3f2e-1d0c-9b8a7f6e5d4c",
+    "show_id": "d7b3f821-6c49-4a2e-b105-9f8d3c7e2a61",
+    "seat_id": "l1a14f68-9a31-47cd-b205-6f8e3a1d7c94",
+    "ticket_type_id": "c4e7b219-8a53-46d0-9f12-5b3e7a1c6d84"
+  },
+  {
+    "id": "4c8e2f90-0b65-5d23-09bc-fe765f4c3b21",
+    "booking_id": "9f8e7d6c-5b4a-3f2e-1d0c-9b8a7f6e5d4c",
+    "show_id": "d7b3f821-6c49-4a2e-b105-9f8d3c7e2a61",
+    "seat_id": "l1a24f68-9a31-47cd-b205-6f8e3a1d7c94",
+    "ticket_type_id": "1a9d5e63-f274-48b1-83c6-2e7f4a0d9b52"
+  }
+]

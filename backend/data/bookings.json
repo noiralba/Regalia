@@ -1,0 +1,14 @@
+[
+  {
+    "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "user_id": "test-user-1",
+    "user_email": "test_1@example.com",
+    "booking_number": "SWE-123456"
+  },
+  {
+    "id": "9f8e7d6c-5b4a-3f2e-1d0c-9b8a7f6e5d4c",
+    "user_id": "test-user-2",
+    "user_email": "2test_1@example.com",
+    "booking_number": "SWE-987654"
+  }
+]
