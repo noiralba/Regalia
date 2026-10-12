@@ -526,3 +526,11 @@ Get all ticket types and their prices from the database.
   }
 ]
 ```
+
+**Fel:** `500 Internal Server Error`
+
+```json
+{
+  "error": "Kunde inte hämta biljettyper från databasen"
+}
+```
