@@ -2,6 +2,10 @@
 
 Follow this examples and document all the respones for CRUD!
 
+Base-URL: `http://localhost:3000`
+
+# Movies
+
 # Mall
 
 ### GET /movies
@@ -578,3 +582,67 @@ No response body is returned.
 - Full HTTP testing of CRUD after authentication and authorization: pending.
 
 The integration test invokes the route handlers directly and does not test authentication, authorization or the complete HTTP request flow.
+
+# Screen
+
+### GET /screens
+
+Get all the screens from database.
+
+**Respons:** `200 OK`
+
+```json
+[
+  {
+    "id": "screen-1",
+    "name": "Stora Salongen",
+    "capacity": 81
+  },
+  {
+    "id": "screen-2",
+    "name": "Lilla Salongen",
+    "capacity": 45
+  }
+]
+```
+
+**Fel:** `500 Internal Server Error `
+
+```json
+{
+  "error": "Kunde inte hämta salonger från databasen"
+}
+```
+
+# Seats
+
+### GET /seats
+
+Get all the seats from database.
+
+**Respons:** `200 OK`
+
+```json
+[
+  {
+    "id": "seat-A1",
+    "seat_row": "1",
+    "seat_number": 1,
+    "screen_id": "screen-1"
+  },
+  {
+    "id": "seat-A2",
+    "seat_row": "1",
+    "seat_number": 2,
+    "screen_id": "screen-1"
+  }
+]
+```
+
+**Fel:** `500 Internal Server Error`
+
+```json
+{
+  "error": "Kunde inte hämta platser från databasen"
+}
+```
