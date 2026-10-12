@@ -465,3 +465,36 @@ Get all the screens from database.
   "error": "Kunde inte hämta salonger från databasen"
 }
 ```
+
+# Seats
+
+### GET /seats
+
+Get all the seats from database.
+
+**Respons:** `200 OK`
+
+```json
+[
+  {
+    "id": "seat-A1",
+    "seat_row": "1",
+    "seat_number": 1,
+    "screen_id": "screen-1"
+  },
+  {
+    "id": "seat-A2",
+    "seat_row": "1",
+    "seat_number": 2,
+    "screen_id": "screen-1"
+  }
+]
+```
+
+**Fel:** `500 Internal Server Error`
+
+```json
+{
+  "error": "Kunde inte hämta platser från databasen"
+}
+```
