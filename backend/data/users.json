@@ -1,0 +1,18 @@
+[
+  {
+    "id": "test-user-1",
+    "first_name": "Rör ej",
+    "last_name": "okej",
+    "email": "test_1@example.com",
+    "password": "qwerty123",
+    "role": "customer"
+  },
+  {
+    "id": "test-user-2",
+    "first_name": "2Rör 2ej",
+    "last_name": "okej",
+    "email": "2test_1@example.com",
+    "password": "qwerty123",
+    "role": "customer"
+  }
+]
