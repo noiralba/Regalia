@@ -1,0 +1,23 @@
+[
+  {
+    "id": "b6e3a912-4d87-42fc-9a51-7c2e8f0d6b34",
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "screen_id": "a3f1c8d2-6b74-4e91-8f25-3d7a9c0b1e56",
+    "date": "2026-11-15",
+    "time": "18:00:00"
+  },
+  {
+    "id": "d7b3f821-6c49-4a2e-b105-9f8d3c7e2a61",
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "screen_id": "e12b4f68-9a31-47cd-b205-6f8e3a1d7c94",
+    "date": "2026-11-10",
+    "time": "21:00:00"
+  },
+  {
+    "id": "a5e8f234-1c89-4b72-ac12-8f9d3e4b7c61",
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "screen_id": "a3f1c8d2-6b74-4e91-8f25-3d7a9c0b1e56",
+    "date": "2026-11-16",
+    "time": "20:00:00"
+  }
+]

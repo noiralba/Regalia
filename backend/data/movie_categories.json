@@ -1,0 +1,274 @@
+[
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+  },
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+  },
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+  },
+  {
+    "movie_id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+    "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+  },
+  {
+    "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+    "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+  },
+  {
+    "movie_id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
+    "category_id": "f7c4d547-92bd-5701-b41f-9c3f46fc09f5"
+  },
+  {
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+  },
+  {
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "category_id": "725e8e44-02b5-5e19-8478-d3dcdb807d11"
+  },
+  {
+    "movie_id": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+    "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+    "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+  },
+  {
+    "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+    "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+  },
+  {
+    "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+    "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+  },
+  {
+    "movie_id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
+    "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+  },
+  {
+    "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+    "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+  },
+  {
+    "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+    "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+  },
+  {
+    "movie_id": "11c4eb5d-8a47-5c66-9861-fcf3f5375a32",
+    "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+  },
+  {
+    "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+    "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+  },
+  {
+    "movie_id": "21fd09b4-8739-5130-a69c-67590fd343a1",
+    "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+  },
+  {
+    "movie_id": "3e9ab7b0-80a9-5af3-bb39-7b4a9027addb",
+    "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "category_id": "506caaa7-dddc-5991-a489-1d6a63c8345b"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+  },
+  {
+    "movie_id": "7c0a34fd-1a2f-505b-8e35-1eed97d98875",
+    "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "category_id": "9e12ab75-f4d7-528a-8b93-ed25a7e6a509"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "category_id": "6c53da68-d281-50e5-a726-b23408c3a023"
+  },
+  {
+    "movie_id": "a2778a3b-8dd0-5d2a-80cf-59bb1457b090",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "category_id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "category_id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "category_id": "9e12ab75-f4d7-528a-8b93-ed25a7e6a509"
+  },
+  {
+    "movie_id": "b1259117-ed00-5435-baf5-4a87a00bccc7",
+    "category_id": "059ed231-394a-564b-97a0-6c922eaac530"
+  },
+  {
+    "movie_id": "b316b362-d7c8-5129-8e60-23f098d5c9e4",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "b316b362-d7c8-5129-8e60-23f098d5c9e4",
+    "category_id": "9976319c-1be4-53ae-9a3b-473b319fd8f4"
+  },
+  {
+    "movie_id": "b316b362-d7c8-5129-8e60-23f098d5c9e4",
+    "category_id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469"
+  },
+  {
+    "movie_id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
+    "category_id": "22a55866-bdb1-50a6-8cb2-d95f31663afe"
+  },
+  {
+    "movie_id": "b4685044-a0e4-5836-9e8b-11102d8e1cd5",
+    "category_id": "be63c9b1-8923-5b6c-886c-74a778165c8e"
+  },
+  {
+    "movie_id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
+    "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+  },
+  {
+    "movie_id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
+    "category_id": "055bbf2a-7277-52b8-a148-41af23755261"
+  },
+  {
+    "movie_id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
+    "category_id": "506caaa7-dddc-5991-a489-1d6a63c8345b"
+  },
+  {
+    "movie_id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "3dee0c55-9dc7-529e-9a6c-da46d4f78f02",
+    "category_id": "e9ea480f-9001-5b8a-8a8a-a81d9828ea2b"
+  },
+  {
+    "movie_id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
+    "category_id": "9976319c-1be4-53ae-9a3b-473b319fd8f4"
+  },
+  {
+    "movie_id": "7d77af8d-37f8-58ae-802a-bc4b92e5cd60",
+    "category_id": "725e8e44-02b5-5e19-8478-d3dcdb807d11"
+  },
+  {
+    "movie_id": "7982d999-171a-5e70-9e4c-a1033c462d98",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "7982d999-171a-5e70-9e4c-a1033c462d98",
+    "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+  },
+  {
+    "movie_id": "7982d999-171a-5e70-9e4c-a1033c462d98",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
+    "category_id": "22a55866-bdb1-50a6-8cb2-d95f31663afe"
+  },
+  {
+    "movie_id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
+    "category_id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469"
+  },
+  {
+    "movie_id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
+    "category_id": "506caaa7-dddc-5991-a489-1d6a63c8345b"
+  },
+  {
+    "movie_id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
+    "category_id": "dba6c569-587b-5ee3-bacd-8dea188dac52"
+  },
+  {
+    "movie_id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
+    "category_id": "e9ea480f-9001-5b8a-8a8a-a81d9828ea2b"
+  },
+  {
+    "movie_id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
+    "category_id": "38def3d1-7cf4-54a9-be9f-063943d3e65e"
+  },
+  {
+    "movie_id": "3b67867a-3f00-5705-beb3-9c9c8eea8740",
+    "category_id": "1ecc17ba-70e1-5ee0-818f-838aa1091b07"
+  },
+  {
+    "movie_id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
+    "category_id": "c6fdc34e-4d08-5d58-9742-9771a47151c4"
+  },
+  {
+    "movie_id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
+    "category_id": "0dc06b5c-8430-56e6-943b-a7a6de52d2a9"
+  },
+  {
+    "movie_id": "a5dbdf5a-254e-54aa-8db2-25e62ee4d8cb",
+    "category_id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469"
+  }
+]
