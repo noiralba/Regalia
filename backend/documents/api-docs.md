@@ -41,11 +41,9 @@ Get all the movies from database.
 //An example of how to document 404-respons
 
 {
-  "error": "Filmen hittades inte"
+  "error": "Film hittades inte"
 }
 ```
-
----
 
 # Regalia API
 
@@ -644,5 +642,41 @@ Get all the seats from database.
 ```json
 {
   "error": "Kunde inte hämta platser från databasen"
+}
+```
+
+# Ticket Types
+
+### GET /api/ticket-types
+
+Get all ticket types and their prices from the database.
+
+**Response:** `200 OK`
+
+```json
+[
+  {
+    "id": "ticket-barn",
+    "name": "Barn",
+    "price": "80.00"
+  },
+  {
+    "id": "ticket-pensionar",
+    "name": "Pensionär",
+    "price": "120.00"
+  },
+  {
+    "id": "ticket-vuxen",
+    "name": "Vuxen",
+    "price": "140.00"
+  }
+]
+```
+
+**Fel:** `500 Internal Server Error`
+
+```json
+{
+  "error": "Kunde inte hämta biljettyper från databasen"
 }
 ```
