@@ -1,14 +1,14 @@
 # Regalia
 
-Grupp A: Andrea, Jonathan, Sara, Madeleine, Kire och Maria
+Group A: Andrea, Jonathan, Sara, Madeleine, Kire, and Maria
 
-Regalia är en webbapplikation för biobokning som utvecklas som ett grupprojekt.
+Regalia is a cinema booking web application developed as a group project.
 
-Projektet består av en frontend, en backend och en MySQL-databas.
+The project consists of a frontend, a backend, and a MySQL database.
 
 ---
 
-## Teknik
+## Technology stack
 
 ### Frontend
 
@@ -32,18 +32,18 @@ Projektet består av en frontend, en backend och en MySQL-databas.
 - dotenv
 - cors
 
-### Utvecklingsmiljö
+### Development tools and environment
 
-- Git och GitHub
+- Git and GitHub
 - Concurrently
 - Node `--watch`
 - Vite reverse proxy
 
 ---
 
-# Projektstruktur
+## Project structure
 
-Projektet är uppdelat i frontend och backend.
+The project is divided into a frontend and a backend.
 
 ```text
 Regalia/
@@ -54,7 +54,6 @@ Regalia/
 │   │   │   └── custom.scss
 │   │   ├── App.tsx
 │   │   └── main.tsx
-│   │
 │   └── package.json
 │
 ├── backend/
@@ -68,7 +67,7 @@ Regalia/
 └── package-lock.json
 ```
 
-Projektet har tre `package.json`:
+The project has three `package.json` files:
 
 ```text
 Regalia/package.json
@@ -76,59 +75,53 @@ frontend/package.json
 backend/package.json
 ```
 
-De har olika ansvar:
+Each has a different responsibility:
 
-- `Regalia/package.json` Används bland annat för att starta frontend och backend samtidigt med Concurrently.
-- `frontend/package.json` innehåller frontends dependencies.
-- `backend/package.json` innehåller backendens dependencies.
+- `Regalia/package.json` is used, among other things, to start the frontend and backend together using Concurrently.
+- `frontend/package.json` contains the frontend dependencies.
+- `backend/package.json` contains the backend dependencies.
 
 ---
 
-# Starta projektet första gången
+## Getting started for the first time
 
-## Förutsättningar
+### Prerequisites
 
-Du behöver ha följande installerat:
+You need to have the following installed:
 
 - Git
 - Node.js
 - npm
 
-Använd en modern Node-version som är kompatibel med projektets version av Vite.
+Use a recent Node.js version compatible with the version of Vite used by the project.
 
-Du ska **inte** skapa ett nytt Vite-projekt, köra `git init` eller installera React, Express eller övriga dependencies manuellt.
+**Do not** create a new Vite project, run `git init`, or manually install React, Express, or the other dependencies one by one.
 
-Projektets grundsetup finns redan i repot.
+The initial project setup is already included in the repository.
 
----
+### 1. Navigate to the folder where you store repositories
 
-## 1. Gå till mappen där du sparar repositories
-
-Exempel:
+For example, in PowerShell:
 
 ```powershell
 cd C:\repository
 ```
 
----
-
-## 2. Klona projektet från GitHub
+### 2. Clone the project from GitHub
 
 ```powershell
 git clone https://github.com/noiralba/Regalia.git
 ```
 
-Det skapar en lokal kopia av Regalia på datorn.
+This creates a local copy of Regalia on your computer.
 
----
-
-## 3. Gå in i projektet
+### 3. Open the project folder
 
 ```powershell
 cd Regalia
 ```
 
-Du bör nu stå i:
+Your current directory should now be:
 
 ```text
 C:\repository\Regalia
@@ -136,55 +129,51 @@ C:\repository\Regalia
 
 ---
 
-# Installera dependencies
+## Install dependencies
 
-Dependencies behöver installeras första gången projektet klonas.
+Dependencies must be installed when you clone the project for the first time.
 
-Vi använder `npm ci` eftersom projektets `package-lock.json` redan innehåller de versioner som projektet är uppsatt och testat med.
+We use `npm ci` because the project's `package-lock.json` files already specify the dependency versions recorded for the project.
 
-Det innebär att varje utvecklare inte själv behöver installera exempelvis React, Express, Bootstrap eller mysql2 ett paket i taget.
+This means that each developer does not have to install React, Express, Bootstrap, mysql2, or other packages individually.
 
----
+### 4. Install dependencies in the project root
 
-## 4. Installera dependencies i projektets rot
-
-Kontrollera att du står i:
+Make sure your current directory is:
 
 ```text
 C:\repository\Regalia
 ```
 
-Kör:
+Run this command:
 
 ```powershell
 npm ci
 ```
 
-Här installeras bland annat Concurrently, som används för att starta frontend och backend samtidigt.
+This installs Concurrently, among other packages. Concurrently is used to start the frontend and backend at the same time.
 
----
+### 5. Install frontend dependencies
 
-## 5. Installera frontendens dependencies
-
-Gå till frontend:
+First, enter the frontend folder:
 
 ```powershell
 cd frontend
 ```
 
-Du ska nu stå i:
+Your current directory should now be:
 
 ```text
 C:\repository\Regalia\frontend
 ```
 
-Kör:
+**Then run this separate command:**
 
 ```powershell
 npm ci
 ```
 
-Här installeras bland annat:
+This installs, among other packages:
 
 - React
 - TypeScript
@@ -195,29 +184,27 @@ Här installeras bland annat:
 - Sass
 - Oxlint
 
----
+### 6. Install backend dependencies
 
-## 6. Installera backendens dependencies
-
-Från frontend går du till backend:
+From the frontend folder, navigate to the backend folder:
 
 ```powershell
 cd ..\backend
 ```
 
-Du ska nu stå i:
+Your current directory should now be:
 
 ```text
 C:\repository\Regalia\backend
 ```
 
-Kör:
+**Then run this separate command:**
 
 ```powershell
 npm ci
 ```
 
-Här installeras bland annat:
+This installs, among other packages:
 
 - Express
 - mysql2
@@ -226,15 +213,15 @@ Här installeras bland annat:
 - dotenv
 - cors
 
----
+When the backend Oxlint setup is merged into `main`, this also installs the backend's Oxlint dependency.
 
-## 7. Gå tillbaka till projektets rot
+### 7. Return to the project root
 
 ```powershell
 cd ..
 ```
 
-Du ska nu stå i:
+Your current directory should now be:
 
 ```text
 C:\repository\Regalia
@@ -242,29 +229,29 @@ C:\repository\Regalia
 
 ---
 
-# Starta projektet
+## Start the project
 
-Från projektets rot:
+From the project root:
 
 ```text
 C:\repository\Regalia
 ```
 
-kör:
+Run:
 
 ```powershell
 npm run dev
 ```
 
-Det startar frontend och backend samtidigt med hjälp av Concurrently.
+This starts the frontend and backend simultaneously using Concurrently.
 
-Frontend kör på:
+The frontend runs at:
 
 ```text
 http://localhost:5173
 ```
 
-Backend kör på:
+The backend runs at:
 
 ```text
 http://localhost:3000
@@ -272,19 +259,19 @@ http://localhost:3000
 
 ---
 
-# Varför använder vi Concurrently?
+## Why do we use Concurrently?
 
-Frontend och backend är två separata processer.
+The frontend and backend are two separate processes.
 
-Utan Concurrently hade vi behövt starta dem i varsin terminal.
+Without Concurrently, we would have to start them in separate terminals.
 
-Concurrently gör att båda kan startas med:
+Concurrently lets us start both with:
 
 ```powershell
 npm run dev
 ```
 
-Flödet ser förenklat ut så här:
+A simplified overview:
 
 ```text
 npm run dev
@@ -300,47 +287,47 @@ Vite       Node/Express
 
 ---
 
-# Automatisk omstart av backend
+## Automatic backend restart
 
-Backendens `dev`-script använder:
+The backend's `dev` script uses:
 
 ```text
 node --watch index.js
 ```
 
-Det betyder att Node håller koll på relevanta backendfiler.
+This means Node.js watches relevant backend files for changes.
 
-När en sådan fil ändras och sparas startas backendprocessen om automatiskt.
+When a watched file is changed and saved, the backend process automatically restarts.
 
-Vi behöver därför inte stoppa och starta backend manuellt efter varje kodändring.
+As a result, we do not have to manually stop and restart the backend after every code change.
 
 ---
 
-# Frontend och backend – Vite reverse proxy
+## Frontend and backend — Vite reverse proxy
 
-Frontend kör på:
+The frontend runs at:
 
 ```text
 localhost:5173
 ```
 
-Backend kör på:
+The backend runs at:
 
 ```text
 localhost:3000
 ```
 
-Under utveckling använder vi Vites reverse proxy.
+During development, we use Vite's reverse proxy.
 
-Det innebär att frontend kan anropa exempelvis:
+This allows the frontend to make requests such as:
 
 ```ts
 fetch("/api");
 ```
 
-Vite skickar då anropet vidare till Express-backend.
+Vite then forwards the request to the Express backend.
 
-Förenklat:
+Simplified flow:
 
 ```text
 React
@@ -355,62 +342,62 @@ Express
 localhost:3000
 ```
 
-Det gör kommunikationen mellan frontend och backend enklare under lokal utveckling.
+This makes communication between the frontend and backend easier during local development.
 
-Därför använder vi inte CORS-middleware för just kommunikationen mellan våra två lokala utvecklingsservrar i nuläget.
+Therefore, we do not currently rely on CORS middleware for communication between these two local development servers.
 
 ---
 
-# Styling
+## Styling
 
-Projektet använder:
+The project uses:
 
 - Bootstrap
 - React-Bootstrap
 - Sass/SCSS
 
-Bootstrap ger bland annat:
+Bootstrap provides, among other things:
 
-- mobile first-stöd
-- responsivt grid
-- flex-utilities
-- spacing-utilities
-- responsiva breakpoints
-- färdiga grundkomponenter
+- Mobile-first support
+- A responsive grid system
+- Flex utilities
+- Spacing utilities
+- Responsive breakpoints
+- Ready-made base components
 
-React-Bootstrap gör Bootstrap-komponenter till React-komponenter.
+React-Bootstrap makes Bootstrap components available as React components.
 
-Exempel:
+Example:
 
 ```tsx
-<Button>Logga in</Button>
+<Button>Log in</Button>
 ```
 
-Sass används för att kunna anpassa Bootstrap till Regalias egen design.
+Sass is used to customize Bootstrap to match Regalia's own design.
 
-Den gemensamma stylingfilen finns här:
+The shared stylesheet is located at:
 
 ```text
 frontend/src/styles/custom.scss
 ```
 
-Den importeras en gång i:
+It is imported once in:
 
 ```text
 frontend/src/main.tsx
 ```
 
-Vi ska inte ändra filer direkt inne i `node_modules` eller i Bootstraps egna källfiler.
+Do not edit files directly inside `node_modules` or Bootstrap's own source files.
 
-Regalias egna färger, typografi och andra designval ska ligga i projektets egna stylingfiler.
+Regalia's custom colors, typography, and other design decisions should be kept in the project's own styling files.
 
 ---
 
-# React Router
+## React Router
 
-React Router är installerat i frontend.
+React Router is installed in the frontend.
 
-Det ska användas för projektets olika routes och URL:er, exempelvis:
+It is intended to handle the project's different routes and URLs, for example:
 
 ```text
 /
@@ -421,29 +408,29 @@ Det ska användas för projektets olika routes och URL:er, exempelvis:
 /mina-sidor
 ```
 
-Själva routingstrukturen byggs vidare under projektets utveckling.
+The routing structure will continue to be developed as the project progresses.
 
 ---
 
-# Databas
+## Database
 
-Projektet använder MySQL.
+The project uses MySQL.
 
-MySQL-databasen ligger på en extern server och backend ansluter till den med paketet:
+The MySQL database is hosted on an external server, and the backend connects to it using:
 
 ```text
 mysql2
 ```
 
-Själva databasanslutningen finns i:
+The database connection is defined in:
 
 ```text
 backend/db.js
 ```
 
-`db.js` skapar en connection pool med `mysql2/promise`.
+`db.js` creates a connection pool using `mysql2/promise`.
 
-Förenklat ser flödet ut så här:
+A simplified overview:
 
 ```text
 Express backend
@@ -455,23 +442,23 @@ backend/db.js
 mysql2 connection pool
       │
       ▼
-MySQL-server
+MySQL server
       │
       ▼
 webapp
 ```
 
-En connection pool används så att backend kan återanvända databasanslutningar när flera API-routes senare behöver läsa eller skriva data.
+A connection pool allows the backend to reuse database connections as multiple API routes need to read or write data.
 
-Anslutningsuppgifterna hämtas från den lokala:
+Connection details are loaded from the local file:
 
 ```text
 backend/.env
 ```
 
-via `dotenv`.
+using `dotenv`.
 
-Exempel på vilka miljövariabler som används:
+Environment variables used include:
 
 ```env
 DB_HOST=
@@ -481,9 +468,9 @@ DB_USER=
 DB_PASSWORD=
 ```
 
-De riktiga värdena finns aldrig i koden eller i GitHub.
+Actual credentials must never be included in the source code or pushed to GitHub.
 
-MySQL-servern använder ett självsignerat SSL-certifikat. Därför används följande SSL-inställning enligt instruktionerna för projektets databasserver:
+The MySQL server uses a self-signed SSL certificate. For this project's database server, the following SSL setting is used according to the provided server instructions:
 
 ```js
 ssl: {
@@ -491,71 +478,73 @@ ssl: {
 }
 ```
 
-Databasanslutningen har verifierats från Node-backend med SQL-frågan:
+**Security note:** This setting disables certificate verification and is specific to the current project configuration. It should not be treated as a recommended default for production environments.
+
+The database connection was verified from the Node.js backend with the SQL query:
 
 ```sql
 SELECT NOW() AS now;
 ```
 
-Databasen returnerade ett korrekt svar, vilket verifierar att följande delar fungerar tillsammans:
+The database returned a valid response, verifying that the following components worked together:
 
 ```text
 .env
- ↓
+  ↓
 dotenv
- ↓
+  ↓
 mysql2/promise
- ↓
+  ↓
 SSL
- ↓
-MySQL-server
- ↓
+  ↓
+MySQL server
+  ↓
 webapp
 ```
 
-Databasanslutningen är alltså klar. Själva tabellerna och projektets SQL-frågor byggs vidare utifrån ER-modellen.
+The database connection is therefore established. The tables and SQL queries continue to be developed based on the ER model.
 
 ---
 
-# `.env` och databasuppgifter
+## `.env` and database credentials
 
-## Viktigt
+### Important
 
-Riktiga databasuppgifter ska aldrig:
+Real database credentials must never be:
 
-- skrivas direkt i JavaScript- eller TypeScript-kod
-- läggas i README
-- läggas i `.env.example`
-- skrivas i frontendkoden
-- läggas i `package.json`
-- skrivas i commit-meddelanden
-- pushas till GitHub
+- Hardcoded in JavaScript or TypeScript files
+- Included in the README
+- Included in `.env.example`
+- Added to frontend code
+- Added to `package.json`
+- Written in commit messages
+- Pushed to GitHub
 
-Databasuppgifterna kommer ungefär bestå av:
+The database credentials generally consist of:
 
 ```text
 host
 port
-databasnamn
-användarnamn
-lösenord
+database name
+username
+password
 ```
 
 ---
 
-# `.env.example`
+## `.env.example`
 
-Projektet innehåller:
+The project includes:
 
 ```text
 backend/.env.example
 ```
 
-Det är en mall.
+This file is a template.
 
-Den innehåller namnen på de miljövariabler backend behöver, men inga riktiga hemligheter.
+It contains the environment variable names required by the backend, but no actual secrets.
 
-Exempel:
+Example:
 
 ```env
 DB_HOST=
@@ -566,35 +555,35 @@ DB_PASSWORD=
 PORT=3000
 ```
 
-`.env.example` får finnas på GitHub eftersom den inte innehåller några riktiga lösenord.
+`.env.example` may be stored on GitHub because it contains no real passwords.
 
 ---
 
-# Skapa din egen `.env`
+## Create your own `.env`
 
-När vi har fått MySQL-uppgifterna ska varje utvecklare skapa sin egen lokala `.env`.
+Once the MySQL connection details have been provided, each developer must create their own local `.env` file.
 
-Stå i projektets rot:
+From the project root:
 
 ```text
 C:\repository\Regalia
 ```
 
-Kör:
+Run:
 
 ```powershell
 Copy-Item backend\.env.example backend\.env
 ```
 
-Det skapar:
+This creates:
 
 ```text
 backend/.env
 ```
 
-Öppna sedan filen och fyll i de riktiga databasuppgifterna.
+Then open the file and enter the actual database credentials.
 
-Exempel:
+Example:
 
 ```env
 DB_HOST=...
@@ -607,31 +596,31 @@ PORT=3000
 
 ---
 
-# Skillnaden mellan `.env.example` och `.env`
+## Difference between `.env.example` and `.env`
 
-Tänk så här:
+Think of them like this:
 
 ```text
 .env.example
-= tom mall
-= innehåller inga hemligheter
-= får finnas på GitHub
+= empty template
+= contains no secrets
+= may be stored on GitHub
 
 .env
-= privat lokal kopia
-= innehåller riktiga databasuppgifter
-= får INTE finnas på GitHub
+= private local copy
+= contains actual database credentials
+= must NOT be stored on GitHub
 ```
 
-Varje utvecklare har sin egen lokala `.env`.
+Each developer has their own local `.env` file.
 
 ---
 
-# Hur skyddas `.env`?
+## How is `.env` protected?
 
-Projektets `.gitignore` innehåller regler som gör att Git ska ignorera `.env`.
+The project's `.gitignore` contains rules that tell Git to ignore `.env` files.
 
-Bland annat:
+These include:
 
 ```gitignore
 **/.env
@@ -639,68 +628,68 @@ Bland annat:
 !**/.env.example
 ```
 
-Det betyder:
+This means:
 
 ```text
-.env           → ignoreras
-.env.local     → ignoreras
-.env.example   → får versionshanteras
+.env           → ignored
+.env.local     → ignored
+.env.example   → allowed in version control
 ```
 
 ---
 
-# Kontrollera `.env` innan commit
+## Check `.env` before committing
 
-Innan en commit är det bra att köra:
+Before making a commit, run:
 
 ```powershell
 git status
 ```
 
-`backend/.env` ska **inte** synas bland filerna som ska committas.
+`backend/.env` must **not** appear among the files to be committed.
 
-Du kan även kontrollera specifikt att Git ignorerar filen:
+You can also check specifically whether Git ignores the file:
 
 ```powershell
 git check-ignore -v backend\.env
 ```
 
-Om `.env` är korrekt ignorerad visas vilken regel i `.gitignore` som fångar filen.
+If `.env` is correctly ignored, Git displays the rule in `.gitignore` that matches the file.
 
 ---
 
-# Om ett lösenord ändå råkar pushas till GitHub
+## If a password is accidentally pushed to GitHub
 
-Om ett riktigt databaslösenord råkar pushas till GitHub:
+If a real database password is accidentally pushed to GitHub:
 
-1. Meddela gruppen direkt.
-2. Meddela ansvarig lärare/serveransvarig.
-3. Betrakta lösenordet som exponerat.
-4. Byt lösenordet.
+1. Notify the group immediately.
+2. Notify the responsible teacher or server administrator.
+3. Treat the password as exposed.
+4. Change or rotate the password.
 
-Det räcker inte att bara radera filen och göra en ny commit.
+Simply deleting the file and creating a new commit is not enough.
 
-Ett värde som redan har committats kan fortfarande finnas kvar i Git-historiken.
+A value that has already been committed may still exist in Git history.
 
 ---
 
-# Starta projektet nästa gång
+## Start the project next time
 
-När projektet redan finns på datorn ska du inte klona det igen.
+If the project is already on your computer, do not clone it again.
 
-Gå till projektets rot:
+Navigate to the project root:
 
 ```powershell
 cd C:\repository\Regalia
 ```
 
-Hämta senaste ändringarna:
+Pull the latest changes:
 
 ```powershell
 git pull
 ```
 
-Starta sedan projektet:
+Then start the project:
 
 ```powershell
 npm run dev
@@ -708,34 +697,32 @@ npm run dev
 
 ---
 
-# Om dependencies har ändrats
+## If dependencies have changed
 
-Om någon i gruppen har installerat eller uppdaterat ett paket kan exempelvis:
+If someone in the group has installed or updated a package, these files may have changed:
 
 ```text
 package.json
 package-lock.json
 ```
 
-ha ändrats.
+You may then need to run `npm ci` again in the part of the project where dependencies changed.
 
-Då kan du behöva köra `npm ci` igen i den del av projektet där dependencies har ändrats.
-
-Exempel för frontend:
+For example, for the frontend:
 
 ```powershell
 cd C:\repository\Regalia\frontend
 npm ci
 ```
 
-Exempel för backend:
+For the backend:
 
 ```powershell
 cd C:\repository\Regalia\backend
 npm ci
 ```
 
-Exempel för projektets rot:
+For the project root:
 
 ```powershell
 cd C:\repository\Regalia
@@ -744,139 +731,225 @@ npm ci
 
 ---
 
-# Git-arbetsflöde
+## Git workflow
 
-Arbeta inte direkt på `main` när du utvecklar en ny funktion.
+Do not work directly on `main` when developing a new feature.
 
-Börja från uppdaterad `main`:
+Start from an up-to-date `main` branch:
 
 ```powershell
 git switch main
 git pull
 ```
 
-Skapa sedan en feature branch:
+Then create a feature branch:
 
 ```powershell
-git switch -c feature/namn-pa-task
+git switch -c feature/task-name
 ```
 
-Exempel:
+For example:
 
 ```powershell
-git switch -c feature/filmdetaljsida
+git switch -c feature/movie-details-page
 ```
 
-Arbeta och spara dina ändringar.
+Work on your changes and save them.
 
-Kontrollera sedan:
+Then check the working tree:
 
 ```powershell
 git status
 ```
 
-Lägg till relevanta filer:
+Stage the relevant files:
 
 ```powershell
-git add .
+git add -- path/to/changed-file
 ```
 
-Commit:
+Replace `path/to/changed-file` with the file you intend to include. Repeat for other relevant files. This is safer than staging every file when there may be local test files or secrets.
+
+Commit your changes:
 
 ```powershell
-git commit -m "Beskriv kort vad som har gjorts"
+git commit -m "Briefly describe what was changed"
 ```
 
-Pusha branchen:
+Push the branch:
 
 ```powershell
-git push -u origin feature/namn-pa-task
+git push -u origin feature/task-name
 ```
 
-Därefter kan ändringarna granskas och mergas till `main`.
+The changes can then be reviewed and merged into `main` through a pull request.
 
 ---
 
-# Viktigt före commit
+## Important checks before committing
 
-Kör alltid:
+Always run:
 
 ```powershell
 git status
 ```
 
-Kontrollera:
+Check that:
 
-- att rätt filer finns med
-- att inga privata filer finns med
-- att `.env` inte finns med
-- att du står på rätt branch
+- Only the intended files are included
+- No private files are included
+- `.env` is not included
+- You are on the correct branch
 
-Kontrollera aktuell branch med:
+Check the current branch with:
 
 ```powershell
 git branch
 ```
 
-Den branch du står på markeras med `*`.
+The current branch is marked with `*`.
 
-Exempel:
+Example:
 
 ```text
-* feature/filmdetaljsida
+* feature/movie-details-page
   main
 ```
 
+### Linting with Oxlint
+
+Oxlint checks code for issues covered by its configured lint rules. It does not replace functional testing.
+
+Once the backend/root Oxlint setup is merged into `main`, run this command **from the project root** to lint both the frontend and backend:
+
+```powershell
+npm run lint
+```
+
+The root script runs the frontend lint command first, followed by the backend lint command. If the root script has not been merged yet, the frontend can be checked separately:
+
+```powershell
+npm run lint --prefix frontend
+```
+
+Test relevant changes before committing or opening a pull request. For changed API endpoints, use Thunder Client to check HTTP status codes, response bodies, and errors. Update `backend/documents/api-docs.md` whenever an endpoint is added or changed.
+
+### API documentation
+
+Endpoint paths, request and response examples, and HTTP status codes are documented separately in:
+
+```text
+backend/documents/api-docs.md
+```
+
+Keep detailed endpoint documentation there rather than duplicating it in this README.
+
 ---
 
-# Kortversion – första installationen
+## Quick reference — first-time installation
+
+**Run each numbered step separately in PowerShell.** Wait for each command to finish before running the next. A line starting with `PS C:\...>` is a terminal prompt, **not** part of the command.
+
+**1. Go to your repositories folder:**
 
 ```powershell
 cd C:\repository
+```
 
+**2. Clone the repository:**
+
+```powershell
 git clone https://github.com/noiralba/Regalia.git
+```
 
+**3. Enter the project root:**
+
+```powershell
 cd Regalia
+```
 
+**4. Install root dependencies:**
+
+```powershell
 npm ci
+```
 
+**5. Enter the frontend folder:**
+
+```powershell
 cd frontend
-npm ci
+```
 
+**6. Install frontend dependencies:**
+
+```powershell
+npm ci
+```
+
+**7. Move from frontend to backend:**
+
+```powershell
 cd ..\backend
+```
+
+**8. Install backend dependencies:**
+
+```powershell
 npm ci
+```
 
+**9. Return to the project root:**
+
+```powershell
 cd ..
+```
 
+**10. Create and configure `backend/.env` if you have not already done so (see the instructions above).** You need the database credentials from the project team.
+
+**11. Start both servers:**
+
+```powershell
 npm run dev
 ```
 
 ---
 
-# Kortversion – nästa gång
+## Quick reference — next time
+
+From a new PowerShell terminal, run these commands one at a time:
+
+**1. Go to the project root:**
 
 ```powershell
 cd C:\repository\Regalia
+```
 
+**2. Pull the latest changes (after checking that your working tree is clean and you are on the intended branch):**
+
+```powershell
 git pull
+```
 
+**3. Start the project:**
+
+```powershell
 npm run dev
 ```
 
 ---
 
-# När MySQL-uppgifterna finns
+## When the MySQL credentials are available
 
-Skapa din privata `.env` från mallen:
+Create your private `.env` file from the template:
 
 ```powershell
 Copy-Item backend\.env.example backend\.env
 ```
 
-Fyll sedan i databasuppgifterna i:
+Then enter the database credentials in:
 
 ```text
 backend/.env
 ```
 
-Ändra aldrig `.env.example` så att den innehåller riktiga lösenord.
+Never modify `.env.example` to include real passwords.
