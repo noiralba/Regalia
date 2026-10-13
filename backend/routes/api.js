@@ -3,7 +3,7 @@ const router = express.Router();
 
 const seatsRoutes = require("./seats");
 const screenRoutes = require("./screens");
-const movieRoutes = require("./movieRoutes.js");
+const movieRoutes = require("./movies");
 const showsRoutes = require("./shows");
 const ticketTypeRoutes = require("./ticketTypes");
 const bookingsRoutes = require("./bookings");
