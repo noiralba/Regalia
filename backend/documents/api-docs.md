@@ -37,15 +37,13 @@ Get all the movies from database.
 
 **Status:** `404 Not Found`
 
-````json
+```json
 //An example of how to document 404-respons
 
 {
-  "fel": "Filmen hittades inte"
+  "error": "Film hittades inte"
 }
-
-
----
+```
 
 # Regalia API
 
@@ -57,7 +55,7 @@ Base-URL: `http://localhost:3000`
 {
   "message": "Regalia API fungerar"
 }
-````
+```
 
 ### GET /movies
 
