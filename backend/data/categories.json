@@ -1,0 +1,78 @@
+[
+  {
+    "id": "4ba2eafc-ae40-5e12-a00d-ae57a32c5a9a",
+    "name": "Äventyr"
+  },
+  {
+    "id": "bd6b43fd-c173-5d6c-8472-6e782ca51d2e",
+    "name": "Action"
+  },
+  {
+    "id": "6c53da68-d281-50e5-a726-b23408c3a023",
+    "name": "Drama"
+  },
+  {
+    "id": "dba6c569-587b-5ee3-bacd-8dea188dac52",
+    "name": "Fantasy"
+  },
+  {
+    "id": "38def3d1-7cf4-54a9-be9f-063943d3e65e",
+    "name": "Komedi"
+  },
+  {
+    "id": "f7c4d547-92bd-5701-b41f-9c3f46fc09f5",
+    "name": "Satir"
+  },
+  {
+    "id": "be63c9b1-8923-5b6c-886c-74a778165c8e",
+    "name": "Thriller"
+  },
+  {
+    "id": "725e8e44-02b5-5e19-8478-d3dcdb807d11",
+    "name": "Mystery"
+  },
+  {
+    "id": "c6fdc34e-4d08-5d58-9742-9771a47151c4",
+    "name": "Skräck"
+  },
+  {
+    "id": "055bbf2a-7277-52b8-a148-41af23755261",
+    "name": "Familj"
+  },
+  {
+    "id": "506caaa7-dddc-5991-a489-1d6a63c8345b",
+    "name": "Animerat"
+  },
+  {
+    "id": "9e12ab75-f4d7-528a-8b93-ed25a7e6a509",
+    "name": "Sci-Fi"
+  },
+  {
+    "id": "059ed231-394a-564b-97a0-6c922eaac530",
+    "name": "Superhjälte"
+  },
+  {
+    "id": "9976319c-1be4-53ae-9a3b-473b319fd8f4",
+    "name": "Slasher"
+  },
+  {
+    "id": "cf2ed536-1a02-52c8-8d5e-cfcc95bf2469",
+    "name": "Klassiker"
+  },
+  {
+    "id": "22a55866-bdb1-50a6-8cb2-d95f31663afe",
+    "name": "Övernaturlig"
+  },
+  {
+    "id": "e9ea480f-9001-5b8a-8a8a-a81d9828ea2b",
+    "name": "Musikal"
+  },
+  {
+    "id": "1ecc17ba-70e1-5ee0-818f-838aa1091b07",
+    "name": "Kultfilm"
+  },
+  {
+    "id": "0dc06b5c-8430-56e6-943b-a7a6de52d2a9",
+    "name": "Psykologisk thriller"
+  }
+]
