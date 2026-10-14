@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { randomUUID } = require("crypto");
+const { getBookingConfirmation } = require("../services/bookingService");
 
 // GET: Hämta alla bokningar
 router.get("/", async (req, res) => {
@@ -14,40 +16,40 @@ router.get("/", async (req, res) => {
   }
 });
 
-// // POST: Skapa en bokning, INTE KLAR, väntar på att alla GET ska bli klara
+// POST: Skapa en bokning
+router.post("/", async (req, res) => {
+  const { user_id, user_email } = req.body;
 
-// router.post("/", async (req, res) => {
-//   const { id, user_email, bookedSeats_id, shows_id } = req.body;
+  if (!user_email) {
+    return res.status(400).json({
+      error: "user_email is required.",
+    });
+  }
 
-//   if (!id || !user_email || !shows_id) {
-//     return res.status(400).json({
-//       error: "id, user_email and shows_id are required.",
-//     });
-//   }
+  const id = randomUUID();
+  const booking_number = `REG-${randomUUID()}`;
 
-//   try {
-//     await db.query(
-//       `INSERT INTO bookings
-//         (id, user_email, bookedSeats_id, shows_id)
-//        VALUES (?, ?, ?, ?)`,
-//       [id, user_email, bookedSeats_id ?? null, shows_id],
-//     );
+  try {
+    await db.query(
+      `INSERT INTO bookings
+        (id, user_id, user_email, booking_number)
+       VALUES (?, ?, ?, ?)`,
+      [id, user_id ?? null, user_email, booking_number],
+    );
 
-//     res.status(201).json({
-//       id,
-//       user_email,
-//       bookedSeats_id: bookedSeats_id ?? null,
-//       shows_id,
-//     });
-//   } catch (error) {
-//     console.error("POST /bookings:", error.message);
-//     res.status(500).json({ error: "Server error." });
-//   }
-// });
+    res.status(201).json({
+      id,
+      user_id: user_id ?? null,
+      user_email,
+      booking_number,
+    });
+  } catch (error) {
+    console.error("POST /bookings:", error.message);
+    res.status(500).json({ error: "Server error." });
+  }
+});
 
-// GET: Get booking confirmation by booking number
-const { getBookingConfirmation } = require("../services/bookingService");
-
+// GET: Hämta bokningsbekräftelse via bokningsnummer
 router.get("/:bookingNumber", async (req, res) => {
   try {
     const confirmation = await getBookingConfirmation(req.params.bookingNumber);
