@@ -598,6 +598,36 @@ Get all the seats from database.
 }
 ```
 
+### GET /seats/available/:showId
+
+Get all available seats for a specific show.
+
+**Response 200 OK**
+
+````json
+[
+  {
+    "id": "seat-A1",
+    "seat_row": "A",
+    "seat_number": 1,
+    "screen_id": "screen-1"
+  }
+]
+
+**Response 404 Not Found**
+
+```json
+{
+  "error": "Visningen hittades inte"
+}
+
+**Response 500 Internal Server Error**
+
+```json
+{
+  "error": "Kunde inte hämta lediga platser från databasen"
+}
+
 # Ticket Types
 
 ### GET /api/ticket-types
