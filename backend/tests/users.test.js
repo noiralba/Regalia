@@ -14,8 +14,8 @@ function setup() {
   };
 
   for (const method of ["post", "get", "patch", "delete"]) {
-    fakeRouter[method] = (_, handler) => {
-      routes[method.toUpperCase()] = handler;
+    fakeRouter[method] = (_, ...handlers) => {
+      routes[method.toUpperCase()] = handlers.at(-1);
     };
   }
 
@@ -31,6 +31,8 @@ function setup() {
     "../db": fakeDb,
     bcrypt: { hash: async () => "test-hash" },
     "node:crypto": { randomUUID: () => "test-user-id" },
+    "../middleware/requireAuth": (_req, _res, next) => next(),
+    "../middleware/requireOwnUser": (_req, _res, next) => next(),
   };
 
   const source = readFileSync(join(__dirname, "../routes/users.js"), "utf8");

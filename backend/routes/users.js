@@ -3,6 +3,8 @@ const router = express.Router();
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const { randomUUID } = require("node:crypto");
+const requireAuth = require("../middleware/requireAuth");
+const requireOwnUser = require("../middleware/requireOwnUser");
 
 // Tillfälligt skydd tills autentisering är implementerad
 router.use((req, res) => {
@@ -78,7 +80,7 @@ router.post("/", async (req, res) => {
 });
 
 // GET: Hämta en användare via ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", requireAuth, requireOwnUser, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -106,7 +108,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // PATCH: Uppdatera användarens kontouppgifter
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", requireAuth, requireOwnUser, async (req, res) => {
   const changes = {};
   const allowedFields = ["first_name", "last_name", "email"];
   const body = req.body ?? {};
@@ -181,7 +183,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 // DELETE: Ta bort en användare via ID
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", requireAuth, requireOwnUser, async (req, res) => {
   const { id } = req.params;
 
   try {
