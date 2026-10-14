@@ -45,4 +45,22 @@ router.get("/", async (req, res) => {
 //   }
 // });
 
+// GET: Get booking confirmation by booking number
+const { getBookingConfirmation } = require("../services/bookingService");
+
+router.get("/:bookingNumber", async (req, res) => {
+  try {
+    const confirmation = await getBookingConfirmation(req.params.bookingNumber);
+
+    if (!confirmation) {
+      return res.status(404).json({ error: "Booking not found." });
+    }
+
+    res.status(200).json(confirmation);
+  } catch (error) {
+    console.error("GET /bookings/:bookingNumber:", error.message);
+    res.status(500).json({ error: "Server error." });
+  }
+});
+
 module.exports = router;
