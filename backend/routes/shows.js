@@ -13,5 +13,22 @@ router.get("/", async (req, res) => {
 });
 
 //här måste jag till en getbyid
-// sen kalla på den
+
+// GET: Hämta en visning via UUID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [shows] = await db.query("SELECT * FROM shows WHERE id = ?", [id]);
+
+    if (shows.length === 0) {
+      return res.status(404).json({ error: "Show not found." });
+    }
+
+    res.status(200).json(shows[0]);
+  } catch (error) {
+    console.error("GET /shows/:id:", error.message);
+    res.status(500).json({ error: "Server error." });
+  }
+});
 module.exports = router;
