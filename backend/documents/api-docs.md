@@ -78,11 +78,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "En klassisk spökhistoria för dig som vågar stanna kvar när lamporna släcks.",
     "longDescription": "Ed och Lorraine Warren hjälper en familj som flyttat in i ett hus där något mörkt och övernaturligt verkar ha vaknat. Se filmen tillsammans med andra skräckälskare under en sen Halloweenvisning.",
     "director_id": "40a9cff9-4eaf-48b0-a054-4fb136ae1dd6",
-    "categories": [
-      "Övernaturlig",
-      "Thriller",
-      "Skräck"
-    ]
+    "categories": ["Övernaturlig", "Thriller", "Skräck"]
   },
   {
     "id": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
@@ -99,12 +95,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
     "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
     "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c",
-    "categories": [
-      "Äventyr",
-      "Drama",
-      "Action",
-      "Fantasy"
-    ]
+    "categories": ["Äventyr", "Drama", "Action", "Fantasy"]
   },
   {
     "id": "cfacf3cc-ddad-502b-bee8-acb226a67a00",
@@ -121,11 +112,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "Coraline upptäcker en annan värld bakom en hemlig dörr – men allt är inte som det verkar.",
     "longDescription": "Coraline upptäcker en hemlig dörr i sitt nya hem som leder till en alternativ värld. Där verkar allt vara bättre än hemma, men snart upptäcker hon att den perfekta världen döljer en mörk hemlighet.",
     "director_id": "0e8f5c3e-9856-4fa7-b187-ea2babe4b8de",
-    "categories": [
-      "Animerat",
-      "Skräck",
-      "Fantasy"
-    ]
+    "categories": ["Animerat", "Skräck", "Fantasy"]
   },
   {
     "id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
@@ -142,11 +129,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "En familj flyttar till Norge för att börja om, men en konflikt med en grannfamilj förändrar allt.",
     "longDescription": "Det rumänsk-norska paret Mihai och Lisbeth flyttar till Norge med sina barn efter att Mihais föräldrar gått bort. De lär känna grannfamiljen Halberg och relationerna blir allt närmare. Men när parets dotter Elia kommer till skolan med blåmärken väcks misstankar och snart hamnar de båda familjerna i en konflikt om uppfostran, tro och frihet.",
     "director_id": "80fc4e70-3109-5b7c-b03e-de1788cce0bc",
-    "categories": [
-      "Familj",
-      "Drama",
-      "Thriller"
-    ]
+    "categories": ["Familj", "Drama", "Thriller"]
   },
   {
     "id": "fdb64c04-c883-5830-b4b7-96efdef437a1",
@@ -163,11 +146,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "En mäktig oljemiljardär försöker övertyga världen om att han är mänsklighetens räddare innan katastrofen han själv orsakat förstör allt.",
     "longDescription": "Digger Rockwell är världens mäktigaste man och en av världens rikaste oljemiljardärer. När en katastrof som han själv har orsakat hotar att förändra världen försöker han desperat övertyga mänskligheten om att han är dess räddare. Filmen är en mörk och satirisk berättelse om makt, girighet, miljökatastrofer och ansvar.",
     "director_id": "98444e80-98ad-5c03-80de-2abd73692930",
-    "categories": [
-      "Komedi",
-      "Drama",
-      "Satir"
-    ]
+    "categories": ["Komedi", "Drama", "Satir"]
   }
 ]
 ```
@@ -192,11 +171,7 @@ Base-URL: `http://localhost:3000`
   "shortDescription": "En ung författare upptäcker mörka hemligheter när hon flyttar in hos den berömda författaren Verity Crawford.",
   "longDescription": "Lowen Ashleigh får i uppdrag att slutföra bokserien åt den berömda författaren Verity Crawford efter att en olycka gjort Verity oförmögen att skriva. När Lowen flyttar in hos familjen hittar hon ett manuskript som avslöjar mörka och skrämmande hemligheter. Snart börjar hon tvivla på vad som egentligen är sant.",
   "director_id": "a866b4d3-6591-5ef7-96c4-0bfa7d419932",
-  "categories": [
-    "Drama",
-    "Mystery",
-    "Thriller"
-  ]
+  "categories": ["Drama", "Mystery", "Thriller"]
 }
 ```
 
@@ -216,7 +191,7 @@ Base-URL: `http://localhost:3000`
 
 ```json
 [
-{
+  {
     "id": "3a4697bf-7d1a-53a1-98bf-708a03160659",
     "title": "The Exorcist",
     "productionYear": 1973,
@@ -247,9 +222,10 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö där lek snabbt övergår i maktkamp.",
     "longDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö. När de blir strandsatta tillsammans med en stökig högstadieklass väcks gamla tonårstrauman till liv. Snart börjar både ungdomar och vuxna tvingas fundera över gränsen mellan lek, maktkamp, offer och förövare.",
     "director_id": "b272b14e-fe62-5ed0-a8d3-62f8ee295589"
-  },
+  }
 ]
 ```
+
 **Respons:** `400 Bad Request`
 
 ```json
@@ -264,7 +240,7 @@ Base-URL: `http://localhost:3000`
 
 ```json
 [
-    {
+  {
     "id": "552a1b46-ed3c-52ce-bfb8-964550cd90c4",
     "title": "Hocus Pocus",
     "productionYear": 1993,
@@ -279,11 +255,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "En magisk Halloweenvisning för hela familjen med de tre busiga Sanderson-systrarna.",
     "longDescription": "När tre häxor återuppstår på Halloween måste en grupp barn försöka stoppa dem innan de sprider kaos över staden. En färgstark Halloweenklassiker för både barn och vuxna.",
     "director_id": "03d341ee-8d53-4a34-82d0-20ccf8901bc9",
-    "categories": [
-      "Familj",
-      "Komedi",
-      "Fantasy"
-    ]
+    "categories": ["Familj", "Komedi", "Fantasy"]
   },
   {
     "id": "ef33e1fe-a3d6-5bc3-807a-44f2ebf55d70",
@@ -300,11 +272,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "En familj flyttar till Norge för att börja om, men en konflikt med en grannfamilj förändrar allt.",
     "longDescription": "Det rumänsk-norska paret Mihai och Lisbeth flyttar till Norge med sina barn efter att Mihais föräldrar gått bort. De lär känna grannfamiljen Halberg och relationerna blir allt närmare. Men när parets dotter Elia kommer till skolan med blåmärken väcks misstankar och snart hamnar de båda familjerna i en konflikt om uppfostran, tro och frihet.",
     "director_id": "80fc4e70-3109-5b7c-b03e-de1788cce0bc",
-    "categories": [
-      "Familj",
-      "Drama",
-      "Thriller"
-    ]
+    "categories": ["Familj", "Drama", "Thriller"]
   }
 ]
 ```
@@ -338,11 +306,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "En ung författare upptäcker mörka hemligheter när hon flyttar in hos den berömda författaren Verity Crawford.",
     "longDescription": "Lowen Ashleigh får i uppdrag att slutföra bokserien åt den berömda författaren Verity Crawford efter att en olycka gjort Verity oförmögen att skriva. När Lowen flyttar in hos familjen hittar hon ett manuskript som avslöjar mörka och skrämmande hemligheter. Snart börjar hon tvivla på vad som egentligen är sant.",
     "director_id": "a866b4d3-6591-5ef7-96c4-0bfa7d419932",
-    "categories": [
-      "Drama",
-      "Mystery",
-      "Thriller"
-    ]
+    "categories": ["Drama", "Mystery", "Thriller"]
   }
 ]
 ```
@@ -376,12 +340,7 @@ Base-URL: `http://localhost:3000`
     "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
     "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
     "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c",
-    "categories": [
-      "Äventyr",
-      "Drama",
-      "Action",
-      "Fantasy"
-    ]
+    "categories": ["Äventyr", "Drama", "Action", "Fantasy"]
   }
 ]
 ```
@@ -705,3 +664,75 @@ Get all ticket types and their prices from the database.
   "error": "Kunde inte hämta biljettyper från databasen"
 }
 ```
+### POST /api/bookings
+
+Create a new booking with the selected show and seats. The booking number is generated automatically. The response includes the booking details, movie title, show date and time, selected seats, ticket types and total price.
+
+**Request body:**
+
+```json
+{
+  "user_email": "test@example.com",
+  "show_id": "2355eb45-0fa0-47dd-bc2c-0ad294986b84",
+  "seats": [
+    {
+      "seat_id": "2d8f6a41-c593-4b07-ae62-91f4d8b3c750",
+      "ticket_type_id": "8f2c4a71-3d96-4b05-ae18-7c9d2f6b1a43"
+    },
+    {
+      "seat_id": "9c1b84f3-3a72-4d1e-84b2-09d1c8e73a5a",
+      "ticket_type_id": "8f2c4a71-3d96-4b05-ae18-7c9d2f6b1a43"
+    }
+  ]
+}
+```
+
+**Response:** `201 Created`
+
+```json
+{
+  "boknings_id": "generated-booking-id",
+  "bokningsnummer": "REG-generated-booking-number",
+  "filmtitel": "Fjord",
+  "visningsdatum": "2026-11-05",
+  "visningstid": "18:00:00",
+  "platser_och_priser": "Rad A Plats 1 (Barn: 80.00 kr), Rad A Plats 2 (Barn: 80.00 kr)",
+  "totalt_pris": "160.00"
+}
+```
+
+**Errors:**
+
+`400 Bad Request` — Required booking information is missing or invalid.
+
+```json
+{
+  "error": "user_email, show_id and at least one seat are required."
+}
+```
+
+`404 Not Found` — The specified show does not exist.
+
+```json
+{
+  "error": "Show not found."
+}
+```
+
+`409 Conflict` — One of the selected seats is already booked for the show.
+
+```json
+{
+  "error": "One of the selected seats is already booked for this show."
+}
+```
+
+`500 Internal Server Error` — An unexpected server or database error occurred.
+
+```json
+{
+  "error": "Server error."
+}
+```
+
+````
