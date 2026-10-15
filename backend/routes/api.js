@@ -8,6 +8,7 @@ const showsRoutes = require("./shows");
 const ticketTypeRoutes = require("./ticketTypes");
 const bookingsRoutes = require("./bookings");
 const usersRoutes = require("./users");
+const authRoutes = require("./auth");
 
 router.use("/screens", screenRoutes);
 router.use("/movies", movieRoutes);
@@ -16,5 +17,6 @@ router.use("/bookings", bookingsRoutes);
 router.use("/ticket-types", ticketTypeRoutes);
 router.use("/seats", seatsRoutes);
 router.use("/users", usersRoutes);
+router.use("/auth", authRoutes);
 
 module.exports = router;

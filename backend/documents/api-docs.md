@@ -392,23 +392,19 @@ Base-URL: `http://localhost:3000`
 
 Base URL: `http://localhost:3000/api`
 
-## Current security status
+### Authentication, authorization and access
 
-All `/api/users`endpoints are currently blocked by temporary middleware.
+- `POST /api/users` is public and rate-limited to 5 requests per hour per client IP.
+- `POST /api/auth/login` is public and rate-limited to 10 requests per 15 minutes per client IP.
+- `GET /api/users/:id`, `PATCH /api/users/:id`, `DELETE /api/users/:id` and `GET /api/users/:id/bookings` require a valid JWT and allow access only when `:id` matches the authenticated user ID.
+- Send the JWT in the header: `Authorization: Bearer <JWT_TOKEN>`.
+- JWTs expire after 1 hour. A missing token returns `401 Unauthorized`; a token for another user ID returns `403 Forbidden`.
+- Passwords are hashed with bcrypt and never included in user responses. Users cannot assign their own role; new accounts receive the `customer` role.
+- These authorization rules cover the Users endpoints listed here. They **do not** secure the separate `/api/bookings` routes.
 
-**Status:** `403 Forbidden`
+### POST /api/users
 
-```json
-{
-  "error": "Åtkomst till användare är inte tillåten ännu"
-}
-```
-
-Authentication and authorization must be implemented before these endpoints are made accessible. Users must not be allowed to access or modify other users' accounts without permission.
-
-### POST /users
-
-Creates a new user. The backend generates a UUID, hashes the password using bcrypt, and automatically assigns the role `customer`.
+Register a user. The API generates a UUID. Required fields are `first_name`, `last_name`, `email`, and `password`. The backend limits first and last name to 100 JavaScript string units each and email to 150. Passwords must contain at least 15 Unicode code points and no more than 72 UTF-8 bytes (bcrypt limit).
 
 **Request body:**
 
@@ -416,123 +412,169 @@ Creates a new user. The backend generates a UUID, hashes the password using bcry
 {
   "first_name": "Anna",
   "last_name": "Testsson",
-  "email": "anna.testsson@example.com",
+  "email": "anna.testsson@example.invalid",
   "password": "ExamplePassword123!"
 }
 ```
 
-**Status:** `201 Created`
+**201 Created:**
 
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "first_name": "Anna",
   "last_name": "Testsson",
-  "email": "anna.testsson@example.com"
-}
-```
-
-The password and its hash are never returned in the response. The client cannot choose the user's role.
-
-**Other responses:**
-
-- `400 Bad Request` - Missing, invalid or excessively long fields.
-- `409 Conflict` - Email address already exists.
-- `500 Internal Server Error` - Database or server error.
-
-### GET /users/:id
-
-Returns a user by ID without exposing the password hash.
-
-**Example:** `GET /api/users/550e8400-e29b-41d4-a716-446655440000`
-
-**Status:** `200 OK`
-
-```json
-{
-  "id": "550e8400-e29b-41d4-a716-446655440000",
-  "first_name": "Anna",
-  "last_name": "Testsson",
-  "email": "anna.testsson@example.com"
-}
-```
-
-**Status:** `404 Not Found`
-
-```json
-{
-  "error": "Användaren hittades inte."
+  "email": "anna.testsson@example.invalid"
 }
 ```
 
 **Other responses:**
 
-- `500 Internal Server Error` – Database or server error.
+- `400 Bad Request` — missing or invalid fields, invalid email, too-short password or excessive field length.
+- `409 Conflict` — email already exists.
+- `429 Too Many Requests` — registration rate limit reached.
+- `500 Internal Server Error` — database or server error.
 
-### PATCH /users/:id
+Example `400` response for a short password:
 
-Updates an existing user's first name, last name or email.
+```json
+{ "error": "Lösenordet måste innehålla minst 15 tecken." }
+```
 
-Only `first_name`, `last_name` and `email` are allowed. Password changes are not supported by this endpoint.
+### POST /api/auth/login
 
-**Example:** `PATCH /api/users/550e8400-e29b-41d4-a716-446655440000`
+Authenticate using email and password. Email is trimmed and normalized to lowercase for lookup.
 
 **Request body:**
 
 ```json
 {
-  "first_name": "Eva"
+  "email": "anna.testsson@example.invalid",
+  "password": "ExamplePassword123!"
 }
 ```
 
-**Status:** `200 OK`
+**200 OK:**
 
 ```json
 {
-  "message": "Användaren uppdaterades."
+  "token": "<JWT_TOKEN>",
+  "tokenType": "Bearer",
+  "expiresIn": 3600
 }
 ```
 
 **Other responses:**
 
-- `400 Bad Request` – Missing, invalid or disallowed fields.
-- `404 Not Found` – User not found.
-- `409 Conflict` – Email address already exists.
-- `500 Internal Server Error` – Database or server error.
+- `400 Bad Request` — missing email or password: `E-postadress och lösenord måste anges.`
+- `401 Unauthorized` — invalid credentials: `Felaktig e-postadress eller lösenord.`
+- `429 Too Many Requests` — too many login attempts.
+- `500 Internal Server Error` — database, server or JWT configuration error.
 
-### DELETE /users/:id
+### GET /api/users/:id
 
-Deletes a user by ID.
+Return the authenticated user's account details without the password hash.
 
-**Example:** `DELETE /api/users/550e8400-e29b-41d4-a716-446655440000`
+**Authorization:** `Bearer <JWT_TOKEN>`
 
-**Status:** `204 No Content`
-
-No response body is returned.
-
-**Status:** `404 Not Found`
+**200 OK:**
 
 ```json
 {
-  "error": "Användaren hittades inte."
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "first_name": "Anna",
+  "last_name": "Testsson",
+  "email": "anna.testsson@example.invalid"
 }
 ```
 
+**Other responses:** `401 Unauthorized` (missing/invalid/expired JWT), `403 Forbidden` (different user ID), `404 Not Found` (account missing), `500 Internal Server Error`.
+
+### PATCH /api/users/:id
+
+Update only the authenticated user's `first_name`, `last_name`, or `email`. Password and role changes are not supported by this endpoint.
+
+**Authorization:** `Bearer <JWT_TOKEN>`
+
+**Request body:**
+
+```json
+{ "first_name": "Eva" }
+```
+
+**200 OK:**
+
+```json
+{ "message": "Användaren uppdaterades." }
+```
+
+**Other responses:** `400 Bad Request` (missing, invalid or disallowed fields), `401 Unauthorized`, `403 Forbidden`, `404 Not Found`, `409 Conflict` (email already exists), `500 Internal Server Error`.
+
+### DELETE /api/users/:id
+
+Delete the authenticated user's own account.
+
+**Authorization:** `Bearer <JWT_TOKEN>`
+
+**204 No Content:** Account deleted. No response body.
+
+**Other responses:** `401 Unauthorized`, `403 Forbidden`, `404 Not Found`, `409 Conflict` (related database records prevent deletion), `500 Internal Server Error`.
+
+### GET /api/users/:id/bookings
+
+Return the authenticated user's upcoming or past bookings for **Mina sidor**. The query filters on `bookings.user_id = :id`, and the middleware verifies that `:id` matches the authenticated user ID. The response contains only summary fields, not customer email or complete booking details. Guest bookings with no associated `user_id` are not included.
+
+**Authorization:** `Bearer <JWT_TOKEN>`
+
+| Query parameter   | Meaning                                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| `period=upcoming` | Upcoming showings; default. Returns all upcoming bookings in chronological order. `offset` is not allowed. |
+| `period=past`     | Past showings, newest first, 2 bookings per page.                                                          |
+| `offset=0`        | Starting position for `period=past`; default 0. Use `offset=2`, `offset=4`, etc. for **Visa fler**.        |
+
+Upcoming example: `GET /api/users/:id/bookings?period=upcoming`
+
+Past example: `GET /api/users/:id/bookings?period=past&offset=0`
+
+Next page: `GET /api/users/:id/bookings?period=past&offset=2`
+
+**200 OK** — illustrative response:
+
+```json
+{
+  "bookings": [
+    {
+      "booking_id": "example-booking-id",
+      "movie_title": "Example movie",
+      "show_date": "2026-10-10",
+      "show_time": "19:00:00",
+      "seat_count": 2
+    }
+  ],
+  "hasMore": false
+}
+```
+
+For past bookings, `hasMore` indicates whether additional older results exist. If the user has no matching bookings, the response is `200 OK` with `{ "bookings": [], "hasMore": false }`.
+
 **Other responses:**
 
-- `409 Conflict` – The user cannot be deleted because of related database records.
-- `500 Internal Server Error` – Database or server error.
+- `400 Bad Request` — invalid `period`, invalid `offset`, or `offset` supplied for `period=upcoming`.
+- `401 Unauthorized` — missing, invalid or expired JWT.
+- `403 Forbidden` — the requested user ID does not match the JWT user ID.
+- `500 Internal Server Error` — database or server error.
 
-### Testing status
+The past/upcoming comparison uses the database server's `NOW()` with the stored showing date and time. Confirm timezone handling in deployment.
 
-- JavaScript syntax check: passed.
-- Automated unit tests with mocked database: 8 passed.
-- MySQL integration test: POST, GET, PATCH and DELETE passed against the `webapp` database using a temporary test user.
-- Password hashing and default `customer` role verified against MySQL.
-- Thunder Client: verified that GET, POST, PATCH and DELETE are blocked with status 403.
-- Full HTTP testing of CRUD after authentication and authorization: pending.
+### Testing and current limitations
 
-The integration test invokes the route handlers directly and does not test authentication, authorization or the complete HTTP request flow.
+- Automated tests: 13 passing Users CRUD/booking-list tests with mocked database operations, plus 8 passing middleware tests.
+- HTTP-tested: registration, login, authenticated account reads/updates/deletion, authentication and ownership errors, login/registration rate limits, and the new booking-list endpoint with empty results and invalid query parameters.
+- Direct read-only SQL queries verified the booking-list table joins against existing nonempty booking data. An authenticated HTTP request returning a **nonempty** booking list has **not yet** been tested against MySQL.
+- Rate limiting currently uses the in-memory store; limits reset when the backend process restarts and are not shared across multiple server instances.
+- JWTs are not revoked immediately when an account is deleted; an already issued token may remain valid until its one-hour expiry. Future booking/admin authorization must account for this limitation.
+- The separate existing `/api/bookings` routes currently include publicly accessible booking reads and booking updates without authentication checks, and booking creation accepts a client-supplied `user_id`. They need a separate security review; adding this Users endpoint does not fix those routes.
+- The database query groups rows by booking and show ID. The current booking creation flow associates a booking with a single show. If bookings can later contain seats from multiple shows, revisit the list query and pagination to avoid repeated booking entries.
 
 # Screen
 

@@ -8,14 +8,23 @@ function setup() {
   const routes = {};
   const calls = [];
   let result = { affectedRows: 1 };
+  let bookingRows = [];
+  const bookingQueries = [];
 
   const fakeRouter = {
-    use() {}, // Vi har redan testat 403-spärren i Thunder Client
+    use() {},
   };
 
   for (const method of ["post", "get", "patch", "delete"]) {
-    fakeRouter[method] = (_, handler) => {
-      routes[method.toUpperCase()] = handler;
+    fakeRouter[method] = (path, ...handlers) => {
+      const methodName = method.toUpperCase();
+      const handler = handlers.at(-1);
+
+      routes[`${methodName} ${path}`] = handler;
+
+      if (path === "/" || path === "/:id") {
+        routes[methodName] = handler;
+      }
     };
   }
 
@@ -24,6 +33,11 @@ function setup() {
       calls.push({ sql, values });
       return [result];
     },
+
+    query: async (sql, values) => {
+      bookingQueries.push({ sql, values });
+      return [bookingRows];
+    },
   };
 
   const dependencies = {
@@ -31,6 +45,11 @@ function setup() {
     "../db": fakeDb,
     bcrypt: { hash: async () => "test-hash" },
     "node:crypto": { randomUUID: () => "test-user-id" },
+    "../middleware/requireAuth": (_req, _res, next) => next(),
+    "../middleware/requireOwnUser": (_req, _res, next) => next(),
+    "../middleware/rateLimit": {
+      registerLimiter: (_req, _res, next) => next(),
+    },
   };
 
   const source = readFileSync(join(__dirname, "../routes/users.js"), "utf8");
@@ -52,6 +71,10 @@ function setup() {
     calls,
     setResult: (value) => {
       result = value;
+    },
+    bookingQueries,
+    setBookingRows: (rows) => {
+      bookingRows = rows;
     },
   };
 }
@@ -193,4 +216,137 @@ test("DELETE: okänt ID ger 404", async () => {
   await routes.DELETE({ params: { id: "saknas" } }, res);
 
   assert.equal(res.statusCode, 404);
+});
+
+test("POST: för kort lösenord ger 400", async () => {
+  const { routes, calls } = setup();
+  const res = response();
+
+  await routes.POST(
+    {
+      body: {
+        first_name: "Anna",
+        last_name: "Andersson",
+        email: "anna@example.com",
+        password: "kort123",
+      },
+    },
+    res,
+  );
+
+  assert.equal(res.statusCode, 400);
+  assert.equal(calls.length, 0);
+});
+
+test("POST: för långt lösenord ger 400", async () => {
+  const { routes, calls } = setup();
+  const res = response();
+
+  await routes.POST(
+    {
+      body: {
+        first_name: "Anna",
+        last_name: "Andersson",
+        email: "anna@example.com",
+        password: "å".repeat(37),
+      },
+    },
+    res,
+  );
+
+  assert.equal(res.statusCode, 400);
+  assert.equal(calls.length, 0);
+});
+
+test("GET bookings: hämtar kommande bokningar för rätt användare", async () => {
+  const { routes, setBookingRows, bookingQueries } = setup();
+  const res = response();
+
+  setBookingRows([
+    {
+      booking_id: "booking-1",
+      movie_title: "Testfilm",
+      show_date: "2026-10-30",
+      show_time: "19:00:00",
+      seat_count: 2,
+    },
+  ]);
+
+  await routes["GET /:id/bookings"](
+    {
+      params: { id: "test-user-id" },
+      query: { period: "upcoming" },
+    },
+    res,
+  );
+
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.body.bookings.length, 1);
+  assert.equal(res.body.bookings[0].movie_title, "Testfilm");
+  assert.equal(res.body.hasMore, false);
+
+  // SQL-frågan måste filtrera på användarens ID.
+  assert.match(bookingQueries[0].sql, /b\.user_id = \?/);
+  assert.equal(bookingQueries[0].values[0], "test-user-id");
+});
+
+test("GET bookings: visar två tidigare bokningar och har fler", async () => {
+  const { routes, setBookingRows, bookingQueries } = setup();
+  const res = response();
+
+  setBookingRows([
+    { booking_id: "booking-3", movie_title: "Film C" },
+    { booking_id: "booking-2", movie_title: "Film B" },
+    { booking_id: "booking-1", movie_title: "Film A" },
+  ]);
+
+  await routes["GET /:id/bookings"](
+    {
+      params: { id: "test-user-id" },
+      query: { period: "past", offset: "0" },
+    },
+    res,
+  );
+
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.body.bookings.length, 2);
+  assert.equal(res.body.bookings[0].booking_id, "booking-3");
+  assert.equal(res.body.bookings[1].booking_id, "booking-2");
+  assert.equal(res.body.hasMore, true);
+
+  assert.match(bookingQueries[0].sql, /LIMIT \? OFFSET \?/);
+  assert.deepEqual(Array.from(bookingQueries[0].values), [
+    "test-user-id",
+    3,
+    0,
+  ]);
+});
+
+test("GET bookings: Visa fler hämtar nästa två tidigare bokningar", async () => {
+  const { routes, setBookingRows, bookingQueries } = setup();
+  const res = response();
+
+  setBookingRows([
+    { booking_id: "booking-3", movie_title: "Äldre film A" },
+    { booking_id: "booking-4", movie_title: "Äldre film B" },
+  ]);
+
+  await routes["GET /:id/bookings"](
+    {
+      params: { id: "test-user-id" },
+      query: { period: "past", offset: "2" },
+    },
+    res,
+  );
+
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.body.bookings.length, 2);
+  assert.equal(res.body.bookings[0].booking_id, "booking-3");
+  assert.equal(res.body.hasMore, false);
+
+  assert.deepEqual(Array.from(bookingQueries[0].values), [
+    "test-user-id",
+    3,
+    2,
+  ]);
 });
