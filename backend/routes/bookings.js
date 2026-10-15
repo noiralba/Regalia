@@ -105,11 +105,11 @@ router.post("/", async (req, res) => {
     );
 
     try {
-  calculateTicketTotal(selectedTickets, ticketTypes);
-} catch (validationError) {
-  await connection.rollback();
-  return res.status(400).json({ error: validationError.message });
-}
+      calculateTicketTotal(selectedTickets, ticketTypes);
+    } catch (validationError) {
+      await connection.rollback();
+      return res.status(400).json({ error: validationError.message });
+    }
 
     // Skapa bokningen
     await connection.query(
@@ -205,6 +205,36 @@ router.get("/:bookingNumber", async (req, res) => {
   } catch (error) {
     console.error("GET /bookings/:bookingNumber:", error.message);
     res.status(500).json({ error: "Server error." });
+  }
+});
+
+// DELETE: Ta bort en bokning via ID
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [existingBookings] = await db.query(
+      "SELECT id FROM bookings WHERE id = ?",
+      [id],
+    );
+
+    if (existingBookings.length === 0) {
+      return res.status(404).json({
+        error: "Booking not found.",
+      });
+    }
+
+    await db.query("DELETE FROM bookings WHERE id = ?", [id]);
+
+    return res.status(200).json({
+      message: "Booking deleted successfully.",
+      id,
+    });
+  } catch (error) {
+    console.error("DELETE /bookings/:id:", error.message);
+    return res.status(500).json({
+      error: "Server error.",
+    });
   }
 });
 
