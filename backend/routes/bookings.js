@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require("../db");
 const { randomUUID } = require("crypto");
 const { getBookingConfirmation } = require("../services/bookingService");
+const calculateTicketTotal = require("../services/calculatePricing");
 
 // PUT: Uppdatera en bokning via ID
 router.put("/:id", async (req, res) => {
@@ -88,6 +89,27 @@ router.post("/", async (req, res) => {
       await connection.rollback();
       return res.status(404).json({ error: "Show not found." });
     }
+
+    // Hämtar biljettyper och kontrollerar att de valda biljettyperna är giltiga
+    const [ticketTypes] = await connection.query(
+      "SELECT id, price FROM ticket_types",
+    );
+
+    // Räkna antal stolar per biljettyp
+    const counts = {};
+    for (const seat of seats) {
+      counts[seat.ticket_type_id] = (counts[seat.ticket_type_id] ?? 0) + 1;
+    }
+    const selectedTickets = Object.entries(counts).map(
+      ([ticketTypeId, quantity]) => ({ ticketTypeId, quantity }),
+    );
+
+    try {
+  calculateTicketTotal(selectedTickets, ticketTypes);
+} catch (validationError) {
+  await connection.rollback();
+  return res.status(400).json({ error: validationError.message });
+}
 
     // Skapa bokningen
     await connection.query(
