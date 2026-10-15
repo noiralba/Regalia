@@ -5,16 +5,9 @@ const bcrypt = require("bcrypt");
 const { randomUUID } = require("node:crypto");
 const requireAuth = require("../middleware/requireAuth");
 const requireOwnUser = require("../middleware/requireOwnUser");
+const { registerLimiter } = require("../middleware/rateLimit");
 
-// Tillfälligt skydd tills autentisering är implementerad
-router.use((req, res) => {
-  return res.status(403).json({
-    error: "Åtkomst till användare är inte tillåten ännu",
-  });
-});
-
-// POST: Skapa en användare
-router.post("/", async (req, res) => {
+router.post("/", registerLimiter, async (req, res) => {
   const { first_name, last_name, email, password } = req.body ?? {};
 
   if (
@@ -24,6 +17,12 @@ router.post("/", async (req, res) => {
   ) {
     return res.status(400).json({
       error: "Alla fält måste fyllas i.",
+    });
+  }
+
+  if (Array.from(password).length < 15) {
+    return res.status(400).json({
+      error: "Lösenordet måste innehålla minst 15 tecken.",
     });
   }
 
@@ -79,7 +78,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET: Hämta en användare via ID
 router.get("/:id", requireAuth, requireOwnUser, async (req, res) => {
   const { id } = req.params;
 
@@ -107,7 +105,73 @@ router.get("/:id", requireAuth, requireOwnUser, async (req, res) => {
   }
 });
 
-// PATCH: Uppdatera användarens kontouppgifter
+router.get("/:id/bookings", requireAuth, requireOwnUser, async (req, res) => {
+  const period = req.query.period ?? "upcoming";
+  const offsetValue = req.query.offset ?? "0";
+
+  if (!["upcoming", "past"].includes(period)) {
+    return res.status(400).json({
+      error: "Ogiltig period.",
+    });
+  }
+
+  if (
+    typeof offsetValue !== "string" ||
+    !/^(0|[1-9]\d*)$/.test(offsetValue) ||
+    !Number.isSafeInteger(Number(offsetValue))
+  ) {
+    return res.status(400).json({
+      error: "Ogiltigt offset-värde.",
+    });
+  }
+
+  if (period === "upcoming" && req.query.offset !== undefined) {
+    return res.status(400).json({
+      error: "Offset kan endast användas för tidigare bokningar.",
+    });
+  }
+
+  const offset = Number(offsetValue);
+  const comparison = period === "upcoming" ? ">=" : "<";
+  const direction = period === "upcoming" ? "ASC" : "DESC";
+
+  try {
+    const sql = `
+      SELECT
+        b.id AS booking_id,
+        m.title AS movie_title,
+        DATE_FORMAT(s.date, '%Y-%m-%d') AS show_date,
+        TIME_FORMAT(s.time, '%H:%i:%s') AS show_time,
+        COUNT(bs.id) AS seat_count
+      FROM bookings b
+      JOIN booked_seats bs ON bs.booking_id = b.id
+      JOIN shows s ON s.id = bs.show_id
+      JOIN movies m ON m.id = s.movie_id
+      WHERE b.user_id = ?
+        AND TIMESTAMP(s.date, s.time) ${comparison} NOW()
+      GROUP BY b.id, s.id, m.title, s.date, s.time
+      ORDER BY s.date ${direction}, s.time ${direction}, b.id ${direction}
+      ${period === "past" ? "LIMIT ? OFFSET ?" : ""}
+    `;
+
+    const parameters =
+      period === "past" ? [req.params.id, 3, offset] : [req.params.id];
+
+    const [results] = await db.query(sql, parameters);
+
+    return res.status(200).json({
+      bookings: period === "past" ? results.slice(0, 2) : results,
+      hasMore: period === "past" && results.length > 2,
+    });
+  } catch (error) {
+    console.error("GET /users/:id/bookings:", error.message);
+
+    return res.status(500).json({
+      error: "Ett serverfel uppstod.",
+    });
+  }
+});
+
 router.patch("/:id", requireAuth, requireOwnUser, async (req, res) => {
   const changes = {};
   const allowedFields = ["first_name", "last_name", "email"];
@@ -182,7 +246,6 @@ router.patch("/:id", requireAuth, requireOwnUser, async (req, res) => {
   }
 });
 
-// DELETE: Ta bort en användare via ID
 router.delete("/:id", requireAuth, requireOwnUser, async (req, res) => {
   const { id } = req.params;
 
