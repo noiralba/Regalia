@@ -4,6 +4,7 @@ const db = require("../db");
 const { randomUUID } = require("crypto");
 const { getBookingConfirmation } = require("../services/bookingService");
 const calculateTicketTotal = require("../services/calculatePricing");
+const { sendBookingConfirmation } = require("../services/emailService");
 
 // PUT: Uppdatera en bokning via ID
 router.put("/:id", async (req, res) => {
@@ -169,7 +170,19 @@ router.post("/", async (req, res) => {
     }
 
     await connection.commit();
+    // Send booking confirmation email
+    const confirmationData = await getBookingConfirmation(booking_number);
 
+    try {
+      if (confirmationData) {
+        await sendBookingConfirmation(user_email, confirmationData);
+      }
+    } catch (emailError) {
+      console.error(
+        "Kunde inte skicka bokningsbekräftelse via e-post:",
+        emailError.message,
+      );
+    }
     return res.status(201).json(receipt[0]);
   } catch (error) {
     if (connection) {
