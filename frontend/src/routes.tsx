@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App";
 import { pages } from "./routeConfig";
+import BookingPage from "./pages/BookingPage";
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
   },
   {
     path: pages.booking.path,
-    element: <h1>Boka biljetter</h1>,
+    element: <BookingPage />,
   },
   {
     path: pages.login.path,
