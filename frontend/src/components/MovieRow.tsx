@@ -10,7 +10,7 @@ export default function MovieRow({ label, movies }: MovieRowProps) {
   return (
     <section className="movie-row">
       <div className="container">
-        <div className="section-label">{label}</div>
+        <div className="section-label h5 text-uppercase mb-3">{label}</div>
         <div className="row g-3 row-cols-2 row-cols-md-4">
           {movies.map((movie) => (
             <div className="col" key={movie.id}>
@@ -18,9 +18,9 @@ export default function MovieRow({ label, movies }: MovieRowProps) {
                 <img
                   src={getMovieImage(movie.posterImage)}
                   alt={movie.title}
-                  className="poster-image"
+                  className="poster-image img-fluid rounded shadow-sm w-100"
                 />
-                <div className="cap">{movie.title}</div>
+                <div className="cap h5 text-uppercase mb-3">{movie.title}</div>
               </div>
             </div>
           ))}

@@ -16,6 +16,7 @@ export interface Movies {
   categories: string[]
 }
 
+//test data
 export interface Showing {
   id: string
   movieTitle: string
@@ -23,6 +24,7 @@ export interface Showing {
   salong: string
 }
 
+//test data
 export interface ScheduleDay {
   id: string
   label: string
