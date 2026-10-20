@@ -4,7 +4,7 @@ const db = require("../db");
 
 router.get("/", async (req, res) => {
   try {
-    const [shows] = await db.query("SELECT * FROM shows");
+    const [shows] = await db.query("SELECT * FROM v_movie_screenings");
     res.status(200).json(shows);
   } catch (error) {
     console.error("GET /shows:", error.message);
@@ -17,10 +17,11 @@ router.get("/", async (req, res) => {
 // GET: Hämta en visning via UUID
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-
   try {
-    const [shows] = await db.query("SELECT * FROM shows WHERE id = ?", [id]);
-
+    const [shows] = await db.query(
+      "SELECT * FROM v_movie_screenings WHERE show_id = ?",
+      [id],
+    );
     if (shows.length === 0) {
       return res.status(404).json({ error: "Show not found." });
     }
