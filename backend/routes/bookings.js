@@ -47,7 +47,7 @@ async function runInTransaction(res, callback) {
 
 async function getOrderConfirmation(column, value, targetDb = db) {
   const [order] = await targetDb.query(
-    `SELECT * FROM v_order_confirmation WHERE \`\${column}\` = ?`,
+    `SELECT * FROM v_order_confirmation WHERE \`${column}\` = ?`,
     [value],
   );
   return order;
