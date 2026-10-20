@@ -171,9 +171,10 @@ router.post("/", async (req, res) => {
 
     await connection.commit();
     // Send booking confirmation email
-    const confirmationData = await getBookingConfirmation(booking_number);
 
     try {
+          const confirmationData = await getBookingConfirmation(booking_number);
+
       if (confirmationData) {
         await sendBookingConfirmation(user_email, confirmationData);
       }
@@ -184,6 +185,7 @@ router.post("/", async (req, res) => {
       );
     }
     return res.status(201).json(receipt[0]);
+
   } catch (error) {
     if (connection) {
       await connection.rollback();
