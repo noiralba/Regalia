@@ -4,9 +4,6 @@ export default function VipBanner() {
       <div className="vip-banner text-center text-white rounded-4 shadow p-5">
         <span className="badge text-bg-warning mb-3 px-3 py-2">Exklusivt</span>
         <h2 className="display-5 fw-bold mb-3">VIP</h2>
-        <p className="lead mb-4">
-          Få förtur till premiärer, bättre platser och särskilda förmåner.
-        </p>
         <button className="btn btn-warning btn-lg px-5 fw-semibold">
           Se mer info om VIP
         </button>
