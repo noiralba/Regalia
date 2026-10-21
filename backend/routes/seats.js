@@ -16,7 +16,7 @@ router.get("/available-seats/:showId", async (req, res) => {
   const { showId } = req.params;
   try {
     const [seats] = await db.query(
-      "SELECT show_id, seat_id, `Seat Row`, `Seat Number`, Status, Available FROM v_seat_availability WHERE show_id = ?",
+      "SELECT show_id, seat_id, `Seat Row`, `Seat Number`, Status, Available FROM v_seat_availability WHERE show_id = ? ORDER BY `Seat Row` ASC, `Seat Number` ASC",
       [showId],
     );
 
