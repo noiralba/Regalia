@@ -12,66 +12,55 @@ const transporter = nodemailer.createTransport({
 
 // Function to send booking confirmation email
 async function sendBookingConfirmation(toEmail, confirmation) {
-  // Format the list of seats (supports array of tickets or concatenated string)
-  let ticketsList = "";
+  const movieTitle = confirmation["Movie"] || "Film";
+  const bookingNum = confirmation["Booking Number"];
+  const showDate = confirmation["Screening Date"];
+  const showTime = confirmation["Start Time"];
+  const total = confirmation["Total Price (SEK)"] || 0;
 
-  if (Array.isArray(confirmation.tickets)) {
+  // Format the list of seats (supports database view "Platser" string, array of tickets, or fallback)
+  let ticketsList = "";
+  const seatsData =
+    confirmation["Platser"] ||
+    confirmation["Seats"] ||
+    confirmation.seats_and_prices ||
+    confirmation.platser_och_priser;
+
+  if (seatsData) {
+    ticketsList = seatsData
+      .split(", ")
+      .map((item) => `<li>${item}</li>`)
+      .join("");
+  } else if (Array.isArray(confirmation.tickets)) {
     ticketsList = confirmation.tickets
       .map(
         (t) =>
           `<li>Rad ${t.seat_row} Plats ${t.seat_number} (${t.ticket_type}: ${t.price} kr)</li>`,
       )
       .join("");
-  } else if (confirmation.seats_and_prices || confirmation.platser_och_priser) {
-    const rawSeats =
-      confirmation.seats_and_prices || confirmation.platser_och_priser;
-    ticketsList = rawSeats
-      .split(", ")
-      .map((item) => `<li>${item}</li>`)
-      .join("");
   } else {
     ticketsList = "<li>Inga platser angivna</li>";
   }
-
-  // Extract booking details with clean fallbacks
-  const movieTitle =
-    confirmation.movie_title ||
-    confirmation.show?.title ||
-    confirmation.filmtitel ||
-    "Film";
-  const bookingNum = confirmation.booking_number || confirmation.bokningsnummer;
-  const showDate =
-    confirmation.show_date ||
-    confirmation.show?.date ||
-    confirmation.visningsdatum;
-  const showTime =
-    confirmation.show_time ||
-    confirmation.show?.time ||
-    confirmation.visningstid;
-  const total =
-    confirmation.total_price ||
-    confirmation.totalPrice ||
-    confirmation.totalt_pris;
 
   const mailOptions = {
     from: '"Regalia" <no-reply@regalia.se>',
     to: toEmail,
     subject: `Bokningsbekräftelse - ${bookingNum}`,
     html: `
-      <h2>Tack, vi ses i salongen!</h2>
-      <p>Här är dina bokningsdetaljer:</p>
+      <h1>Bokningsbekräftelse</h1>
+      <p>Tack för din bokning! Här är dina bokningsdetaljer:</p>
       <ul>
         <li><strong>Film:</strong> ${movieTitle}</li>
         <li><strong>Bokningsnummer:</strong> ${bookingNum}</li>
-        <li><strong>Datum & Tid:</strong> ${showDate} kl. ${showTime}</li>
+        <li><strong>Datum:</strong> ${showDate}</li>
+        <li><strong>Tid:</strong> ${showTime}</li>
+        <li><strong>Totalt pris:</strong> ${total} kr</li>
       </ul>
       <p><strong>Platser:</strong></p>
       <ul>
         ${ticketsList}
       </ul>
-      <p><strong>Totalt pris:</strong> ${total} kr</p>
-      <p>Välkommen!</p>
-      <p>Uppge bokningsnumret vid ankomst.</p>
+      <p>Välkommen! Uppge bokningsnumret vid ankomst.</p>
     `,
   };
 

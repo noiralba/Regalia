@@ -5,11 +5,8 @@ const { getMovieScreenings } = require("../services/showService");
 const { randomUUID } = require("crypto");
 const validateBooking = require("../middleware/validateBooking");
 const validateUpdateBooking = require("../middleware/validateUpdateBooking");
+const { sendBookingConfirmation } = require("../services/emailService");
 
-const {
-  getBookingConfirmation,
-  sendBookingConfirmation,
-} = require("../services/emailService");
 async function runInTransaction(res, callback) {
   let connection;
   let isTransactionActive = false;
