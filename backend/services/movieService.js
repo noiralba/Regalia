@@ -6,7 +6,7 @@ async function getMovies({ type = "latest", limit = 15 } = {}, targetDb = db) {
   if (type === "upcoming") {
     sql += " WHERE release_date > NOW() ORDER BY release_date ASC";
   } else {
-    sql += " ORDER BY release_date DESC";
+    sql += " WHERE release_date <= NOW() ORDER BY release_date DESC";
   }
 
   sql += " LIMIT ?";
