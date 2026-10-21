@@ -28,7 +28,7 @@ Get all the movies from database.
     "subtitles": "Svenska"
   },
   "posterImage": "https://cdng.europosters.eu/pod_public/1300/321147.jpg",
-  "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
+  "trailerUrl": "Mzw2ttJD2qQ",
   "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
   "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
   "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c"
@@ -74,7 +74,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/the-conjuring-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=ejMMn0t58Lc",
+    "trailerUrl": "ejMMn0t58Lc",
     "shortDescription": "En klassisk spökhistoria för dig som vågar stanna kvar när lamporna släcks.",
     "longDescription": "Ed och Lorraine Warren hjälper en familj som flyttat in i ett hus där något mörkt och övernaturligt verkar ha vaknat. Se filmen tillsammans med andra skräckälskare under en sen Halloweenvisning.",
     "director_id": "40a9cff9-4eaf-48b0-a054-4fb136ae1dd6",
@@ -91,7 +91,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/odyssey-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
+    "trailerUrl": "Mzw2ttJD2qQ",
     "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
     "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
     "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c",
@@ -108,7 +108,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/coraline-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=m9bOpeuvNwY",
+    "trailerUrl": "m9bOpeuvNwY",
     "shortDescription": "Coraline upptäcker en annan värld bakom en hemlig dörr – men allt är inte som det verkar.",
     "longDescription": "Coraline upptäcker en hemlig dörr i sitt nya hem som leder till en alternativ värld. Där verkar allt vara bättre än hemma, men snart upptäcker hon att den perfekta världen döljer en mörk hemlighet.",
     "director_id": "0e8f5c3e-9856-4fa7-b187-ea2babe4b8de",
@@ -125,7 +125,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/fjord-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=0gdRZZVoinM",
+    "trailerUrl": "0gdRZZVoinM",
     "shortDescription": "En familj flyttar till Norge för att börja om, men en konflikt med en grannfamilj förändrar allt.",
     "longDescription": "Det rumänsk-norska paret Mihai och Lisbeth flyttar till Norge med sina barn efter att Mihais föräldrar gått bort. De lär känna grannfamiljen Halberg och relationerna blir allt närmare. Men när parets dotter Elia kommer till skolan med blåmärken väcks misstankar och snart hamnar de båda familjerna i en konflikt om uppfostran, tro och frihet.",
     "director_id": "80fc4e70-3109-5b7c-b03e-de1788cce0bc",
@@ -142,7 +142,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/digger-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=qORTe1wW3Wg",
+    "trailerUrl": "qORTe1wW3Wg",
     "shortDescription": "En mäktig oljemiljardär försöker övertyga världen om att han är mänsklighetens räddare innan katastrofen han själv orsakat förstör allt.",
     "longDescription": "Digger Rockwell är världens mäktigaste man och en av världens rikaste oljemiljardärer. När en katastrof som han själv har orsakat hotar att förändra världen försöker han desperat övertyga mänskligheten om att han är dess räddare. Filmen är en mörk och satirisk berättelse om makt, girighet, miljökatastrofer och ansvar.",
     "director_id": "98444e80-98ad-5c03-80de-2abd73692930",
@@ -167,7 +167,7 @@ Base-URL: `http://localhost:3000`
     "subtitles": "Svenska"
   },
   "posterImage": "/images/movies/verity-poster.jpg",
-  "trailerUrl": "https://www.youtube.com/watch?v=xdPMKhjMSFs",
+  "trailerUrl": "xdPMKhjMSFs",
   "shortDescription": "En ung författare upptäcker mörka hemligheter när hon flyttar in hos den berömda författaren Verity Crawford.",
   "longDescription": "Lowen Ashleigh får i uppdrag att slutföra bokserien åt den berömda författaren Verity Crawford efter att en olycka gjort Verity oförmögen att skriva. När Lowen flyttar in hos familjen hittar hon ett manuskript som avslöjar mörka och skrämmande hemligheter. Snart börjar hon tvivla på vad som egentligen är sant.",
   "director_id": "a866b4d3-6591-5ef7-96c4-0bfa7d419932",
@@ -202,7 +202,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/the-exorcist-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=BU2eYAO31Cc",
+    "trailerUrl": "BU2eYAO31Cc",
     "shortDescription": "Vågar du möta natten med en av skräckfilmens mest ikoniska filmer?",
     "longDescription": "När en ung flicka börjar uppvisa allt mer skrämmande beteende söker hennes mamma desperat efter hjälp. En legendarisk skräckklassiker visas vid midnatt på Halloween.",
     "director_id": "f49933d6-433d-4dd7-8c6a-c51856f61eb4"
@@ -218,7 +218,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/arkipelag-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=ke00C6G7ewg",
+    "trailerUrl": "ke00C6G7ewg",
     "shortDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö där lek snabbt övergår i maktkamp.",
     "longDescription": "Tre pappor följer med sina döttrar på en skolresa till en idyllisk skärgårdsö. När de blir strandsatta tillsammans med en stökig högstadieklass väcks gamla tonårstrauman till liv. Snart börjar både ungdomar och vuxna tvingas fundera över gränsen mellan lek, maktkamp, offer och förövare.",
     "director_id": "b272b14e-fe62-5ed0-a8d3-62f8ee295589"
@@ -251,7 +251,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/hocus-pocus-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=F4e6YQFrt1s",
+    "trailerUrl": "F4e6YQFrt1s",
     "shortDescription": "En magisk Halloweenvisning för hela familjen med de tre busiga Sanderson-systrarna.",
     "longDescription": "När tre häxor återuppstår på Halloween måste en grupp barn försöka stoppa dem innan de sprider kaos över staden. En färgstark Halloweenklassiker för både barn och vuxna.",
     "director_id": "03d341ee-8d53-4a34-82d0-20ccf8901bc9",
@@ -268,7 +268,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/fjord-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=0gdRZZVoinM",
+    "trailerUrl": "0gdRZZVoinM",
     "shortDescription": "En familj flyttar till Norge för att börja om, men en konflikt med en grannfamilj förändrar allt.",
     "longDescription": "Det rumänsk-norska paret Mihai och Lisbeth flyttar till Norge med sina barn efter att Mihais föräldrar gått bort. De lär känna grannfamiljen Halberg och relationerna blir allt närmare. Men när parets dotter Elia kommer till skolan med blåmärken väcks misstankar och snart hamnar de båda familjerna i en konflikt om uppfostran, tro och frihet.",
     "director_id": "80fc4e70-3109-5b7c-b03e-de1788cce0bc",
@@ -302,7 +302,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/verity-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=xdPMKhjMSFs",
+    "trailerUrl": "xdPMKhjMSFs",
     "shortDescription": "En ung författare upptäcker mörka hemligheter när hon flyttar in hos den berömda författaren Verity Crawford.",
     "longDescription": "Lowen Ashleigh får i uppdrag att slutföra bokserien åt den berömda författaren Verity Crawford efter att en olycka gjort Verity oförmögen att skriva. När Lowen flyttar in hos familjen hittar hon ett manuskript som avslöjar mörka och skrämmande hemligheter. Snart börjar hon tvivla på vad som egentligen är sant.",
     "director_id": "a866b4d3-6591-5ef7-96c4-0bfa7d419932",
@@ -336,7 +336,7 @@ Base-URL: `http://localhost:3000`
       "subtitles": "Svenska"
     },
     "posterImage": "/images/movies/odyssey-poster.jpg",
-    "trailerUrl": "https://www.youtube.com/watch?v=Mzw2ttJD2qQ",
+    "trailerUrl": "Mzw2ttJD2qQ",
     "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
     "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
     "director_id": "bab4795d-c38e-51c4-a013-f931be094a4c",
