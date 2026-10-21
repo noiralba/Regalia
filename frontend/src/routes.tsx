@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App";
+import Layout from "./Layout";
 import { pages } from "./routeConfig";
 import MovieDetailPage from "./pages/MovieDetailPage";
 
