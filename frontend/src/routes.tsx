@@ -3,6 +3,7 @@ import App from "./App";
 import Layout from "./Layout";
 import { pages } from "./routeConfig";
 import LoginPage from "./pages/LoginPage";
+import CancellationPage from "./pages/CancellationPage";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: pages.vip.path,
         element: <h1>Regalias loge</h1>,
+      },
+      {
+        path: pages.cancellation.path,
+        element: <CancellationPage />,
       },
       {
         path: "*",

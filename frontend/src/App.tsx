@@ -1,5 +1,4 @@
 import CookieModal from "./components/CookieModal";
-import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 
 function App() {
@@ -8,7 +7,6 @@ function App() {
       <main className="container py-4">
         <HomePage />
       </main>
-      <Footer />
 
       <CookieModal />
     </>
