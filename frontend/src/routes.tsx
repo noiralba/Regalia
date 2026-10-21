@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App";
 import { pages } from "./routeConfig";
+import MovieDetailPage from "./pages/MovieDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
   },
   {
     path: pages.movieDetails.path,
-    element: <h1>Filmdetaljer</h1>,
+    element: <MovieDetailPage />,
   },
   {
     path: pages.vip.path,
