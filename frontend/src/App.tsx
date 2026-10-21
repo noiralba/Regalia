@@ -1,10 +1,17 @@
+import CookieModal from "./components/CookieModal";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+
 function App() {
   return (
-    <main className="container py-4">
-      {" "}
-      <h1>Regalia</h1>
-      <p>Biobokning</p>
-    </main>
+    <>
+      <main className="container py-4">
+        <HomePage />
+      </main>
+      <Footer />
+
+      <CookieModal />
+    </>
   );
 }
 

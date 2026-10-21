@@ -1,53 +1,61 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { getMovieScreenings } = require("../services/showService");
 const { randomUUID } = require("crypto");
-const { getBookingConfirmation } = require("../services/bookingService");
-const calculateTicketTotal = require("../services/calculatePricing");
-const { sendBookingConfirmation } = require("../services/emailService");
+const validateBooking = require("../middleware/validateBooking");
+const validateUpdateBooking = require("../middleware/validateUpdateBooking");
 
-// PUT: Uppdatera en bokning via ID
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { user_id, user_email } = req.body;
-
-  if (!user_email) {
-    return res.status(400).json({
-      error: "user_email is required.",
-    });
-  }
+async function runInTransaction(res, callback) {
+  let connection;
+  let isTransactionActive = false;
 
   try {
-    const [existingBookings] = await db.query(
-      "SELECT id FROM bookings WHERE id = ?",
-      [id],
-    );
+    connection = await db.getConnection();
+    await connection.beginTransaction();
+    isTransactionActive = true;
 
-    if (existingBookings.length === 0) {
-      return res.status(404).json({ error: "Booking not found." });
+    const result = await callback(connection);
+
+    await connection.commit();
+    return result;
+  } catch (error) {
+    if (connection && isTransactionActive) {
+      try {
+        await connection.rollback();
+      } catch (e) {
+        console.error("Rollback failed:", e);
+      }
     }
 
-    await db.query(
-      "UPDATE bookings SET user_id = ?, user_email = ? WHERE id = ?",
-      [user_id ?? null, user_email, id],
-    );
+    console.error("Database transaction error:", error);
 
-    const [updatedBookings] = await db.query(
-      "SELECT * FROM bookings WHERE id = ?",
-      [id],
-    );
+    if (error.code === "ER_DUP_ENTRY" || error.errno === 1062) {
+      return res.status(409).json({
+        error:
+          "One or more of the selected seats are already booked for this show.",
+      });
+    }
 
-    res.status(200).json(updatedBookings[0]);
-  } catch (error) {
-    console.error("PUT /bookings/:id:", error.message);
-    res.status(500).json({ error: "Server error." });
+    return res
+      .status(500)
+      .json({ error: "An unexpected server error occurred." });
+  } finally {
+    if (connection) connection.release();
   }
-});
+}
 
-// GET: Hämta alla bokningar
+async function getOrderConfirmation(column, value, targetDb = db) {
+  const [order] = await targetDb.query(
+    `SELECT * FROM v_order_confirmation WHERE \`${column}\` = ?`,
+    [value],
+  );
+  return order;
+}
+
 router.get("/", async (req, res) => {
   try {
-    const [bookings] = await db.query("SELECT * FROM bookings");
+    const [bookings] = await db.query("SELECT * FROM v_order_confirmation");
 
     res.status(200).json(bookings);
   } catch (error) {
@@ -56,124 +64,63 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST: Skapa en bokning med platser och returnera kvitto
-router.post("/", async (req, res) => {
+router.get("/order/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const order = await getOrderConfirmation("Booking Number", id);
+
+    if (order.length === 0) {
+      return res.status(404).json({ error: "Order not found." });
+    }
+
+    res.status(200).json(order);
+  } catch (error) {
+    console.error("Fel vid hämtning av order.", error);
+    res.status(500).json({ error: "Kunde inte hämta order från databasen." });
+  }
+});
+
+router.post("/", validateBooking, async (req, res) => {
   const { user_id, user_email, show_id, seats } = req.body;
-
-  if (!user_email || !show_id || !Array.isArray(seats) || seats.length === 0) {
-    return res.status(400).json({
-      error: "user_email, show_id and at least one seat are required.",
-    });
-  }
-
-  if (seats.some((seat) => !seat.seat_id || !seat.ticket_type_id)) {
-    return res.status(400).json({
-      error: "Every seat must have seat_id and ticket_type_id.",
-    });
-  }
-
   const id = randomUUID();
   const booking_number = `REG-${randomUUID()}`;
-  let connection;
 
-  try {
-    connection = await db.getConnection();
-    await connection.beginTransaction();
+  await runInTransaction(res, async (connection) => {
+    const show = await getMovieScreenings(show_id, connection);
 
-    // Kontrollera att visningen finns
-    const [shows] = await connection.query(
-      "SELECT id FROM shows WHERE id = ?",
-      [show_id],
-    );
-
-    if (shows.length === 0) {
-      await connection.rollback();
-      return res.status(404).json({ error: "Show not found." });
+    if (show.length === 0) {
+      res.status(404).json({ error: "Show not found." });
+      throw new Error("Show not found");
     }
 
-    // Hämtar biljettyper och kontrollerar att de valda biljettyperna är giltiga
-    const [ticketTypes] = await connection.query(
-      "SELECT id, price FROM ticket_types",
-    );
-
-    // Räkna antal stolar per biljettyp
-    const counts = {};
-    for (const seat of seats) {
-      counts[seat.ticket_type_id] = (counts[seat.ticket_type_id] ?? 0) + 1;
-    }
-    const selectedTickets = Object.entries(counts).map(
-      ([ticketTypeId, quantity]) => ({ ticketTypeId, quantity }),
-    );
-
-    try {
-      calculateTicketTotal(selectedTickets, ticketTypes);
-    } catch (validationError) {
-      await connection.rollback();
-      return res.status(400).json({ error: validationError.message });
-    }
-
-    // Skapa bokningen
     await connection.query(
-      `INSERT INTO bookings
-        (id, user_id, user_email, booking_number)
-       VALUES (?, ?, ?, ?)`,
+      `INSERT INTO bookings (id, user_id, user_email, booking_number) VALUES (?, ?, ?, ?)`,
       [id, user_id ?? null, user_email, booking_number],
     );
 
-    // Spara varje plats i bokningen
     for (const seat of seats) {
       await connection.query(
-        `INSERT INTO booked_seats
-          (id, booking_id, show_id, seat_id, ticket_type_id)
-         VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO booked_seats (id, booking_id, show_id, seat_id, ticket_type_id) VALUES (?, ?, ?, ?, ?)`,
         [randomUUID(), id, show_id, seat.seat_id, seat.ticket_type_id],
       );
     }
 
-    // Hämta kvittot innan transaktionen avslutas
-    const receiptQuery = `
-      SELECT
-        b.id AS boknings_id,
-        b.booking_number AS bokningsnummer,
-        m.title AS filmtitel,
-        s.date AS visningsdatum,
-        s.time AS visningstid,
-        GROUP_CONCAT(
-          CONCAT(
-            'Rad ', se.seat_row,
-            ' Plats ', se.seat_number,
-            ' (', tt.name, ': ', FORMAT(tt.price, 2), ' kr)'
-          )
-          ORDER BY se.seat_row, se.seat_number
-          SEPARATOR ', '
-        ) AS platser_och_priser,
-        SUM(tt.price) AS totalt_pris
-      FROM bookings b
-      JOIN booked_seats bs ON b.id = bs.booking_id
-      JOIN shows s ON bs.show_id = s.id
-      JOIN movies m ON s.movie_id = m.id
-      JOIN seats se ON bs.seat_id = se.id
-      JOIN ticket_types tt ON bs.ticket_type_id = tt.id
-      WHERE b.id = ?
-      GROUP BY
-        b.id,
-        b.booking_number,
-        m.title,
-        s.date,
-        s.time
-    `;
+    const order = await getOrderConfirmation(
+      "Booking Number",
+      booking_number,
+      connection,
+    );
 
-    const [receipt] = await connection.query(receiptQuery, [id]);
-
-    if (receipt.length === 0) {
-      throw new Error("Booking receipt could not be generated.");
+    if (order.length === 0) {
+      res
+        .status(404)
+        .json({ error: "Order confirmation could not be generated." });
+      throw new Error("Order generation failed");
     }
 
-    await connection.commit();
     // Send booking confirmation email
-
     try {
-          const confirmationData = await getBookingConfirmation(booking_number);
+      const confirmationData = await getBookingConfirmation(booking_number);
 
       if (confirmationData) {
         await sendBookingConfirmation(user_email, confirmationData);
@@ -184,46 +131,72 @@ router.post("/", async (req, res) => {
         emailError.message,
       );
     }
-    return res.status(201).json(receipt[0]);
 
-  } catch (error) {
-    if (connection) {
-      await connection.rollback();
-    }
-
-    console.error("POST /bookings:", error.message);
-
-    if (error.code === "ER_DUP_ENTRY") {
-      return res.status(409).json({
-        error: "One of the selected seats is already booked for this show.",
-      });
-    }
-
-    return res.status(500).json({ error: "Server error." });
-  } finally {
-    if (connection) {
-      connection.release();
-    }
-  }
+    return res.status(201).json(order[0]);
+  });
 });
 
-// GET: Hämta bokningsbekräftelse via bokningsnummer
-router.get("/:bookingNumber", async (req, res) => {
-  try {
-    const confirmation = await getBookingConfirmation(req.params.bookingNumber);
+router.put("/:id", validateUpdateBooking, async (req, res) => {
+  const { id } = req.params; //
+  const { user_id, user_email, show_id, seats } = req.body;
 
-    if (!confirmation) {
-      return res.status(404).json({ error: "Booking not found." });
+  await runInTransaction(res, async (connection) => {
+    const [rows] = await connection.query(
+      "SELECT user_id, user_email FROM bookings WHERE id = ?",
+      [id],
+    );
+
+    if (rows.length === 0) {
+      res.status(404).json({ error: "Booking not found." });
+      throw new Error("Booking not found");
+    }
+    const existing = rows[0];
+
+    const finalUserId = user_id !== undefined ? user_id : existing.user_id;
+    const finalUserEmail =
+      user_email !== undefined ? user_email : existing.user_email;
+
+    await connection.query(
+      "UPDATE bookings SET user_id = ?, user_email = ? WHERE id = ?",
+      [finalUserId ?? null, finalUserEmail, id], //
+    );
+
+    if (seats !== undefined) {
+      if (!show_id) {
+        res
+          .status(400)
+          .json({ error: "show_id is required when updating seats." });
+        throw new Error("Missing show_id");
+      }
+
+      const show = await getMovieScreenings(show_id, connection);
+
+      if (show.length === 0) {
+        res.status(404).json({ error: "Show not found." });
+        throw new Error("Show not found");
+      }
+
+      await connection.query("DELETE FROM booked_seats WHERE booking_id = ?", [
+        id,
+      ]); //
+
+      for (const seat of seats) {
+        //
+        await connection.query(
+          `INSERT INTO booked_seats (id, booking_id, show_id, seat_id, ticket_type_id) VALUES (?, ?, ?, ?, ?)`,
+          [randomUUID(), id, show_id, seat.seat_id, seat.ticket_type_id], //
+        );
+      }
     }
 
-    res.status(200).json(confirmation);
-  } catch (error) {
-    console.error("GET /bookings/:bookingNumber:", error.message);
-    res.status(500).json({ error: "Server error." });
-  }
+    const updatedOrder = await getOrderConfirmation("id", id, connection);
+
+    return res
+      .status(200)
+      .json(updatedOrder[0] || { message: "Booking updated successfully." }); //
+  });
 });
 
-// DELETE: Ta bort en bokning via ID
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 

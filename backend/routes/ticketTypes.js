@@ -4,7 +4,7 @@ const db = require("../db");
 
 router.get("/", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT * FROM ticket_types");
+    const [rows] = await db.query("SELECT * FROM v_ticket_types");
     res.status(200).json(rows);
   } catch (error) {
     console.error("Fel vid hämtning av biljettyper.", error);
