@@ -15,7 +15,9 @@ router.get("/", async (req, res) => {
     res.status(200).json(shows);
   } catch (error) {
     console.error("GET /shows:", error.message);
-    res.status(500).json({ error: "Server error." });
+    return res.status(500).json({
+      error: "Could not retrieve shows from the database.",
+    });
   }
 });
 
@@ -24,12 +26,21 @@ router.get("/:id", async (req, res) => {
   try {
     const shows = await getMovieScreenings(id);
     if (shows.length === 0) {
-      return res.status(404).json({ error: "Show not found." });
+      const error = new Error("Show not found");
+      error.statusCode = 404;
+      error.publicMessage = "Show not found.";
+      throw error;
     }
-    res.status(200).json(shows);
+    res.status(200).json(shows[0]);
   } catch (error) {
     console.error("GET /shows/:id:", error.message);
-    res.status(500).json({ error: "Server error." });
+    if (error.statusCode) {
+      return res.status(error.statusCode).json({ error: error.publicMessage });
+    }
+
+    return res.status(500).json({
+      error: "Server error. Could not retrieve show details.",
+    });
   }
 });
 
