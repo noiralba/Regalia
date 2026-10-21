@@ -98,7 +98,7 @@ router.get("/order/:id", async (req, res) => {
 router.post("/", validateBooking, async (req, res) => {
   const { user_id, user_email, show_id, seats } = req.body;
   const id = randomUUID();
-  const booking_number = `REG-${randomUUID()}`;
+  const booking_number = `REG-${randomUUID().slice(0, 13)}`;
 
   await runInTransaction(res, async (connection) => {
     const show = await getMovieScreenings(show_id, connection);
@@ -212,10 +212,7 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const [existingBookings] = await db.query(
-      "SELECT id FROM bookings WHERE id = ?",
-      [id],
-    );
+    const existingBookings = await getOrderConfirmation("Booking Number", id);
 
     if (existingBookings.length === 0) {
       const error = new Error("Booking not found");
@@ -224,7 +221,7 @@ router.delete("/:id", async (req, res) => {
       throw error;
     }
 
-    await db.query("DELETE FROM bookings WHERE id = ?", [id]);
+    await db.query("DELETE FROM bookings WHERE booking_number = ?", [id]);
 
     return res.status(200).json({
       message: "Booking deleted successfully.",
