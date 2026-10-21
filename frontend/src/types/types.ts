@@ -22,17 +22,26 @@ export interface Movies {
 export interface Showing {
   show_id: string;
   movie_id: string;
+  movieTitle: string;
   "Screening Date": string;
   "Start Time": string;
   Screen: string;
 }
 
-//test data
+export interface ScheduleShowing {
+  id: string;
+  movieTitle: string;
+  time: string;
+  salong: string;
+}
+
+// Testdata för schemat
 export interface ScheduleDay {
   id: string;
   label: string;
-  showings: Showing[];
+  showings: ScheduleShowing[];
 }
+
 export interface SeatAvailability {
   show_id: string;
   seat_id: string;
