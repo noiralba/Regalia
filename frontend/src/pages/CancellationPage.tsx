@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 type Booking = {
   bookingNumber: string;
@@ -15,6 +16,7 @@ export default function CancellationPage() {
   const [notFound, setNotFound] = useState(false);
   const [confirmingCancel, setConfirmingCancel] = useState(false);
   const [cancelled, setCancelled] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -88,7 +90,7 @@ export default function CancellationPage() {
 
         {!confirmingCancel ? (
           <div className="d-flex gap-2">
-            <button type="button" className="btn btn-primary" onClick={handleEdit}>
+            <button type="button" className="btn btn-primary" onClick={() => navigate("/bokning/:visningId")}>
               Ändra bokning
             </button>
             <button
@@ -130,7 +132,7 @@ export default function CancellationPage() {
 
   return (
     <main className="container py-4">
-      <h1 className="mb-3">Avbokning</h1>
+      <h1 className="mb-3">Avboka eller Ändra bokning</h1>
       <p className="mb-4">
         Fyll i ditt bokningsnummer och din e-postadress för att hitta din bokning.
       </p>
