@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
     if (shows.length === 0) {
       const error = new Error("Show not found");
       error.statusCode = 404;
-      error.publicMessage = "Show not found.";
+      error.publicMessage = "Visning hittades inte.";
       throw error;
     }
     res.status(200).json(shows[0]);

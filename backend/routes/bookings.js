@@ -39,7 +39,7 @@ async function runInTransaction(res, callback) {
 
     if (error.statusCode) {
       return res.status(error.statusCode).json({
-        error: error.publicMessage || "An unexpected server error occurred.",
+        error: error.publicMessage || "Ett oväntat serverfel inträffade.",
       });
     }
 
@@ -80,7 +80,7 @@ router.get("/order/:id", async (req, res) => {
     if (order.length === 0) {
       const error = new Error("Order not found");
       error.statusCode = 404;
-      error.publicMessage = "Order not found.";
+      error.publicMessage = "Beställningen hittades inte.";
       throw error;
     }
 
@@ -106,7 +106,7 @@ router.post("/", validateBooking, async (req, res) => {
     if (show.length === 0) {
       const error = new Error("Show not found");
       error.statusCode = 404;
-      error.publicMessage = "Show not found.";
+      error.publicMessage = "Visning hittades inte.";
       throw error;
     }
 
@@ -132,7 +132,7 @@ router.post("/", validateBooking, async (req, res) => {
     if (order.length === 0) {
       const error = new Error("Order generation failed");
       error.statusCode = 500;
-      error.publicMessage = "Order confirmation could not be generated.";
+      error.publicMessage = "Orderbekräftelse kunde inte skapas.";
       throw error;
     }
 
@@ -153,7 +153,7 @@ router.put("/:id", validateUpdateBooking, async (req, res) => {
     if (rows.length === 0) {
       const error = new Error("Booking not found");
       error.statusCode = 404;
-      error.publicMessage = "Booking not found.";
+      error.publicMessage = "Bokningen hittades inte.";
       throw error;
     }
     const existing = rows[0];
@@ -171,7 +171,7 @@ router.put("/:id", validateUpdateBooking, async (req, res) => {
       if (!show_id) {
         const error = new Error("Missing show_id");
         error.statusCode = 400;
-        error.publicMessage = "show_id is required when updating seats.";
+        error.publicMessage = "show_id krävs vid uppdatering av platser.";
         throw error;
       }
 
@@ -180,7 +180,7 @@ router.put("/:id", validateUpdateBooking, async (req, res) => {
       if (show.length === 0) {
         const error = new Error("Show not found");
         error.statusCode = 404;
-        error.publicMessage = "Show not found.";
+        error.publicMessage = "Visning hittades inte.";
         throw error;
       }
 
@@ -220,7 +220,7 @@ router.delete("/:id", async (req, res) => {
     if (existingBookings.length === 0) {
       const error = new Error("Booking not found");
       error.statusCode = 404;
-      error.publicMessage = "Booking not found.";
+      error.publicMessage = "Bokningen hittades inte.";
       throw error;
     }
 
