@@ -6,6 +6,10 @@ const { randomUUID } = require("crypto");
 const validateBooking = require("../middleware/validateBooking");
 const validateUpdateBooking = require("../middleware/validateUpdateBooking");
 
+const {
+  getBookingConfirmation,
+  sendBookingConfirmation,
+} = require("../services/emailService");
 async function runInTransaction(res, callback) {
   let connection;
   let isTransactionActive = false;
@@ -118,12 +122,9 @@ router.post("/", validateBooking, async (req, res) => {
       throw new Error("Order generation failed");
     }
 
-    // Send booking confirmation email
     try {
-      const confirmationData = await getBookingConfirmation(booking_number);
-
-      if (confirmationData) {
-        await sendBookingConfirmation(user_email, confirmationData);
+      if (order.length > 0) {
+        await sendBookingConfirmation(user_email, order[0]);
       }
     } catch (emailError) {
       console.error(
