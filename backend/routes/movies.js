@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db.js");
+const { getMovies } = require("../services/movieService.js");
 
 const CATEGORIES_SUBQUERY = `
   (SELECT COALESCE(JSON_ARRAYAGG(c.name), JSON_ARRAY())
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
   try {
     const { ageRating, categories, search } = req.query;
 
-      let sql = `
+    let sql = `
       SELECT m.*,
         ${CATEGORIES_SUBQUERY}
       FROM movies m
@@ -26,7 +27,9 @@ router.get("/", async (req, res) => {
     if (ageRating !== undefined) {
       const age = Number(ageRating);
       if (Number.isNaN(age) || age < 0) {
-        return res.status(400).json({ error: "ageRating måste vara ett positivt tal" });
+        return res
+          .status(400)
+          .json({ error: "ageRating måste vara ett positivt tal" });
       }
       conditions.push("m.ageRating = ?");
       params.push(age);
@@ -39,7 +42,7 @@ router.get("/", async (req, res) => {
         JOIN categories c2 ON c2.id = mc2.category_id
         WHERE mc2.movie_id = m.id AND c2.name = ?
       )`);
-        params.push(categories);
+      params.push(categories);
     }
 
     if (search) {
@@ -47,7 +50,7 @@ router.get("/", async (req, res) => {
         return res.status(400).json({ error: "Sökordet är för kort" });
       }
       conditions.push(
-        "(m.title LIKE ? OR m.shortDescription LIKE ? OR m.longDescription LIKE ?)"
+        "(m.title LIKE ? OR m.shortDescription LIKE ? OR m.longDescription LIKE ?)",
       );
       const term = `%${search}%`;
       params.push(term, term, term);
@@ -69,6 +72,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/type/:filter", async (req, res, next) => {
+  const { filter } = req.params;
+
+  if (filter !== "latest" && filter !== "upcoming") {
+    return next();
+  }
+
+  try {
+    const movies = await getMovies({ type: filter, limit: 15 });
+    res.status(200).json(movies);
+  } catch (error) {
+    console.error(`GET /movies/type/${filter}:`, error.message);
+    return res.status(500).json({
+      error: `Could not retrieve ${filter} movies from the database.`,
+    });
+  }
+});
+
 // GET: Get a specific movie by ID
 router.get("/:id", async (req, res) => {
   const movieId = req.params.id;
@@ -76,7 +97,9 @@ router.get("/:id", async (req, res) => {
     const [results] = await db.query(
       `SELECT m.*, ${CATEGORIES_SUBQUERY}
       FROM movies m
-      WHERE m.id = ? `, [movieId]);
+      WHERE m.id = ? `,
+      [movieId],
+    );
     if (results.length === 0) {
       return res.status(404).json({ error: "Film hittades inte" });
     }
