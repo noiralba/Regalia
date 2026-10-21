@@ -10,12 +10,33 @@ interface MovieScreening {
   "Available Seats": number;
 }
 
+interface TicketType {
+  ticket_type_id: string;
+  "Ticket Type": string;
+  "Price (SEK)": string;
+}
+
+interface Seat {
+  show_id: string;
+  seat_id: string;
+  "Seat Row": string;
+  "Seat Number": number;
+  Status: string;
+  Available: number;
+}
+
+
 function BookingPage() {
   const { visningId } = useParams();
 
   const [showing, setShowing] = useState<MovieScreening | null>(null);
   const [error, setError] = useState("");
-  // Hämta info om vald filmvisnign från backend 
+  const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);
+  const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
+  const [seats, setSeats] = useState<Seat[]>([]);
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const [email, setEmail] = useState("");
+  // Hämta info om vald filmvisnign från backend
   useEffect(() => {
     if (!visningId) return;
 
@@ -40,6 +61,94 @@ function BookingPage() {
     fetchShowing();
   }, [visningId]);
 
+  // Hämta biljettyper från backend
+  useEffect(() => {
+    async function fetchTicketTypes() {
+      try {
+        const response = await fetch("http://localhost:3000/api/ticket-types");
+
+        if (!response.ok) {
+          throw new Error("Could not fetch ticket types");
+        }
+
+        const data: TicketType[] = await response.json();
+        setTicketTypes(data);
+      } catch (error) {
+        console.error(error);
+        setError("Kunde inte hämta biljettyperna.");
+      }
+    }
+
+    fetchTicketTypes();
+  }, []);
+
+  // Hämta stolarna för den valda visningen
+  useEffect(() => {
+    if (!visningId) return;
+
+    async function fetchSeats() {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/seats/available-seats/${visningId}`,
+        );
+
+        if (!response.ok) {
+          throw new Error("Could not fetch seats");
+        }
+
+        const data: Seat[] = await response.json();
+        setSeats(data);
+      } catch (error) {
+        console.error(error);
+        setError("Kunde inte hämta stolarna.");
+      }
+    }
+
+    fetchSeats();
+  }, [visningId]);
+
+  // FUNKTIONER
+function changeTicketCount(ticketTypeId: string, change: number) {
+  setTicketCounts((previous) => ({
+    ...previous,
+    [ticketTypeId]: Math.max(0, (previous[ticketTypeId] || 0) + change),
+  }));
+
+  if (change < 0) {
+    setSelectedSeats((previous) => previous.slice(0, -1));
+  }
+}
+
+function toggleSeat(seatId: string) {
+  setSelectedSeats((previous) => {
+    if (previous.includes(seatId)) {
+      return previous.filter((id) => id !== seatId);
+    }
+
+    if (previous.length >= totalTickets) {
+      return previous;
+    }
+
+    return [...previous, seatId];
+  });
+}
+
+  // BERÄKNINGAR 
+
+  const totalPrice = ticketTypes.reduce((total, ticket) => {
+    const count = ticketCounts[ticket.ticket_type_id] || 0;
+    const price = Number(ticket["Price (SEK)"]);
+
+    return total + count * price;
+  }, 0);
+
+  const totalTickets = Object.values(ticketCounts).reduce(
+  (total, count) => total + count,
+  0,
+);
+
+
+
   return (
     <main>
       <h1>Boka biljetter</h1>
@@ -59,6 +168,88 @@ function BookingPage() {
             <p>Salong: {showing.Screen}</p>
           </>
         )}
+      </section>
+
+      <section>
+        <h2>Välj biljetter</h2>
+
+        {ticketTypes.map((ticket) => (
+          <article key={ticket.ticket_type_id}>
+            <h3>{ticket["Ticket Type"]}</h3>
+            <p>{ticket["Price (SEK)"]} kr</p>
+
+            <button
+              type="button"
+              onClick={() => changeTicketCount(ticket.ticket_type_id, -1)}
+              disabled={!ticketCounts[ticket.ticket_type_id]}
+            >
+              -
+            </button>
+
+            <span>{ticketCounts[ticket.ticket_type_id] || 0}</span>
+
+            <button
+              type="button"
+              onClick={() => changeTicketCount(ticket.ticket_type_id, 1)}
+            >
+              +
+            </button>
+          </article>
+        ))}
+        <p>Totalt: {totalPrice} kr</p>
+      </section>
+
+      <section>
+        <h2>Välj sittplatser</h2>
+
+        {seats.map((seat) => (
+          <button
+            key={seat.seat_id}
+            type="button"
+            disabled={seat.Available === 0}
+            onClick={() => toggleSeat(seat.seat_id)}
+          >
+            {seat["Seat Row"]}
+            {seat["Seat Number"]}
+            {selectedSeats.includes(seat.seat_id) && " (Vald)"}
+          </button>
+        ))}
+
+        <p>
+          Valda sittplatser: {selectedSeats.length} av {totalTickets}
+        </p>
+      </section>
+
+      <section>
+        <h2>Din bokning</h2>
+        {showing && (
+          <>
+            <p>Film: {showing.Movie}</p>
+            <p>
+              Visning: {showing["Screening Date"]} kl. {showing["Start Time"]}
+            </p>
+            <p>Salong: {showing.Screen}</p>
+            <p>Biljetter: {totalTickets} st</p>
+            <p>
+              Platser:{" "}
+              {seats
+                .filter((seat) => selectedSeats.includes(seat.seat_id))
+                .map((seat) => `${seat["Seat Row"]}${seat["Seat Number"]}`)
+                .join(", ") || "Inga platser valda"}
+            </p>
+            <p>Totalt: {totalPrice} kr</p>
+          </>
+        )}
+
+        <label htmlFor="email">E-postadress</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="namn@exempel.se"
+          required
+        />
       </section>
     </main>
   );
