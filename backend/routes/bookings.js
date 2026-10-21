@@ -80,7 +80,7 @@ router.get("/order/:id", async (req, res) => {
     if (order.length === 0) {
       const error = new Error("Order not found");
       error.statusCode = 404;
-      error.publicMessage = "Beställningen hittades inte.";
+      error.publicMessage = "Bokning hittades inte.";
       throw error;
     }
 
@@ -132,7 +132,7 @@ router.post("/", validateBooking, async (req, res) => {
     if (order.length === 0) {
       const error = new Error("Order generation failed");
       error.statusCode = 500;
-      error.publicMessage = "Orderbekräftelse kunde inte skapas.";
+      error.publicMessage = "bokningsbekräftelse kunde inte skapas.";
       throw error;
     }
 
