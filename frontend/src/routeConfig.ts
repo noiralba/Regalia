@@ -37,6 +37,10 @@ export const pages = {
     path: "/vip",
     label: "Regalias loge",
   },
+  cancellation: {
+  path: "/avbokning",
+  label: "Avbokning",
+},
 };
 
 export const routeLinks = {

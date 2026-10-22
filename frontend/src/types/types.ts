@@ -38,3 +38,14 @@ export interface MovieScreening {
   "Start Time": string;
   Screen: string;
 }
+
+export interface Booking {
+  bookingNumber: string;
+  email: string;
+  movieTitle: string
+  showTime: string;
+  seats: string[];
+}
+
+export type BookingSearch = Pick<Booking, "bookingNumber" | "email">;
+
