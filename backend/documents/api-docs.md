@@ -528,8 +528,10 @@ The past/upcoming comparison uses the database server's `NOW()` with the stored 
 ### Testing and current limitations
 
 - Automated tests: 13 passing Users CRUD/booking-list tests with mocked database operations, plus 8 passing middleware tests.
-- HTTP-tested: registration, login, authenticated account reads/updates/deletion, authentication and ownership errors, login/registration rate limits, and the new booking-list endpoint with empty results and invalid query parameters.
-- Direct read-only SQL queries verified the booking-list table joins against existing nonempty booking data. An authenticated HTTP request returning a **nonempty** booking list has **not yet** been tested against MySQL.
+- HTTP-tested: registration, login, authenticated account reads/updates/deletion, authentication and ownership errors, login/registration rate limits, and the booking-list endpoint with empty and nonempty results and invalid query parameters.
+- Direct read-only SQL queries verified the booking-list table joins against existing nonempty booking data. An authenticated HTTP request returning a nonempty booking list was successfully verified against MySQL using a separate test user. The initial booking's ownership was also confirmed in DBeaver.
+- Additional manual HTTP tests verified past-booking pagination: `period=past&offset=0` returned Resident Evil and Verity with `hasMore: true`. `period=past&offset=2` returned Digger with `hasMore: false`. Bookings were returned in descending screening date and time order.
+- Additional manual HTTP tests verified that a missing JWT returns `401 Unauthorized`, accessing another user's bookings returns `403 Forbidden`, and an invalid `period` parameter returns `400 Bad Request`.
 - Rate limiting currently uses the in-memory store; limits reset when the backend process restarts and are not shared across multiple server instances.
 - JWTs are not revoked immediately when an account is deleted; an already issued token may remain valid until its one-hour expiry. Future booking/admin authorization must account for this limitation.
 - The separate existing `/api/bookings` routes currently include publicly accessible booking reads and booking updates without authentication checks, and booking creation accepts a client-supplied `user_id`. They need a separate security review; adding this Users endpoint does not fix those routes.
