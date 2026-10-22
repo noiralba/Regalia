@@ -25,7 +25,6 @@ interface Seat {
   Available: number;
 }
 
-
 function BookingPage() {
   const { visningId } = useParams();
 
@@ -36,6 +35,8 @@ function BookingPage() {
   const [seats, setSeats] = useState<Seat[]>([]);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [email, setEmail] = useState("");
+  // Håller reda på om en bokning håller på att skickas
+  const [isBooking, setIsBooking] = useState(false);
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
     if (!visningId) return;
@@ -61,7 +62,7 @@ function BookingPage() {
     fetchShowing();
   }, [visningId]);
 
-  // Hämta biljettyper från backend
+  // Hämta biljettyper och priser från backend
   useEffect(() => {
     async function fetchTicketTypes() {
       try {
@@ -108,33 +109,113 @@ function BookingPage() {
   }, [visningId]);
 
   // FUNKTIONER
-function changeTicketCount(ticketTypeId: string, change: number) {
-  setTicketCounts((previous) => ({
-    ...previous,
-    [ticketTypeId]: Math.max(0, (previous[ticketTypeId] || 0) + change),
-  }));
-
-  if (change < 0) {
-    setSelectedSeats((previous) => previous.slice(0, -1));
+  //Ökar/minskar antalet biljetter
+  function changeTicketCount(ticketTypeId: string, change: number) {
+    setTicketCounts((previous) => ({
+      ...previous,
+      [ticketTypeId]: Math.max(0, (previous[ticketTypeId] || 0) + change),
+    }));
+    // Tar bort den senast valda sittplatsen om antalet biljetter minskar
+    if (change < 0) {
+      setSelectedSeats((previous) => previous.slice(0, -1));
+    }
   }
-}
+  // Markerar eller avmarkerar en sittplats
+  function toggleSeat(seatId: string) {
+    setSelectedSeats((previous) => {
+      // Om platsen redan är vald tas den bort
+      if (previous.includes(seatId)) {
+        return previous.filter((id) => id !== seatId);
+      }
+      // Förhindrar att fler sittplatser väljs än antalet biljetter
 
-function toggleSeat(seatId: string) {
-  setSelectedSeats((previous) => {
-    if (previous.includes(seatId)) {
-      return previous.filter((id) => id !== seatId);
+      if (previous.length >= totalTickets) {
+        return previous;
+      }
+
+      return [...previous, seatId];
+    });
+  }
+  // Kontrollerar bokningsuppgifterna och skickar bokningen till backend
+  async function handleBooking() {
+    if (totalTickets === 0) {
+      setError("Du måste välja minst en biljett.");
+      return;
+    }
+    // Antalet valda sittplatser måste motsvara antalet biljetter
+    if (selectedSeats.length !== totalTickets) {
+      setError("Du måste välja lika många sittplatser som biljetter.");
+      return;
     }
 
-    if (previous.length >= totalTickets) {
-      return previous;
+    // Kontrollerar att e-postadressen har ett giltigt format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError("Vänligen ange en giltig e-postadress.");
+      return;
     }
 
-    return [...previous, seatId];
-  });
-}
+    // Förhindrar flera bokningsanrop samtidigt
+    if (isBooking) return;
 
-  // BERÄKNINGAR 
+    setError("");
+    setIsBooking(true);
 
+    // Skapar en lista med biljettyper, en för varje vald biljett
+    const selectedTicketTypes: string[] = [];
+
+    ticketTypes.forEach((ticket) => {
+      const count = ticketCounts[ticket.ticket_type_id] || 0;
+
+      for (let i = 0; i < count; i++) {
+        selectedTicketTypes.push(ticket.ticket_type_id);
+      }
+    });
+    // Kopplar varje vald sittplats till en biljettyp
+    // Detta är info som skickas till backend
+    const bookingData = {
+      show_id: visningId,
+      user_email: email,
+      seats: selectedSeats.map((seatId, index) => ({
+        seat_id: seatId,
+        ticket_type_id: selectedTicketTypes[index],
+      })),
+    };
+    // Skicka bokningen till backend med POST
+    try {
+      const response = await fetch("http://localhost:3000/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      // Hanterar om en sittplats redan har bokats
+      if (response.status === 409) {
+        setError(
+          "En av dina valda platser är redan bokad. Välj en annan plats.",
+        );
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Could not create booking");
+      }
+      // Hämtar bokningsbekräftelsen från backend
+      // Ska senare användas för att visa bekräftelsemodalen
+      const data = await response.json();
+      console.log("Bokning skapad:", data);
+    } catch (error) {
+      console.error(error);
+      setError("Kunde inte genomföra bokningen.");
+    } finally {
+      // Återställer knappen när bokningsförsöket är klart
+      setIsBooking(false);
+    }
+  }
+
+  // BERÄKNINGAR
+  // Beräknar totalpriset biljetter och pris
   const totalPrice = ticketTypes.reduce((total, ticket) => {
     const count = ticketCounts[ticket.ticket_type_id] || 0;
     const price = Number(ticket["Price (SEK)"]);
@@ -143,11 +224,9 @@ function toggleSeat(seatId: string) {
   }, 0);
 
   const totalTickets = Object.values(ticketCounts).reduce(
-  (total, count) => total + count,
-  0,
-);
-
-
+    (total, count) => total + count,
+    0,
+  );
 
   return (
     <main>
@@ -250,6 +329,10 @@ function toggleSeat(seatId: string) {
           placeholder="namn@exempel.se"
           required
         />
+        {error && <p>{error}</p>}
+        <button type="button" onClick={handleBooking} disabled={isBooking}>
+          {isBooking ? "Bokar..." : "Bekräfta bokning"}
+        </button>
       </section>
     </main>
   );
