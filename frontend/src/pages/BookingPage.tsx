@@ -255,7 +255,7 @@ function BookingPage() {
         {ticketTypes.map((ticket) => (
           <article key={ticket.ticket_type_id}>
             <h3>{ticket["Ticket Type"]}</h3>
-            <p>{ticket["Price (SEK)"]} kr</p>
+            <p>{Number(ticket["Price (SEK)"])} kr</p>
 
             <button
               type="button"
