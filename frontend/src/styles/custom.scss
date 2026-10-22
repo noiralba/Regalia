@@ -1,1 +1,78 @@
+// ==========================================
+// 1. CSS RESET & GLOBAL PREVENTIONS
+// ==========================================
+
+// CSS Reset: Standardizes
+//box sizing and removes default margins/paddings for all elements
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Prevents unwanted horizontal scroll on small screens
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+// ==========================================
+// 2. DESIGN TOKENS & BREAKPOINTS
+// ==========================================
+
+// Colors from Figma design system
+$color-bg-dark: #100d0e; // Main background color
+$color-card-bg: #1a1416; // Card background color
+$color-primary-red: #6e1726; // Primary button color
+$color-gold: #a8864a; // Border and heading accent color
+$color-cream: #ecdbb0; // Text and label color
+
+// Typography
+$font-title: "Monomakh", serif;
+$font-body: "Manrope", sans-serif;
+
+// Breakpoints
+$breakpoint-mobile-max: 599px;
+$breakpoint-tablet-min: 600px;
+$breakpoint-tablet-max: 1024px;
+$breakpoint-desktop-min: 1025px;
+
+// Mixins for responsive design and accessibility
+
+// Responsive media query mixin
+@mixin respond-to($media) {
+  @if $media == mobile {
+    @media only screen and (max-width: $breakpoint-mobile-max) {
+      @content;
+    }
+  }
+  @if $media == tablet {
+    @media only screen and (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet-max) {
+      @content;
+    }
+  }
+  @if $media == desktop {
+    @media only screen and (min-width: $breakpoint-desktop-min) {
+      @content;
+    }
+  }
+}
+
+// Reusable focus ring mixin for accessibility
+@mixin focus-ring {
+  outline: none;
+  border-color: $color-gold;
+  box-shadow: 0 0 0 3px rgba($color-gold, 0.15);
+}
+
+// Bootstrap variable overrides
+$body-bg: $color-bg-dark;
+$body-color: $color-cream;
+$primary: $color-primary-red;
+
+// Import Bootstrap SCSS after variable overrides to apply custom styles
 @import "bootstrap/scss/bootstrap";
