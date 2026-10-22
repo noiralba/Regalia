@@ -39,10 +39,10 @@ export default function CancellationPage() {
     }
   }
 
-  function handleEdit() {
-    // TODO (nästa story): ändra bokningen, t.ex. navigera till en ändringsvy
-    console.log("Ändra bokning", booking?.bookingNumber);
-  }
+  // function handleEdit() {
+  //   // TODO (nästa story): ändra bokningen, t.ex. navigera till en ändringsvy
+  //   console.log("Ändra bokning", booking?.bookingNumber);
+  // }
 
   function handleConfirmCancel() {
     // TODO (nästa story): radera bokningen via API

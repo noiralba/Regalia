@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import { pages } from "./routeConfig";
 import LoginPage from "./pages/LoginPage";
 import CancellationPage from "./pages/CancellationPage";
+import CalendarPage from "./pages/CalendarPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: pages.calendar.path,
-        element: <h1>Kalender</h1>,
+        element: <CalendarPage />,
       },
       {
         path: pages.movieDetails.path,

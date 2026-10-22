@@ -395,20 +395,113 @@ Regalia's custom colors, typography, and other design decisions should be kept i
 
 ## React Router
 
-React Router is installed in the frontend.
+Regalia uses React Router with manually configured routes rather than automatic file-based routing.
 
-It is intended to handle the project's different routes and URLs, for example:
+The routing is divided into these files:
 
-```text
-/
-/filmer
-/filmer/:id
-/bokning
-/logga-in
-/mina-sidor
-```
+- `frontend/src/routeConfig.ts` - Contains shared page paths, labels and helpers for dynamic URLs.
+- `frontend/src/routes.tsx` - Connects the paths to their React page components.
+- `frontend/src/main.tsx` - Activates the router using RouterProvider.
+- `frontend/src/Layout.tsx` - Provides a shared layout with the header and an Outlet for the current page.
 
-The routing structure will continue to be developed as the project progresses.
+### How to add or connect a page
+
+1. Create your page component inside `frontend/src/pages/`.
+2. Check routeConfig.ts for an existing route. Add one if needed.
+3. Open routes.tsx and connect your component to its route.
+4. use the shared paths when creating navigation links.
+
+#### For example:
+
+The movies route is defined in `routeConfig.ts` as `pages.movies.path` which points to **/filmer**
+
+In `routes.tsx` the route can be connected to a component using `element: <MoviesPage />`.
+
+**Important:** Several routes currently contain temporary headings. Replace the heading with your actual page component when it is ready.
+
+### How to create links
+
+Import Link from react-router and pages from `routeConfig.ts`.
+
+**Example:**
+
+`<Link to={pages.movies.path}>På bio nu</Link>`
+This avoids manually writing the same URL in multiple components.
+
+### Dynamic routes
+
+Some routes contain parameters, for example:
+
+- `/filmer/:id`
+- `/bokning/:visningId`
+
+Use the shared routeLinks helpers to generate these URLs:
+
+- `routeLinks.movie(7)` generates `/filmer/7`
+- `routeLinks.booking(12)` generates `/bokning/12`
+
+Import routeLinks from `routeConfig.ts`
+
+The page component can use React Router's `useParams()` to read the parameter from the URL.
+
+---
+
+## Shared frontend types
+
+Shared TypeScript interfaces are located in `frontend/src/types/types.ts.`
+
+The `MovieScreening interface` describes the screening data returned by our local backend API and can be reused by other frontend components.
+
+**Example:**
+
+> import type { MovieScreening } from "../types/types";
+> import { get } from "../api/api";
+>
+> const showings = await get<MovieScreening[]>("/api/shows");
+
+Use the existing interface when workning with screening data instead of creating duplicate types.
+
+Note that som API field names contain spaces, such as `Screening Date` and `Start Time`.
+
+---
+
+## Header and authentication
+
+The header and login functionality are divided into three main files:
+
+- `frontend/src/components/Header.tsx` - Displays navigation links and the correct login/logout options.
+- `frontend/src/Layout.tsx` - Manages the login session and displays the shared header.
+- `frontend/src/pages/LoginPage.tsx` - Contains the login form and communicates with the backend API.
+
+### How the header works
+
+The header is already included in `Layout.tsx`, so individual pages do not need to import or render it.
+
+The header uses the shared paths from `routeConfig.ts`
+
+When the user is logged out, it displays **Skapa konto** and **Logga in**.
+
+When the user is logged in, it displays **Mina sidor** and **Logga ut**.
+
+To add a new navigation link, update `Header.tsx` and use the relevant path from `routeConfig.ts`.
+
+### How login works
+
+1. The user enters an email address and password in `LoginPage.tsx`.
+2. The form sends a **POST** request to `/api/auth/login` using our existing API helper.
+3. If login succeeds, the backend returns a JWT token and its expiration time.
+4. `LoginPage.tsx` calls `onLogin`, provided by `Layout.tsx` through `useOutletContext`.
+5. `Layout.tsx` updates the login state, and the header displays the logged-in options.
+
+The form also handles incorrect credentials (HTTP 401) and too many login attempts (HTTP 429).
+
+### Current limitations
+
+- The session is currently stored in React state only. Refreshing the browser resets the login state.
+- Logging out clears the frontend session but does not revoke the JWT on the backend.
+- Protected API requests and authorization for individual pages still need to be integrated.
+
+These are areas for future development and should not be treated as completed authentication functionality.
 
 ---
 
