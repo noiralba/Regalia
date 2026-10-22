@@ -5,6 +5,7 @@ const { getMovieScreenings } = require("../services/showService");
 const { randomUUID } = require("crypto");
 const validateBooking = require("../middleware/validateBooking");
 const validateUpdateBooking = require("../middleware/validateUpdateBooking");
+const { sendBookingConfirmation } = require("../services/emailService");
 
 async function runInTransaction(res, callback) {
   let connection;
@@ -116,7 +117,6 @@ router.post("/", validateBooking, async (req, res) => {
     );
 
     for (const seat of seats) {
-      //
       await connection.query(
         `INSERT INTO booked_seats (id, booking_id, show_id, seat_id, ticket_type_id) VALUES (?, ?, ?, ?, ?)`,
         [randomUUID(), id, show_id, seat.seat_id, seat.ticket_type_id],
@@ -134,6 +134,17 @@ router.post("/", validateBooking, async (req, res) => {
       error.statusCode = 500;
       error.publicMessage = "bokningsbekräftelse kunde inte skapas.";
       throw error;
+    }
+
+    try {
+      if (order.length > 0) {
+        await sendBookingConfirmation(user_email, order[0]);
+      }
+    } catch (emailError) {
+      console.error(
+        "Kunde inte skicka bokningsbekräftelse via e-post:",
+        emailError.message,
+      );
     }
 
     return res.status(201).json(order[0]);
