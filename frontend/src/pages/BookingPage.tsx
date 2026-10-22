@@ -25,6 +25,19 @@ interface Seat {
   Available: number;
 }
 
+interface BookingConfirmation {
+  "Booking Number": string;
+  Movie: string;
+  "Screening Date": string;
+  "Start Time": string;
+  Screen: string;
+  Seats: string | null;
+  "Number of Tickets": number;
+  "Total Price (SEK)": string | number | null;
+  Email: string;
+}
+
+
 function BookingPage() {
   const { visningId } = useParams();
 
@@ -37,6 +50,9 @@ function BookingPage() {
   const [email, setEmail] = useState("");
   // Håller reda på om en bokning håller på att skickas
   const [isBooking, setIsBooking] = useState(false);
+const [bookingConfirmation, setBookingConfirmation] =
+  useState<BookingConfirmation | null>(null);
+
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
     if (!visningId) return;
@@ -203,8 +219,11 @@ function BookingPage() {
       }
       // Hämtar bokningsbekräftelsen från backend
       // Ska senare användas för att visa bekräftelsemodalen
-      const data = await response.json();
-      console.log("Bokning skapad:", data);
+      
+const data: BookingConfirmation = await response.json();
+setBookingConfirmation(data);
+console.log("Bokning skapad:", data);
+
     } catch (error) {
       console.error(error);
       setError("Kunde inte genomföra bokningen.");
@@ -231,6 +250,10 @@ function BookingPage() {
   return (
     <main>
       <h1>Boka biljetter</h1>
+
+      {bookingConfirmation && (
+        <p>Bokning skapad: {bookingConfirmation["Booking Number"]}</p>
+      )}
 
       <section>
         <h2>Vald visning</h2>
