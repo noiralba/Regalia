@@ -6,7 +6,7 @@ interface HeroProps {
 
 export default function Hero({ title, tagline, imageUrl }: HeroProps) {
   return (
-    <div
+    <section
       className="hero position-relative overflow-hidden text-white"
       style={{ height: '70vh', minHeight: '400px' }}
     >
@@ -17,13 +17,13 @@ export default function Hero({ title, tagline, imageUrl }: HeroProps) {
         style={{ objectFit: 'cover' }}
       />
 
-      <div
+      <article
         className="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-3"
         style={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}
       >
         <h1 className="display-3 fw-bold text-uppercase mb-3">{title}</h1>
         <p className="lead fs-4 mb-0 col-12 col-md-8 col-lg-6">{tagline}</p>
-      </div>
-    </div>
+      </article>
+    </section>
   )
 }

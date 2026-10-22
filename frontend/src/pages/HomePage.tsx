@@ -8,22 +8,6 @@ import type { Movies, ScheduleDay } from '../types/types'
 import { get } from '../api/api'
 
 
-
-//Prototyp-data — ersätt med riktig data från API:et när backend finns.
-// const nowShowing: Movies[] = [
-//   { id: '1', title: 'Anora', imageUrl: 'https://placehold.co/600x400' },
-//   { id: '2', title: 'The Odyssey', imageUrl: 'https://placehold.co/600x400' },
-//   { id: '3', title: 'Spindelmannen', imageUrl: 'https://placehold.co/600x400' },
-//   { id: '4', title: 'Resident Evil', imageUrl: 'https://placehold.co/600x400' },
-// ]
-
-// const comingSoon: Movies[] = [
-//   { id: '5', title: 'Avengers', imageUrl: 'https://placehold.co/600x400' },
-//   { id: '6', title: 'Dune', imageUrl: 'https://placehold.co/600x400' },
-//   { id: '7', title: 'Hope', imageUrl: 'https://placehold.co/600x400' },
-//   { id: '8', title: 'Heart of the Beast', imageUrl: 'https://placehold.co/600x400' },
-// ]
-
 const scheduleDays: ScheduleDay[] = [
   {
     id: 'idag',

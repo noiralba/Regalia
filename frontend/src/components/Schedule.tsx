@@ -29,9 +29,9 @@ export default function Schedule({ days }: ScheduleProps) {
           >
             <div className="col-12 col-md-4">
               <div className="movie-info border-bottom pb-1">
-                <div className="movie-title text-uppercase fw-bold fs-6">
+                <p className="movie-title text-uppercase fw-bold fs-6">
                   {title}
-                </div>
+                </p>
                 <small>Genre | 15+ | 160min</small>
               </div>
             </div>
