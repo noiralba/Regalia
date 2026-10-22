@@ -34,7 +34,7 @@ async function runInTransaction(res, callback) {
     if (error.code === "ER_DUP_ENTRY" || error.errno === 1062) {
       return res.status(409).json({
         error:
-          "One or more of the selected seats are already booked for this show.",
+          "En eller flera av de valda platserna är redan bokade till den här visningen.",
       });
     }
 
@@ -44,9 +44,7 @@ async function runInTransaction(res, callback) {
       });
     }
 
-    return res
-      .status(500)
-      .json({ error: "An unexpected server error occurred." });
+    return res.status(500).json({ error: "Ett oväntat serverfel inträffade." });
   } finally {
     if (connection) connection.release();
   }
@@ -62,7 +60,9 @@ async function getOrderConfirmation(column, value, targetDb = db) {
 
 router.get("/", async (req, res) => {
   try {
-    const [bookings] = await db.query("SELECT * FROM v_order_confirmation");
+    const [bookings] = await db.query(
+      "SELECT * FROM v_order_confirmation ORDER BY `Booked At`",
+    );
 
     res.status(200).json(bookings);
   } catch (error) {
@@ -73,7 +73,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/order/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const order = await getOrderConfirmation("Booking Number", id);
@@ -99,7 +99,7 @@ router.get("/order/:id", async (req, res) => {
 router.post("/", validateBooking, async (req, res) => {
   const { user_id, user_email, show_id, seats } = req.body;
   const id = randomUUID();
-  const booking_number = `REG-${randomUUID()}`;
+  const booking_number = `REG-${randomUUID().slice(0, 13)}`;
 
   await runInTransaction(res, async (connection) => {
     const show = await getMovieScreenings(show_id, connection);
@@ -152,12 +152,13 @@ router.post("/", validateBooking, async (req, res) => {
 });
 
 router.put("/:id", validateUpdateBooking, async (req, res) => {
-  const { id } = req.params; //
+  const { id } = req.params; // Det här är bokningsnumret (t.ex. REG-1234)
   const { user_id, user_email, show_id, seats } = req.body;
 
   await runInTransaction(res, async (connection) => {
+    // BUGG 1 FIXAD: Hämtar nu ut den interna kolumnen `id` (UUID) ur databasen!
     const [rows] = await connection.query(
-      "SELECT user_id, user_email FROM bookings WHERE id = ?",
+      "SELECT id, user_id, user_email FROM bookings WHERE booking_number = ?",
       [id],
     );
 
@@ -168,6 +169,7 @@ router.put("/:id", validateUpdateBooking, async (req, res) => {
       throw error;
     }
     const existing = rows[0];
+    const internalBookingId = existing.id; // Nu innehåller denna det riktiga UUID:t!
 
     const finalUserId = user_id !== undefined ? user_id : existing.user_id;
     const finalUserEmail =
@@ -175,7 +177,7 @@ router.put("/:id", validateUpdateBooking, async (req, res) => {
 
     await connection.query(
       "UPDATE bookings SET user_id = ?, user_email = ? WHERE id = ?",
-      [finalUserId ?? null, finalUserEmail, id],
+      [finalUserId ?? null, finalUserEmail, internalBookingId],
     );
 
     if (seats !== undefined) {
@@ -195,38 +197,49 @@ router.put("/:id", validateUpdateBooking, async (req, res) => {
         throw error;
       }
 
+      // Nu raderas de gamla stolarna korrekt eftersom internalBookingId har ett värde
       await connection.query("DELETE FROM booked_seats WHERE booking_id = ?", [
-        id,
+        internalBookingId,
       ]);
 
       for (const seat of seats) {
+        // BUGG 2 FIXAD: Använder internalBookingId (UUID) istället för 'id' (REG-nummer)
         await connection.query(
           `INSERT INTO booked_seats (id, booking_id, show_id, seat_id, ticket_type_id) VALUES (?, ?, ?, ?, ?)`,
-          [randomUUID(), id, show_id, seat.seat_id, seat.ticket_type_id],
+          [
+            randomUUID(),
+            internalBookingId,
+            show_id,
+            seat.seat_id,
+            seat.ticket_type_id,
+          ],
         );
       }
     }
 
-    const updatedOrder = await getOrderConfirmation("id", id, connection);
+    // FIX 3: Hämtar orderbekräftelsen med bokningsnumret (id) som din vy v_order_confirmation förväntar sig
+    const updatedOrder = await getOrderConfirmation(
+      "Booking Number",
+      id,
+      connection,
+    );
 
     return res
       .status(200)
       .json(
         updatedOrder.length > 0
           ? updatedOrder[0]
-          : { message: "Booking updated successfully." },
+          : { message: "Bokningen har uppdaterats." },
       );
   });
 });
+
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const [existingBookings] = await db.query(
-      "SELECT id FROM bookings WHERE id = ?",
-      [id],
-    );
+    const existingBookings = await getOrderConfirmation("Booking Number", id);
 
     if (existingBookings.length === 0) {
       const error = new Error("Booking not found");
@@ -235,7 +248,7 @@ router.delete("/:id", async (req, res) => {
       throw error;
     }
 
-    await db.query("DELETE FROM bookings WHERE id = ?", [id]);
+    await db.query("DELETE FROM bookings WHERE booking_number = ?", [id]);
 
     return res.status(200).json({
       message: "Booking deleted successfully.",
