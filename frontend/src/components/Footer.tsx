@@ -1,4 +1,5 @@
 import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa"
+import { Link } from "react-router"
 
 export default function Footer() {
   return (
@@ -28,7 +29,7 @@ export default function Footer() {
         </article>
          <article>
           <h5 className="text-uppercase mb-3">Info</h5>
-          <a href="#">Avboka/ändra bokning</a>
+          <Link to="/avbokning">Avboka/ändra bokning</Link>
         </article>
     </section>
     </footer>

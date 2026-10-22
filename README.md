@@ -446,6 +446,25 @@ The page component can use React Router's `useParams()` to read the parameter fr
 
 ---
 
+## Shared frontend types
+
+Shared TypeScript interfaces are located in `frontend/src/types/types.ts.`
+
+The `MovieScreening interface` describes the screening data returned by our local backend API and can be reused by other frontend components.
+
+**Example:**
+
+> import type { MovieScreening } from "../types/types";
+> import { get } from "../api/api";
+>
+> const showings = await get<MovieScreening[]>("/api/shows");
+
+Use the existing interface when workning with screening data instead of creating duplicate types.
+
+Note that som API field names contain spaces, such as `Screening Date` and `Start Time`.
+
+---
+
 ## Header and authentication
 
 The header and login functionality are divided into three main files:
