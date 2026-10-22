@@ -1,36 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-
-type Booking = {
-  bookingNumber: string;
-  email: string;
-  movieTitle: string;
-  showTime: string;
-  seats: string[];
-};
+import type { BookingSearch } from "../types/types";
+import { get, del } from "../api/api";
 
 export default function CancellationPage() {
   const [bookingNumber, setBookingNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [booking, setBooking] = useState<Booking | null>(null);
+  const [bookings, setBookings] = useState<BookingSearch[]>([]);
+  const [booking, setBooking] = useState<BookingSearch | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [confirmingCancel, setConfirmingCancel] = useState(false);
   const [cancelled, setCancelled] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [cancelError, setCancelError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchBookings() {
+      try {
+        const data = await get<Record<string, string>[]>("/api/bookings");
+
+        setBookings(
+          data.map((b) => ({
+            bookingNumber: b["Booking Number"],
+            email: b["Email"],
+          })),
+        );
+      } catch (err) {
+        console.error("Kunde inte hämta bokningar:", err);
+        setError("Bokningarna kunde inte laddas.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchBookings();
+  }, []);
+
+  if (loading) return <p>Laddar...</p>;
+  if (error) return <p>{error}</p>;
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setNotFound(false);
 
-    // TODO (nästa story): hämta bokningen med bookingNumber + email
-    // Platshållare så att du kan se gränssnittet:
-    const found: Booking | null = {
-      bookingNumber,
-      email,
-      movieTitle: "Exempelfilm",
-      showTime: "2026-11-01 19:00",
-      seats: ["A1", "A2"],
-    };
+    const found = bookings.find(
+      (b) =>
+        b.bookingNumber === bookingNumber.trim() &&
+        b.email.toLowerCase() === email.trim().toLowerCase(),
+    );
 
     if (found) {
       setBooking(found);
@@ -39,17 +58,23 @@ export default function CancellationPage() {
     }
   }
 
-  // function handleEdit() {
-  //   // TODO (nästa story): ändra bokningen, t.ex. navigera till en ändringsvy
-  //   console.log("Ändra bokning", booking?.bookingNumber);
-  // }
+  async function handleConfirmCancel() {
+    if (!booking) return;
 
-  function handleConfirmCancel() {
-    // TODO (nästa story): radera bokningen via API
-    console.log("Avboka", booking?.bookingNumber);
-    setCancelled(true);
-    setConfirmingCancel(false);
-    setBooking(null);
+    try {
+      await del(`/api/bookings/${encodeURIComponent(booking.bookingNumber)}`);
+
+      setBookings((prev) =>
+        prev.filter((b) => b.bookingNumber !== booking.bookingNumber),
+      );
+      setCancelled(true);
+      setConfirmingCancel(false);
+      setBooking(null);
+    } catch (err) {
+      console.error("Kunde inte avboka:", err);
+      setCancelError("Bokningen kunde inte avbokas. Försök igen.");
+      setConfirmingCancel(false);
+    }
   }
 
   function handleReset() {
@@ -65,10 +90,14 @@ export default function CancellationPage() {
     return (
       <main className="container py-4">
         <h1 className="mb-3">Avbokning</h1>
-        <div className="alert alert-success" role="alert">
+        <p className="alert alert-success" role="alert">
           Din bokning är avbokad.
-        </div>
-        <button type="button" className="btn btn-secondary" onClick={handleReset}>
+        </p>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={handleReset}
+        >
           Tillbaka
         </button>
       </main>
@@ -80,17 +109,29 @@ export default function CancellationPage() {
       <main className="container py-4">
         <h1 className="mb-3">Din bokning</h1>
 
-        <div className="card mb-3 col-12 col-md-6 col-lg-4">
-          <div className="card-body">
+        <section className="card mb-3 col-12 col-md-6 col-lg-4">
+          <article className="card-body">
             <p className="mb-1">
               <strong>Bokningsnummer:</strong> {booking.bookingNumber}
             </p>
-        </div>
-        </div>
+          </article>
+        </section>
 
         {!confirmingCancel ? (
-          <div className="d-flex gap-2">
-            <button type="button" className="btn btn-primary" onClick={() => navigate("/bokning/:visningId")}>
+          <section className="d-flex gap-2">
+            {cancelError && (
+              <p
+                className="alert alert-danger col-12 col-md-6 col-lg-4"
+                role="alert"
+              >
+                {cancelError}
+              </p>
+            )}
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => navigate("/bokning/:visningId")}
+            >
               Ändra bokning
             </button>
             <button
@@ -100,11 +141,14 @@ export default function CancellationPage() {
             >
               Avboka
             </button>
-          </div>
+          </section>
         ) : (
-          <div className="alert alert-warning col-12 col-md-6 col-lg-4" role="alert">
+          <section
+            className="alert alert-warning col-12 col-md-6 col-lg-4"
+            role="alert"
+          >
             <p className="mb-3">Är du säker på att du vill avboka?</p>
-            <div className="d-flex gap-2">
+            <article className="d-flex gap-2">
               <button
                 type="button"
                 className="btn btn-danger"
@@ -119,11 +163,15 @@ export default function CancellationPage() {
               >
                 Nej, behåll
               </button>
-            </div>
-          </div>
+            </article>
+          </section>
         )}
 
-        <button type="button" className="btn btn-link mt-3 ps-0" onClick={handleReset}>
+        <button
+          type="button"
+          className="btn btn-link mt-3 ps-0"
+          onClick={handleReset}
+        >
           Sök efter en annan bokning
         </button>
       </main>
@@ -134,17 +182,18 @@ export default function CancellationPage() {
     <main className="container py-4">
       <h1 className="mb-3">Avboka eller Ändra bokning</h1>
       <p className="mb-4">
-        Fyll i ditt bokningsnummer och din e-postadress för att hitta din bokning.
+        Fyll i ditt bokningsnummer och din e-postadress för att hitta din
+        bokning.
       </p>
 
       {notFound && (
-        <div className="alert alert-danger col-12 col-md-6 col-lg-4" role="alert">
+        <p className="alert alert-danger col-12 col-md-6 col-lg-4" role="alert">
           Vi hittade ingen bokning med de uppgifterna.
-        </div>
+        </p>
       )}
 
       <form onSubmit={handleSubmit} className="col-12 col-md-6 col-lg-4">
-        <div className="mb-3">
+        <section className="mb-3">
           <label htmlFor="bookingNumber" className="form-label">
             Bokningsnummer
           </label>
@@ -156,9 +205,9 @@ export default function CancellationPage() {
             onChange={(e) => setBookingNumber(e.target.value)}
             required
           />
-        </div>
+        </section>
 
-        <div className="mb-3">
+        <section className="mb-3">
           <label htmlFor="email" className="form-label">
             E-postadress
           </label>
@@ -170,7 +219,7 @@ export default function CancellationPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
+        </section>
 
         <button type="submit" className="btn btn-primary">
           Sök bokning
