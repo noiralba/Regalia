@@ -6,6 +6,7 @@ import Schedule from '../components/Schedule'
 import { useEffect, useState } from 'react'
 import type { Movies, ScheduleDay } from '../types/types'
 import { get } from '../api/api'
+import Calendar from '../components/Calender';
 
 
 const scheduleDays: ScheduleDay[] = [
@@ -59,6 +60,7 @@ function HomePage() {
       <VipBanner />
       {/* <MovieRow label="Kommer snart" movies={comingSoon} /> */}
       <Schedule days={scheduleDays} />
+      <Calendar />
     </>
   )
 }

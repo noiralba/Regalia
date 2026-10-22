@@ -16,6 +16,7 @@ export interface Movies {
   categories: string[]
 }
 
+
 //test data
 export interface Showing {
   id: string
