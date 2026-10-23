@@ -31,7 +31,6 @@ router.get("/", async (req, res) => {
           .status(400)
           .json({ error: "ageRating måste vara ett positivt tal" });
       }
-
       conditions.push("m.ageRating = ?");
       params.push(age);
     }
@@ -43,7 +42,6 @@ router.get("/", async (req, res) => {
         JOIN categories c2 ON c2.id = mc2.category_id
         WHERE mc2.movie_id = m.id AND c2.name = ?
       )`);
-
       params.push(categories);
     }
 
@@ -51,11 +49,9 @@ router.get("/", async (req, res) => {
       if (search.length < 2) {
         return res.status(400).json({ error: "Sökordet är för kort" });
       }
-
       conditions.push(
         "(m.title LIKE ? OR m.shortDescription LIKE ? OR m.longDescription LIKE ?)",
       );
-
       const term = `%${search}%`;
       params.push(term, term, term);
     }
@@ -76,7 +72,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET: Get a specific movie by ID, including its cast
 router.get("/type/:filter", async (req, res, next) => {
   const { filter } = req.params;
 
@@ -98,15 +93,9 @@ router.get("/type/:filter", async (req, res, next) => {
 // GET: Get a specific movie by ID
 router.get("/:id", async (req, res) => {
   const movieId = req.params.id;
-
   try {
     const [results] = await db.query(
       `SELECT m.*, ${CATEGORIES_SUBQUERY}
-       FROM movies m
-       WHERE m.id = ?`,
-      [movieId],
-    );
-
       FROM movies m
       WHERE m.id = ? `,
       [movieId],
@@ -114,25 +103,10 @@ router.get("/:id", async (req, res) => {
     if (results.length === 0) {
       return res.status(404).json({ error: "Film hittades inte" });
     }
-
-    const [cast] = await db.query(
-      `SELECT p.id, p.name, p.image, mc.character_name
-       FROM movie_cast mc
-       JOIN persons p ON p.id = mc.person_id
-       WHERE mc.movie_id = ?`,
-      [movieId],
-    );
-
-    res.json({
-      ...results[0],
-      cast,
-    });
+    res.json(results[0]);
   } catch (err) {
     console.error("Fel vid hämtning av film:", err);
-
-    res.status(500).json({
-      error: "Kunde inte hämta filmen",
-    });
+    res.status(500).json({ error: "Kunde inte hämta filmen" });
   }
 });
 
