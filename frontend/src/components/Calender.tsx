@@ -9,16 +9,35 @@ type ShowingWithInfo = MovieScreening & {
   duration?: Movies["duration"];
 };
 
-export default function Calendar() {
-  const [selectedDate, setSelectedDate] = useState(() =>
-    new Date().toLocaleDateString("sv-SE"),
-  );
+type CalendarProps = {
+  selectedDate: string;
+};
+
+export default function Calendar({ selectedDate }: CalendarProps) {
+
 
   const [showings, setShowings] = useState<MovieScreening[]>([]);
   const [movies, setMovies] = useState<Movies[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  
+  function formatSelectedDate(dateString: string) {
+    const todayString = new Date().toLocaleDateString("sv-SE");
+
+    if (dateString === todayString) return "Visas idag";
+
+    const date = new Date(`${dateString}T00:00`);
+
+    const weekday = date.toLocaleDateString("sv-SE", { weekday: "long" });
+    const dayAndMonth = date
+      .toLocaleDateString("sv-SE", { day: "numeric", month: "short" })
+      .replace(".", ""); 
+
+    return `${weekday} ${dayAndMonth}`;
+  }
+
 
   // Hämta filmer en gång
   useEffect(() => {
@@ -109,10 +128,7 @@ export default function Calendar() {
     <section className="container my-5">
       <header className="mb-3">
         <h2 className="h5 text-uppercase">
-          Visas{" "}
-          {selectedDate === new Date().toLocaleDateString("sv-SE")
-            ? "idag"
-            : selectedDate}
+           {formatSelectedDate(selectedDate)}
         </h2>
       </header>
 
@@ -168,8 +184,8 @@ export default function Calendar() {
 
           <footer className="row g-0 mt-3">
             <section className="col-12 col-md-8 offset-md-4">
-                    <button
-                      onClick={() => navigate("/kalender")}
+              <button
+                onClick={() => navigate("/kalender")}
                 type="button"
                 className="btn border rounded-2 w-100 py-2 text-uppercase fw-semibold"
               >
