@@ -10,6 +10,12 @@ export interface Movies {
   shortDescription: string;
   longDescription: string;
   director_id: string;
+  director: {
+    id: string;
+    name: string;
+    image: string;
+    character_name: string;
+  }
   categories: string[];
   cast: {
     id: string;

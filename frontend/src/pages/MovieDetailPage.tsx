@@ -26,6 +26,8 @@ function MovieDetailPage() {
         if (!id) return;
 
         const data = await getById<Movies>("/api/movies", id);
+        console.log("FILMDATA:", data);
+        console.log("CAST:", data.cast);
         setMovie(data);
 
         const movieShowings = await get<Showing[]>(`/api/shows?movie_id=${id}`);
@@ -142,6 +144,12 @@ function MovieDetailPage() {
       <p>Längd: {movie.duration} minuter</p>
       <p>Originalspråk: {movie.language.original}</p>
       <p>Undertexter: {movie.language.subtitles}</p>
+
+      <p>Regissör: {movie.director?.name ?? "Okänd"}</p>
+      <img
+        src={getPersonImage(movie.director.image)}
+        alt={movie.director.name}
+      />
 
       <h2>Rollista</h2>
 
