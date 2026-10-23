@@ -1,21 +1,24 @@
-import { useState } from 'react'
-import type { ScheduleDay } from '../types/types'
+import { useState } from "react";
+import type { ScheduleDay } from "../types/types";
 
 interface ScheduleProps {
-  days: ScheduleDay[]
+  days: ScheduleDay[];
 }
 
 export default function Schedule({ days }: ScheduleProps) {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const activeDay = days[activeIndex]
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeDay = days[activeIndex];
 
   // Gruppera visningar per film
-  const showingsByMovie = new Map<string, NonNullable<typeof activeDay>['showings']>()
+  const showingsByMovie = new Map<
+    string,
+    NonNullable<typeof activeDay>["showings"]
+  >();
   activeDay?.showings.forEach((showing) => {
-    const list = showingsByMovie.get(showing.movieTitle) ?? []
-    list.push(showing)
-    showingsByMovie.set(showing.movieTitle, list)
-  })
+    const list = showingsByMovie.get(showing.movieTitle) ?? [];
+    list.push(showing);
+    showingsByMovie.set(showing.movieTitle, list);
+  });
 
   return (
     <section className="container schedule my-5">
@@ -23,10 +26,7 @@ export default function Schedule({ days }: ScheduleProps) {
 
       <div className="schedule-box border rounded-2 p-3 p-md-4">
         {[...showingsByMovie.entries()].map(([title, showings]) => (
-          <div
-            key={title}
-            className="row align-items-center g-3 py-2"
-          >
+          <div key={title} className="row align-items-center g-3 py-2">
             <div className="col-12 col-md-4">
               <div className="movie-info border-bottom pb-1">
                 <p className="movie-title text-uppercase fw-bold fs-6">
@@ -42,7 +42,7 @@ export default function Schedule({ days }: ScheduleProps) {
                   <button
                     key={showing.id}
                     type="button"
-                    style={{flex: '1 1 0', minWidth: '100px'}}
+                    style={{ flex: "1 1 0", minWidth: "100px" }}
                     className="time-btn btn border rounded-2 py-2 px-3 text-center"
                   >
                     <div className="fw-semibold">{showing.time}</div>
@@ -67,5 +67,5 @@ export default function Schedule({ days }: ScheduleProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }
