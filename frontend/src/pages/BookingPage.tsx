@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import type { BookingConfirmation } from "../types/types";
+import BookingConfirmationModal from "../components/BookingConfirmationModal";
+import { pages } from "../routeConfig";
 
 interface MovieScreening {
   show_id: string;
@@ -25,21 +28,9 @@ interface Seat {
   Available: number;
 }
 
-interface BookingConfirmation {
-  "Booking Number": string;
-  Movie: string;
-  "Screening Date": string;
-  "Start Time": string;
-  Screen: string;
-  Seats: string | null;
-  "Number of Tickets": number;
-  "Total Price (SEK)": string | number | null;
-  Email: string;
-}
-
-
 function BookingPage() {
   const { visningId } = useParams();
+  const navigate = useNavigate();
 
   const [showing, setShowing] = useState<MovieScreening | null>(null);
   const [error, setError] = useState("");
@@ -252,7 +243,10 @@ console.log("Bokning skapad:", data);
       <h1>Boka biljetter</h1>
 
       {bookingConfirmation && (
-        <p>Bokning skapad: {bookingConfirmation["Booking Number"]}</p>
+        <BookingConfirmationModal
+          confirmation={bookingConfirmation}
+          onClose={() => navigate(pages.home.path)}
+        />
       )}
 
       <section>
