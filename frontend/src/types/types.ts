@@ -25,6 +25,8 @@ export interface Movies {
   }[];
 }
 
+
+//test data
 export interface Showing {
   show_id: string;
   movie_id: string;
@@ -55,10 +57,6 @@ export interface SeatAvailability {
   "Seat Number": number;
   Status: string;
   Available: boolean;
-}
-  id: string
-  label: string
-  showings: Showing[]
 }
 export interface MovieScreening {
   show_id: string;
