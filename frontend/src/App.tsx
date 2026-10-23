@@ -1,6 +1,6 @@
 import CookieModal from "./components/CookieModal";
-import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
+import "./styles/custom.scss";
 
 function App() {
   return (
@@ -8,7 +8,6 @@ function App() {
       <main className="container py-4">
         <HomePage />
       </main>
-      <Footer />
 
       <CookieModal />
     </>

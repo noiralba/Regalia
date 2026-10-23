@@ -50,3 +50,26 @@ export interface SeatAvailability {
   Status: string;
   Available: boolean;
 }
+  id: string
+  label: string
+  showings: Showing[]
+}
+export interface MovieScreening {
+  show_id: string;
+  movie_id: string;
+  Movie: string;
+  "Screening Date": string;
+  "Start Time": string;
+  Screen: string;
+}
+
+export interface Booking {
+  bookingNumber: string;
+  email: string;
+  movieTitle: string
+  showTime: string;
+  seats: string[];
+}
+
+export type BookingSearch = Pick<Booking, "bookingNumber" | "email">;
+

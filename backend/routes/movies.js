@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db.js");
+const { getMovies } = require("../services/movieService.js");
 
 const CATEGORIES_SUBQUERY = `
   (SELECT COALESCE(JSON_ARRAYAGG(c.name), JSON_ARRAY())
@@ -76,6 +77,25 @@ router.get("/", async (req, res) => {
 });
 
 // GET: Get a specific movie by ID, including its cast
+router.get("/type/:filter", async (req, res, next) => {
+  const { filter } = req.params;
+
+  if (filter !== "latest" && filter !== "upcoming") {
+    return next();
+  }
+
+  try {
+    const movies = await getMovies({ type: filter, limit: 15 });
+    res.status(200).json(movies);
+  } catch (error) {
+    console.error(`GET /movies/type/${filter}:`, error.message);
+    return res.status(500).json({
+      error: `Could not retrieve ${filter} movies from the database.`,
+    });
+  }
+});
+
+// GET: Get a specific movie by ID
 router.get("/:id", async (req, res) => {
   const movieId = req.params.id;
 
@@ -87,6 +107,10 @@ router.get("/:id", async (req, res) => {
       [movieId],
     );
 
+      FROM movies m
+      WHERE m.id = ? `,
+      [movieId],
+    );
     if (results.length === 0) {
       return res.status(404).json({ error: "Film hittades inte" });
     }
