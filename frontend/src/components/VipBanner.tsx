@@ -9,5 +9,5 @@ export default function VipBanner() {
         </button>
       </div>
     </section>
-  )
+  );
 }
