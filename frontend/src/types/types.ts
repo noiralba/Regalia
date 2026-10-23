@@ -1,55 +1,31 @@
 export interface Movies {
-  id: string;
-  title: string;
-  productionYear: number;
-  ageRating: number;
-  duration: number;
-  language: { original: string; subtitles: string };
-  posterImage: string;
-  trailerUrl: string;
-  shortDescription: string;
-  longDescription: string;
-  director_id: string;
-  categories: string[];
-  cast: {
-    id: string;
-    name: string;
-    image: string;
-    character_name: string;
-  }[];
+  id: string
+  title: string
+  productionYear: number
+  ageRating: number
+  duration: number
+  language: {
+    original: string
+    subtitles: string
+  }
+  posterImage: string
+  trailerUrl: string
+  shortDescription: string
+  longDescription: string
+  director_id: string
+  categories: string[]
 }
 
+//test data
 export interface Showing {
-  show_id: string;
-  movie_id: string;
-  movieTitle: string;
-  "Screening Date": string;
-  "Start Time": string;
-  Screen: string;
+  id: string
+  movieTitle: string
+  time: string
+  salong: string
 }
 
-export interface ScheduleShowing {
-  id: string;
-  movieTitle: string;
-  time: string;
-  salong: string;
-}
-
-// Testdata för schemat
+//test data
 export interface ScheduleDay {
-  id: string;
-  label: string;
-  showings: ScheduleShowing[];
-}
-
-export interface SeatAvailability {
-  show_id: string;
-  seat_id: string;
-  "Seat Row": string;
-  "Seat Number": number;
-  Status: string;
-  Available: boolean;
-}
   id: string
   label: string
   showings: Showing[]
