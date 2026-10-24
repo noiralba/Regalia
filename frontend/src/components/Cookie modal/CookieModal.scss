@@ -6,7 +6,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.903);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +52,8 @@
     gap: 1rem;
     margin-top: 2rem;
 
-    button {
+    .btn-necessary,
+    .btn-accept {
       flex: 1;
       font-family: $font-body;
       font-size: 0.95rem;
@@ -62,29 +63,17 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
-
-      &:focus {
-        @include focus-ring;
-      }
-    }
-
-    .btn-necessary {
       background-color: $color-card-bg;
       border: 1px solid $color-gold;
       color: $color-cream;
 
-      &:hover {
-        background-color: lighten($color-card-bg, 5%);
+      &:focus {
+        @include focus-ring;
       }
-    }
-
-    .btn-accept {
-      background-color: $color-primary-red;
-      border: 1px solid $color-gold;
-      color: $color-cream;
 
       &:hover {
-        background-color: lighten($color-primary-red, 5%);
+        background-color: $color-primary-red;
+        border-color: $color-primary-red;
       }
     }
   }
@@ -95,7 +84,8 @@
     .cookie-modal-actions {
       flex-direction: column;
 
-      button {
+      .btn-necessary,
+      .btn-accept {
         width: 100%;
       }
     }
