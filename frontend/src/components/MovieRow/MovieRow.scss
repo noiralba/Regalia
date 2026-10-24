@@ -1,4 +1,4 @@
-@use "../../styles/custom.scss" as c;
+@use "../../styles/variables" as c;
 
 .movie-row {
   padding-block: 1.5rem;
@@ -55,7 +55,7 @@
   }
 }
 
-.btn {
+.arrow-btn {
   border: 1px solid c.$color-gold;
   color: c.$color-gold;
 

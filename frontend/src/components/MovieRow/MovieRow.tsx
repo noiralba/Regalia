@@ -29,7 +29,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
           <nav aria-label={`Bläddra i ${label}`}>
             <button
               type="button"
-              className="btn btn-outline-light btn-sm me-2"
+              className="arrow-btn btn btn-outline-light btn-sm me-2"
               onClick={() => setPage((p) => p - 1)}
               disabled={page === 0}
               aria-label="Föregående sida"
@@ -38,7 +38,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
             </button>
             <button
               type="button"
-              className="btn btn-outline-light btn-sm"
+              className="arrow-btn btn btn-outline-light btn-sm"
               onClick={() => setPage((p) => p + 1)}
               disabled={page === pageCount - 1}
               aria-label="Nästa sida"

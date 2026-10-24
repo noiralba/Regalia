@@ -121,7 +121,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   }, [showingsWithInfo]);
 
   return (
-    <section className="calender container my-5">
+    <section className="container my-5">
       <header className="mb-3">
         <h2 className="h5 text-uppercase">
           {formatSelectedDate(selectedDate)}

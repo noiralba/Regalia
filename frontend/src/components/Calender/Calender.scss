@@ -1,17 +1,17 @@
-@use "../../styles/custom.scss" as c;
+@use "../../styles/variables" as v;
 
-.calender {
-
-  header h2 {
-    font-family: c.$font-title;
-    color: c.$color-gold;
-    letter-spacing: 0.08em;
+.calendar {
+  .schedule-box {
+    background-color: v.$color-card-bg;
   }
 
-  .schedule-box {
-    background: c.$color-card-bg;
-    border-color: c.$color-gold;
-    color: c.$color-cream;
-    font-family: c.$font-body;
+  .movie-title {
+    color: v.$color-gold;
+  }
+
+  .time-btn {
+  color: v.$color-gold;
+  
   }
 }
+
