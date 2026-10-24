@@ -5,7 +5,7 @@ import VipBanner from "../components/VipBanner";
 import { useEffect, useState } from "react";
 import type { Movies } from "../types/types";
 import { get } from "../api/api";
-import Calendar from "../components/Calender";
+import Calendar from "../components/Calender/Calender";
 
 function HomePage() {
   const [selectedDate] = useState(() => new Date().toLocaleDateString("sv-SE"));

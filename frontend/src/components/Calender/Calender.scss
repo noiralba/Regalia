@@ -1,6 +1,17 @@
 @use "../../styles/custom.scss" as c;
 
-.calender-section {
-  background-color: c.$color-card-bg;
-  
+.calender {
+
+  header h2 {
+    font-family: c.$font-title;
+    color: c.$color-gold;
+    letter-spacing: 0.08em;
+  }
+
+  .schedule-box {
+    background: c.$color-card-bg;
+    border-color: c.$color-gold;
+    color: c.$color-cream;
+    font-family: c.$font-body;
+  }
 }
