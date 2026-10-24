@@ -1,0 +1,66 @@
+@use "../../styles/custom.scss" as c;
+
+.movie-row {
+  padding-block: 1.5rem;
+
+  .section-label {
+    font-family: c.$font-title;
+    color: c.$color-gold;
+    letter-spacing: 0.08em;
+  }
+
+  .poster {
+    border: 1px solid c.$color-gold;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .poster-image {
+    display: block;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+  }
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+
+  button {
+    width: 0.6rem;
+    height: 0.6rem;
+    border: 1px solid c.$color-gold;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &.active {
+      background: c.$color-primary-red;
+    }
+
+    &:focus-visible {
+      @include c.focus-ring;
+    }
+  }
+}
+
+.btn {
+  border: 1px solid c.$color-gold;
+  color: c.$color-gold;
+
+  &:hover {
+    background-color: c.$color-primary-red;
+    border: 1px solid c.$color-gold;
+  }
+}

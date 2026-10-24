@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
-import { get } from "../api/api";
-import type { MovieScreening, Movies } from "../types/types";
+import { get } from "../../api/api";
+import type { MovieScreening, Movies } from "../../types/types";
 import { useNavigate } from "react-router";
 
 type ShowingWithInfo = MovieScreening & {
@@ -125,7 +125,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   }, [showingsWithInfo]);
 
   return (
-    <section className="container my-5">
+    <section className="calender-section container my-5">
       <header className="mb-3">
         <h2 className="h5 text-uppercase">
            {formatSelectedDate(selectedDate)}
