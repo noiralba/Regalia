@@ -14,15 +14,12 @@ type CalendarProps = {
 };
 
 export default function Calendar({ selectedDate }: CalendarProps) {
-
-
   const [showings, setShowings] = useState<MovieScreening[]>([]);
   const [movies, setMovies] = useState<Movies[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  
   function formatSelectedDate(dateString: string) {
     const todayString = new Date().toLocaleDateString("sv-SE");
 
@@ -33,11 +30,10 @@ export default function Calendar({ selectedDate }: CalendarProps) {
     const weekday = date.toLocaleDateString("sv-SE", { weekday: "long" });
     const dayAndMonth = date
       .toLocaleDateString("sv-SE", { day: "numeric", month: "short" })
-      .replace(".", ""); 
+      .replace(".", "");
 
     return `${weekday} ${dayAndMonth}`;
   }
-
 
   // Hämta filmer en gång
   useEffect(() => {
