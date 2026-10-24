@@ -1,0 +1,103 @@
+@import "../../styles/custom.scss";
+
+.cookie-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.cookie-modal-card {
+  background-color: $color-bg-dark;
+  border: 1px solid $color-gold;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  max-width: 580px;
+  width: 100%;
+  color: $color-cream;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+  header {
+    h2 {
+      font-family: $font-title;
+      color: $color-cream;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .cookie-modal-body {
+    p {
+      font-family: $font-body;
+      font-size: 1.05rem;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .cookie-modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    button {
+      flex: 1;
+      font-family: $font-body;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:focus {
+        @include focus-ring;
+      }
+    }
+
+    .btn-necessary {
+      background-color: $color-card-bg;
+      border: 1px solid $color-gold;
+      color: $color-cream;
+
+      &:hover {
+        background-color: lighten($color-card-bg, 5%);
+      }
+    }
+
+    .btn-accept {
+      background-color: $color-primary-red;
+      border: 1px solid $color-gold;
+      color: $color-cream;
+
+      &:hover {
+        background-color: lighten($color-primary-red, 5%);
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    padding: 1.5rem;
+
+    .cookie-modal-actions {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
