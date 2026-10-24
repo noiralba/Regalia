@@ -1,4 +1,4 @@
-import CookieModal from "./components/CookieModal";
+import CookieModal from "./components/Cookie modal/CookieModal";
 import HomePage from "./pages/HomePage";
 import "./styles/custom.scss";
 
