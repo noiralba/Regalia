@@ -1,0 +1,37 @@
+@use "../../styles/variables" as v;
+
+.calender {
+  .schedule-box {
+    background-color: v.$color-card-bg;
+    border: 1px solid v.$color-gold;
+  }
+
+  .movie-title {
+    color: v.$color-cream;
+  }
+
+  .movie-info {
+    border-bottom: 1px solid v.$color-gold;
+    padding-bottom: 0.7rem;
+    color: v.$color-gold;
+  }
+
+  .btn {
+    --bs-btn-color: #{v.$color-gold};
+    --bs-btn-bg: #{v.$color-bg-dark};
+    --bs-btn-border-color: #{v.$color-gold};
+
+    --bs-btn-hover-color: #{v.$color-cream};
+    --bs-btn-hover-bg: #{v.$color-primary-red};
+    --bs-btn-hover-border-color: #{v.$color-gold};
+
+    --bs-btn-active-color: #{v.$color-cream};
+    --bs-btn-active-bg: #{v.$color-primary-red};
+    --bs-btn-active-border-color: #{v.$color-primary-red};
+  }
+
+  .time-btn time {
+    font-family: v.$font-body;
+    color: v.$color-cream;
+  }
+}
