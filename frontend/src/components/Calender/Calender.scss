@@ -9,9 +9,7 @@
     color: v.$color-gold;
   }
 
-  .time-btn {
-  color: v.$color-gold;
-  
+  .time-btn time {
+    font-family: v.$font-title;
   }
 }
-
