@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import CancellationPage from "./pages/CancellationPage";
 import CalendarPage from "./pages/CalendarPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
+import VipPage from "./pages/VipPage";
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -18,7 +19,7 @@ export const router = createBrowserRouter([
       { path: pages.myPages.path, element: <h1>Mina sidor</h1> },
       { path: pages.calendar.path, element: <CalendarPage /> },
       { path: pages.movieDetails.path, element: <MovieDetailPage /> },
-      { path: pages.vip.path, element: <h1>Regalias loge</h1> },
+      { path: pages.vip.path, element: <VipPage /> },
       { path: pages.cancellation.path, element: <CancellationPage /> },
       { path: "*", element: <h1>404 – Sidan kunde inte hittas</h1> },
     ],
