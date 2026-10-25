@@ -62,7 +62,7 @@ const [bookingConfirmation, setBookingConfirmation] =
         setShowing(data);
       } catch (error) {
         console.error(error);
-        setError("Kunde inte hämta filmvisningen.");
+        setError("Kunde tyvärr inte hämta filmvisningen.");
       }
     }
 
@@ -83,37 +83,38 @@ const [bookingConfirmation, setBookingConfirmation] =
         setTicketTypes(data);
       } catch (error) {
         console.error(error);
-        setError("Kunde inte hämta biljettyperna.");
+        setError("Kunde tyvärr inte hämta biljettyperna.");
       }
     }
 
     fetchTicketTypes();
   }, []);
 
-  // Hämta stolarna för den valda visningen
-  useEffect(() => {
-    if (!visningId) return;
+    // Hämtar sittplatser för den valda visningen
+async function fetchSeats() {
+  if (!visningId) return;
 
-    async function fetchSeats() {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/seats/available-seats/${visningId}`,
-        );
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/seats/available-seats/${visningId}`,
+    );
 
-        if (!response.ok) {
-          throw new Error("Could not fetch seats");
-        }
-
-        const data: Seat[] = await response.json();
-        setSeats(data);
-      } catch (error) {
-        console.error(error);
-        setError("Kunde inte hämta stolarna.");
-      }
+    if (!response.ok) {
+      throw new Error("Could not fetch seats");
     }
 
-    fetchSeats();
-  }, [visningId]);
+    const data: Seat[] = await response.json();
+    setSeats(data);
+  } catch (error) {
+    console.error(error);
+    setError("Kunde tyvärr inte hämta stolarna.");
+  }
+}
+
+// Hämtar sittplatser när visningen ändras
+useEffect(() => {
+  fetchSeats();
+}, [visningId]);
 
   // FUNKTIONER
   //Ökar/minskar antalet biljetter
@@ -199,8 +200,14 @@ const [bookingConfirmation, setBookingConfirmation] =
 
       // Hanterar om en sittplats redan har bokats
       if (response.status === 409) {
+        // Hämtar aktuell tillgänglighet från backend
+        await fetchSeats();
+
+        // Rensar valda sittplatser så att användaren kan välja igen
+        setSelectedSeats([]);
+
         setError(
-          "En av dina valda platser är redan bokad. Välj en annan plats.",
+          "En av dina valda platser är redan bokad. Välj nya sittplatser.",
         );
         return;
       }
@@ -217,7 +224,7 @@ console.log("Bokning skapad:", data);
 
     } catch (error) {
       console.error(error);
-      setError("Kunde inte genomföra bokningen.");
+      setError("Kunde tyvärr inte genomföra bokningen.");
     } finally {
       // Återställer knappen när bokningsförsöket är klart
       setIsBooking(false);
@@ -272,7 +279,7 @@ console.log("Bokning skapad:", data);
         {ticketTypes.map((ticket) => (
           <article key={ticket.ticket_type_id}>
             <h3>{ticket["Ticket Type"]}</h3>
-            <p>{ticket["Price (SEK)"]} kr</p>
+            <p>{Number(ticket["Price (SEK)"])} kr</p>
 
             <button
               type="button"

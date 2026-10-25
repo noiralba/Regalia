@@ -91,18 +91,46 @@ router.get("/type/:filter", async (req, res, next) => {
 });
 
 // GET: Get a specific movie by ID
+
 router.get("/:id", async (req, res) => {
   const movieId = req.params.id;
+
   try {
     const [results] = await db.query(
-      `SELECT m.*, ${CATEGORIES_SUBQUERY}
+      `SELECT
+        m.*,
+        ${CATEGORIES_SUBQUERY},
+        (
+          SELECT JSON_ARRAYAGG(
+            JSON_OBJECT(
+              'id', p.id,
+              'name', p.name,
+              'image', p.image,
+              'character_name', mc.character_name
+            )
+          )
+          FROM movie_cast mc
+          JOIN persons p ON p.id = mc.person_id
+          WHERE mc.movie_id = m.id
+        ) AS cast,
+        (
+          SELECT JSON_OBJECT(
+            'id', director.id,
+            'name', director.name,
+            'image', director.image
+          )
+          FROM persons director
+          WHERE director.id = m.director_id
+        ) AS director
       FROM movies m
-      WHERE m.id = ? `,
+      WHERE m.id = ?`,
       [movieId],
     );
+
     if (results.length === 0) {
       return res.status(404).json({ error: "Film hittades inte" });
     }
+
     res.json(results[0]);
   } catch (err) {
     console.error("Fel vid hämtning av film:", err);
