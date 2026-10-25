@@ -17,17 +17,18 @@ function MovieDetailPage() {
     [],
   );
   const [loading, setLoading] = useState(true);
+  const [seatsLoading, setSeatsLoading] = useState(false);
   const [showTrailer, setShowTrailer] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
     async function fetchMovie() {
+      setLoading(true);
+
       try {
         if (!id) return;
 
         const data = await getById<Movies>("/api/movies", id);
-        console.log("FILMDATA:", data);
-        console.log("CAST:", data.cast);
         setMovie(data);
 
         const movieShowings = await get<Showing[]>(`/api/shows?movie_id=${id}`);
@@ -35,13 +36,51 @@ function MovieDetailPage() {
         setShowings(movieShowings);
 
         if (movieShowings.length > 0) {
-          const dates = [
-            ...new Set(
-              movieShowings.map((showing) => showing["Screening Date"]),
-            ),
-          ];
+          const now = new Date();
 
-          setSelectedDate(dates[0]);
+          const today = [
+            now.getFullYear(),
+            String(now.getMonth() + 1).padStart(2, "0"),
+            String(now.getDate()).padStart(2, "0"),
+          ].join("-");
+
+          const upcomingShowings = [...movieShowings]
+            .filter((showing) => {
+              const date = showing["Screening Date"];
+              const time = showing["Start Time"].slice(0, 8);
+              return new Date(`${date}T${time}`) >= now;
+            })
+            .sort((a, b) => {
+              const aDate = `${a["Screening Date"]}T${a["Start Time"]}`;
+              const bDate = `${b["Screening Date"]}T${b["Start Time"]}`;
+              return aDate.localeCompare(bDate);
+            });
+
+          const todayShowings = movieShowings
+            .filter((showing) => showing["Screening Date"] === today)
+            .sort((a, b) => a["Start Time"].localeCompare(b["Start Time"]));
+
+          let firstShowing: Showing | undefined;
+
+          if (upcomingShowings.length > 0) {
+            firstShowing = upcomingShowings[0];
+          } else if (todayShowings.length > 0) {
+            firstShowing = todayShowings[0];
+          } else {
+            firstShowing = [...movieShowings].sort((a, b) => {
+              const aDate = `${a["Screening Date"]}T${a["Start Time"]}`;
+              const bDate = `${b["Screening Date"]}T${b["Start Time"]}`;
+              return aDate.localeCompare(bDate);
+            })[0];
+          }
+
+          if (firstShowing) {
+            setSelectedDate(firstShowing["Screening Date"]);
+            setSelectedShowing(firstShowing);
+          }
+        } else {
+          setSelectedDate(null);
+          setSelectedShowing(null);
         }
       } catch (error) {
         console.error("Kunde inte hämta filmen eller visningarna:", error);
@@ -54,32 +93,49 @@ function MovieDetailPage() {
   }, [id]);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function fetchSeatAvailability() {
       if (!selectedShowing) {
         setSeatAvailability([]);
+        setSeatsLoading(false);
         return;
       }
 
       setSeatAvailability([]);
+      setSeatsLoading(true);
 
       try {
         const seats = await get<SeatAvailability[]>(
           `/api/seats/available-seats/${selectedShowing.show_id}`,
         );
 
-        setSeatAvailability(seats);
+        if (!cancelled) {
+          setSeatAvailability(seats);
+        }
       } catch (error) {
         console.error("Kunde inte hämta platsinformation:", error);
-        setSeatAvailability([]);
+
+        if (!cancelled) {
+          setSeatAvailability([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setSeatsLoading(false);
+        }
       }
     }
 
     fetchSeatAvailability();
+
+    return () => {
+      cancelled = true;
+    };
   }, [selectedShowing]);
 
   const dates = [
     ...new Set(showings.map((showing) => showing["Screening Date"])),
-  ];
+  ].sort((a, b) => a.localeCompare(b));
 
   const filteredShowings = showings
     .filter((showing) => showing["Screening Date"] === selectedDate)
@@ -116,6 +172,8 @@ function MovieDetailPage() {
 
       <h1>{movie.title}</h1>
 
+      <p>Regissör: {movie.director?.name ?? "Okänd"}</p>
+
       <button type="button" onClick={() => setShowTrailer(true)}>
         Se trailer
       </button>
@@ -145,30 +203,26 @@ function MovieDetailPage() {
       <p>Originalspråk: {movie.language.original}</p>
       <p>Undertexter: {movie.language.subtitles}</p>
 
-      <p>Regissör: {movie.director?.name ?? "Okänd"}</p>
-      <img
-        src={getPersonImage(movie.director.image)}
-        alt={movie.director.name}
-      />
+      <section aria-labelledby="cast-heading">
+        <h2 id="cast-heading">Rollista</h2>
 
-      <h2>Rollista</h2>
+        {movie.cast && movie.cast.length > 0 ? (
+          <section>
+            {movie.cast.map((person) => (
+              <article key={person.id}>
+                <img src={getPersonImage(person.image)} alt={person.name} />
+                <h3>{person.name}</h3>
+                <p>Rollfigur: {person.character_name}</p>
+              </article>
+            ))}
+          </section>
+        ) : (
+          <p>Ingen rollista tillgänglig.</p>
+        )}
+      </section>
 
-      {movie.cast && movie.cast.length > 0 ? (
-        <section>
-          {movie.cast.map((person) => (
-            <article key={person.id}>
-              <img src={getPersonImage(person.image)} alt={person.name} />
-              <h3>{person.name}</h3>
-              <p>Rollfigur: {person.character_name}</p>
-            </article>
-          ))}
-        </section>
-      ) : (
-        <p>Ingen rollista tillgänglig.</p>
-      )}
-
-      <section>
-        <h2>Visningstider</h2>
+      <section aria-labelledby="showtimes-heading">
+        <h2 id="showtimes-heading">Visningstider</h2>
 
         {dates.length > 0 ? (
           <>
@@ -181,8 +235,21 @@ function MovieDetailPage() {
                   type="button"
                   onClick={() => {
                     setSelectedDate(date);
-                    setSelectedShowing(null);
-                    setSeatAvailability([]);
+
+                    const dateShowings = showings
+                      .filter((showing) => showing["Screening Date"] === date)
+                      .sort((a, b) =>
+                        a["Start Time"].localeCompare(b["Start Time"]),
+                      );
+
+                    const now = new Date();
+
+                    const nextShowing = dateShowings.find((showing) => {
+                      const time = showing["Start Time"].slice(0, 8);
+                      return new Date(`${date}T${time}`) >= now;
+                    });
+
+                    setSelectedShowing(nextShowing ?? dateShowings[0] ?? null);
                   }}
                   aria-pressed={selectedDate === date}
                 >
@@ -194,7 +261,7 @@ function MovieDetailPage() {
             <h3>Välj tid</h3>
 
             {filteredShowings.length > 0 ? (
-              <section>
+              <section aria-label="Tillgängliga visningar">
                 {filteredShowings.map((showing) => (
                   <button
                     key={showing.show_id}
@@ -202,26 +269,30 @@ function MovieDetailPage() {
                     onClick={() => setSelectedShowing(showing)}
                     aria-pressed={selectedShowing?.show_id === showing.show_id}
                   >
-                    {formatTime(showing["Start Time"])}
+                    <span>{formatTime(showing["Start Time"])}</span>
+                    <span>{showing.Screen}</span>
                   </button>
                 ))}
               </section>
             ) : (
               <p>Inga visningar det här datumet.</p>
             )}
+
             <section aria-live="polite">
-              <h3>{selectedShowing ? selectedShowing.Screen : "Salongen"}</h3>
-
-              {selectedShowing && totalSeats > 0 && (
-                <p>
-                  {bookedSeats} av {totalSeats}
-                </p>
-              )}
-
-              {selectedShowing && totalSeats === 0 && (
-                <p>
-                  Kunde inte hämta platsinformationen för den här visningen.
-                </p>
+              {selectedShowing && (
+                <>
+                  {seatsLoading ? (
+                    <p>Hämtar platsinformation...</p>
+                  ) : totalSeats > 0 ? (
+                    <p>
+                      {bookedSeats} av {totalSeats} platser bokade
+                    </p>
+                  ) : (
+                    <p>
+                      Kunde inte hämta platsinformationen för den här visningen.
+                    </p>
+                  )}
+                </>
               )}
 
               <button
