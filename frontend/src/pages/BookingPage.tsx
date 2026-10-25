@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import type { BookingConfirmation } from "../types/types";
+import BookingConfirmationModal from "../components/BookingConfirmationModal";
+import { pages } from "../routeConfig";
 
 interface MovieScreening {
   show_id: string;
@@ -25,8 +28,22 @@ interface Seat {
   Available: number;
 }
 
+async function fetchSeats(visningId: string): Promise<Seat[]> {
+  const response = await fetch(
+    `http://localhost:3000/api/seats/available-seats/${visningId}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Could not fetch seats");
+  }
+
+  const data: Seat[] = await response.json();
+  return data;
+}
+
 function BookingPage() {
   const { visningId } = useParams();
+  const navigate = useNavigate();
 
   const [showing, setShowing] = useState<MovieScreening | null>(null);
   const [error, setError] = useState("");
@@ -37,6 +54,9 @@ function BookingPage() {
   const [email, setEmail] = useState("");
   // Håller reda på om en bokning håller på att skickas
   const [isBooking, setIsBooking] = useState(false);
+const [bookingConfirmation, setBookingConfirmation] =
+  useState<BookingConfirmation | null>(null);
+
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
     if (!visningId) return;
@@ -55,7 +75,7 @@ function BookingPage() {
         setShowing(data);
       } catch (error) {
         console.error(error);
-        setError("Kunde tyvärr inte hämta filmvisningen.");
+        setError("Kunde inte hämta filmvisningen.");
       }
     }
 
@@ -76,38 +96,30 @@ function BookingPage() {
         setTicketTypes(data);
       } catch (error) {
         console.error(error);
-        setError("Kunde tyvärr inte hämta biljettyperna.");
+        setError("Kunde inte hämta biljettyperna.");
       }
     }
 
     fetchTicketTypes();
   }, []);
 
-    // Hämtar sittplatser för den valda visningen
-async function fetchSeats() {
+  // Hämta stolarna för den valda visningen
+useEffect(() => {
   if (!visningId) return;
 
-  try {
-    const response = await fetch(
-      `http://localhost:3000/api/seats/available-seats/${visningId}`,
-    );
-
-    if (!response.ok) {
-      throw new Error("Could not fetch seats");
+  async function loadSeats() {
+    try {
+      const data = await fetchSeats(visningId!);
+      setSeats(data);
+    } catch (error) {
+      console.error(error);
+      setError("Kunde inte hämta stolarna.");
     }
-
-    const data: Seat[] = await response.json();
-    setSeats(data);
-  } catch (error) {
-    console.error(error);
-    setError("Kunde tyvärr inte hämta stolarna.");
   }
-}
 
-// Hämtar sittplatser när visningen ändras
-useEffect(() => {
-  fetchSeats();
+  loadSeats();
 }, [visningId]);
+
 
   // FUNKTIONER
   //Ökar/minskar antalet biljetter
@@ -192,29 +204,30 @@ useEffect(() => {
       });
 
       // Hanterar om en sittplats redan har bokats
-      if (response.status === 409) {
-        // Hämtar aktuell tillgänglighet från backend
-        await fetchSeats();
+   if (response.status === 409) {
+     if (visningId) {
+       const updatedSeats = await fetchSeats(visningId);
+       setSeats(updatedSeats);
+     }
 
-        // Rensar valda sittplatser så att användaren kan välja igen
-        setSelectedSeats([]);
-
-        setError(
-          "En av dina valda platser är redan bokad. Välj nya sittplatser.",
-        );
-        return;
-      }
+     setSelectedSeats([]);
+     setError("En av dina valda platser är redan bokad. Välj nya sittplatser.");
+     return;
+   }
 
       if (!response.ok) {
         throw new Error("Could not create booking");
       }
       // Hämtar bokningsbekräftelsen från backend
       // Ska senare användas för att visa bekräftelsemodalen
-      const data = await response.json();
-      console.log("Bokning skapad:", data);
+      
+const data: BookingConfirmation = await response.json();
+setBookingConfirmation(data);
+console.log("Bokning skapad:", data);
+
     } catch (error) {
       console.error(error);
-      setError("Kunde tyvärr inte genomföra bokningen.");
+      setError("Kunde inte genomföra bokningen.");
     } finally {
       // Återställer knappen när bokningsförsöket är klart
       setIsBooking(false);
@@ -239,6 +252,13 @@ useEffect(() => {
     <main>
       <h1>Boka biljetter</h1>
 
+      {bookingConfirmation && (
+        <BookingConfirmationModal
+          confirmation={bookingConfirmation}
+          onClose={() => navigate(pages.home.path)}
+        />
+      )}
+
       <section>
         <h2>Vald visning</h2>
 
@@ -262,7 +282,7 @@ useEffect(() => {
         {ticketTypes.map((ticket) => (
           <article key={ticket.ticket_type_id}>
             <h3>{ticket["Ticket Type"]}</h3>
-            <p>{Number(ticket["Price (SEK)"])} kr</p>
+            <p>{ticket["Price (SEK)"]} kr</p>
 
             <button
               type="button"

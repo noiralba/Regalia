@@ -6,13 +6,14 @@ import LoginPage from "./pages/LoginPage";
 import CancellationPage from "./pages/CancellationPage";
 import CalendarPage from "./pages/CalendarPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
+import BookingPage from "./pages/BookingPage";
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       { path: pages.home.path, element: <App /> },
       { path: pages.movies.path, element: <h1>Filmer</h1> },
-      { path: pages.booking.path, element: <h1>Boka biljetter</h1> },
+      { path: pages.booking.path, element: <BookingPage /> },
       { path: pages.login.path, element: <LoginPage /> },
       { path: pages.register.path, element: <h1>Skapa konto</h1> },
       { path: pages.myPages.path, element: <h1>Mina sidor</h1> },
