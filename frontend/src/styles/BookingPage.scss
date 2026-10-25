@@ -1,0 +1,85 @@
+@use "./variables" as v;
+
+.booking-page {
+  max-width: 900px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 18px;
+
+  color: v.$color-cream;
+  background: v.$color-bg-dark;
+  font-family: v.$font-body;
+  font-size: 13px;
+  line-height: 1.5;
+
+  h1,
+  h2 {
+    color: v.$color-cream;
+    font-family: v.$font-title;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 12px 0 24px;
+    font-size: clamp(28px, 5vw, 46px);
+  }
+
+  h2 {
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+&__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: v.$color-card-bg;
+}
+
+&__showing,
+&__tickets {
+  min-width: 0;
+}
+
+&__ticket-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 24px 24px 24px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+
+  span {
+  text-align: center;
+}
+
+  h3 {
+    margin: 0;
+    color: v.$color-cream;
+    font-family: v.$font-body;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  button {
+    width: 24px;
+    height: 24px;
+    color: v.$color-cream;
+    background: transparent;
+    border: 1px solid v.$color-gold;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+}
+
+&__tickets > p {
+  margin-top: 20px;
+  font-weight: 600;
+}
+}

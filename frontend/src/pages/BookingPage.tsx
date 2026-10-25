@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import type { BookingConfirmation } from "../types/types";
 import BookingConfirmationModal from "../components/BookingConfirmationModal";
 import { pages } from "../routeConfig";
+import "../styles/BookingPage.scss";
 
 interface MovieScreening {
   show_id: string;
@@ -248,18 +249,19 @@ console.log("Bokning skapad:", data);
     0,
   );
 
-  return (
-    <main>
-      <h1>Boka biljetter</h1>
+return (
+  <main className="booking-page">
+    <h1>Boka biljetter</h1>
 
-      {bookingConfirmation && (
-        <BookingConfirmationModal
-          confirmation={bookingConfirmation}
-          onClose={() => navigate(pages.home.path)}
-        />
-      )}
+    {bookingConfirmation && (
+      <BookingConfirmationModal
+        confirmation={bookingConfirmation}
+        onClose={() => navigate(pages.home.path)}
+      />
+    )}
 
-      <section>
+    <div className="booking-page__top">
+      <section className="booking-page__showing">
         <h2>Vald visning</h2>
 
         {error && <p>{error}</p>}
@@ -276,11 +278,14 @@ console.log("Bokning skapad:", data);
         )}
       </section>
 
-      <section>
+      <section className="booking-page__tickets">
         <h2>Välj biljetter</h2>
 
         {ticketTypes.map((ticket) => (
-          <article key={ticket.ticket_type_id}>
+          <article
+            className="booking-page__ticket-row"
+            key={ticket.ticket_type_id}
+          >
             <h3>{ticket["Ticket Type"]}</h3>
             <p>{ticket["Price (SEK)"]} kr</p>
 
@@ -304,65 +309,66 @@ console.log("Bokning skapad:", data);
         ))}
         <p>Totalt: {totalPrice} kr</p>
       </section>
+    </div>
 
-      <section>
-        <h2>Välj sittplatser</h2>
+    <section>
+      <h2>Välj sittplatser</h2>
 
-        {seats.map((seat) => (
-          <button
-            key={seat.seat_id}
-            type="button"
-            disabled={seat.Available === 0}
-            onClick={() => toggleSeat(seat.seat_id)}
-          >
-            {seat["Seat Row"]}
-            {seat["Seat Number"]}
-            {selectedSeats.includes(seat.seat_id) && " (Vald)"}
-          </button>
-        ))}
-
-        <p>
-          Valda sittplatser: {selectedSeats.length} av {totalTickets}
-        </p>
-      </section>
-
-      <section>
-        <h2>Din bokning</h2>
-        {showing && (
-          <>
-            <p>Film: {showing.Movie}</p>
-            <p>
-              Visning: {showing["Screening Date"]} kl. {showing["Start Time"]}
-            </p>
-            <p>Salong: {showing.Screen}</p>
-            <p>Biljetter: {totalTickets} st</p>
-            <p>
-              Platser:{" "}
-              {seats
-                .filter((seat) => selectedSeats.includes(seat.seat_id))
-                .map((seat) => `${seat["Seat Row"]}${seat["Seat Number"]}`)
-                .join(", ") || "Inga platser valda"}
-            </p>
-            <p>Totalt: {totalPrice} kr</p>
-          </>
-        )}
-
-        <label htmlFor="email">E-postadress</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="namn@exempel.se"
-          required
-        />
-        {error && <p>{error}</p>}
-        <button type="button" onClick={handleBooking} disabled={isBooking}>
-          {isBooking ? "Bokar..." : "Bekräfta bokning"}
+      {seats.map((seat) => (
+        <button
+          key={seat.seat_id}
+          type="button"
+          disabled={seat.Available === 0}
+          onClick={() => toggleSeat(seat.seat_id)}
+        >
+          {seat["Seat Row"]}
+          {seat["Seat Number"]}
+          {selectedSeats.includes(seat.seat_id) && " (Vald)"}
         </button>
-      </section>
-    </main>
-  );
+      ))}
+
+      <p>
+        Valda sittplatser: {selectedSeats.length} av {totalTickets}
+      </p>
+    </section>
+
+    <section>
+      <h2>Din bokning</h2>
+      {showing && (
+        <>
+          <p>Film: {showing.Movie}</p>
+          <p>
+            Visning: {showing["Screening Date"]} kl. {showing["Start Time"]}
+          </p>
+          <p>Salong: {showing.Screen}</p>
+          <p>Biljetter: {totalTickets} st</p>
+          <p>
+            Platser:{" "}
+            {seats
+              .filter((seat) => selectedSeats.includes(seat.seat_id))
+              .map((seat) => `${seat["Seat Row"]}${seat["Seat Number"]}`)
+              .join(", ") || "Inga platser valda"}
+          </p>
+          <p>Totalt: {totalPrice} kr</p>
+        </>
+      )}
+
+      <label htmlFor="email">E-postadress</label>
+      <input
+        type="email"
+        id="email"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        placeholder="namn@exempel.se"
+        required
+      />
+      {error && <p>{error}</p>}
+      <button type="button" onClick={handleBooking} disabled={isBooking}>
+        {isBooking ? "Bokar..." : "Bekräfta bokning"}
+      </button>
+    </section>
+  </main>
+);
 }
 
 export default BookingPage;
