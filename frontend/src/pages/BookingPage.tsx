@@ -126,7 +126,7 @@ function BookingPage() {
       return [...previous, seatId];
     });
   }
-  // Kontrollerar bokningsuppgifterna och skickar bokningen till backend
+  // handleBooking börjar här. Kontrollerar bokningsuppgifterna och skickar bokningen till backend
   async function handleBooking() {
     if (totalTickets === 0) {
       setError("Du måste välja minst en biljett.");
@@ -248,7 +248,7 @@ function BookingPage() {
               key={ticket.ticket_type_id}
             >
               <h3>{ticket["Ticket Type"]}</h3>
-              <p>{ticket["Price (SEK)"]} kr</p>
+              <p>{Number(ticket["Price (SEK)"])} kr</p>
               <button
                 type="button"
                 onClick={() => changeTicketCount(ticket.ticket_type_id, -1)}
@@ -317,37 +317,83 @@ function BookingPage() {
           </div>
         </div>
       </section>
-      <section>
+
+      <section className="booking-page__summary">
         <h2>Din bokning</h2>
-        {showing && (
-          <>
-            <p>Film: {showing.Movie}</p>
+
+        <div className="booking-page__summary-content">
+          <div className="booking-page__summary-details">
+            {showing && (
+              <>
+                <div className="booking-page__summary-row">
+                  <span>Film</span>
+                  <span>{showing.Movie}</span>
+                </div>
+
+                <div className="booking-page__summary-row">
+                  <span>Visning</span>
+                  <span>
+                    {showing["Screening Date"]} • {showing["Start Time"]}
+                  </span>
+                </div>
+
+                <div className="booking-page__summary-row">
+                  <span>Salong</span>
+                  <span>{showing.Screen}</span>
+                </div>
+
+                <div className="booking-page__summary-row">
+                  <span>Platser</span>
+                  <span>
+                    {seats
+                      .filter((seat) => selectedSeats.includes(seat.seat_id))
+                      .map(
+                        (seat) => `${seat["Seat Row"]}${seat["Seat Number"]}`,
+                      )
+                      .join(", ") || "Inga platser valda"}
+                  </span>
+                </div>
+
+                <div className="booking-page__summary-row">
+                  <span>Biljetter</span>
+                  <span>{totalTickets} st</span>
+                </div>
+
+                <div className="booking-page__summary-row">
+                  <span>TOTALT</span>
+                  <span>{totalPrice} kr</span>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="booking-page__summary-email">
             <p>
-              Visning: {showing["Screening Date"]} kl. {showing["Start Time"]}
+              Fyll i din e-postadress för att slutföra bokningen. Din
+              bokningsbekräftelse skickas till den angivna adressen.
             </p>
-            <p>Salong: {showing.Screen}</p>
-            <p>Biljetter: {totalTickets} st</p>
-            <p>
-              Platser:{" "}
-              {seats
-                .filter((seat) => selectedSeats.includes(seat.seat_id))
-                .map((seat) => `${seat["Seat Row"]}${seat["Seat Number"]}`)
-                .join(", ") || "Inga platser valda"}
-            </p>
-            <p>Totalt: {totalPrice} kr</p>
-          </>
-        )}
-        <label htmlFor="email">E-postadress</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="namn@exempel.se"
-          required
-        />
-        {error && <p>{error}</p>}
-        <button type="button" onClick={handleBooking} disabled={isBooking}>
+
+            <label htmlFor="email">E-postadress</label>
+            <input
+              className="booking-page__email"
+              type="email"
+              id="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="namn@exempel.se"
+              required
+            />
+          </div>
+        </div>
+
+        {error && <p className="booking-page__summary-error">{error}</p>}
+
+        <button
+          className="booking-page__confirm-button"
+          type="button"
+          onClick={handleBooking}
+          disabled={isBooking}
+        >
           {isBooking ? "Bokar..." : "Bekräfta bokning"}
         </button>
       </section>
