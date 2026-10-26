@@ -1,8 +1,9 @@
 import type { Movies } from "../../types/types";
 import { getMovieImage } from "../../utils/movieImages";
 import { useState } from "react";
+import { Link } from "react-router";
 
-import './MovieRow.scss'
+import './MovieRow.scss';
 
 type MovieRowProps = {
   id?: string;
@@ -52,13 +53,18 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
       <ul className="row g-3 row-cols-2 row-cols-md-4 list-unstyled">
         {visibleMovies.map((movie) => (
           <li className="col" key={movie.id}>
-            <figure className="poster">
-              <img
-                src={getMovieImage(movie.posterImage)}
-                alt={movie.title}
-                className="poster-image img-fluid rounded shadow-sm w-100"
-              />
-            </figure>
+            <Link
+              to={`/filmer/${movie.id}`}
+              aria-label={`Visa information om ${movie.title}`}
+            >
+              <figure className="poster">
+                <img
+                  src={getMovieImage(movie.posterImage)}
+                  alt={movie.title}
+                  className="poster-image img-fluid rounded shadow-sm w-100"
+                />
+              </figure>
+            </Link>
           </li>
         ))}
       </ul>
