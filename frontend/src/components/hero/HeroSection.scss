@@ -1,0 +1,122 @@
+@use "../../styles/variables" as *;
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 1.9 / 1;
+  max-height: 42.5rem;
+  background: $color-bg-dark;
+  overflow: hidden;
+
+  &__video-wrapper {
+    position: absolute;
+    top: 3.75rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: $color-bg-dark;
+    background-color: white;
+  }
+
+  &__curtain {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    pointer-events: none;
+
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.3) 0,
+        rgba(255, 255, 255, 0.08) 12px,
+        transparent 25px,
+        rgba(0, 0, 0, 0.2) 40px
+      ),
+      linear-gradient(
+        180deg,
+        lighten($color-primary-red, 5%) 0%,
+        $color-primary-red 45%,
+        darken($color-primary-red, 15%) 100%
+      );
+
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+    transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+
+    /* Vänster gardin */
+    &--left {
+      left: 0;
+      border-right: 0.063rem solid rgba($color-gold, 0.45);
+    }
+
+    /* Höger gardin */
+    &--right {
+      right: 0;
+      border-left: 0.063rem solid rgba($color-gold, 0.45);
+    }
+
+    /* Övre gardinkappa */
+    &--top {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3.75rem;
+      border-bottom: 0.063rem solid rgba($color-gold, 0.45);
+      z-index: 3;
+
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.3) 0,
+          rgba(255, 255, 255, 0.08) 12px,
+          transparent 25px,
+          rgba(0, 0, 0, 0.2) 40px
+        ),
+        linear-gradient(
+          90deg,
+          darken($color-primary-red, 15%) 0%,
+          $color-primary-red 15%,
+          lighten($color-primary-red, 5%) 50%,
+          $color-primary-red 85%,
+          darken($color-primary-red, 15%) 100%
+        );
+    }
+  }
+
+  &--open {
+    .hero__curtain--left {
+      transform: translateX(-70%);
+    }
+
+    .hero__curtain--right {
+      transform: translateX(70%);
+    }
+  }
+
+  @include respond-to(mobile) {
+    min-height: 20rem;
+
+    &__curtain {
+      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.35);
+      transition-duration: 1.4s;
+    }
+  }
+
+  @include respond-to(desktop) {
+  }
+}

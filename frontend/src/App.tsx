@@ -5,7 +5,7 @@ import "./styles/custom.scss";
 function App() {
   return (
     <>
-      <main className="container py-4">
+      <main className="">
         <HomePage />
       </main>
 
