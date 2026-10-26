@@ -122,80 +122,6 @@
     margin: -6px 0 12px;
     color: v.$color-gold;
   }
- 
-  &__seat-map {
-    overflow-x: auto;
-    padding: 28px 16px 22px;
-    background: v.$color-bg-dark;
-    border: 1px solid v.$color-gold;
-    border-radius: 3px;
-  }
- 
-  &__screen {
-    width: min(85%, 580px);
-    height: 24px;
-    margin: 0 auto 26px;
-    border-top: 2px solid v.$color-gold;
-    border-radius: 50% 50% 0 0;
-  }
-  
-  &__seat-rows {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
-    min-width: max-content;
-  }
-  &__seat-row {
-    display: grid;
-    grid-template-columns: 58px 414px;
-    align-items: center;
-    column-gap: 24px;
-  }
-  &__row-label {
-    width: 58px;
-    text-align: left;
-    color: v.$color-gold;
-    font-family: v.$font-title;
-    white-space: nowrap;
-  }
-  &__seat-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-  }
-  &__seat {
-    width: 29px;
-    height: 29px;
-    flex: 0 0 29px;
-    border: 1px solid v.$color-gold;
-    border-radius: 5px 5px 3px 3px;
-    background: transparent;
-    color: v.$color-cream;
-    font-size: 11px;
-    cursor: pointer;
-    &.is-selected { background: v.$color-gold; color: v.$color-bg-dark; }
-    &.is-unavailable { background: #484044; border-color: #484044; color: #a79da0; cursor: not-allowed; }
-    &:focus-visible { outline: 2px solid v.$color-cream; outline-offset: 2px; }
-  }
-  &__legend {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin: 24px 0 0;
-    white-space: nowrap;
-    span { display: inline-flex; align-items: center; gap: 6px; }
-  }
-  &__legend-icon {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 1px solid v.$color-gold;
-    border-radius: 3px;
-    &.is-selected { background: v.$color-gold; }
-    &.is-unavailable { background: #484044; border-color: #484044; }
-  }
 
 &__summary {
   padding: 24px 20px;
@@ -276,6 +202,17 @@
   color: v.$color-cream;
   margin-bottom: 16px;
 }
+@media (max-width: 600px) {
+  .booking-page {
+    &__top {
+      grid-template-columns: 1fr;
+    }
 
+    &__summary-content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+  }
+}
 
 }

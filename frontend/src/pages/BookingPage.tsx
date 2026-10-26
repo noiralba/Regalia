@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import type { BookingConfirmation } from "../types/types";
+import type { BookingConfirmation, Seat } from "../types/types";
 import BookingConfirmationModal from "../components/BookingConfirmationModal/BookingConfirmationModal";
 import { pages } from "../routeConfig";
 import "../styles/BookingPage.scss";
+import SeatMap from "../components/SeatMap/SeatMap";
 interface MovieScreening {
   show_id: string;
   Movie: string;
@@ -17,14 +18,7 @@ interface TicketType {
   "Ticket Type": string;
   "Price (SEK)": string;
 }
-interface Seat {
-  show_id: string;
-  seat_id: string;
-  "Seat Row": string;
-  "Seat Number": number;
-  Status: string;
-  Available: number;
-}
+
 async function fetchSeats(visningId: string): Promise<Seat[]> {
   const response = await fetch(
     `http://localhost:3000/api/seats/available-seats/${visningId}`,
@@ -274,50 +268,12 @@ function BookingPage() {
         {showing && (
           <p className="booking-page__screen-name">{showing.Screen}</p>
         )}
-        <div className="booking-page__seat-map">
-          <div className="booking-page__screen" aria-hidden="true" />
-          <div className="booking-page__seat-rows">
-            {[...new Set(seats.map((seat) => seat["Seat Row"]))]
-              .sort()
-              .map((row) => (
-                <div className="booking-page__seat-row" key={row}>
-                  <span className="booking-page__row-label">Rad {row}</span>
-                  <div className="booking-page__seat-buttons">
-                    {seats
-                      .filter((seat) => seat["Seat Row"] === row)
-                      .sort((a, b) => a["Seat Number"] - b["Seat Number"])
-                      .map((seat) => (
-                        <button
-                          className={`booking-page__seat ${seat.Available === 0 ? "is-unavailable" : ""} ${selectedSeats.includes(seat.seat_id) ? "is-selected" : ""}`}
-                          key={seat.seat_id}
-                          type="button"
-                          disabled={seat.Available === 0}
-                          onClick={() => toggleSeat(seat.seat_id)}
-                          aria-label={`Rad ${row}, plats ${seat["Seat Number"]}`}
-                          aria-pressed={selectedSeats.includes(seat.seat_id)}
-                          title={`Rad ${row}, plats ${seat["Seat Number"]}`}
-                        >
-                          {seat["Seat Number"]}
-                        </button>
-                      ))}
-                  </div>
-                </div>
-              ))}
-          </div>
-          <div className="booking-page__legend">
-            <span>
-              <i className="booking-page__legend-icon" /> Ledig
-            </span>
-            <span>
-              <i className="booking-page__legend-icon is-selected" /> Vald
-            </span>
-            <span>
-              <i className="booking-page__legend-icon is-unavailable" />{" "}
-              Upptagen
-            </span>
-          </div>
-        </div>
-      </section>
+<SeatMap
+  seats={seats}
+  selectedSeats={selectedSeats}
+  toggleSeat={toggleSeat}
+        />
+        </section>
 
       <section className="booking-page__summary">
         <h2>Din bokning</h2>
