@@ -1,4 +1,4 @@
-import Hero from "../components/Hero";
+import HeroSection from "../components/hero/HeroSection";
 import MovieRow from "../components/MovieRow/MovieRow";
 import VipBanner from "../components/VipBanner";
 
@@ -40,27 +40,24 @@ function HomePage() {
 
   return (
     <>
-      <Hero
-        title="The Odyssey"
-        tagline="En resa genom stjärnorna. Nu på bio."
-        imageUrl="https://placehold.co/1400x800"
-      />
+      <HeroSection />
+      <section className="container py-4">
+        <MovieRow
+          id="now-playing-heading"
+          label="På bio just nu"
+          movies={nowPlaying}
+        />
 
-      <MovieRow
-        id="now-playing-heading"
-        label="På bio just nu"
-        movies={nowPlaying}
-      />
+        <VipBanner />
 
-      <VipBanner />
+        <MovieRow
+          id="coming-soon-heading"
+          label="Kommer snart"
+          movies={comingSoon}
+        />
 
-      <MovieRow
-        id="coming-soon-heading"
-        label="Kommer snart"
-        movies={comingSoon}
-      />
-
-      <Calendar selectedDate={selectedDate} />
+        <Calendar selectedDate={selectedDate} />
+      </section>
     </>
   );
 }
