@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import type { BookingConfirmation } from "../types/types";
-import BookingConfirmationModal from "../components/BookingConfirmationModal";
+import BookingConfirmationModal from "../components/BookingConfirmationModal/BookingConfirmationModal";
 import { pages } from "../routeConfig";
 import "../styles/BookingPage.scss";
 interface MovieScreening {
@@ -49,6 +49,7 @@ function BookingPage() {
   const [isBooking, setIsBooking] = useState(false);
   const [bookingConfirmation, setBookingConfirmation] =
     useState<BookingConfirmation | null>(null);
+  
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
     if (!visningId) return;
