@@ -1,3 +1,4 @@
+@use "../../styles/variables" as v;
 @import "../../styles/custom.scss";
 
 .cookie-overlay {
@@ -15,19 +16,19 @@
 }
 
 .cookie-modal-card {
-  background-color: $color-bg-dark;
-  border: 1px solid $color-gold;
+  background-color: v.$color-bg-dark;
+  border: 1px solid v.$color-gold;
   border-radius: 12px;
   padding: 2.5rem 2rem;
   max-width: 580px;
   width: 100%;
-  color: $color-cream;
+  color: v.$color-cream;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 
   header {
     h2 {
-      font-family: $font-title;
-      color: $color-cream;
+      font-family: v.$font-title;
+      color: v.$color-cream;
       font-size: 1.4rem;
       letter-spacing: 0.05em;
       margin-bottom: 1.5rem;
@@ -36,7 +37,7 @@
 
   .cookie-modal-body {
     p {
-      font-family: $font-body;
+      font-family: v.$font-body;
       font-size: 1.05rem;
       line-height: 1.4;
       margin-bottom: 1.25rem;
@@ -55,7 +56,7 @@
     .btn-necessary,
     .btn-accept {
       flex: 1;
-      font-family: $font-body;
+      font-family: v.$font-body;
       font-size: 0.95rem;
       font-weight: 600;
       letter-spacing: 0.03em;
@@ -63,22 +64,22 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
-      background-color: $color-card-bg;
-      border: 1px solid $color-gold;
-      color: $color-cream;
+      background-color: v.$color-card-bg;
+      border: 1px solid v.$color-gold;
+      color: v.$color-cream;
 
       &:focus {
-        @include focus-ring;
+        @include v.focus-ring;
       }
 
       &:hover {
-        background-color: $color-primary-red;
-        border-color: $color-gold;
+        background-color: v.$color-primary-red;
+        border-color: v.$color-gold;
       }
     }
   }
 
-  @include respond-to(mobile) {
+  @include v.respond-to(mobile) {
     padding: 1.5rem;
 
     .cookie-modal-actions {

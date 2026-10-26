@@ -1,5 +1,5 @@
-import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa"
-import { Link } from "react-router"
+import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
+import { Link } from "react-router";
 
 export default function Footer() {
   return (
@@ -23,15 +23,21 @@ export default function Footer() {
         </article>
         <article>
           <h5 className="text-uppercase mb-3">Följ oss</h5>
-          <a href="#" className="text-blue fs-4 px-1" aria-label="Instagram"><FaInstagram /></a>
-          <a href="#" className="text-blue fs-4 px-1" aria-label="TikTok"><FaTiktok /></a>
-          <a href="#" className="text-blue fs-4 px-1" aria-label="Facebook"><FaFacebook /></a>
+          <a href="#" className="text-blue fs-4 px-1" aria-label="Instagram">
+            <FaInstagram />
+          </a>
+          <a href="#" className="text-blue fs-4 px-1" aria-label="TikTok">
+            <FaTiktok />
+          </a>
+          <a href="#" className="text-blue fs-4 px-1" aria-label="Facebook">
+            <FaFacebook />
+          </a>
         </article>
-         <article>
+        <article>
           <h5 className="text-uppercase mb-3">Info</h5>
           <Link to="/avbokning">Avboka/ändra bokning</Link>
         </article>
-    </section>
+      </section>
     </footer>
-  )
+  );
 }
