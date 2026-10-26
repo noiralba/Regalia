@@ -9,6 +9,58 @@ $color-cream: #ecdbb0; // Text and label color
 $font-title: "Monomakh", serif;
 $font-body: "Manrope", sans-serif;
 
+/* ========================================
+   REGALIA – GLOBAL DESIGN SYSTEM
+   ======================================== */
+
+:root {
+  --regalia-radius: 8px;
+}
+
+/* Knappar och interaktiva element */
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  border-radius: var(--regalia-radius);
+}
+
+/* Bilder, video och inbäddat media */
+img,
+video,
+iframe {
+  border-radius: var(--regalia-radius);
+}
+
+/* Kort, paneler och vanliga ramar */
+.card,
+.panel,
+.modal,
+.dialog,
+.frame,
+section,
+article {
+  border-radius: var(--regalia-radius);
+}
+
+/* Länkar som utformas som knappar */
+a.button,
+a.btn,
+.button,
+.btn {
+  border-radius: var(--regalia-radius);
+}
+
+/* Formulärfält får rundade kanter även vid fokus */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline-offset: 3px;
+}
+
 // Breakpoints
 $breakpoint-mobile-max: 599px;
 $breakpoint-tablet-min: 600px;
