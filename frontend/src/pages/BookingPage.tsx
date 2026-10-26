@@ -5,6 +5,8 @@ import BookingConfirmationModal from "../components/BookingConfirmationModal/Boo
 import { pages } from "../routeConfig";
 import "../styles/BookingPage.scss";
 import SeatMap from "../components/SeatMap/SeatMap";
+import SeatMapModal from "../components/SeatMap/SeatMapModal";
+
 interface MovieScreening {
   show_id: string;
   Movie: string;
@@ -38,6 +40,7 @@ function BookingPage() {
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
   const [seats, setSeats] = useState<Seat[]>([]);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   // Håller reda på om en bokning håller på att skickas
   const [isBooking, setIsBooking] = useState(false);
@@ -265,15 +268,33 @@ function BookingPage() {
       </div>
       <section className="booking-page__seats">
         <h2>Välj sittplatser</h2>
+
         {showing && (
           <p className="booking-page__screen-name">{showing.Screen}</p>
         )}
-<SeatMap
-  seats={seats}
-  selectedSeats={selectedSeats}
-  toggleSeat={toggleSeat}
+        
+        <button
+          type="button"
+          className="booking-page__open-seats"
+          onClick={() => setIsSeatModalOpen(true)}
+        >
+          Välj sittplatser
+        </button>
+
+        <SeatMap
+          seats={seats}
+          selectedSeats={selectedSeats}
+          toggleSeat={toggleSeat}
         />
-        </section>
+        {isSeatModalOpen && (
+          <SeatMapModal
+            seats={seats}
+            selectedSeats={selectedSeats}
+            toggleSeat={toggleSeat}
+            onClose={() => setIsSeatModalOpen(false)}
+          />
+        )}
+      </section>
 
       <section className="booking-page__summary">
         <h2>Din bokning</h2>

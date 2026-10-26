@@ -202,8 +202,12 @@
   color: v.$color-cream;
   margin-bottom: 16px;
 }
+
+&__open-seats {
+  display: none;
+}
+
 @media (max-width: 600px) {
-  .booking-page {
     &__top {
       grid-template-columns: 1fr;
     }
@@ -212,7 +216,22 @@
       grid-template-columns: minmax(0, 1fr);
       gap: 24px;
     }
+
+    &__open-seats {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: v.$color-primary-red;
+  color: v.$color-cream;
+  border: 1px solid v.$color-gold;
+  border-radius: 5px;
+  font-family: v.$font-body;
+  cursor: pointer;
+}
+
+&__seats > .booking-page__seat-map {
+  display: none;
+}
   }
 }
 
-}
