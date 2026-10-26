@@ -1,0 +1,25 @@
+@use "../../styles/variables" as v;
+
+.dates {
+  background-color: v.$color-card-bg;
+  margin: 1rem;
+
+  .date-title {
+    color: v.$color-cream;
+  }
+
+.date-picker {
+  background-color: v.$color-bg-dark;
+}
+
+.date-button {
+  background-color: v.$color-card-bg;
+
+  &:hover {
+    background-color: v.$color-primary-red;
+  }
+}
+small {
+  color: v.$color-gold;
+}
+}

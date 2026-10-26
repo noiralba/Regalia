@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./DatePicker.scss"
 
 type DatePickerProps = {
   selectedDate: string;
@@ -27,16 +28,16 @@ export default function DatePicker({
   const canGoBack = startDate > today;
 
   return (
-    <section className="border rounded-2 p-3 p-md-4 mb-4">
-      <h2 className="h6 text-uppercase mb-3">Välj datum</h2>
+    <section className="dates border rounded-2 p-3 p-md-4 mb-4">
+      <h2 className="date-title h6 text-uppercase mb-3">Välj datum</h2>
 
       <nav
         aria-label="Datumväljare"
-        className="d-flex align-items-stretch gap-2 border rounded-2 p-3"
+        className="date-picker d-flex align-items-stretch gap-2 border rounded-2 p-3"
       >
         <button
           type="button"
-          className="btn border rounded-2"
+          className="date-button btn border rounded-2"
           aria-label="Föregående datum"
           disabled={!canGoBack}
           onClick={() => setStartDate((d) => addDays(d, -daysVisible))}
@@ -53,7 +54,7 @@ export default function DatePicker({
               <li key={value} className="flex-fill">
                 <button
                   type="button"
-                  className={`btn border rounded-2 w-100 py-2 ${isSelected ? "active" : ""}`}
+                  className={`date-button btn border rounded-2 w-100 py-2 ${isSelected ? "active" : ""}`}
                   aria-pressed={isSelected}
                   onClick={() => onSelect(value)}
                 >
@@ -77,7 +78,7 @@ export default function DatePicker({
 
         <button
           type="button"
-          className="btn border rounded-2"
+          className="date-button btn border rounded-2"
           aria-label="Nästa datum"
           onClick={() => setStartDate((d) => addDays(d, daysVisible))}
         >

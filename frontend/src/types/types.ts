@@ -70,10 +70,21 @@ export interface MovieScreening {
 export interface Booking {
   bookingNumber: string;
   email: string;
-  movieTitle: string
+  movieTitle: string;
   showTime: string;
   seats: string[];
 }
 
 export type BookingSearch = Pick<Booking, "bookingNumber" | "email">;
 
+export interface BookingConfirmation {
+  "Booking Number": string;
+  Movie: string;
+  "Screening Date": string;
+  "Start Time": string;
+  Screen: string;
+  Seats: string | null;
+  "Number of Tickets": number;
+  "Total Price (SEK)": string | number | null;
+  Email: string;
+}

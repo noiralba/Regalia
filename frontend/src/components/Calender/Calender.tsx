@@ -21,10 +21,11 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function formatSelectedDate(dateString: string) {
-    const todayString = new Date().toLocaleDateString("sv-SE");
+  const [today] = useState(() => new Date().toLocaleDateString("sv-SE"));
 
-    if (dateString === todayString) return "Visas idag";
+  function formatSelectedDate(dateString: string) {
+
+    if (dateString === today) return "Visas idag";
 
     const date = new Date(`${dateString}T00:00`);
 
