@@ -1,26 +1,27 @@
 import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
 import { Link } from "react-router";
+import "./Footer.scss";
 
 export default function Footer() {
   return (
     <footer className="footer container pb-5">
       <section className="row g-4 row-cols-1 row-cols-md-4">
         <article className="col">
-          <h5 className="footer-title">ÖPPETIDER</h5>
-          <p className="footer-schedule-group">
+          <h5 className="footer-title">ÖPPETTIDER</h5>
+          <p className="footer-text mb-2">
             <span className="d-block">Mån-Tor</span>
-            <span className="footer-hours">16.00 - 23.00</span>
+            <span>16.00 - 23.00</span>
           </p>
-          <p className="footer-schedule-group">
+          <p className="footer-text">
             <span className="d-block">Fre-Sön</span>
-            <span className="footer-hours">10.00 - 21.00</span>
+            <span>10.00 - 21.00</span>
           </p>
         </article>
 
         <article className="col">
           <h5 className="footer-title">ADRESS</h5>
-          <p>Filmvägen 13</p>
-          <p>Småstad</p>
+          <p className="footer-text">Filmvägen 13</p>
+          <p className="footer-text">Småstad</p>
         </article>
 
         <article className="col">
