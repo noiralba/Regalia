@@ -27,7 +27,7 @@ export default function CookieModal() {
         <div className="cookie-modal-body">
           <p>
             Vi använder nödvändiga cookies för att webbplatsen ska fungera,
-            bland annat för inloggning.
+            bland annat för inloggning.{" "}
           </p>
           <p>Med ditt godkännande använder vi även cookies för statistik.</p>
         </div>
