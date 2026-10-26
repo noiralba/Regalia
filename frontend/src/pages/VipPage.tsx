@@ -3,10 +3,38 @@ import { useNavigate } from "react-router";
 import popcorn from "../assets/images/vip/popcorn.png";
 import drinks from "../assets/images/vip/drinks.jpg";
 import food from "../assets/images/vip/food.png";
+import foodMenu from "../assets/images/vip/matmeny.png";
+import drinkMenu from "../assets/images/vip/dryckmeny.png";
+import snacksMenu from "../assets/images/vip/snacksmeny.png";
+import "../styles/VipPage.scss";
+
+type MenuTab = "mat" | "dryck" | "snacks";
+
+const menuImages = {
+  mat: {
+    src: foodMenu,
+    alt: "Regalias matmeny",
+  },
+  dryck: {
+    src: drinkMenu,
+    alt: "Regalias dryckesmeny",
+  },
+  snacks: {
+    src: snacksMenu,
+    alt: "Regalias snacksmeny",
+  },
+};
 
 function VipPage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<MenuTab>("mat");
+
   const navigate = useNavigate();
+
+  function openMenu() {
+    setActiveMenu("mat");
+    setMenuOpen(true);
+  }
 
   return (
     <main className="vip-page">
@@ -23,9 +51,9 @@ function VipPage() {
         </nav>
 
         <section className="vip-images" aria-label="Bilder från logen">
-          <img src={popcorn} alt="popcorn" />
-          <img src={drinks} alt="drinkar" />
-          <img src={food} alt="mat" />
+          <img src={popcorn} alt="Popcorn" />
+          <img src={drinks} alt="Drinkar" />
+          <img src={food} alt="Mat serverad i logen" />
         </section>
 
         <header className="vip-header">
@@ -36,9 +64,8 @@ function VipPage() {
           <p>
             Till utvalda visningar finns ett antal VIP-platser där du har
             möjlighet att förbeställa varm mat och svalkande dryck från vår
-            bistro. Från bistron kan vi erbjuda dig en VIP-plats kan du under
-            visningen få möjlighet att komplettera din beställning via platsens
-            QR-kod. Allt serveras direkt till dig i salongen.
+            bistro. Under visningen kan du även komplettera din beställning via
+            platsens QR-kod. Allt serveras direkt till dig i salongen.
           </p>
 
           <ol>
@@ -55,18 +82,14 @@ function VipPage() {
           </ol>
 
           <p>
-            Det går förstås även utmärkt att beställa mat, dryck och snacks i
-            vår foajébar innan, under och efter visning om du föredrar det.
-            Foajébaren har öppet till kl. 22.00.
+            Det går även bra att beställa mat, dryck och snacks i vår foajébar
+            före, under och efter visningen. Foajébaren har öppet till kl.
+            22.00.
           </p>
         </section>
 
         <footer className="vip-actions">
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-haspopup="dialog"
-          >
+          <button type="button" onClick={openMenu} aria-haspopup="dialog">
             Meny
           </button>
 
@@ -77,11 +100,7 @@ function VipPage() {
       </article>
 
       {menuOpen && (
-        <dialog
-          className="vip-menu-overlay"
-          open
-          aria-labelledby="vip-menu-title"
-        >
+        <dialog className="vip-menu-overlay" open aria-label="Regalias meny">
           <button
             className="vip-menu-close"
             type="button"
@@ -91,27 +110,39 @@ function VipPage() {
             ×
           </button>
 
-          <header className="vip-menu-header">
-            <h1 id="vip-menu-title">REGALIAS MENY</h1>
-            <p>Välkommen till Regalias loge</p>
-          </header>
+          <section className="vip-menu-stage" aria-label="Menybild">
+            <img
+              className="vip-menu-image"
+              src={menuImages[activeMenu].src}
+              alt={menuImages[activeMenu].alt}
+            />
 
-          <main className="vip-menu-content">
-            <section aria-labelledby="vip-food-title">
-              <h2 id="vip-food-title">Mat</h2>
-              <p>Menyn kommer snart.</p>
-            </section>
+            <nav className="vip-menu-tabs" aria-label="Byt meny">
+              <button
+                type="button"
+                className="vip-menu-tab vip-menu-tab-mat"
+                aria-label="Visa matmenyn"
+                aria-pressed={activeMenu === "mat"}
+                onClick={() => setActiveMenu("mat")}
+              />
 
-            <section aria-labelledby="vip-drink-title">
-              <h2 id="vip-drink-title">Dryck</h2>
-              <p>Dryckesmenyn kommer snart.</p>
-            </section>
+              <button
+                type="button"
+                className="vip-menu-tab vip-menu-tab-dryck"
+                aria-label="Visa dryckesmenyn"
+                aria-pressed={activeMenu === "dryck"}
+                onClick={() => setActiveMenu("dryck")}
+              />
 
-            <section aria-labelledby="vip-snacks-title">
-              <h2 id="vip-snacks-title">Snacks</h2>
-              <p>Snacksmenyn kommer snart.</p>
-            </section>
-          </main>
+              <button
+                type="button"
+                className="vip-menu-tab vip-menu-tab-snacks"
+                aria-label="Visa snacksmenyn"
+                aria-pressed={activeMenu === "snacks"}
+                onClick={() => setActiveMenu("snacks")}
+              />
+            </nav>
+          </section>
         </dialog>
       )}
     </main>

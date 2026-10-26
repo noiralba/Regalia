@@ -1,0 +1,348 @@
+/* =================================
+   VIP-SIDA OCH MÖRK BAKGRUND
+================================= */
+
+.vip-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  color: #e8d8b5;
+
+  background-image:
+    linear-gradient(rgba(12, 5, 5, 0.58), rgba(12, 5, 5, 0.72)),
+    url("../assets/images/vip/backpick.png");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.vip-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.16);
+  pointer-events: none;
+}
+
+/* =================================
+   INFORMATIONS KORT
+================================= */
+
+.vip-card {
+  position: relative;
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  padding: 1.5rem 2rem 2rem;
+  color: #e8d8b5;
+  background: rgba(24, 15, 16, 0.96);
+  border: 1px solid rgba(184, 145, 66, 0.7);
+  border-radius: 3px;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.55);
+}
+
+/* =================================
+   NAVIGATION
+================================= */
+
+.vip-navigation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.vip-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 30px;
+  color: #c5a15a;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.vip-back:hover {
+  color: #f5dfaa;
+}
+
+/* =================================
+   BILDER PÅ VIP-SIDAN
+================================= */
+
+.vip-images {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.vip-images img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(184, 145, 66, 0.45);
+  border-radius: 3px;
+}
+
+/* =================================
+   RUBRIK OCH INFORMATION
+================================= */
+
+.vip-header {
+  margin: 1.2rem 0 0.8rem;
+  text-align: center;
+}
+
+.vip-header h1 {
+  margin: 0;
+  color: #e8d8b5;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: 0.035em;
+}
+
+.vip-description {
+  max-width: 680px;
+  margin: 0 auto;
+  color: #d6c9b6;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.vip-description p {
+  margin: 0 0 0.9rem;
+}
+
+.vip-description ol {
+  margin: 0 0 1rem;
+  padding-left: 1.3rem;
+}
+
+.vip-description li {
+  padding-left: 0.1rem;
+  margin-bottom: 0.25rem;
+}
+
+/* =================================
+   MENY- OCH BOKA-KNAPPAR
+================================= */
+
+.vip-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.vip-actions button {
+  min-width: 115px;
+  padding: 0.55rem 1.3rem;
+  color: #f0dfb8;
+  background: #681c2c;
+  border: 1px solid #bd984e;
+  border-radius: 3px;
+  font: inherit;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+
+.vip-actions button:hover {
+  background: #84283b;
+}
+
+/* =================================
+   HELSKÄRMSMODAL
+================================= */
+
+.vip-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #f0dfb8;
+  background: #0d0909;
+  border: none;
+}
+
+.vip-menu-overlay::backdrop {
+  background: rgba(0, 0, 0, 0.94);
+}
+
+/* =================================
+   STÄNG-KNAPP
+================================= */
+
+.vip-menu-close {
+  position: fixed;
+  top: 0.8rem;
+  right: 1rem;
+  z-index: 1003;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #f0dfb8;
+  background: #211515;
+  border: 1px solid #bd984e;
+  border-radius: 50%;
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.vip-menu-close:hover {
+  background: #681c2c;
+}
+
+/* =================================
+   MENYBILD OCH KLICKBARA RUBRIKER
+================================= */
+
+.vip-menu-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.vip-menu-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+/*
+  De genomskinliga klickytorna ligger ovanpå
+  rubrikerna i menybilden.
+
+  Positionerna är procentuella så de skalar
+  med bilden på olika skärmstorlekar.
+*/
+
+.vip-menu-tabs {
+  position: absolute;
+  top: 18%;
+  left: 19%;
+  width: 62%;
+  height: 10%;
+  display: flex;
+  align-items: stretch;
+  z-index: 1002;
+}
+
+.vip-menu-tab {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.vip-menu-tab-mat {
+  flex: 0.9;
+}
+
+.vip-menu-tab-dryck {
+  flex: 1.1;
+}
+
+.vip-menu-tab-snacks {
+  flex: 1.2;
+}
+
+.vip-menu-tab:hover {
+  background: rgba(213, 179, 102, 0.08);
+}
+
+.vip-menu-tab:focus-visible {
+  outline: 2px solid #d5b366;
+  outline-offset: -2px;
+}
+
+/* =================================
+   TILLGÄNGLIGHET
+================================= */
+
+.vip-back:focus-visible,
+.vip-actions button:focus-visible,
+.vip-menu-close:focus-visible {
+  outline: 2px solid #f1d28a;
+  outline-offset: 3px;
+}
+
+/* =================================
+   MOBILANPASSNING
+================================= */
+
+@media (max-width: 600px) {
+  .vip-page {
+    padding: 1rem 0.6rem;
+    background-attachment: scroll;
+  }
+
+  .vip-card {
+    padding: 1rem;
+  }
+
+  .vip-images {
+    gap: 0.45rem;
+  }
+
+  .vip-images img {
+    height: 115px;
+  }
+
+  .vip-header {
+    margin-top: 1.2rem;
+  }
+
+  .vip-description {
+    font-size: 0.85rem;
+  }
+
+  .vip-actions button {
+    min-width: 105px;
+  }
+
+  .vip-menu-overlay {
+    padding: 0.5rem;
+  }
+
+  .vip-menu-close {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 38px;
+    height: 38px;
+  }
+
+  .vip-menu-tabs {
+    top: 18%;
+    left: 19%;
+    width: 62%;
+    height: 10%;
+  }
+}
