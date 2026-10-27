@@ -1,0 +1,10 @@
+@use "../../styles/variables" as v;
+
+main {
+a, 
+.link {
+  color: v.$color-cream !important;
+  text-decoration: underline;
+}
+
+}
