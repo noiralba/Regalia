@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap");
+
+$bg: #0f0d0e;
+$gold: #a98a4e;
+$gold-light: #e0cfa2;
+$gold-bright: #f4e8c4;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: $bg;
+  color: $gold-light;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  padding-bottom: 0.9rem; // så stjärnan inte ligger kant i kant med innehållet
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1rem 1.1rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Logotyp ---------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid $gold-light;
+    outline-offset: 4px;
+  }
+}
+
+.icon {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.brandName {
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #c4a45f, #9a7b42);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Hamburgare (dold på desktop) ---------- */
+.toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: $gold-light;
+  transition: background-color 0.3s ease;
+
+  &:hover { background: rgba($gold, 0.15); }
+
+  &:focus-visible {
+    outline: 2px solid $gold-light;
+    outline-offset: 2px;
+  }
+}
+
+.bars {
+  position: relative;
+  width: 1.6rem;
+  height: 1.1rem;
+
+  span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition:
+      transform 0.4s cubic-bezier(0.65, 0, 0.35, 1),
+      opacity 0.25s ease,
+      top 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+
+    &:nth-child(1) { top: 0; }
+    &:nth-child(2) { top: 50%; margin-top: -1px; }
+    &:nth-child(3) { top: 100%; margin-top: -2px; }
+  }
+}
+
+// Hamburgare -> kryss
+.toggleOpen .bars span {
+  &:nth-child(1) { top: 50%; margin-top: -1px; transform: rotate(45deg); }
+  &:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  &:nth-child(3) { top: 50%; margin-top: -1px; transform: rotate(-45deg); }
+}
+
+/* ---------- Meny ---------- */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $gold-light;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &.active {
+    color: $gold-bright;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $gold-light;
+    outline-offset: 4px;
+  }
+}
+
+// "Logga ut" är en <button> men ska se ut som övriga länkar
+.logout {
+  padding: 0;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* ---------- Linje med stjärna ---------- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: $gold;
+}
+
+.star {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: $gold;
+  flex-shrink: 0;
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 1200px) {
+  .link { font-size: 1.4rem; }
+  .nav { gap: 1.2rem; }
+}
+
+@media (max-width: 992px) {
+  .brandName { font-size: 1.5rem; }
+  .link { font-size: 1.15rem; }
+  .nav { gap: 1rem; }
+}
+
+@media (max-width: 768px) {
+  .toggle { display: inline-flex; }
+
+  // Menyn fälls ut genom att animera grid-raden från 0fr till 1fr
+  .navWrap {
+    flex-basis: 100%;
+    order: 3;
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden; // gömda länkar ska inte gå att tabba till
+    transition:
+      grid-template-rows 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+      visibility 0s linear 0.45s;
+  }
+
+  .navOpen {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .nav {
+    overflow: hidden;
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition:
+      opacity 0.3s ease,
+      transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+
+    li + li { border-top: 1px solid rgba($gold, 0.3); }
+  }
+
+  .navOpen .nav {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.08s, 0s;
+  }
+
+  .link {
+    display: block;
+    padding: 0.9rem 0.25rem;
+    font-size: 1.3rem;
+  }
+
+  .header { padding-bottom: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .toggle,
+  .bars span,
+  .navWrap,
+  .nav {
+    transition: none !important;
+  }
+}
