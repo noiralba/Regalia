@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch index.js",
     "seed": "node data/seed.js",
+    "seats": "node data/seedSeats.js",
     "lint": "oxlint ."
   },
   "keywords": [],
