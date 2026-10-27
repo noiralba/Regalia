@@ -38,7 +38,7 @@ Retrieves all movies from the database with optional filters (`ageRating`, `cate
       "original": "Engelska",
       "subtitles": "Svenska"
     },
-    "posterImage": "/images/movies/bortglömda-ön-poster.jpg",
+    "posterImage": "/images/movies/bortglömda-ön-poster.webp",
     "trailerUrl": "Ri2KipSRQ4E",
     "shortDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor.",
     "longDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor. När de firar sin sista kväll tillsammans, råkar Jo och Raissa hitta en mystisk portal som transporterar dem till den fantastiska ön Nakali, full av de magiska och mytologiska väsen som hört berättelser om under uppväxten i sina filippinska familjer. En del av de här varelserna blir vänner, andra blir fiender. I sällskap med den välmenande men olyckliga hunden Raww och ett litet men mäktiga gäng kompisar, måste Jo och Raissa möta Den Fruktande Manananggal, den mest skräckinjagande varelsen på ön. När de upptäcker att priset för att återvända hem är att förlora alla minnena av deras vänskap, måste Jo och Raissa skynda sig att hitta ett sätt att lämna ön innan de helt glömmer bort varandra, för evigt.",
@@ -77,7 +77,7 @@ Retrieves all movies from the database with optional filters (`ageRating`, `cate
       "original": "Engelska",
       "subtitles": "Svenska"
     },
-    "posterImage": "/images/movies/the-exorcist-poster.jpg",
+    "posterImage": "/images/movies/the-exorcist-poster.webp",
     "trailerUrl": "BU2eYAO31Cc",
     "shortDescription": "Vågar du möta natten med en av skräckfilmens mest ikoniska filmer?",
     "longDescription": "När en ung flicka börjar uppvisa allt mer skrämmande beteende söker hennes mamma desperat efter hjälp. En legendarisk skräckklassiker visas vid midnatt på Halloween.",
@@ -104,7 +104,7 @@ Retrieves all movies from the database with optional filters (`ageRating`, `cate
       "original": "Engelska",
       "subtitles": "Svenska"
     },
-    "posterImage": "/images/movies/hocus-pocus-poster.jpg",
+    "posterImage": "/images/movies/hocus-pocus-poster.webp",
     "trailerUrl": "F4e6YQFrt1s",
     "shortDescription": "En magisk Halloweenvisning för hela familjen med de tre busiga Sanderson-systrarna.",
     "longDescription": "När tre häxor återuppstår på Halloween måste en grupp barn försöka stoppa dem innan de sprider kaos över staden. En färgstark Halloweenklassiker för både barn och vuxna.",
@@ -139,7 +139,7 @@ Retrieves all movies from the database with optional filters (`ageRating`, `cate
       "original": "Engelska",
       "subtitles": "Svenska"
     },
-    "posterImage": "/images/movies/resident-evil-poster.jpg",
+    "posterImage": "/images/movies/resident-evil-poster.webp",
     "trailerUrl": "mNd1gb19A-c",
     "shortDescription": "Den medicinske kuriren Bryan dras ovetande in i en intensiv kamp för överlevnad.",
     "longDescription": "Den medicinske kuriren Bryan dras ovetande in i en intensiv kamp för överlevnad i en skoningslös kamp mot klockan. Resident Evil är en actionfylld skräckfilm som tar tittarna med på en spännande resa genom en värld fylld av faror och mysterier.",
@@ -174,7 +174,7 @@ Retrieves all movies from the database with optional filters (`ageRating`, `cate
       "original": "Engelska",
       "subtitles": "Svenska"
     },
-    "posterImage": "/images/movies/odyssey-poster.jpg",
+    "posterImage": "/images/movies/odyssey-poster.webp",
     "trailerUrl": "Mzw2ttJD2qQ",
     "shortDescription": "Odysseus ger sig ut på en lång och farofylld resa hem efter det trojanska kriget, där han möter gudar, monster och andra prövningar.",
     "longDescription": "Efter det trojanska kriget försöker kung Odysseus återvända hem till Ithaka och sin familj. Resan blir ett episkt äventyr fyllt av faror, mytiska varelser, mäktiga gudar och svåra val. Samtidigt väntar hans hustru Penelope och sonen Telemachos hemma på hans återkomst.",
@@ -204,7 +204,7 @@ Retrieves a specific movie by ID.
     "original": "Engelska",
     "subtitles": "Svenska"
   },
-  "posterImage": "/images/movies/bortglömda-ön-poster.jpg",
+  "posterImage": "/images/movies/bortglömda-ön-poster.webp",
   "trailerUrl": "Ri2KipSRQ4E",
   "shortDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor.",
   "longDescription": "Jo och Raissa har varit bästa vänner sedan grundskolan men har nu gått ut High School och ska påbörja sina separata livsresor. När de firar sin sista kväll tillsammans, råkar Jo och Raissa hitta en mystisk portal som transporterar dem till den fantastiska ön Nakali, full av de magiska och mytologiska väsen som hört berättelser om under uppväxten i sina filippinska familjer. En del av de här varelserna blir vänner, andra blir fiender. I sällskap med den välmenande men olyckliga hunden Raww och ett litet men mäktiga gäng kompisar, måste Jo och Raissa möta Den Fruktande Manananggal, den mest skräckinjagande varelsen på ön. När de upptäcker att priset för att återvända hem är att förlora alla minnena av deras vänskap, måste Jo och Raissa skynda sig att hitta ett sätt att lämna ön innan de helt glömmer bort varandra, för evigt.",

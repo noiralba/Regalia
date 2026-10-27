@@ -19,14 +19,14 @@
 
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0.5rem 1rem rgba(168, 135, 68, 0.75);
     }
   }
 
   .poster-image {
     display: block;
     aspect-ratio: 2 / 3;
-    object-fit: cover;
+    // object-fit: cover;
   }
 }
 

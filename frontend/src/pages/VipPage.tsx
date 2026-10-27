@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import popcorn from "../assets/images/vip/popcorn.png";
-import drinks from "../assets/images/vip/drinks.jpg";
-import food from "../assets/images/vip/food.png";
-import foodMenu from "../assets/images/vip/matmeny.png";
-import drinkMenu from "../assets/images/vip/dryckmeny.png";
-import snacksMenu from "../assets/images/vip/snacksmeny.png";
+import popcorn from "../assets/images/vip/popcorn.webp";
+import drinks from "../assets/images/vip/drinks.webp";
+import food from "../assets/images/vip/food.webp";
+import foodMenu from "../assets/images/vip/matmeny.webp";
+import drinkMenu from "../assets/images/vip/dryckmeny.webp";
+import snacksMenu from "../assets/images/vip/snacksmeny.webp";
 import "../styles/VipPage.scss";
 
 type MenuTab = "mat" | "dryck" | "snacks";
