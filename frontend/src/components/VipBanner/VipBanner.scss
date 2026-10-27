@@ -1,0 +1,114 @@
+@use "../../styles/variables" as v;
+
+.vip-banner {
+  max-width: 1320px;
+  margin: 0 auto;
+
+  background-color: v.$color-bg-dark;
+  color: v.$color-cream;
+  border-radius: 12px;
+  border: 1px solid v.$color-gold;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+
+  padding: 1rem;
+
+  @include v.respond-to(tablet) {
+    padding: 1.25rem;
+  }
+
+  @include v.respond-to(desktop) {
+    padding: 1.5rem;
+  }
+
+  &-image {
+    border-radius: 8px;
+    border: 1px solid rgba(v.$color-gold, 0.25);
+    width: 100%;
+    height: 100%;
+    max-height: 240px;
+    object-fit: cover;
+
+    @include v.respond-to(desktop) {
+      max-height: 280px;
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+
+    @include v.respond-to(desktop) {
+      text-align: left;
+      padding-left: 1rem;
+    }
+  }
+
+  &-title {
+    font-family: v.$font-title;
+    color: v.$color-gold;
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  &-subtitle {
+    color: v.$color-gold;
+    font-family: v.$font-body;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+    opacity: 0.9;
+  }
+
+  &-description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: auto;
+
+    p {
+      margin-bottom: 0.25rem;
+    }
+
+    .fw-semibold {
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+  }
+
+  &-actions {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  &-btn {
+    --bs-btn-color: #{v.$color-cream};
+    --bs-btn-bg: #{v.$color-primary-red};
+    --bs-btn-border-color: #{v.$color-gold};
+
+    --bs-btn-hover-color: #{v.$color-cream};
+    --bs-btn-hover-bg: #{lighten(v.$color-primary-red, 8%)};
+    --bs-btn-hover-border-color: #{v.$color-gold};
+
+    display: block;
+    width: 100%;
+    font-family: v.$font-body;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    letter-spacing: 0.08em;
+    padding: 0.65rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:focus-visible {
+      @include v.focus-ring;
+    }
+  }
+}

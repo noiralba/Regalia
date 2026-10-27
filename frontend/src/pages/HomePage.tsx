@@ -1,6 +1,6 @@
 import HeroSection from "../components/hero/HeroSection";
 import MovieRow from "../components/MovieRow/MovieRow";
-import VipBanner from "../components/VipBanner";
+import VipBanner from "../components/VipBanner/VipBanner";
 
 import { useEffect, useState } from "react";
 import type { Movies } from "../types/types";
