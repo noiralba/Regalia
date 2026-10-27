@@ -101,15 +101,6 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
                 På bio nu
               </NavLink>
             </li>
-            {/* <li>
-              <NavLink
-                to={pages.calendar.path}
-                onClick={close}
-                className={navLinkClass}
-              >
-                Kalender
-              </NavLink>
-            </li> */}
 
             {isLoggedIn ? (
               <>
