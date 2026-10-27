@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import type { BookingConfirmation, Seat } from "../types/types";
+import type {
+  BookingConfirmation,
+  Seat,
+  Movies,
+  MovieScreening,
+} from "../types/types";
 import BookingConfirmationModal from "../components/BookingConfirmationModal/BookingConfirmationModal";
 import { pages } from "../routeConfig";
 import "../styles/BookingPage.scss";
 import SeatMap from "../components/SeatMap/SeatMap";
 import SeatMapModal from "../components/SeatMap/SeatMapModal";
+import { getById } from "../api/api";
+import { getMovieImage } from "../utils/movieImages";
 
-interface MovieScreening {
-  show_id: string;
-  Movie: string;
-  "Screening Date": string;
-  "Start Time": string;
-  Screen: string;
-  "Available Seats": number;
-}
 interface TicketType {
   ticket_type_id: string;
   "Ticket Type": string;
@@ -35,6 +34,7 @@ function BookingPage() {
   const { visningId } = useParams();
   const navigate = useNavigate();
   const [showing, setShowing] = useState<MovieScreening | null>(null);
+  const [movie, setMovie] = useState<Movies | null>(null);
   const [error, setError] = useState("");
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
@@ -60,6 +60,8 @@ function BookingPage() {
         }
         const data: MovieScreening = await response.json();
         setShowing(data);
+        const movieData = await getById<Movies>("/api/movies", data.movie_id);
+        setMovie(movieData);
       } catch (error) {
         console.error(error);
         setError("Kunde inte hämta filmvisningen.");
@@ -226,8 +228,13 @@ function BookingPage() {
           {!showing && !error && <p>Hämtar visning...</p>}
           {showing && (
             <div className="booking-page__movie">
-              <div className="booking-page__poster" aria-hidden="true">
-                REGALIA
+              <div className="booking-page__poster">
+                {movie && (
+                  <img
+                    src={getMovieImage(movie.posterImage)}
+                    alt={`Filmaffisch för ${movie.title}`}
+                  />
+                )}
               </div>
               <div className="booking-page__movie-details">
                 <h3>{showing.Movie}</h3>
@@ -272,7 +279,7 @@ function BookingPage() {
         {showing && (
           <p className="booking-page__screen-name">{showing.Screen}</p>
         )}
-        
+
         <button
           type="button"
           className="booking-page__open-seats"
