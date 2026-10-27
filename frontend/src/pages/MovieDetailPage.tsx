@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useEffect, useState, useCallback } from "react";
+import { useParams, useNavigate } from "react-router";
 import { get, getById } from "../api/api";
 import type { Movies, Showing, SeatAvailability } from "../types/types";
 import { getPersonImage } from "../utils/personImages";
@@ -8,6 +8,7 @@ import "../styles/MovieDetailPage.scss";
 
 function MovieDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [movie, setMovie] = useState<Movies | null>(null);
   const [showings, setShowings] = useState<Showing[]>([]);
@@ -140,33 +141,29 @@ function MovieDetailPage() {
     return time.slice(0, 5);
   }
 
-  function selectDate(date: string) {
-    setSelectedDate(date);
+  const selectDate = useCallback(
+    (date: string) => {
+      setSelectedDate(date);
 
-    const dateShowings = showings
-      .filter((showing) => showing["Screening Date"] === date)
-      .sort((a, b) => a["Start Time"].localeCompare(b["Start Time"]));
+      const dateShowings = showings
+        .filter((showing) => showing["Screening Date"] === date)
+        .sort((a, b) => a["Start Time"].localeCompare(b["Start Time"]));
 
-    const now = new Date();
+      const now = new Date();
 
-    const nextShowing = dateShowings.find((showing) => {
-      const time = showing["Start Time"].slice(0, 8);
-      return new Date(`${date}T${time}`) >= now;
-    });
+      const nextShowing = dateShowings.find((showing) => {
+        const time = showing["Start Time"].slice(0, 8);
+        return new Date(`${date}T${time}`) >= now;
+      });
 
-    setSelectedShowing(nextShowing ?? dateShowings[0] ?? null);
-  }
+      setSelectedShowing(nextShowing ?? dateShowings[0] ?? null);
+    },
+    [showings],
+  );
 
   function bookShowing() {
     if (!selectedShowing) return;
-
-    const bookingUrl = new URL("/booking", window.location.origin);
-
-    bookingUrl.searchParams.set("show_id", selectedShowing.show_id);
-    bookingUrl.searchParams.set("date", selectedShowing["Screening Date"]);
-    bookingUrl.searchParams.set("time", selectedShowing["Start Time"]);
-
-    window.location.href = bookingUrl.toString();
+    navigate(`/bokning/${selectedShowing.show_id}`);
   }
 
   if (loading) {
