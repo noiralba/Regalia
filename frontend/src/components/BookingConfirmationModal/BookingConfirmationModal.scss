@@ -1,0 +1,77 @@
+
+@use "../../styles/variables" as v;
+
+.booking-modal {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  padding: 48px 32px;
+  background: v.$color-card-bg;
+  border: 1px solid v.$color-gold;
+  border-radius: 5px;
+  color: v.$color-cream;
+  font-family: v.$font-body;
+  text-align: center;
+
+  h2 {
+    margin: 0 0 28px;
+    color: v.$color-cream;
+    font-family: v.$font-body;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0 0 28px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  &__email,
+  &__number {
+    display: block;
+    overflow-wrap: anywhere;
+  }
+
+  button {
+    padding: 12px 18px;
+    background: v.$color-primary-red;
+    color: v.$color-cream;
+    border: 1px solid v.$color-gold;
+    border-radius: 5px;
+    font-family: v.$font-body;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.85);
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-modal {
+    max-width: 340px;
+    padding: 32px 20px;
+
+    h2 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 13px;
+    }
+
+    button {
+      font-size: 12px;
+    }
+  }
+}

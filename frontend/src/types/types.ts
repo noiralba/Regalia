@@ -15,7 +15,7 @@ export interface Movies {
     name: string;
     image: string;
     character_name: string;
-  }
+  };
   categories: string[];
   cast: {
     id: string;
@@ -24,7 +24,6 @@ export interface Movies {
     character_name: string;
   }[];
 }
-
 
 //test data
 export interface Showing {
@@ -87,4 +86,13 @@ export interface BookingConfirmation {
   "Number of Tickets": number;
   "Total Price (SEK)": string | number | null;
   Email: string;
+}
+
+export interface Seat {
+  show_id: string;
+  seat_id: string;
+  "Seat Row": string;
+  "Seat Number": number;
+  Status: string;
+  Available: number;
 }
