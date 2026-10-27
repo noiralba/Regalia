@@ -1,9 +1,8 @@
-
 import { createBrowserRouter } from "react-router";
 import App from "./App";
 import Layout from "./Layout";
 import { pages } from "./routeConfig";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/Login-Page/LoginPage";
 import CancellationPage from "./pages/CancellationPage";
 import CalendarPage from "./pages/CalendarPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
