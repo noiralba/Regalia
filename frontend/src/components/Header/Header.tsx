@@ -94,14 +94,14 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
           <ul className={styles.nav}>
             <li>
               <NavLink
-                to={pages.movies.path}
+                to={pages.calendar.path}
                 onClick={close}
                 className={navLinkClass}
               >
                 På bio nu
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 to={pages.calendar.path}
                 onClick={close}
@@ -109,7 +109,7 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
               >
                 Kalender
               </NavLink>
-            </li>
+            </li> */}
 
             {isLoggedIn ? (
               <>
