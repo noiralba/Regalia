@@ -77,14 +77,14 @@ export default function CancellationPage() {
     }
   }
 
-  function handleReset() {
-    setBookingNumber("");
-    setEmail("");
-    setBooking(null);
-    setNotFound(false);
-    setConfirmingCancel(false);
-    setCancelled(false);
-  }
+  // function handleReset() {
+  //   setBookingNumber("");
+  //   setEmail("");
+  //   setBooking(null);
+  //   setNotFound(false);
+  //   setConfirmingCancel(false);
+  //   setCancelled(false);
+  // }
 
   if (cancelled) {
     return (
@@ -96,7 +96,7 @@ export default function CancellationPage() {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={handleReset}
+          onClick={() => navigate("/")}
         >
           Tillbaka
         </button>
@@ -129,10 +129,10 @@ export default function CancellationPage() {
             )}
             <button
               type="button"
-              className="btn btn-primary"
-              onClick={() => navigate("/bokning/:visningId")}
+              className="btn btn-secondary"
+              onClick={() => navigate(-1)}
             >
-              Ändra bokning
+              Avbryt
             </button>
             <button
               type="button"
@@ -166,21 +166,21 @@ export default function CancellationPage() {
             </article>
           </section>
         )}
-
+        {/* 
         <button
           type="button"
           className="btn btn-link mt-3 ps-0"
           onClick={handleReset}
         >
           Sök efter en annan bokning
-        </button>
+        </button> */}
       </main>
     );
   }
 
   return (
     <main className="container py-4">
-      <h1 className="mb-3">Avboka eller Ändra bokning</h1>
+      <h1 className="mb-3">Avboka bokning</h1>
       <p className="mb-4">
         Fyll i ditt bokningsnummer och din e-postadress för att hitta din
         bokning.
@@ -223,6 +223,13 @@ export default function CancellationPage() {
 
         <button type="submit" className="btn btn-primary">
           Sök bokning
+        </button>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => navigate(-1)}
+        >
+          Avbryt
         </button>
       </form>
     </main>
