@@ -8,6 +8,7 @@ import CalendarPage from "./pages/CalendarPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
 import VipPage from "./pages/VipPage";
 import BookingPage from "./pages/BookingPage";
+import CreateAccountPage from "./pages/Create-Account/CreateAccountPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
       { path: pages.movies.path, element: <h1>Filmer</h1> },
       { path: pages.booking.path, element: <BookingPage /> },
       { path: pages.login.path, element: <LoginPage /> },
-      { path: pages.register.path, element: <h1>Skapa konto</h1> },
+      { path: pages.register.path, element: <CreateAccountPage /> },
       { path: pages.myPages.path, element: <h1>Mina sidor</h1> },
       { path: pages.calendar.path, element: <CalendarPage /> },
       { path: pages.movieDetails.path, element: <MovieDetailPage /> },

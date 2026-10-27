@@ -48,7 +48,7 @@ export default function LoginPage() {
 
   return (
     <main className="container py-4">
-      <h1 className="mb-3">Logga in</h1>
+      <h1 className="mb-3 text-uppercase">Logga in</h1>
 
       <form className="col-12 col-md-6 col-lg-4" onSubmit={handleSubmit}>
         <article className="mb-3">
