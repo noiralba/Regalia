@@ -43,4 +43,14 @@ async function getMovieScreenings(showId = null, filters = {}, targetDb = db) {
   return shows;
 }
 
-module.exports = { getMovieScreenings };
+async function createShow(showData, targetDb = db) {
+  // showData innehåller { id, movie_id, screen_id, date, time }
+  await targetDb.query("INSERT INTO `shows` SET ?", showData);
+
+  return showData;
+}
+
+module.exports = {
+  getMovieScreenings,
+  createShow,
+};

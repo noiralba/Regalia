@@ -38,9 +38,13 @@ export const pages = {
     label: "Regalias loge",
   },
   cancellation: {
-  path: "/avbokning",
-  label: "Avbokning",
-},
+    path: "/avbokning",
+    label: "Avbokning",
+  },
+  showsadmin: {
+    path: "/admin",
+    label: "admin",
+  },
 };
 
 export const routeLinks = {
