@@ -1,9 +1,98 @@
 @use "../../styles/variables" as v;
 
 .footer {
+  background-color: v.$color-bg-dark;
+  width: 100%;
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+
+  .footer-title {
+    font-family: v.$font-title;
+    color: v.$color-gold;
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .footer-text,
+  .footer-text span {
+    font-family: v.$font-body;
+    color: v.$color-cream !important;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
   a,
   .footer-link {
-    color: v.$color-cream;
+    color: v.$color-cream !important;
     text-decoration: underline;
+
+    &:hover {
+      color: v.$color-gold !important;
+    }
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 0.75rem;
+
+    a {
+      color: v.$color-cream !important;
+      font-size: 1.4rem;
+      text-decoration: none;
+
+      &:hover {
+        color: v.$color-gold !important;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+
+    > .col {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+
+    > .col:nth-child(1) {
+      order: 1;
+    }
+    > .col:nth-child(2) {
+      order: 3;
+    }
+    > .col:nth-child(3) {
+      order: 2;
+    }
+    > .col:nth-child(4) {
+      order: 4;
+    }
+
+    @include v.respond-to(desktop) {
+      display: flex;
+      flex-wrap: nowrap;
+
+      > .col {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+
+      > .col:nth-child(1) {
+        order: 1;
+      }
+      > .col:nth-child(2) {
+        order: 2;
+      }
+      > .col:nth-child(3) {
+        order: 3;
+      }
+      > .col:nth-child(4) {
+        order: 4;
+      }
+    }
   }
 }

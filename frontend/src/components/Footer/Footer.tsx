@@ -33,7 +33,7 @@ export default function Footer() {
           </p>
           <p>
             <Link to="/avbokning" className="footer-link">
-              Avboka/ändra bokning
+              Avbokning
             </Link>
           </p>
         </article>
