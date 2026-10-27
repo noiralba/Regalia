@@ -1,41 +1,56 @@
 import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
 import { Link } from "react-router";
+import "./Footer.scss";
 
 export default function Footer() {
   return (
-    <footer className="container">
-      <section className="row g-3 row-cols-2 row-cols-md-4">
+    <footer className="footer container pb-5">
+      <section className="row g-4 row-cols-1 row-cols-md-4">
         <article className="col">
-          <h5 className="text-uppercase mb-3">Öppettider</h5>
-          <p>Mån-Tors</p>
-          <p>16.00-23.00</p>
-          <p>Fre-Sön</p>
-          <p>10.00-21.00</p>
+          <h5 className="footer-title">ÖPPETTIDER</h5>
+          <p className="footer-text mb-2">
+            <span className="d-block">Mån-Tor</span>
+            <span>16.00 - 23.00</span>
+          </p>
+          <p className="footer-text">
+            <span className="d-block">Fre-Sön</span>
+            <span>10.00 - 21.00</span>
+          </p>
         </article>
-        <article>
-          <h5 className="text-uppercase mb-3">Adress</h5>
-          <p>Filmvägen 13</p>
-          <p>Småstad</p>
+
+        <article className="col">
+          <h5 className="footer-title">ADRESS</h5>
+          <p className="footer-text">Filmvägen 13</p>
+          <p className="footer-text">Småstad</p>
         </article>
-        <article>
-          <h5 className="text-uppercase mb-3">Kontakt</h5>
-          <a href="#">info@regalia.se</a>
+
+        <article className="col">
+          <h5 className="footer-title">KONTAKT</h5>
+          <p className="mb-4">
+            <a href="mailto:info@regalia.se" className="footer-link">
+              info@regalia.se
+            </a>
+          </p>
+          <p>
+            <Link to="/avbokning" className="footer-link">
+              Avboka/ändra bokning
+            </Link>
+          </p>
         </article>
-        <article>
-          <h5 className="text-uppercase mb-3">Följ oss</h5>
-          <a href="#" className="text-blue fs-4 px-1" aria-label="Instagram">
-            <FaInstagram />
-          </a>
-          <a href="#" className="text-blue fs-4 px-1" aria-label="TikTok">
-            <FaTiktok />
-          </a>
-          <a href="#" className="text-blue fs-4 px-1" aria-label="Facebook">
-            <FaFacebook />
-          </a>
-        </article>
-        <article>
-          <h5 className="text-uppercase mb-3">Info</h5>
-          <Link to="/avbokning">Avboka/ändra bokning</Link>
+
+        <article className="col">
+          <h5 className="footer-title">FÖLJ OSS</h5>
+          <div className="footer-socials d-flex gap-4 mt-2">
+            <a href="#" aria-label="Facebook">
+              <FaFacebook />
+            </a>
+            <a href="#" aria-label="TikTok">
+              <FaTiktok />
+            </a>
+            <a href="#" aria-label="Instagram">
+              <FaInstagram />
+            </a>
+          </div>
         </article>
       </section>
     </footer>
