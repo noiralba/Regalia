@@ -216,10 +216,13 @@
     padding: 12px;
     background: #191315;
     border: 1px solid #392b26;
-
+    h2 {
+      font-size: 25px;
+    }
     h3 {
       margin: 12px 0 6px;
       font-weight: 500;
+      font-size: 18px;
     }
   }
 
@@ -236,7 +239,7 @@
   &__date {
     flex: 0 0 auto;
     padding: 7px 12px;
-    font-size: 10px;
+    font-size: 15px;
     white-space: nowrap;
 
     &[aria-pressed="true"] {
@@ -261,11 +264,11 @@
     min-width: 0;
     min-height: 42px;
     padding: 7px;
-    font-size: 11px;
+    font-size: 15px;
 
     span:last-child {
       color: #b8a88c;
-      font-size: 10px;
+      font-size: 15px;
     }
 
     &.is-selected,
@@ -288,7 +291,7 @@
     p {
       margin-bottom: 8px;
       color: #d99a45;
-      font-size: 12px;
+      font-size: 14px;
     }
   }
 
@@ -301,7 +304,7 @@
     background: #74172a;
     border-color: #74172a;
     font-family: "Monomakh", Georgia, serif;
-    font-size: 15px;
+    font-size: 19px;
     letter-spacing: 0.08em;
   }
 
