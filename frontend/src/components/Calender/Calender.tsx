@@ -1,8 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import { get } from "../../api/api";
 import type { MovieScreening, Movies } from "../../types/types";
-import { useNavigate } from "react-router";
-import "./Calender.scss"
+import { useLocation, useNavigate } from "react-router";
+import "./Calender.scss";
 
 type ShowingWithInfo = MovieScreening & {
   categories: string;
@@ -20,11 +20,11 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [today] = useState(() => new Date().toLocaleDateString("sv-SE"));
 
   function formatSelectedDate(dateString: string) {
-
     if (dateString === today) return "Visas idag";
 
     const date = new Date(`${dateString}T00:00`);
@@ -164,6 +164,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                   {group.map((show) => (
                     <li key={show.show_id}>
                       <button
+                        onClick={() => navigate(`/bokning/${show.show_id}`)}
                         type="button"
                         className="time-btn btn rounded-2 py-2 px-3 text-center w-100"
                       >
@@ -180,17 +181,19 @@ export default function Calendar({ selectedDate }: CalendarProps) {
             );
           })}
 
-          <footer className="row g-0 mt-3">
-            <section className="col-12 col-md-8 offset-md-4">
-              <button
-                onClick={() => navigate("/kalender")}
-                type="button"
-                className="show-more btn rounded-2 w-100 py-2 text-uppercase fw-semibold"
-              >
-                Se fler datum
-              </button>
-            </section>
-          </footer>
+          {location.pathname !== "/kalender" && (
+            <footer className="row g-0 mt-3">
+              <section className="col-12 col-md-8 offset-md-4">
+                <button
+                  onClick={() => navigate("/kalender")} //
+                  type="button"
+                  className="show-more btn rounded-2 w-100 py-2 text-uppercase fw-semibold"
+                >
+                  Se fler datum
+                </button>
+              </section>
+            </footer>
+          )}
         </section>
       )}
     </section>
