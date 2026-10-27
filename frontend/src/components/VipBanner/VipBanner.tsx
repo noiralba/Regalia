@@ -19,21 +19,21 @@ export default function VipBanner() {
             <header className="mb-3">
               <h2 className="vip-banner-title">REGALIAS LOGE</h2>
               <p className="vip-banner-subtitle semibold">
-                Egen lounge &nbsp;|&nbsp; Eget sällskap &nbsp;|&nbsp; En kväll
-                att minnas
+                Egen loge &nbsp;|&nbsp; Eget sällskap &nbsp;|&nbsp; En kväll att
+                minnas
               </p>
             </header>
 
             <article className="vip-banner-description">
               <p>
                 Samla gänget, luta er tillbaka och njut av god mat, kalla
-                drycker och en riktigt bra film.<br></br>Boka er egen lounge
+                drycker och en riktigt bra film.<br></br>Boka er egen loge
               </p>
             </article>
 
             <nav className="vip-banner-actions" aria-label="VIP-erbjudande">
               <Link to="/vip" className="vip-banner-btn btn">
-                TA MIG TILL LOUNGEN
+                TA MIG TILL LOGE
               </Link>
             </nav>
           </section>
