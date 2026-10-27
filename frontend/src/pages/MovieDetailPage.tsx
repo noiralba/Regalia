@@ -160,14 +160,6 @@ function MovieDetailPage() {
 
   function bookShowing() {
     if (!selectedShowing) return;
-
-    // const bookingUrl = new URL("/booking", window.location.origin);
-
-    // bookingUrl.searchParams.set("show_id", selectedShowing.show_id);
-    // bookingUrl.searchParams.set("date", selectedShowing["Screening Date"]);
-    // bookingUrl.searchParams.set("time", selectedShowing["Start Time"]);
-
-    // window.location.href = bookingUrl.toString();
     navigate(`/bokning/${selectedShowing.show_id}`);
   }
 
