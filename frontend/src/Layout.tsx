@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 type Session = {
   token: string;
@@ -32,6 +33,7 @@ export default function Layout() {
 
   return (
     <>
+      <ScrollToTop />
       <Header isLoggedIn={session !== null} onLogout={() => setSession(null)} />
 
       <Outlet context={{ onLogin: handleLogin }} />
