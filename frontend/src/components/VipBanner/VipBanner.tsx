@@ -17,7 +17,7 @@ export default function VipBanner() {
 
           <section className="col-lg-6 vip-banner-content">
             <header className="mb-3">
-              <h2 className="vip-banner-title">REGALIAS LOUNGE</h2>
+              <h2 className="vip-banner-title">REGALIAS LOGE</h2>
               <p className="vip-banner-subtitle semibold">
                 Egen lounge &nbsp;|&nbsp; Eget sällskap &nbsp;|&nbsp; En kväll
                 att minnas
