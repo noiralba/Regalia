@@ -93,9 +93,9 @@ function VipPage() {
             Meny
           </button>
 
-          <button type="button" onClick={() => navigate("/booking")}>
+          {/* <button type="button" onClick={() => navigate("/booking")}>
             Boka
-          </button>
+          </button> */}
         </footer>
       </article>
 
