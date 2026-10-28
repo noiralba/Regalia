@@ -165,10 +165,10 @@
 
 .vip-menu-overlay {
   position: fixed;
-  top: 80px;
+  top: 60px;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 60px);
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 1000;
   display: flex;
