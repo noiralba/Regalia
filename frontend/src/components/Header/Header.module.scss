@@ -12,7 +12,7 @@ $gold-bright: #f4e8c4;
   background: $bg;
   color: $gold-light;
   font-family: "Playfair Display", "Times New Roman", serif;
-  padding-bottom: 0.9rem; // så stjärnan inte ligger kant i kant med innehållet
+  padding-bottom: 0.25rem; // så stjärnan inte ligger kant i kant med innehållet
 }
 
 .bar {
@@ -20,7 +20,7 @@ $gold-bright: #f4e8c4;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.25rem 1rem 1.1rem;
+  padding: 0.25rem 2rem 0rem;
   flex-wrap: wrap;
 }
 
@@ -43,7 +43,7 @@ $gold-bright: #f4e8c4;
 }
 
 .brandName {
-  font-size: 1.9rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -68,7 +68,9 @@ $gold-bright: #f4e8c4;
   color: $gold-light;
   transition: background-color 0.3s ease;
 
-  &:hover { background: rgba($gold, 0.15); }
+  &:hover {
+    background: rgba($gold, 0.15);
+  }
 
   &:focus-visible {
     outline: 2px solid $gold-light;
@@ -93,17 +95,36 @@ $gold-bright: #f4e8c4;
       opacity 0.25s ease,
       top 0.4s cubic-bezier(0.65, 0, 0.35, 1);
 
-    &:nth-child(1) { top: 0; }
-    &:nth-child(2) { top: 50%; margin-top: -1px; }
-    &:nth-child(3) { top: 100%; margin-top: -2px; }
+    &:nth-child(1) {
+      top: 0;
+    }
+    &:nth-child(2) {
+      top: 50%;
+      margin-top: -1px;
+    }
+    &:nth-child(3) {
+      top: 100%;
+      margin-top: -2px;
+    }
   }
 }
 
 // Hamburgare -> kryss
 .toggleOpen .bars span {
-  &:nth-child(1) { top: 50%; margin-top: -1px; transform: rotate(45deg); }
-  &:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  &:nth-child(3) { top: 50%; margin-top: -1px; transform: rotate(-45deg); }
+  &:nth-child(1) {
+    top: 50%;
+    margin-top: -1px;
+    transform: rotate(45deg);
+  }
+  &:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  &:nth-child(3) {
+    top: 50%;
+    margin-top: -1px;
+    transform: rotate(-45deg);
+  }
 }
 
 /* ---------- Meny ---------- */
@@ -117,7 +138,7 @@ $gold-bright: #f4e8c4;
 }
 
 .link {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -169,18 +190,30 @@ $gold-bright: #f4e8c4;
 
 /* ---------- Mobil ---------- */
 @media (max-width: 1200px) {
-  .link { font-size: 1.4rem; }
-  .nav { gap: 1.2rem; }
+  .link {
+    font-size: 1.4rem;
+  }
+  .nav {
+    gap: 1.2rem;
+  }
 }
 
 @media (max-width: 992px) {
-  .brandName { font-size: 1.5rem; }
-  .link { font-size: 1.15rem; }
-  .nav { gap: 1rem; }
+  .brandName {
+    font-size: 1.5rem;
+  }
+  .link {
+    font-size: 1.15rem;
+  }
+  .nav {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .toggle { display: inline-flex; }
+  .toggle {
+    display: inline-flex;
+  }
 
   // Menyn fälls ut genom att animera grid-raden från 0fr till 1fr
   .navWrap {
@@ -212,7 +245,9 @@ $gold-bright: #f4e8c4;
       opacity 0.3s ease,
       transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
 
-    li + li { border-top: 1px solid rgba($gold, 0.3); }
+    li + li {
+      border-top: 1px solid rgba($gold, 0.3);
+    }
   }
 
   .navOpen .nav {
@@ -227,7 +262,9 @@ $gold-bright: #f4e8c4;
     font-size: 1.3rem;
   }
 
-  .header { padding-bottom: 0.75rem; }
+  .header {
+    padding-bottom: 0.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
