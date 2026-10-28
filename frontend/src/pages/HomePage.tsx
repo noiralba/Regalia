@@ -40,7 +40,9 @@ function HomePage() {
 
   return (
     <>
-      <HeroSection />
+      <section className="hero-container">
+        <HeroSection />
+      </section>
       <section className="container py-4">
         <MovieRow
           id="now-playing-heading"
