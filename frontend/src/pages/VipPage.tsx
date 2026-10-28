@@ -101,16 +101,16 @@ function VipPage() {
 
       {menuOpen && (
         <dialog className="vip-menu-overlay" open aria-label="Regalias meny">
-          <button
-            className="vip-menu-close"
-            type="button"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Stäng menyn"
-          >
-            ×
-          </button>
-
           <section className="vip-menu-stage" aria-label="Menybild">
+            <button
+              className="vip-menu-close"
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Stäng menyn"
+            >
+              ×
+            </button>
+
             <img
               className="vip-menu-image"
               src={menuImages[activeMenu].src}

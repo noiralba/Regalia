@@ -288,7 +288,7 @@ function MovieDetailPage() {
                   {seatsLoading
                     ? "Hämtar platsinformation..."
                     : totalSeats > 0
-                      ? `${bookedSeats} av ${totalSeats}`
+                      ? `${totalSeats - bookedSeats} av ${totalSeats}`
                       : "Platsinformation saknas"}
                 </p>
               )}
