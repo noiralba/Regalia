@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getMovieScreenings } = require("../services/showService");
+const crypto = require("crypto");
+const { getMovieScreenings, createShow } = require("../services/showService");
 
 router.get("/", async (req, res) => {
   const { date, movie_id, age_rating, category } = req.query;
@@ -40,6 +41,48 @@ router.get("/:id", async (req, res) => {
 
     return res.status(500).json({
       error: "Server error. Could not retrieve show details.",
+    });
+  }
+});
+
+router.post("/", async (req, res) => {
+  const { movie_id, screen_id, date, time } = req.body;
+
+  if (!movie_id || !screen_id || !date || !time) {
+    return res.status(400).json({
+      error: "Fälten movie_id, screen_id, date och time är obligatoriska.",
+    });
+  }
+
+  try {
+    const id = crypto.randomUUID();
+
+    const newShow = await createShow({
+      id,
+      movie_id,
+      screen_id,
+      date,
+      time,
+    });
+
+    res.status(201).json({
+      message: "Visningen har skapats framgångsrikt.",
+      show: newShow,
+    });
+  } catch (error) {
+    console.error("POST /shows:", error.message);
+
+    if (
+      error.code === "ER_NO_REFERENCED_ROW_2" ||
+      error.code === "ER_NO_REFERENCED_ROW"
+    ) {
+      return res.status(400).json({
+        error: "Angivet movie_id eller screen_id existerar inte i databasen.",
+      });
+    }
+
+    return res.status(500).json({
+      error: "Kunde inte skapa visningen i databasen.",
     });
   }
 });

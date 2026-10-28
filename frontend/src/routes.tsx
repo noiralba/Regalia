@@ -9,6 +9,7 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import VipPage from "./pages/VipPage";
 import BookingPage from "./pages/BookingPage";
 import CreateAccountPage from "./pages/Create-Account/CreateAccountPage";
+import CreateShow from "./pages/CreateShow";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
       { path: pages.movieDetails.path, element: <MovieDetailPage /> },
       { path: pages.vip.path, element: <VipPage /> },
       { path: pages.cancellation.path, element: <CancellationPage /> },
+      { path: pages.showsadmin.path, element: <CreateShow /> },
       { path: "*", element: <h1>404 – Sidan kunde inte hittas</h1> },
     ],
   },

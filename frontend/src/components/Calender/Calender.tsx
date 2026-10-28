@@ -160,9 +160,9 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                   </p>
                 </header>
 
-                <ul className="col-12 col-md-8 list-unstyled d-flex flex-column gap-2 mb-0">
+                <ul className="col-12 col-md-8 list-unstyled d-flex flex-row flex-wrap gap-2 mb-0">
                   {group.map((show) => (
-                    <li key={show.show_id}>
+                    <li key={show.show_id} className="flex-grow-1">
                       <button
                         onClick={() => navigate(`/bokning/${show.show_id}`)}
                         type="button"
@@ -171,7 +171,6 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                         <time className="fw-semibold d-block">
                           {show["Start Time"]}
                         </time>
-
                         <small className="d-block">{show.Screen}</small>
                       </button>
                     </li>

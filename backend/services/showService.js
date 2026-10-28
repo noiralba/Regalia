@@ -11,7 +11,9 @@ async function getMovieScreenings(showId = null, filters = {}, targetDb = db) {
 
   let sql = "SELECT * FROM v_movie_screenings";
   const queryParams = [];
-  const whereClauses = [];
+  const whereClauses = [
+    "STR_TO_DATE(CONCAT(`Screening Date`, ' ', `Start Time`), '%Y-%m-%d %H:%i') >= NOW()",
+  ];
 
   if (filters.date) {
     whereClauses.push("`Screening Date` = ?");
@@ -43,4 +45,13 @@ async function getMovieScreenings(showId = null, filters = {}, targetDb = db) {
   return shows;
 }
 
-module.exports = { getMovieScreenings };
+async function createShow(showData, targetDb = db) {
+  await targetDb.query("INSERT INTO `shows` SET ?", showData);
+
+  return showData;
+}
+
+module.exports = {
+  getMovieScreenings,
+  createShow,
+};

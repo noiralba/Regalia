@@ -103,7 +103,7 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
               </NavLink>
             </li>
 
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? (
               <>
                 <li>
                   <NavLink
@@ -145,7 +145,7 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
                   </NavLink>
                 </li>
               </>
-            )}
+            )} */}
           </ul>
         </nav>
       </section>
