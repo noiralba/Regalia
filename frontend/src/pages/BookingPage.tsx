@@ -13,6 +13,7 @@ import SeatMap from "../components/SeatMap/SeatMap";
 import SeatMapModal from "../components/SeatMap/SeatMapModal";
 import { getById } from "../api/api";
 import { getMovieImage } from "../utils/movieImages";
+import { extractIdFromSlug } from "../utils/slugify";
 
 interface TicketType {
   ticket_type_id: string;
@@ -31,7 +32,8 @@ async function fetchSeats(visningId: string): Promise<Seat[]> {
   return data;
 }
 function BookingPage() {
-  const { visningId } = useParams();
+  const { showingSlug } = useParams(); // 1. Läs ut hela sluggen
+  const visningId = extractIdFromSlug(showingSlug); // 2. Extrahera ut visningen
   const navigate = useNavigate();
   const [showing, setShowing] = useState<MovieScreening | null>(null);
   const [movie, setMovie] = useState<Movies | null>(null);
@@ -46,7 +48,7 @@ function BookingPage() {
   const [isBooking, setIsBooking] = useState(false);
   const [bookingConfirmation, setBookingConfirmation] =
     useState<BookingConfirmation | null>(null);
-  
+
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
     if (!visningId) return;
@@ -197,7 +199,7 @@ function BookingPage() {
       console.error(error);
       setError("Kunde inte genomföra bokningen.");
     } finally {
-      // Återställer knappen 
+      // Återställer knappen
       setIsBooking(false);
     }
   }

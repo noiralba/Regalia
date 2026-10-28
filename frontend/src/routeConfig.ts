@@ -10,7 +10,7 @@ export const pages = {
     label: "Filmer",
   },
   booking: {
-    path: "/bokning/:visningId",
+    path: "/bokning/:showingSlug",
     label: "Boka biljetter",
   },
   login: {
@@ -30,7 +30,7 @@ export const pages = {
     label: "Kalender",
   },
   movieDetails: {
-    path: "/filmer/:id",
+    path: "/filmer/:movieSlug",
     label: "Filmdetaljer",
   },
   vip: {

@@ -4,10 +4,12 @@ import { get, getById } from "../api/api";
 import type { Movies, Showing, SeatAvailability } from "../types/types";
 import { getPersonImage } from "../utils/personImages";
 import TrailerPlayer from "../components/TrailerPlayer";
+import { slugify, extractIdFromSlug } from "../utils/slugify";
 import "../styles/MovieDetailPage.scss";
 
 function MovieDetailPage() {
-  const { id } = useParams();
+  const { movieSlug } = useParams();
+  const id = extractIdFromSlug(movieSlug);
   const navigate = useNavigate();
 
   const [movie, setMovie] = useState<Movies | null>(null);
@@ -163,7 +165,13 @@ function MovieDetailPage() {
 
   function bookShowing() {
     if (!selectedShowing) return;
-    navigate(`/bokning/${selectedShowing.show_id}`);
+
+    const movieTitleSlug = slugify(movie?.title || "okand-film");
+    const dateStr = selectedShowing["Screening Date"];
+    const timeStr = selectedShowing["Start Time"].slice(0, 5).replace(":", "-");
+    const showId = selectedShowing.show_id;
+
+    navigate(`/bokning/${movieTitleSlug}-${dateStr}-${timeStr}-${showId}`);
   }
 
   if (loading) {
