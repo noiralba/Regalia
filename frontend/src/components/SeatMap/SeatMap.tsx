@@ -25,11 +25,15 @@ function SeatMap({ seats, selectedSeats, toggleSeat }: SeatMapProps) {
                   .sort((a, b) => a["Seat Number"] - b["Seat Number"])
                   .map((seat) => (
                     <button
-                      className={`booking-page__seat ${seat.Available === 0 ? "is-unavailable" : ""
-                        } ${selectedSeats.includes(seat.seat_id)
+                      className={`booking-page__seat ${
+                        seat.Available === 0 ? "is-unavailable" : ""
+                      } ${
+                        selectedSeats.includes(seat.seat_id)
                           ? "is-selected"
                           : ""
-                        }`}
+                      }${
+                        seat["Seat Row"] === "H" ? "is-vip" : "" // <-- LÄGG TILL DENNA RAD
+                      }`}
                       key={seat.seat_id}
                       type="button"
                       disabled={seat.Available === 0}
@@ -49,6 +53,9 @@ function SeatMap({ seats, selectedSeats, toggleSeat }: SeatMapProps) {
       <div className="booking-page__legend">
         <span>
           <i className="booking-page__legend-icon" /> Ledig
+        </span>
+        <span>
+          <i className="booking-page__legend-icon is-vip" /> Vip (Rad H)
         </span>
         <span>
           <i className="booking-page__legend-icon is-selected" /> Vald
