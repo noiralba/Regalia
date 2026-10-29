@@ -2,14 +2,26 @@
 
 .movie-row {
   padding-block: 1.5rem;
+  width: 100% !important;
+
+  .grid-movies {
+    display: grid;
+    grid-template-columns: auto repeat(5, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
 
   .section-label {
     font-family: c.$font-title;
-    color: c.$color-gold;
+    color: c.$color-cream;
     letter-spacing: 0.08em;
   }
 
   .poster {
+    position: relative;
+    margin: 0;
     border: 1px solid c.$color-gold;
     border-radius: 8px;
     overflow: hidden;
@@ -23,10 +35,29 @@
     }
   }
 
+    .age-badge {
+      position: absolute;
+        bottom: 0.5rem;
+        left: 0.5rem;
+      display: grid;
+      place-items: center;
+      min-width: 2rem;
+      height: 2rem;
+      padding-inline: 0.35rem;
+      border: 1px solid c.$color-gold;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      color: c.$color-gold;
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: none; // klick går igenom till länken
+    }
+
   .poster-image {
     display: block;
     aspect-ratio: 2 / 3;
-    // object-fit: cover;
   }
 }
 
@@ -56,11 +87,10 @@
 }
 
 .arrow-btn {
-  border: 1px solid c.$color-gold;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
   color: c.$color-gold;
-
-  &:hover {
-    background-color: c.$color-primary-red;
-    border: 1px solid c.$color-gold;
-  }
+  cursor: pointer;
 }
