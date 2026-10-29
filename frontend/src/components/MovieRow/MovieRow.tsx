@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { slugify } from "../../utils/slugify";
 
+import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
+
 import "./MovieRow.scss";
 
 type MovieRowProps = {
@@ -12,7 +14,7 @@ type MovieRowProps = {
   movies: Movies[];
 };
 
-const PER_PAGE = 4;
+const PER_PAGE = 5;
 
 export default function MovieRow({ id, label, movies }: MovieRowProps) {
   const [page, setPage] = useState(0);
@@ -21,37 +23,24 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
   const visibleMovies = movies.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
 
   return (
-    <section className="movie-row container" aria-labelledby={id}>
+    <section className="movie-row px-4" aria-labelledby={id}>
       <header className="d-flex justify-content-between align-items-center mb-3">
-        <h2 className="section-label h5 text-uppercase mb-0" id={id}>
+        <h2 className="section-label text-uppercase mb-0" id={id}>
           {label}
         </h2>
-
-        {pageCount > 1 && (
-          <nav aria-label={`Bläddra i ${label}`}>
-            <button
-              type="button"
-              className="arrow-btn btn btn-outline-light btn-sm me-2"
-              onClick={() => setPage((p) => p - 1)}
-              disabled={page === 0}
-              aria-label="Föregående sida"
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              className="arrow-btn btn btn-outline-light btn-sm"
-              onClick={() => setPage((p) => p + 1)}
-              disabled={page === pageCount - 1}
-              aria-label="Nästa sida"
-            >
-              ›
-            </button>
-          </nav>
-        )}
       </header>
 
-      <ul className="row g-3 row-cols-2 row-cols-md-4 list-unstyled">
+      <ul className="grid-movies list-unstyled">
+        <button
+          type="button"
+          className="arrow-btn"
+          style={{ visibility: pageCount > 1 ? "visible" : "hidden" }}
+          onClick={() => setPage((p) => Math.max(p - 1, 0))}
+          disabled={page === 0}
+          aria-label="Föregående sida"
+        >
+          <MdOutlineArrowBackIos size={30}/>
+        </button>
         {visibleMovies.map((movie) => (
           <li className="col" key={movie.id}>
             <Link
@@ -68,6 +57,16 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
             </Link>
           </li>
         ))}
+        <button
+          type="button"
+          className="arrow-btn"
+          style={{ visibility: pageCount > 1 ? "visible" : "hidden" }}
+          onClick={() => setPage((p) => Math.min(p + 1, pageCount - 1))}
+          disabled={page === pageCount - 1}
+          aria-label="Nästa sida"
+        >
+          <MdOutlineArrowForwardIos size={30}/>
+        </button>
       </ul>
 
       {pageCount > 1 && (
