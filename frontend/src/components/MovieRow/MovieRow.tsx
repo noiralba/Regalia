@@ -39,7 +39,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
           disabled={page === 0}
           aria-label="Föregående sida"
         >
-          <MdOutlineArrowBackIos size={30}/>
+          <MdOutlineArrowBackIos size={30} />
         </button>
         {visibleMovies.map((movie) => (
           <li className="col" key={movie.id}>
@@ -53,6 +53,12 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
                   alt={movie.title}
                   className="poster-image img-fluid rounded shadow-sm w-100"
                 />
+                <span
+                  className="age-badge"
+                  aria-label={`Åldersgräns ${movie.ageRating} år`}
+                >
+                  {movie.ageRating === 0 ? "Btl" : movie.ageRating}+
+                </span>
               </figure>
             </Link>
           </li>
@@ -65,7 +71,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
           disabled={page === pageCount - 1}
           aria-label="Nästa sida"
         >
-          <MdOutlineArrowForwardIos size={30}/>
+          <MdOutlineArrowForwardIos size={30} />
         </button>
       </ul>
 

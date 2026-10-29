@@ -20,6 +20,8 @@
   }
 
   .poster {
+    position: relative;
+    margin: 0;
     border: 1px solid c.$color-gold;
     border-radius: 8px;
     overflow: hidden;
@@ -32,6 +34,26 @@
       box-shadow: 0 0.5rem 1rem rgba(168, 135, 68, 0.75);
     }
   }
+
+    .age-badge {
+      position: absolute;
+        bottom: 0.5rem;
+        left: 0.5rem;
+      display: grid;
+      place-items: center;
+      min-width: 2rem;
+      height: 2rem;
+      padding-inline: 0.35rem;
+      border: 1px solid c.$color-gold;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      color: c.$color-gold;
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: none; // klick går igenom till länken
+    }
 
   .poster-image {
     display: block;
