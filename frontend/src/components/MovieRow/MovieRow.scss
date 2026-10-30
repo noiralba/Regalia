@@ -2,7 +2,7 @@
 
 .movie-row {
   padding-block: 1.5rem;
-  width: 100% !important;
+
 
   .grid-movies {
     display: grid;
@@ -11,6 +11,15 @@
     gap: 1rem;
     padding: 0;
     margin: 0;
+
+    @include c.respond-to(tablet) {
+      grid-template-columns: auto repeat(3, 1fr) auto;
+    }
+
+    @include c.respond-to(mobile) {
+      grid-template-columns: auto repeat(2, 1fr) auto;
+      gap: 0.5rem;
+    }
   }
 
   .section-label {
@@ -35,30 +44,31 @@
     }
   }
 
-    .age-badge {
-      position: absolute;
-        bottom: 0.5rem;
-        left: 0.5rem;
-      display: grid;
-      place-items: center;
-      min-width: 2rem;
-      height: 2rem;
-      padding-inline: 0.35rem;
-      border: 1px solid c.$color-gold;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      color: c.$color-gold;
-      font-size: 0.8rem;
-      font-weight: 700;
-      line-height: 1;
-      pointer-events: none; 
-    }
+  .age-badge {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    display: grid;
+    place-items: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding-inline: 0.35rem;
+    border: 1px solid c.$color-gold;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    color: c.$color-gold;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+    pointer-events: none;
+  }
 
   .poster-image {
     display: block;
     aspect-ratio: 2 / 3;
   }
+
 }
 
 .dots {
@@ -93,4 +103,9 @@
   background: transparent;
   color: c.$color-gold;
   cursor: pointer;
+
+  @include c.respond-to(mobile) {
+    width: 2rem;
+    height: 2rem;
+  }
 }
