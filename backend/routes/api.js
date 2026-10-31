@@ -9,6 +9,7 @@ const ticketTypeRoutes = require("./ticketTypes");
 const bookingsRoutes = require("./bookings");
 const usersRoutes = require("./users");
 const authRoutes = require("./auth");
+const themesRoutes = require("./themes");
 
 router.use("/screens", screenRoutes);
 router.use("/movies", movieRoutes);
@@ -18,5 +19,6 @@ router.use("/ticket-types", ticketTypeRoutes);
 router.use("/seats", seatsRoutes);
 router.use("/users", usersRoutes);
 router.use("/auth", authRoutes);
+router.use("/themes", themesRoutes);
 
 module.exports = router;
