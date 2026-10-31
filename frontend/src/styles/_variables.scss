@@ -1,103 +1,53 @@
-// Colors from Figma design system
-$color-bg-dark: #100d0e; // Main background color
-$color-card-bg: #1a1416; // Card background color
-$color-primary-red: #6e1726; // Primary button color
-$color-gold: #a8864a; // Border and heading accent color
-$color-cream: #ecdbb0; // Text and label color
+/* REGALIA – GLOBAL DESIGN SYSTEM */
 
-// Typography
+/* Färger */
+$color-bg-dark: #100d0e;
+$color-card-bg: #1a1416;
+$color-primary-red: #6e1726;
+$color-gold: #a8864a;
+$color-cream: #ecdbb0;
+
+/* Typsnitt */
 $font-title: "Monomakh", serif;
 $font-body: "Manrope", sans-serif;
 
-/* ========================================
-   REGALIA – GLOBAL DESIGN SYSTEM
-   ======================================== */
+/* Textstorlekar */
+$font-size-h1: 3rem;
+$font-size-h2: 1.5rem;
+$font-size-h3: 1.25rem;
+$font-size-body: 1.125rem;
+$font-size-small: 1rem;
+$font-size-button: 1.125rem;
 
-:root {
-  --regalia-radius: 8px;
-}
+/* Rundade hörn */
+$border-radius: 0.5rem;
 
-/* Knappar och interaktiva element */
-button,
-input,
-textarea,
-select,
-[role="button"] {
-  border-radius: var(--regalia-radius);
-}
+/* Responsiva brytpunkter */
+$breakpoint-mobile-max: 37.4375rem;
+$breakpoint-tablet-min: 37.5rem;
+$breakpoint-tablet-max: 64rem;
+$breakpoint-desktop-min: 64.0625rem;
 
-/* Bilder, video och inbäddat media */
-img,
-video,
-iframe {
-  border-radius: var(--regalia-radius);
-}
-
-/* Kort, paneler och vanliga ramar */
-.card,
-.panel,
-.modal,
-.dialog,
-.frame,
-section,
-article {
-  border-radius: var(--regalia-radius);
-}
-
-/* Länkar som utformas som knappar */
-a.button,
-a.btn,
-.button,
-.btn {
-  border-radius: var(--regalia-radius);
-}
-
-/* Formulärfält får rundade kanter även vid fokus */
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-button:focus-visible,
-[role="button"]:focus-visible {
-  outline-offset: 3px;
-}
-
-// Breakpoints
-$breakpoint-mobile-max: 599px;
-$breakpoint-tablet-min: 600px;
-$breakpoint-tablet-max: 1024px;
-$breakpoint-desktop-min: 1025px;
-
-// Mixins for responsive design and accessibility
-
-// Responsive media query mixin
+/* Responsiv mixin */
 @mixin respond-to($media) {
-  @if $media ==mobile {
-    @media only screen and (max-width: $breakpoint-mobile-max) {
+  @if $media == mobile {
+    @media (max-width: $breakpoint-mobile-max) {
       @content;
     }
-  }
-
-  @if $media ==tablet {
-    @media only screen and (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet-max) {
+  } @else if $media == tablet {
+    @media (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet-max) {
       @content;
     }
-  }
-
-  @if $media ==desktop {
-    @media only screen and (min-width: $breakpoint-desktop-min) {
+  } @else if $media == desktop {
+    @media (min-width: $breakpoint-desktop-min) {
       @content;
     }
   }
 }
 
-// Reusable focus ring mixin for accessibility
+/* Fokusmarkering */
 @mixin focus-ring {
   outline: none;
   border-color: $color-gold;
-  box-shadow: 0 0 0 3px rgba($color-gold, 0.15);
+  box-shadow: 0 0 0 0.1875rem rgba($color-gold, 0.15);
 }
-
-// Bootstrap variable overrides
-$body-bg: $color-bg-dark;
-$body-color: $color-cream;
-$primary: $color-primary-red;

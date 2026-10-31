@@ -43,7 +43,7 @@ function HomePage() {
       <section className="hero-container">
         <HeroSection />
       </section>
-      <section className="container py-4">
+      
         <MovieRow
           id="now-playing-heading"
           label="På bio just nu"
@@ -59,7 +59,6 @@ function HomePage() {
         />
 
         <Calendar selectedDate={selectedDate} />
-      </section>
     </>
   );
 }

@@ -1,4 +1,10 @@
+/* 1. Hämta våra designvariabler */
 @use "./variables" as v;
+
+/*
+   2. BOOTSTRAP – EGNA INSTÄLLNINGAR
+   Dessa måste anges före Bootstrap importeras.
+*/
 
 $body-bg: v.$color-bg-dark;
 $body-color: v.$color-cream;
@@ -9,9 +15,18 @@ $headings-font-family: v.$font-title;
 $headings-color: v.$color-gold;
 
 $border-color: v.$color-gold;
+$border-radius: v.$border-radius;
 
-// CSS Reset: Standardizes
-//box sizing and removes default margins/paddings for all elements
+/*
+   3. IMPORTERA BOOTSTRAP
+*/
+
+@import "bootstrap/scss/bootstrap";
+
+/*
+   4. CSS RESET
+*/
+
 *,
 *::before,
 *::after {
@@ -20,7 +35,10 @@ $border-color: v.$color-gold;
   padding: 0;
 }
 
-// Prevents unwanted horizontal scroll on small screens
+/*
+   5. GRUNDSTIL FÖR HELA WEBBPLATSEN
+ */
+
 html,
 body {
   width: 100%;
@@ -28,8 +46,109 @@ body {
 }
 
 body {
+  background-color: v.$color-bg-dark;
+  color: v.$color-cream;
+  font-family: v.$font-body;
+  font-size: v.$font-size-body;
   overflow-x: clip;
 }
 
-// Import Bootstrap SCSS after variable overrides to apply custom styles
-@import "bootstrap/scss/bootstrap";
+/*
+   6. RUBRIKER
+*/
+
+h1,
+h2,
+h3 {
+  font-family: v.$font-title;
+  color: v.$color-gold;
+}
+
+h1 {
+  font-size: v.$font-size-h1;
+}
+
+h2 {
+  font-size: v.$font-size-h2;
+}
+
+h3 {
+  font-size: v.$font-size-h3;
+}
+
+/*
+   7. BRÖDTEXT
+*/
+
+p {
+  font-family: v.$font-body;
+  font-size: v.$font-size-body;
+  color: v.$color-cream;
+}
+
+.text-small {
+  font-size: v.$font-size-small;
+}
+
+/*
+   8. KNAPPAR
+*/
+
+button,
+.btn,
+.button,
+a.btn,
+a.button {
+  font-family: v.$font-body;
+  font-size: v.$font-size-button;
+  border-radius: v.$border-radius;
+}
+
+/*
+   9. FORMULÄR OCH INTERAKTIVA ELEMENT
+*/
+
+input,
+textarea,
+select,
+[role="button"] {
+  border-radius: v.$border-radius;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  @include v.focus-ring;
+}
+
+/* 
+   10. BILDER OCH MEDIA
+*/
+
+img,
+video,
+iframe {
+  border-radius: v.$border-radius;
+}
+
+/*
+   11. RESPONSIV DESIGN
+
+/* 
+Mobil
+*/
+@include v.respond-to(mobile) {
+  h1 {
+    font-size: v.$font-size-h1;
+  }
+
+  h2 {
+    font-size: v.$font-size-h2;
+  }
+
+  h3 {
+    font-size: v.$font-size-h3;
+  }
+}
