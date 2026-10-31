@@ -1,10 +1,13 @@
-import type { Movies, MovieThumbnails } from "../../types/types";
+import type { MovieThumbnails } from "../../types/types";
 import { getMovieImage } from "../../utils/movieImages";
 import { useState } from "react";
 import { Link } from "react-router";
 import { slugify } from "../../utils/slugify";
 
-import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
+import {
+  MdOutlineArrowBackIos,
+  MdOutlineArrowForwardIos,
+} from "react-icons/md";
 
 import "./MovieRow.scss";
 
