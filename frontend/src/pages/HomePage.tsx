@@ -3,15 +3,15 @@ import MovieRow from "../components/MovieRow/MovieRow";
 import VipBanner from "../components/VipBanner/VipBanner";
 
 import { useEffect, useState } from "react";
-import type { Movies } from "../types/types";
+import type { Movies, MovieThumbnails } from "../types/types";
 import { get } from "../api/api";
 import Calendar from "../components/Calender/Calender";
 
 function HomePage() {
   const [selectedDate] = useState(() => new Date().toLocaleDateString("sv-SE"));
 
-  const [nowPlaying, setNowPlaying] = useState<Movies[]>([]);
-  const [comingSoon, setComingSoon] = useState<Movies[]>([]);
+  const [nowPlaying, setNowPlaying] = useState<MovieThumbnails[]>([]);
+  const [comingSoon, setComingSoon] = useState<MovieThumbnails[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,8 +19,8 @@ function HomePage() {
     async function fetchMovies() {
       try {
         const [latest, upcoming] = await Promise.all([
-          get<Movies[]>("/api/movies/type/latest"),
-          get<Movies[]>("/api/movies/type/upcoming"),
+          get<MovieThumbnails[]>("/api/movies/type/latest"),
+          get<MovieThumbnails[]>("/api/movies/type/upcoming"),
         ]);
         setNowPlaying(latest);
         setComingSoon(upcoming);

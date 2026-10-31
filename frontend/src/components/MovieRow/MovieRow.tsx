@@ -1,4 +1,4 @@
-import type { Movies } from "../../types/types";
+import type { Movies, MovieThumbnails } from "../../types/types";
 import { getMovieImage } from "../../utils/movieImages";
 import { useState } from "react";
 import { Link } from "react-router";
@@ -9,7 +9,7 @@ import "./MovieRow.scss";
 type MovieRowProps = {
   id?: string;
   label: string;
-  movies: Movies[];
+  movies: MovieThumbnails[];
 };
 
 const PER_PAGE = 4;
@@ -53,17 +53,20 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
 
       <ul className="row g-3 row-cols-2 row-cols-md-4 list-unstyled">
         {visibleMovies.map((movie) => (
-          <li className="col" key={movie.id}>
+          <li className="col" key={movie.movie_id}>
             <Link
-              to={`/filmer/${slugify(movie.title)}-${movie.id}`}
+              to={`/filmer/${slugify(movie.title)}-${movie.movie_id}`}
               aria-label={`Visa information om ${movie.title}`}
             >
               <figure className="poster">
                 <img
-                  src={getMovieImage(movie.posterImage)}
+                  src={getMovieImage(movie.posterThumbnail)}
                   alt={movie.title}
                   className="poster-image img-fluid rounded shadow-sm w-100"
                 />
+                <figcaption className="poster-overlay">
+                  <span className="poster-title">{movie.title}</span>
+                </figcaption>
               </figure>
             </Link>
           </li>

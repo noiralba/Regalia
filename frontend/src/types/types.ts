@@ -6,6 +6,7 @@ export interface Movies {
   duration: number;
   language: { original: string; subtitles: string };
   posterImage: string;
+  posterThumbnail: string;
   trailerUrl: string;
   shortDescription: string;
   longDescription: string;
@@ -23,6 +24,15 @@ export interface Movies {
     image: string;
     character_name: string;
   }[];
+}
+
+export interface MovieThumbnails {
+  movie_id: string;
+  title: string;
+  ageRating: number;
+  posterThumbnail: string;
+  release_date: string;
+  categories: string[];
 }
 
 //test data
