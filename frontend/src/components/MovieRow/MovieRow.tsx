@@ -1,5 +1,6 @@
 import type { MovieThumbnails } from "../../types/types";
 import { getMovieImage } from "../../utils/movieImages";
+import { getMovieThumnail } from "../../utils/movieThumbnail";
 import { useState } from "react";
 import { Link } from "react-router";
 import { slugify } from "../../utils/slugify";
@@ -52,7 +53,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
             >
               <figure className="poster">
                 <img
-                  src={getMovieImage(movie.posterThumbnail)}
+                  src={getMovieThumnail(movie.posterThumbnail)}
                   alt={movie.title}
                   className="poster-image img-fluid rounded shadow-sm w-100"
                 />
