@@ -7,6 +7,8 @@ export default function HeroSection() {
   const [activeTrailer, setActiveTrailer] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const currentTrailer = promoTrailers[activeTrailer];
+
   // Öppna gardinerna
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -33,7 +35,11 @@ export default function HeroSection() {
   return (
     <section
       className={`hero ${curtainsOpen ? "hero--open" : ""}`}
-      aria-label="Biografens trailers"
+      aria-label={
+        currentTrailer
+          ? `Biografens trailers: ${currentTrailer.title}`
+          : "Biografens trailers"
+      }
     >
       <section
         className="hero__curtain hero__curtain--top"
@@ -44,8 +50,8 @@ export default function HeroSection() {
         <video
           ref={videoRef}
           className="hero__video"
-          key={promoTrailers[activeTrailer]}
-          src={promoTrailers[activeTrailer]}
+          key={currentTrailer?.src}
+          src={currentTrailer?.src}
           autoPlay
           muted
           playsInline
@@ -55,6 +61,10 @@ export default function HeroSection() {
           Din webbläsare stöder inte video.
         </video>
       </section>
+
+      {currentTrailer && (
+        <h2 className="hero__title">{currentTrailer.title}</h2>
+      )}
 
       <section
         className="hero__curtain hero__curtain--left"
