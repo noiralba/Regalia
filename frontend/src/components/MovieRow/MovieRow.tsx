@@ -17,13 +17,39 @@ type MovieRowProps = {
   movies: MovieThumbnails[];
 };
 
-const PER_PAGE = 5;
+const MOBILE = "(max-width: 37.4375rem)";
+const TABLET = "(min-width: 37.5rem) and (max-width: 64rem)";
+
+function getPerPage() {
+  if (window.matchMedia(MOBILE).matches) return 2;
+  if (window.matchMedia(TABLET).matches) return 3;
+  return 5;
+}
+
+function usePerPage() {
+  const [perPage, setPerPage] = useState(getPerPage);
+
+  useEffect(() => {
+    const queries = [MOBILE, TABLET].map((q) => window.matchMedia(q));
+    const update = () => setPerPage(getPerPage());
+    queries.forEach((mq) => mq.addEventListener("change", update));
+    return () =>
+      queries.forEach((mq) => mq.removeEventListener("change", update));
+  }, []);
+
+  return perPage;
+}
 
 export default function MovieRow({ id, label, movies }: MovieRowProps) {
+  const perPage = usePerPage();
   const [page, setPage] = useState(0);
 
-  const pageCount = Math.ceil(movies.length / PER_PAGE);
-  const visibleMovies = movies.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
+  const pageCount = Math.ceil(movies.length / perPage);
+  const safePage = Math.min(page, pageCount - 1);
+  const visibleMovies = movies.slice(
+    safePage * perPage,
+    (safePage + 1) * perPage,
+  );
 
   return (
     <section className="movie-row px-4" aria-labelledby={id}>
@@ -33,13 +59,13 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
         </h2>
       </header>
 
-      <ul className="grid-movies list-unstyled">
+      <article className="carousel">
         <button
           type="button"
           className="arrow-btn"
           style={{ visibility: pageCount > 1 ? "visible" : "hidden" }}
-          onClick={() => setPage((p) => Math.max(p - 1, 0))}
-          disabled={page === 0}
+          onClick={() => setPage(Math.max(safePage - 1, 0))}
+          disabled={safePage === 0}
           aria-label="Föregående sida"
         >
           <MdOutlineArrowBackIos size={30} />
@@ -87,12 +113,12 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
           className="arrow-btn"
           style={{ visibility: pageCount > 1 ? "visible" : "hidden" }}
           onClick={() => setPage((p) => Math.min(p + 1, pageCount - 1))}
-          disabled={page === pageCount - 1}
+          disabled={safePage === pageCount - 1}
           aria-label="Nästa sida"
         >
           <MdOutlineArrowForwardIos size={30} />
         </button>
-      </ul>
+      </article>
 
       {pageCount > 1 && (
         <nav className="dots" aria-label={`Sidor i ${label}`}>
@@ -100,10 +126,10 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
             <button
               key={i}
               type="button"
-              className={i === page ? "active" : undefined}
+              className={i === safePage ? "active" : undefined}
               onClick={() => setPage(i)}
               aria-label={`Sida ${i + 1} av ${pageCount}`}
-              aria-current={i === page ? "true" : undefined}
+              aria-current={i === safePage ? "true" : undefined}
             />
           ))}
         </nav>

@@ -123,9 +123,9 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   }, [showingsWithInfo]);
 
   return (
-    <section className="calender container my-5">
+    <section className="calender my-5">
       <header className="mb-3">
-        <h2 className="h5 text-uppercase">
+        <h2 className="calender-title text-uppercase">
           {formatSelectedDate(selectedDate)}
         </h2>
       </header>
@@ -147,7 +147,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                 key={movie.movie_id}
               >
                 <header className="col-12 col-md-4">
-                  <h3 className="movie-title text-uppercase fw-bold fs-6">
+                  <h3 className="movie-title text-uppercase">
                     {movie.Movie}
                   </h3>
 
@@ -184,7 +184,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
             <footer className="row g-0 mt-3">
               <section className="col-12 col-md-8 offset-md-4">
                 <button
-                  onClick={() => navigate("/kalender")} //
+                  onClick={() => navigate("/kalender")} 
                   type="button"
                   className="show-more btn rounded-2 w-100 py-2 text-uppercase fw-semibold"
                 >
