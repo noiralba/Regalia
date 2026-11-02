@@ -32,7 +32,6 @@
     color: v.$color-cream;
     background: #191315;
     border: 1px solid #a8864a;
-    border-radius: 2px;
     cursor: pointer;
     transition:
       background 0.2s ease,
@@ -67,7 +66,7 @@
   .movie-detail__description-toggle:active {
     all: unset !important;
     display: inline !important;
-    color: #ecdbb0 !important;
+    color: v.$color-gold !important;
     background: transparent !important;
     border: none !important;
     outline: none !important;
@@ -232,6 +231,7 @@
     padding: 7px 12px;
     font-size: 15px;
     white-space: nowrap;
+    text-transform: uppercase;
 
     &[aria-pressed="true"] {
       color: #ecdbb0;

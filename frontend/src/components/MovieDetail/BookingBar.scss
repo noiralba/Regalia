@@ -3,7 +3,6 @@
   .booking {
     margin-top: 12px;
     padding-top: 10px;
-    border-top: 1px solid v.$color-gold;
 
     .booking-info {
       display: flex;
@@ -34,6 +33,7 @@
     font-family: v.$font-body;
     font-size: 19px;
     letter-spacing: 0.08em;
+    border-radius: v.$border-radius;
   }
 
   .book-button:hover:not(:disabled) {
