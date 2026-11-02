@@ -75,17 +75,21 @@ router.get("/", async (req, res) => {
 router.get("/type/:filter", async (req, res, next) => {
   const { filter } = req.params;
 
-  if (filter !== "latest" && filter !== "upcoming") {
+  const validFilters = ["latest", "current", "upcoming", "past"];
+  if (!validFilters.includes(filter)) {
     return next();
   }
 
   try {
-    const movies = await getMovies({ type: filter, limit: 15 });
+    const statusParam =
+      filter === "latest" || filter === "current" ? "current" : filter;
+
+    const movies = await getMovies({ status: statusParam, limit: 15 });
     res.status(200).json(movies);
   } catch (error) {
     console.error(`GET /movies/type/${filter}:`, error.message);
     return res.status(500).json({
-      error: `Could not retrieve ${filter} movies from the database.`,
+      error: `Kunde inte hämta filmer med status ${filter} från databasen.`,
     });
   }
 });
