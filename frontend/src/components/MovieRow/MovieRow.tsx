@@ -1,6 +1,5 @@
 import type { MovieThumbnails } from "../../types/types";
-import { getMovieImage } from "../../utils/movieImages";
-import { getMovieThumnail } from "../../utils/movieThumbnail";
+import { getMovieImage } from "../../utils/getMovieImage";
 import { useState } from "react";
 import { Link } from "react-router";
 import { slugify } from "../../utils/slugify";
@@ -45,31 +44,44 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
         >
           <MdOutlineArrowBackIos size={30} />
         </button>
-        {visibleMovies.map((movie) => (
-          <li className="col" key={movie.movie_id}>
-            <Link
-              to={`/filmer/${slugify(movie.title)}-${movie.movie_id}`}
-              aria-label={`Visa information om ${movie.title}`}
-            >
-              <figure className="poster">
-                <img
-                  src={getMovieThumnail(movie.posterThumbnail)}
-                  alt={movie.title}
-                  className="poster-image img-fluid rounded shadow-sm w-100"
-                />
-                <span
-                  className="age-badge"
-                  aria-label={`Åldersgräns ${movie.ageRating} år`}
-                >
-                  {movie.ageRating === 0 ? "Btl" : movie.ageRating}+
-                </span>
-                <figcaption className="poster-overlay">
-                  <span className="poster-title">{movie.title}</span>
-                </figcaption>
-              </figure>
-            </Link>
-          </li>
-        ))}
+        {visibleMovies.map((movie) => {
+          const thumbnailUrl = getMovieImage(
+            movie.posterThumbnail,
+            "thumbnail",
+          );
+          const posterUrl = getMovieImage(movie.posterThumbnail, "poster");
+
+          return (
+            <li className="col" key={movie.movie_id}>
+              <Link
+                to={`/filmer/${slugify(movie.title)}-${movie.movie_id}`}
+                aria-label={`Visa information om ${movie.title}`}
+              >
+                <figure className="poster">
+                  <picture>
+                    <source media="(max-width: 767px)" srcSet={thumbnailUrl} />
+
+                    <img
+                      src={posterUrl}
+                      alt={movie.title}
+                      loading="lazy"
+                      className="poster-image img-fluid rounded shadow-sm w-100"
+                    />
+                  </picture>
+                  <span
+                    className="age-badge"
+                    aria-label={`Åldersgräns ${movie.ageRating} år`}
+                  >
+                    {movie.ageRating === 0 ? "Btl" : movie.ageRating}+
+                  </span>
+                  <figcaption className="poster-overlay">
+                    <span className="poster-title">{movie.title}</span>
+                  </figcaption>
+                </figure>
+              </Link>
+            </li>
+          );
+        })}
         <button
           type="button"
           className="arrow-btn"
