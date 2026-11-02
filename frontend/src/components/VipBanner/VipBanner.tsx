@@ -4,9 +4,9 @@ import "./VipBanner.scss";
 
 export default function VipBanner() {
   return (
-    <section className="container my-5">
+    <section className="my-5">
       <article className="vip-banner">
-        <div className="row align-items-center g-4">
+        <section className="row align-items-center g-4">
           <section className="col-lg-6">
             <img
               src={vipImageLounge}
@@ -26,18 +26,24 @@ export default function VipBanner() {
 
             <article className="vip-banner-description">
               <p>
-                Samla gänget, luta er tillbaka och njut av god mat, kalla
-                drycker och en riktigt bra film.<br></br>Boka er egen loge
+                Samla vännerna, familjen eller kollegorna för en kväll utöver
+                det vanliga i Regalias privata loge. Här får ni njuta av
+                filmupplevelsen tillsammans i en exklusiv och avkopplande miljö,
+                med gott om utrymme för både skratt, gemenskap och guldkant på
+                tillvaron. Genom vårt samarbete med Restaurang Trivana kan vi
+                dessutom erbjuda mat som förhöjer upplevelsen ytterligare. Njut
+                av god mat, något gott i glaset och en riktigt bra film – allt
+                samlat under samma tak.
               </p>
             </article>
 
             <nav className="vip-banner-actions" aria-label="VIP-erbjudande">
               <Link to="/vip" className="vip-banner-btn btn">
-                TA MIG TILL LOGE
+                TA MIG TILL LOGEN
               </Link>
             </nav>
           </section>
-        </div>
+        </section>
       </article>
     </section>
   );
