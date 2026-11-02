@@ -1,6 +1,7 @@
 import HeroSection from "../components/hero/HeroSection";
 import MovieRow from "../components/MovieRow/MovieRow";
 import VipBanner from "../components/VipBanner/VipBanner";
+import "../styles/HomePage.scss";
 
 import { useEffect, useState } from "react";
 import type { MovieThumbnails } from "../types/types";
@@ -39,11 +40,14 @@ function HomePage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <>
+    <main className="home-page">
+      {/* Fullbredd */}
       <section className="hero-container">
         <HeroSection />
       </section>
-      
+
+      {/* Gemensam innehållsbredd */}
+      <section className="home-content">
         <MovieRow
           id="now-playing-heading"
           label="På bio just nu"
@@ -59,7 +63,8 @@ function HomePage() {
         />
 
         <Calendar selectedDate={selectedDate} />
-    </>
+      </section>
+    </main>
   );
 }
 

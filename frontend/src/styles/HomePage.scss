@@ -1,0 +1,13 @@
+@use "./variables" as v;
+
+.home-page {
+  width: 100%;
+  min-width: 0;
+}
+
+// Gemensam innehållsbredd
+.home-content {
+  width: 100%;
+  max-width: v.$content-max-width;
+  margin-inline: auto;
+}
