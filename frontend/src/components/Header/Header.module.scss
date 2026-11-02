@@ -12,8 +12,13 @@ $gold-bright: #f4e8c4;
   background: $bg;
   color: $gold-light;
   font-family: "Playfair Display", "Times New Roman", serif;
-  padding-bottom: 0.25rem; // så stjärnan inte ligger kant i kant med innehållet
-  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.headerHome {
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .bar {
@@ -99,10 +104,12 @@ $gold-bright: #f4e8c4;
     &:nth-child(1) {
       top: 0;
     }
+
     &:nth-child(2) {
       top: 50%;
       margin-top: -1px;
     }
+
     &:nth-child(3) {
       top: 100%;
       margin-top: -2px;
@@ -117,10 +124,12 @@ $gold-bright: #f4e8c4;
     margin-top: -1px;
     transform: rotate(45deg);
   }
+
   &:nth-child(2) {
     opacity: 0;
     transform: scaleX(0);
   }
+
   &:nth-child(3) {
     top: 50%;
     margin-top: -1px;
@@ -189,11 +198,38 @@ $gold-bright: #f4e8c4;
   flex-shrink: 0;
 }
 
-/* ---------- Mobil ---------- */
+/* ---------- Desktop ---------- */
+@media (min-width: 769px) {
+  .bar {
+    padding: 1.25rem 4rem;
+  }
+
+  .brand {
+    margin-left: -1.5rem;
+  }
+
+  .icon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .brandName {
+    position: relative;
+    top: 0.3rem;
+  }
+
+  .nav {
+    position: relative;
+    top: 0.3rem;
+  }
+}
+
+/* ---------- Responsiva storlekar ---------- */
 @media (max-width: 1200px) {
   .link {
     font-size: 1.4rem;
   }
+
   .nav {
     gap: 1.2rem;
   }
@@ -203,14 +239,17 @@ $gold-bright: #f4e8c4;
   .brandName {
     font-size: 1.5rem;
   }
+
   .link {
     font-size: 1.15rem;
   }
+
   .nav {
     gap: 1rem;
   }
 }
 
+/* ---------- Mobil ---------- */
 @media (max-width: 768px) {
   .toggle {
     display: inline-flex;
@@ -222,7 +261,7 @@ $gold-bright: #f4e8c4;
     order: 3;
     display: grid;
     grid-template-rows: 0fr;
-    visibility: hidden; // gömda länkar ska inte gå att tabba till
+    visibility: hidden;
     transition:
       grid-template-rows 0.45s cubic-bezier(0.65, 0, 0.35, 1),
       visibility 0s linear 0.45s;
@@ -268,6 +307,7 @@ $gold-bright: #f4e8c4;
   }
 }
 
+/* ---------- Tillgänglighet ---------- */
 @media (prefers-reduced-motion: reduce) {
   .link,
   .toggle,
