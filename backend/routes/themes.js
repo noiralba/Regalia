@@ -40,6 +40,7 @@ router.get("/", async (req, res) => {
     );
     res.json(themes);
   } catch (error) {
+    console.error("Fel vid hämtning av teman med filmer:", error);
     res.status(500).json({ error: "Kunde inte hämta teman." });
   }
 });

@@ -3,7 +3,7 @@ import MovieRow from "../components/MovieRow/MovieRow";
 import VipBanner from "../components/VipBanner/VipBanner";
 
 import { useEffect, useState } from "react";
-import type { Movies, MovieThumbnails } from "../types/types";
+import type { MovieThumbnails } from "../types/types";
 import { get } from "../api/api";
 import Calendar from "../components/Calender/Calender";
 
