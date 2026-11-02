@@ -119,7 +119,7 @@ Retrieves all movies from the database with optional filters (`ageRating`, `cate
 
 ```json
 {
-  "error": "Kategorin finns inte"
+  "error": "Kategorin finns inte."
 }
 ``` -->
 

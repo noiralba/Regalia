@@ -2,21 +2,26 @@
 
 .movie-row {
   padding-block: 1.5rem;
-  width: 100% !important;
-
-  .grid-movies {
-    display: grid;
-    grid-template-columns: auto repeat(5, 1fr) auto;
-    align-items: center;
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-  }
+  width: 100%;
 
   .section-label {
     font-family: c.$font-title;
     color: c.$color-cream;
     letter-spacing: 0.08em;
+  }
+
+  .movie-carousel {
+    position: relative;
+    width: 100%;
+  }
+
+  .grid-movies {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
   }
 
   .poster {
@@ -90,12 +95,33 @@
     font-size: 0.8rem;
     font-weight: 700;
     line-height: 1;
-    pointer-events: none; // klick går igenom till länken
+    pointer-events: none;
   }
 
   .poster-image {
     display: block;
     aspect-ratio: 2 / 3;
+  }
+}
+
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: c.$color-gold;
+  cursor: pointer;
+
+  &.arrow-prev {
+    left: -3rem;
+  }
+
+  &.arrow-next {
+    right: -3rem;
   }
 }
 
@@ -122,13 +148,4 @@
       @include c.focus-ring;
     }
   }
-}
-
-.arrow-btn {
-  display: grid;
-  place-items: center;
-  border: none;
-  background: transparent;
-  color: c.$color-gold;
-  cursor: pointer;
 }

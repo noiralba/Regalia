@@ -26,17 +26,17 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
   const visibleMovies = movies.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
 
   return (
-    <section className="movie-row px-4" aria-labelledby={id}>
-      <header className="d-flex justify-content-between align-items-center mb-3">
+    <section className="movie-row" aria-labelledby={id}>
+      <header className="mb-3">
         <h2 className="section-label text-uppercase mb-0" id={id}>
           {label}
         </h2>
       </header>
 
-      <ul className="grid-movies list-unstyled">
+      <section className="movie-carousel" aria-label={`Filmer: ${label}`}>
         <button
           type="button"
-          className="arrow-btn"
+          className="arrow-btn arrow-prev"
           style={{ visibility: pageCount > 1 ? "visible" : "hidden" }}
           onClick={() => setPage((p) => Math.max(p - 1, 0))}
           disabled={page === 0}
@@ -84,7 +84,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
         })}
         <button
           type="button"
-          className="arrow-btn"
+          className="arrow-btn arrow-next"
           style={{ visibility: pageCount > 1 ? "visible" : "hidden" }}
           onClick={() => setPage((p) => Math.min(p + 1, pageCount - 1))}
           disabled={page === pageCount - 1}
@@ -92,7 +92,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
         >
           <MdOutlineArrowForwardIos size={30} />
         </button>
-      </ul>
+      </section>
 
       {pageCount > 1 && (
         <nav className="dots" aria-label={`Sidor i ${label}`}>
