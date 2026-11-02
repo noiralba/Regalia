@@ -1,16 +1,15 @@
-
-const personImages = import.meta.glob(
-  '../assets/images/people/*',
-  {
-    eager: true,
-    import: 'default',
-  },
-) as Record<string, string>
+const personImages = import.meta.glob("../assets/images/people/*", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
 
 export function getPersonImage(image: string): string {
-  const fileName = image.split('/').pop()
+  const cleanImageName = image.split("/").pop()?.split(".")[0] || "";
 
-  const imagePath = `../assets/images/people/${fileName}`
+  const matchedKey = Object.keys(personImages).find((key) => {
+    const keyFileName = key.split("/").pop()?.split(".")[0];
+    return keyFileName === cleanImageName;
+  });
 
-  return personImages[imagePath] ?? ''
+  return matchedKey ? personImages[matchedKey] : "";
 }
