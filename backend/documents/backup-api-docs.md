@@ -158,6 +158,8 @@ Retrieves all movies from the database with optional filters (`ageRating`, `cate
 }
 ```
 
+he jonte
+
 ### GET /movies?ageRating=11&categories=Äventyr&search=odysseus
 
 **Response:** `200 OK`
