@@ -1,12 +1,6 @@
 @use "../../styles/variables" as v;
 
 .calender {
-  margin: 1rem;
-
-  .calender-title {
-    color: v.$color-cream;
-  }
-
   .schedule-box {
     background-color: v.$color-card-bg;
     border: 1px solid v.$color-gold;
@@ -14,7 +8,6 @@
 
   .movie-title {
     color: v.$color-cream;
-    font-size: v.$font-size-h3;
   }
 
   .movie-info {
@@ -23,20 +16,22 @@
     color: v.$color-gold;
   }
 
-  .time-btn  {
+  .btn {
+    --bs-btn-color: #{v.$color-gold};
+    --bs-btn-bg: #{v.$color-bg-dark};
+    --bs-btn-border-color: #{v.$color-gold};
+
+    --bs-btn-hover-color: #{v.$color-cream};
+    --bs-btn-hover-bg: #{v.$color-primary-red};
+    --bs-btn-hover-border-color: #{v.$color-gold};
+
+    --bs-btn-active-color: #{v.$color-cream};
+    --bs-btn-active-bg: #{v.$color-primary-red};
+    --bs-btn-active-border-color: #{v.$color-primary-red};
+  }
+
+  .time-btn time {
     font-family: v.$font-body;
     color: v.$color-cream;
-    border: 1px solid v.$color-gold;
-    background-color: v.$color-bg-dark;
-  }
-
-  small {
-    color: v.$color-gold;
-  }
-
-  .show-more {
-    color: v.$color-cream;
-    background-color: v.$color-primary-red;
-    border: 1px solid v.$color-gold;
   }
 }
