@@ -3,23 +3,27 @@
 .movie-row {
   padding-block: 1.5rem;
 
+  .carousel {
+    display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto; 
+      align-items: center;
+      gap: 0.5rem;
+    
+      @include c.respond-to(desktop) {
+        gap: 1rem;
+      }
+  }
 
   .grid-movies {
     display: grid;
-    grid-template-columns: auto repeat(5, 1fr) auto;
-    align-items: center;
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-
-    @include c.respond-to(tablet) {
-      grid-template-columns: auto repeat(3, 1fr) auto;
-    }
-
-    @include c.respond-to(mobile) {
-      grid-template-columns: auto repeat(2, 1fr) auto;
+      grid-template-columns: repeat(var(--per-page), minmax(0, 1fr));
       gap: 0.5rem;
-    }
+      padding: 0;
+      margin: 0;
+    
+      @include c.respond-to(desktop) {
+        gap: 1rem;
+      }
   }
 
   .section-label {
@@ -66,6 +70,7 @@
 
   .poster-image {
     display: block;
+    width: 100%;
     aspect-ratio: 2 / 3;
   }
 
@@ -101,14 +106,24 @@
 
 .arrow-btn {
   display: grid;
-  place-items: center;
-  border: none;
-  background: transparent;
-  color: c.$color-gold;
-  cursor: pointer;
-
-  @include c.respond-to(mobile) {
-    width: 2rem;
-    height: 2rem;
-  }
+    place-items: center;
+    border: none;
+    background: transparent;
+    color: c.$color-gold;
+    cursor: pointer;
+  
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+  
+    @include c.respond-to(mobile) {
+      width: 1.5rem;
+      height: 2rem;
+  
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
 }
