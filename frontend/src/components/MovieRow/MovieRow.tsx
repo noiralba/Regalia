@@ -44,44 +44,49 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
         >
           <MdOutlineArrowBackIos size={30} />
         </button>
-        {visibleMovies.map((movie) => {
-          const thumbnailUrl = getMovieImage(
-            movie.posterThumbnail,
-            "thumbnail",
-          );
-          const posterUrl = getMovieImage(movie.posterThumbnail, "poster");
+        <ul className="grid-movies list-unstyled">
+          {visibleMovies.map((movie) => {
+            const thumbnailUrl = getMovieImage(
+              movie.posterThumbnail,
+              "thumbnail",
+            );
+            const posterUrl = getMovieImage(movie.posterThumbnail, "poster");
 
-          return (
-            <li className="col" key={movie.movie_id}>
-              <Link
-                to={`/filmer/${slugify(movie.title)}-${movie.movie_id}`}
-                aria-label={`Visa information om ${movie.title}`}
-              >
-                <figure className="poster">
-                  <picture>
-                    <source media="(max-width: 767px)" srcSet={thumbnailUrl} />
+            return (
+              <li className="col" key={movie.movie_id}>
+                <Link
+                  to={`/filmer/${slugify(movie.title)}-${movie.movie_id}`}
+                  aria-label={`Visa information om ${movie.title}`}
+                >
+                  <figure className="poster">
+                    <picture>
+                      <source
+                        media="(max-width: 767px)"
+                        srcSet={thumbnailUrl}
+                      />
 
-                    <img
-                      src={posterUrl}
-                      alt={movie.title}
-                      loading="lazy"
-                      className="poster-image img-fluid rounded shadow-sm w-100"
-                    />
-                  </picture>
-                  <span
-                    className="age-badge"
-                    aria-label={`Åldersgräns ${movie.ageRating} år`}
-                  >
-                    {movie.ageRating === 0 ? "Btl" : movie.ageRating}+
-                  </span>
-                  <figcaption className="poster-overlay">
-                    <span className="poster-title">{movie.title}</span>
-                  </figcaption>
-                </figure>
-              </Link>
-            </li>
-          );
-        })}
+                      <img
+                        src={posterUrl}
+                        alt={movie.title}
+                        loading="lazy"
+                        className="poster-image img-fluid rounded shadow-sm w-100"
+                      />
+                    </picture>
+                    <span
+                      className="age-badge"
+                      aria-label={`Åldersgräns ${movie.ageRating} år`}
+                    >
+                      {movie.ageRating === 0 ? "Btl" : movie.ageRating}+
+                    </span>
+                    <figcaption className="poster-overlay">
+                      <span className="poster-title">{movie.title}</span>
+                    </figcaption>
+                  </figure>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
         <button
           type="button"
           className="arrow-btn arrow-next"
