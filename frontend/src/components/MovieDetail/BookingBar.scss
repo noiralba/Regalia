@@ -1,0 +1,52 @@
+  @use "../../styles/variables" as v;
+  
+  .booking {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid v.$color-gold;
+
+    .booking-info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      gap: 4px;
+      font-family: v.$font-body;
+      font-size: 14px;
+      color: v.$color-cream;
+
+      &__separator {
+        margin: 0 4px;
+        color: v.$color-cream;
+      }
+    }
+  }
+
+  .book-button {
+    width: 100%;
+    max-width: v.$content-max-width;
+    min-height: 42px;
+    margin-top: 8px;
+    padding: 10px;
+    color: v.$color-cream;
+    background: v.$color-primary-red;
+    border-color: v.$color-primary-red;
+    font-family: v.$font-body;
+    font-size: 19px;
+    letter-spacing: 0.08em;
+  }
+
+  .book-button:hover:not(:disabled) {
+    background: v.$color-primary-red;
+    border-color: v.$color-gold;
+  }
+
+  .book-button:focus-visible {
+    outline: 2px solid v.$color-gold;
+    outline-offset: 3px;
+  }
+
+  .book-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
