@@ -1,6 +1,6 @@
 // import React from "react";
 import { Link } from "react-router";
-import { getMovieImage } from "../../utils/movieImages";
+import { getMovieImage } from "../../utils/getMovieImage";
 import { slugify } from "../../utils/slugify";
 import "./ThemeFilmStrip.scss";
 

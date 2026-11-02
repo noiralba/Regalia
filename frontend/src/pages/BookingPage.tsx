@@ -12,7 +12,7 @@ import "../styles/BookingPage.scss";
 import SeatMap from "../components/SeatMap/SeatMap";
 import SeatMapModal from "../components/SeatMap/SeatMapModal";
 import { getById } from "../api/api";
-import { getMovieImage } from "../utils/movieImages";
+import { getMovieImage } from "../utils/getMovieImage";
 import { extractIdFromSlug } from "../utils/slugify";
 
 interface TicketType {
