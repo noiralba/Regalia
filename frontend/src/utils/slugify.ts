@@ -10,8 +10,8 @@ export function slugify(text: string): string {
     .replace(/å/g, "a") // Ersätt åäö
     .replace(/ä/g, "a")
     .replace(/ö/g, "o")
-    .replace(/[^\w\-]+/g, "") // Ta bort alla specialtecken förutom -
-    .replace(/\-\-+/g, "-"); // Ta bort dubbla -
+    .replace(/[^\w-]+/g, "") // Ta bort alla specialtecken förutom -
+    .replace(/--+/g, "-"); // Ta bort dubbla -
 }
 
 // Plockar ut det sista UUID:t från en kombinerad URL-sträng

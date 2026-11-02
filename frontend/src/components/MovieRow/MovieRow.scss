@@ -25,35 +25,73 @@
     border: 1px solid c.$color-gold;
     border-radius: 8px;
     overflow: hidden;
+    margin: 0; // Nollställer figurens standardmarginal
     transition:
       transform 0.2s ease,
       box-shadow 0.2s ease;
 
-    &:hover {
+    // Den dolda overlayen som tonas in
+    .poster-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75); // Mörk bakgrund ovanpå bilden
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+      opacity: 0; // Dold som standard
+      transition: opacity 0.2s ease;
+    }
+
+    .poster-title {
+      font-family: c.$font-title; // Använder din guld-font om du vill ha den här med
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      transform: translateY(8px); // Liten rörelse nedifrån vid aktivering
+      transition: transform 0.2s ease;
+    }
+
+    // Aktiveras vid hover ELLER när länkens inuti får fokus via tangentbordet
+    &:hover,
+    &:focus-within {
       transform: translateY(-4px);
       box-shadow: 0 0.5rem 1rem rgba(168, 135, 68, 0.75);
+
+      .poster-overlay {
+        opacity: 1; // Visar textrutan
+      }
+
+      .poster-title {
+        transform: translateY(0); // Flyttar upp texten till mitten
+      }
     }
   }
 
-    .age-badge {
-      position: absolute;
-        bottom: 0.5rem;
-        left: 0.5rem;
-      display: grid;
-      place-items: center;
-      min-width: 2rem;
-      height: 2rem;
-      padding-inline: 0.35rem;
-      border: 1px solid c.$color-gold;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      color: c.$color-gold;
-      font-size: 0.8rem;
-      font-weight: 700;
-      line-height: 1;
-      pointer-events: none; // klick går igenom till länken
-    }
+  .age-badge {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    display: grid;
+    place-items: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding-inline: 0.35rem;
+    border: 1px solid c.$color-gold;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    color: c.$color-gold;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+    pointer-events: none; // klick går igenom till länken
+  }
 
   .poster-image {
     display: block;

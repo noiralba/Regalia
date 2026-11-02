@@ -1,0 +1,76 @@
+@use "../../styles/variables" as v;
+
+.theme-filmstrip {
+  margin-top: 20px;
+  &__strip-wrapper {
+    position: relative;
+    padding: 16px 0;
+    background: #1a1515;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    overflow-x: auto;
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background-image: linear-gradient(
+        90deg,
+        #fff 0px,
+        #fff 12px,
+        // Hålens bredd (12px)
+        transparent 12px,
+        transparent 18px
+      );
+      background-size: 18px 100%;
+    }
+
+    &::before {
+      top: 4px;
+    }
+
+    &::after {
+      bottom: 4px;
+    }
+  }
+
+  &__strip {
+    display: flex;
+    padding: 0 10px;
+    margin: 0;
+    min-width: max-content;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__item {
+    padding: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &__poster {
+    width: 145px;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    background: #000;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

@@ -1,7 +1,7 @@
 const db = require("../db");
 
 async function getMovies({ type = "latest", limit = 15 } = {}, targetDb = db) {
-  let sql = "SELECT * FROM movies";
+  let sql = "SELECT * FROM v_homepage_movies";
 
   if (type === "upcoming") {
     sql += " WHERE release_date > NOW() ORDER BY release_date ASC";
