@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import type {
   BookingConfirmation,
-  Seat,
   Movies,
   MovieScreening,
 } from "../types/types";
@@ -14,6 +13,7 @@ import SeatMapModal from "../components/SeatMap/SeatMapModal";
 import { getById } from "../api/api";
 import { getMovieImage } from "../utils/getMovieImage";
 import { extractIdFromSlug } from "../utils/slugify";
+import { useSeatPolling } from "../hooks/useSeatPolling";
 
 interface TicketType {
   ticket_type_id: string;
@@ -21,16 +21,6 @@ interface TicketType {
   "Price (SEK)": string;
 }
 
-async function fetchSeats(visningId: string): Promise<Seat[]> {
-  const response = await fetch(
-    `http://localhost:3000/api/seats/available-seats/${visningId}`,
-  );
-  if (!response.ok) {
-    throw new Error("Could not fetch seats");
-  }
-  const data: Seat[] = await response.json();
-  return data;
-}
 function BookingPage() {
   const { showingSlug } = useParams(); // 1. Läs ut hela sluggen
   const visningId = extractIdFromSlug(showingSlug); // 2. Extrahera ut visningen
@@ -40,7 +30,7 @@ function BookingPage() {
   const [error, setError] = useState("");
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
-  const [seats, setSeats] = useState<Seat[]>([]);
+  const { seats, refreshSeats } = useSeatPolling(visningId);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -88,20 +78,7 @@ function BookingPage() {
     }
     fetchTicketTypes();
   }, []);
-  // Hämta stolarna för den valda visningen
-  useEffect(() => {
-    if (!visningId) return;
-    async function loadSeats() {
-      try {
-        const data = await fetchSeats(visningId!);
-        setSeats(data);
-      } catch (error) {
-        console.error(error);
-        setError("Kunde inte hämta stolarna.");
-      }
-    }
-    loadSeats();
-  }, [visningId]);
+
   // FUNKTIONER
   //Ökar/minskar antalet biljetter
   function changeTicketCount(ticketTypeId: string, change: number) {
