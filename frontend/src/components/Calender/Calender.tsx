@@ -19,6 +19,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   const [movies, setMovies] = useState<Movies[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,9 +30,15 @@ export default function Calendar({ selectedDate }: CalendarProps) {
 
     const date = new Date(`${dateString}T00:00`);
 
-    const weekday = date.toLocaleDateString("sv-SE", { weekday: "long" });
+    const weekday = date.toLocaleDateString("sv-SE", {
+      weekday: "long",
+    });
+
     const dayAndMonth = date
-      .toLocaleDateString("sv-SE", { day: "numeric", month: "short" })
+      .toLocaleDateString("sv-SE", {
+        day: "numeric",
+        month: "short",
+      })
       .replace(".", "");
 
     return `${weekday} ${dayAndMonth}`;
@@ -123,11 +130,9 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   }, [showingsWithInfo]);
 
   return (
-    <section className="calender container my-5">
+    <section className="calender">
       <header className="mb-3">
-        <h2 className="h5 text-uppercase">
-          {formatSelectedDate(selectedDate)}
-        </h2>
+        <h2>{formatSelectedDate(selectedDate)}</h2>
       </header>
 
       {loading ? (
@@ -147,15 +152,23 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                 key={movie.movie_id}
               >
                 <header className="col-12 col-md-4">
-                  <h3 className="movie-title text-uppercase fw-bold fs-6">
-                    {movie.Movie}
-                  </h3>
+                  <h3 className="movie-title text-uppercase">{movie.Movie}</h3>
 
                   <p className="movie-info mb-0">
                     <small>
                       {movie.categories}
-                      {movie.ageRating != null && ` | ${movie.ageRating}+`}
-                      {movie.duration != null && ` | ${movie.duration} min`}
+                      {movie.ageRating != null && (
+                        <>
+                          <span className="separator">|</span>
+                          {movie.ageRating}+
+                        </>
+                      )}
+                      {movie.duration != null && (
+                        <>
+                          <span className="separator">|</span>
+                          {movie.duration} min
+                        </>
+                      )}
                     </small>
                   </p>
                 </header>
@@ -171,6 +184,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                         <time className="fw-semibold d-block">
                           {show["Start Time"]}
                         </time>
+
                         <small className="d-block">{show.Screen}</small>
                       </button>
                     </li>
@@ -184,7 +198,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
             <footer className="row g-0 mt-3">
               <section className="col-12 col-md-8 offset-md-4">
                 <button
-                  onClick={() => navigate("/kalender")} //
+                  onClick={() => navigate("/kalender")}
                   type="button"
                   className="show-more btn rounded-2 w-100 py-2 text-uppercase fw-semibold"
                 >

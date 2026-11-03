@@ -1,10 +1,10 @@
 import { Link } from "react-router";
-import vipImageLounge from "../../assets/images/vip/vip-lounge-homepage.png";
+import vipImageLounge from "../../assets/images/vip/vipbanner.png";
 import "./VipBanner.scss";
 
 export default function VipBanner() {
   return (
-    <section className="mt-3 mb-5">
+    <section>
       <article className="vip-banner">
         <section className="row align-items-center g-4">
           <section className="col-lg-6">

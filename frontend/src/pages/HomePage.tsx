@@ -1,12 +1,13 @@
 import HeroSection from "../components/hero/HeroSection";
 import MovieRow from "../components/MovieRow/MovieRow";
 import VipBanner from "../components/VipBanner/VipBanner";
+import Calendar from "../components/Calender/Calender";
+
 import "../styles/HomePage.scss";
 
 import { useEffect, useState } from "react";
 import type { MovieThumbnails } from "../types/types";
 import { get } from "../api/api";
-import Calendar from "../components/Calender/Calender";
 
 function HomePage() {
   const [selectedDate] = useState(() => new Date().toLocaleDateString("sv-SE"));
@@ -23,6 +24,7 @@ function HomePage() {
           get<MovieThumbnails[]>("/api/movies/type/latest"),
           get<MovieThumbnails[]>("/api/movies/type/upcoming"),
         ]);
+
         setNowPlaying(latest);
         setComingSoon(upcoming);
       } catch (err) {
@@ -41,28 +43,34 @@ function HomePage() {
 
   return (
     <main className="home-page">
-      {/* Fullbredd */}
-      <section className="hero-container">
+      <section className="home-hero-section">
         <HeroSection />
       </section>
 
-      {/* Gemensam innehållsbredd */}
       <section className="home-content">
-        <MovieRow
-          id="now-playing-heading"
-          label="På bio just nu"
-          movies={nowPlaying}
-        />
+        <section className="page-section">
+          <MovieRow
+            id="now-playing-heading"
+            label="På bio just nu"
+            movies={nowPlaying}
+          />
+        </section>
 
-        <VipBanner />
+        <section className="page-section">
+          <VipBanner />
+        </section>
 
-        <MovieRow
-          id="coming-soon-heading"
-          label="Kommer snart"
-          movies={comingSoon}
-        />
+        <section className="page-section">
+          <MovieRow
+            id="coming-soon-heading"
+            label="Kommer snart"
+            movies={comingSoon}
+          />
+        </section>
 
-        <Calendar selectedDate={selectedDate} />
+        <section className="page-section">
+          <Calendar selectedDate={selectedDate} />
+        </section>
       </section>
     </main>
   );

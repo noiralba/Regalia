@@ -5,9 +5,19 @@
   min-width: 0;
 }
 
-// Gemensam innehållsbredd
+// Gemensam innehållsbredd och avstånd mellan sektioner
 .home-content {
   width: 100%;
   max-width: v.$content-max-width;
   margin-inline: auto;
+  padding-inline: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: v.$section-spacing;
+}
+
+// Avstånd mellan Hero och resterande innehåll
+.home-hero-section {
+  margin-block-end: v.$section-spacing;
 }
