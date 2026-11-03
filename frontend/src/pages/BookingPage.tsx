@@ -152,16 +152,20 @@ function BookingPage() {
         },
         body: JSON.stringify(bookingData),
       });
+
       // Hanterar om en sittplats redan har bokats
       if (response.status === 409) {
-        if (visningId) {
-          const updatedSeats = await fetchSeats(visningId);
-          setSeats(updatedSeats);
-        }
+        // Hämtar platsinfo från backend
+        await refreshSeats();
+
+        // Rensar användarens tidigare valda sittplatser
         setSelectedSeats([]);
+
+        // Visar ett felmeddelande så användaren kan välja nya platser
         setError(
-          "En av dina valda platser är redan bokad. Välj nya sittplatser.",
+          "En av dina valda platser är tyvärr redan bokad. Vänligen Välj nya sittplatser.",
         );
+
         return;
       }
       if (!response.ok) {
