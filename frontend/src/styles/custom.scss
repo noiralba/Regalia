@@ -54,6 +54,14 @@ body {
   overflow-x: clip;
 }
 
+/*Pages container*/
+.page-container {
+  max-width: v.$content-max-width;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 18px;
+}
+
 /*
    6. RUBRIKER
 */

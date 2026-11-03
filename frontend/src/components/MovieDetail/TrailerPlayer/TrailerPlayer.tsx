@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import "./TrailerPlayer.scss";
 
 interface TrailerPlayerProps {
   trailerUrl: string;
@@ -47,7 +48,7 @@ function TrailerPlayer({ trailerUrl, title }: TrailerPlayerProps) {
         func: isPlaying ? "pauseVideo" : "playVideo",
         args: [],
       }),
-      "https://youtube.com",
+      "https://www.youtube.com",
     );
 
     setIsPlaying((previous) => !previous);
@@ -58,7 +59,7 @@ function TrailerPlayer({ trailerUrl, title }: TrailerPlayerProps) {
       <iframe
         ref={iframeRef}
         className="movie-trailer__video"
-        src={`https://youtube.com/embed/${encodeURIComponent(trailerId)}?enablejsapi=1&controls=0&playsinline=1&rel=0&origin=${encodeURIComponent(window.location.origin)}`}
+        src={`https://www.youtube.com/embed/${encodeURIComponent(trailerId)}?enablejsapi=1&controls=0&playsinline=1&rel=0&origin=${encodeURIComponent(window.location.origin)}`}
         title={`Trailer för ${title}`}
         allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
         allowFullScreen

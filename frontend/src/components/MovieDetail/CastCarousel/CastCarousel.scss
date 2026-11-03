@@ -1,0 +1,117 @@
+@use "../../../styles/variables" as v;
+
+.cast-carousel {
+  min-width: 0;
+  margin-top: 1.5rem;
+  padding: 1.5rem 2rem 2rem;
+  background: v.$color-card-bg;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  &__heading {
+    margin: 0;
+    font-family: v.$font-title;
+    font-size: v.$font-size-h2;
+    color: v.$color-cream;
+    text-transform: uppercase;
+  }
+
+  &__content {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    scroll-snap-type: x mandatory;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: v.$color-gold;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: v.$color-bg-dark;
+      border-radius: 3px;
+    }
+  }
+
+  &__card {
+    flex: 0 0 15rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.875rem;
+    background: v.$color-bg-dark;
+    border-radius: v.$border-radius;
+    text-align: left;
+    scroll-snap-align: start;
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: top;
+      border-radius: v.$border-radius;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      min-height: calc(1.3em * 2);
+      margin: 0 0 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(v.$color-gold, 0.4);
+      font-family: v.$font-body;
+      font-size: v.$font-size-body;
+      font-weight: 500;
+      line-height: 1.3;
+      color: v.$color-cream;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    p {
+      margin: 0;
+      font-family: v.$font-body;
+      font-size: v.$font-size-body;
+      line-height: 1.3;
+      color: v.$color-cream;
+    }
+  }
+
+  @include v.respond-to(mobile) {
+    padding: 1.25rem 1rem 1.5rem;
+
+    &__heading {
+      font-size: v.$font-size-h3;
+    }
+
+    &__arrows {
+      display: none;
+    }
+
+    &__content {
+      gap: 1rem;
+      scroll-snap-type: x proximity;
+      overscroll-behavior-x: contain;
+    }
+
+    &__card {
+      flex: 0 0 min(70vw, 14rem); 
+
+      padding: 0.625rem;
+
+      img {
+        margin-bottom: 0.75rem;
+      }
+    }
+  }
+}
