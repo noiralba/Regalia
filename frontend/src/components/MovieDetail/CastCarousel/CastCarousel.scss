@@ -21,30 +21,6 @@
     text-transform: uppercase;
   }
 
-  &__arrows {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  &__arrow {
-    padding: 0.25rem 0.5rem;
-    background: none;
-    border: none;
-    color: v.$color-gold;
-    font-size: 1.25rem;
-    line-height: 1;
-    cursor: pointer;
-
-    &:hover {
-      color: v.$color-cream;
-    }
-
-    &:focus-visible {
-      outline: 2px solid v.$color-gold;
-      outline-offset: 2px;
-    }
-  }
-
   &__content {
     display: flex;
     align-items: stretch;

@@ -1,0 +1,54 @@
+@use "../../../styles/variables" as v;
+
+.movie-description {
+  margin-top: 1.5rem;
+  padding: 18px;
+  width: 100%;
+
+  &__title {
+    font-family: v.$font-title;
+    font-size: v.$font-size-h1;
+    color: v.$color-cream;
+    text-transform: uppercase;
+  }
+
+  &__text {
+    font-family: v.$font-body;
+    font-size: v.$font-size-body;
+    color: v.$color-cream;
+    line-height: 1.5;
+
+    &--collapsed {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__toggle {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: v.$color-cream;
+    font-family: v.$font-body;
+    font-size: v.$font-size-body;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @include v.respond-to(mobile) {
+    padding: 12px;
+
+    &__title {
+      font-size: v.$font-size-h2;
+    }
+
+    &__text {
+      font-size: v.$font-size-small;
+    }
+  }
+}

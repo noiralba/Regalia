@@ -52,4 +52,10 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  @include v.respond-to(mobile) {
+    min-height: 40px;
+    padding: 8px;
+    font-size: v.$font-size-small;
+  }
 }

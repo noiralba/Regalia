@@ -7,13 +7,12 @@ import { useMovieDetail } from "../hooks/useMovieDetail";
 import { useSeatAvailability } from "../hooks/useSeatAvailability";
 import { pickNextShowing } from "../utils/showings";
 import { slugify, extractIdFromSlug } from "../utils/slugify";
-import TrailerPlayer from "../components/TrailerPlayer";
-import MovieDescription from "../components/MovieDetail/MovieDescription";
-import MovieFacts from "../components/MovieDetail/MovieFacts";
+import TrailerPlayer from "../components/MovieDetail/TrailerPlayer/TrailerPlayer";
+import MovieDescription from "../components/MovieDetail/MovieDescription/MovieDescription";
+import MovieFacts from "../components/MovieDetail/MovieFacts/MovieFacts";
 import CastCarousel from "../components/MovieDetail/CastCarousel/CastCarousel";
 import ShowtimePicker from "../components/MovieDetail/ShowtimePicker/ShowtimePicker";
 import BookingBar from "../components/MovieDetail/BookingBar/BookingBar";
-import "../styles/MovieDetailPage.scss";
 
 export default function MovieDetailPage() {
   const { movieSlug } = useParams();
@@ -59,39 +58,39 @@ export default function MovieDetailPage() {
   if (!movie) return <p>Filmen kunde inte hittas.</p>;
 
   return (
-    <main className="movie-detail">
+    <main className="page-container" aria-label="Filmdetaljer">
       <TrailerPlayer trailerUrl={movie.trailerUrl} title={movie.title} />
-      <h1 className="movie-detail__title">{movie.title}</h1>
 
       <MovieDescription
+        movie={movie}
         shortDescription={movie.shortDescription}
         longDescription={movie.longDescription}
       />
       <MovieFacts movie={movie} />
       <CastCarousel movie={movie} />
 
-        {dates.length > 0 ? (
-          <>
-            <ShowtimePicker
-              dates={dates}
-              showings={filteredShowings}
-              selectedDate={selectedDate}
-              selectedShowing={selectedShowing}
-              onSelectDate={selectDate}
-              onSelectShowing={setSelectedShowing}
-            />
-            <BookingBar
-              hasShowing={!!selectedShowing}
-              seatsLoading={seats.loading}
-              totalSeats={seats.total}
-              availableSeats={seats.available}
-              Screen={selectedShowing?.Screen || ""}
-              onBook={bookShowing}
-            />
-          </>
-        ) : (
-          <p>Inga visningar hittades för den här filmen.</p>
-        )}
+      {dates.length > 0 ? (
+        <>
+          <ShowtimePicker
+            dates={dates}
+            showings={filteredShowings}
+            selectedDate={selectedDate}
+            selectedShowing={selectedShowing}
+            onSelectDate={selectDate}
+            onSelectShowing={setSelectedShowing}
+          />
+          <BookingBar
+            hasShowing={!!selectedShowing}
+            seatsLoading={seats.loading}
+            totalSeats={seats.total}
+            availableSeats={seats.available}
+            Screen={selectedShowing?.Screen || ""}
+            onBook={bookShowing}
+          />
+        </>
+      ) : (
+        <p>Inga visningar hittades för den här filmen.</p>
+      )}
     </main>
   );
 }
