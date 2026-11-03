@@ -1,14 +1,18 @@
-/* 1. Hämta våra designvariabler */
+/* =========================================
+   1. DESIGNVARIABLER
+========================================= */
+
 @use "./variables" as v;
 
-/*
+/* =========================================
    2. BOOTSTRAP – EGNA INSTÄLLNINGAR
    Dessa måste anges före Bootstrap importeras.
-*/
+========================================= */
 
 $body-bg: v.$color-bg-dark;
 $body-color: v.$color-cream;
 $primary: v.$color-primary-red;
+
 $content-max-width: 75rem;
 
 $font-family-base: v.$font-body;
@@ -18,15 +22,15 @@ $headings-color: v.$color-gold;
 $border-color: v.$color-gold;
 $border-radius: v.$border-radius;
 
-/*
+/* =========================================
    3. IMPORTERA BOOTSTRAP
-*/
+========================================= */
 
 @import "bootstrap/scss/bootstrap";
 
-/*
+/* =========================================
    4. CSS RESET
-*/
+========================================= */
 
 *,
 *::before,
@@ -36,9 +40,9 @@ $border-radius: v.$border-radius;
   padding: 0;
 }
 
-/*
+/* =========================================
    5. GRUNDSTIL FÖR HELA WEBBPLATSEN
- */
+========================================= */
 
 html,
 body {
@@ -64,7 +68,7 @@ body {
 
 /*
    6. RUBRIKER
-*/
+========================================= */
 
 h1,
 h2,
@@ -85,9 +89,9 @@ h3 {
   font-size: v.$font-size-h3;
 }
 
-/*
-   7. BRÖDTEXT
-*/
+/* =========================================
+   7. BRÖDTEXT OCH TEXTFORMATERING
+========================================= */
 
 p {
   font-family: v.$font-body;
@@ -99,9 +103,14 @@ p {
   font-size: v.$font-size-small;
 }
 
-/*
+/* Avstånd runt avdelare */
+.separator {
+  margin-inline: v.$separator-spacing;
+}
+
+/* =========================================
    8. KNAPPAR
-*/
+========================================= */
 
 button,
 .btn,
@@ -113,9 +122,9 @@ a.button {
   border-radius: v.$border-radius;
 }
 
-/*
+/* =========================================
    9. FORMULÄR OCH INTERAKTIVA ELEMENT
-*/
+========================================= */
 
 input,
 textarea,
@@ -132,9 +141,9 @@ select:focus-visible,
   @include v.focus-ring;
 }
 
-/* 
+/* =========================================
    10. BILDER OCH MEDIA
-*/
+========================================= */
 
 img,
 video,
@@ -142,12 +151,11 @@ iframe {
   border-radius: v.$border-radius;
 }
 
-/*
+/* =========================================
    11. RESPONSIV DESIGN
+========================================= */
 
-/* 
-Mobil
-*/
+/* Mobil */
 @include v.respond-to(mobile) {
   h1 {
     font-size: v.$font-size-h1;

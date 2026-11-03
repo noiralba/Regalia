@@ -62,6 +62,23 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
+
+    // Kontinuerligt guldskimmer
+    background: linear-gradient(
+      110deg,
+      v.$color-cream 20%,
+      v.$color-gold 40%,
+      #fff4d6 50%,
+      v.$color-gold 60%,
+      v.$color-cream 80%
+    );
+
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: vip-title-shimmer 3s ease-in-out infinite;
   }
 
   &-subtitle {
@@ -122,14 +139,34 @@
       color 0.2s ease;
 
     &:hover {
+      animation: button-blink 0.3s ease-in-out;
       background-color: v.$color-primary-red;
       color: v.$color-cream;
       border-color: v.$color-cream;
-      box-shadow: 0 0 0.75rem rgba(110, 23, 38, 0.8);
     }
 
     &:focus-visible {
       @include v.focus-ring;
     }
+  }
+}
+
+// Animationen ligger utanför .vip-banner
+@keyframes vip-title-shimmer {
+  0% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
+
+  100% {
+    background-position: 0% center;
+  }
+}
+@keyframes button-blink {
+  50% {
+    opacity: 0.65;
   }
 }

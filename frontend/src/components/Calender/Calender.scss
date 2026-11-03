@@ -1,22 +1,58 @@
 @use "../../styles/variables" as v;
 
 .calender {
+  width: 100%;
+  max-width: v.$content-max-width;
+  margin-inline: auto;
+
+  // Datumrubrik – H2
+  h2 {
+    font-family: v.$font-title;
+    font-size: v.$font-size-h2;
+    color: v.$color-cream;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+
+  // Kalenderns bakgrund och ram
   .schedule-box {
     background-color: v.$color-card-bg;
     border: 1px solid v.$color-gold;
+    border-radius: v.$border-radius;
+    padding-block: 2.5rem !important;
   }
 
+  // Filmtitel – H3
   .movie-title {
+    font-family: v.$font-title;
+    font-size: v.$font-size-h3;
     color: v.$color-cream;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
   }
 
+  // Filminformation
   .movie-info {
+    font-family: v.$font-body;
+    font-size: v.$font-size-small;
+    color: v.$color-gold;
     border-bottom: 1px solid v.$color-gold;
     padding-bottom: 0.7rem;
-    color: v.$color-gold;
+    letter-spacing: v.$letter-spacing;
   }
 
+  // Flytta ner hela filmblocket
+  .movie-title,
+  .movie-info {
+    transform: translateY(0.5rem);
+  }
+
+  // Knappar
   .btn {
+    font-family: v.$font-body;
+    font-size: v.$font-size-button;
+    border-radius: v.$border-radius;
+
     --bs-btn-color: #{v.$color-gold};
     --bs-btn-bg: #{v.$color-bg-dark};
     --bs-btn-border-color: #{v.$color-gold};
@@ -30,8 +66,59 @@
     --bs-btn-active-border-color: #{v.$color-primary-red};
   }
 
-  .time-btn time {
-    font-family: v.$font-body;
+  // Tid och salong
+  .time-btn {
+    min-height: 4rem;
+    transition: background-color 0.2s ease;
+
+    time {
+      font-family: v.$font-body;
+      font-size: v.$font-size-button;
+      color: v.$color-cream;
+    }
+
+    small {
+      font-family: v.$font-body;
+      font-size: v.$font-size-small;
+      color: v.$color-gold;
+    }
+  }
+
+  // Se fler datum
+  .show-more {
+    text-transform: uppercase;
+    min-height: 4rem;
+    letter-spacing: v.$letter-spacing;
+
+    background-color: v.$color-primary-red;
     color: v.$color-cream;
+    border-color: v.$color-gold;
+
+    &:hover {
+      background-color: v.$color-primary-red;
+      color: v.$color-cream;
+      border-color: v.$color-gold;
+      animation: button-blink 0.3s ease-in-out;
+    }
+  }
+
+  // Mobilanpassning
+  @include v.respond-to(mobile) {
+    .schedule-box {
+      padding: 1rem !important;
+    }
+
+    .movie-title {
+      font-size: v.$font-size-h3;
+    }
+
+    .time-btn {
+      min-height: 3.5rem;
+    }
+  }
+}
+@keyframes button-blink {
+  50% {
+    opacity: 0.65;
   }
 }

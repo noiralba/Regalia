@@ -22,18 +22,21 @@
     overflow: hidden;
     z-index: 0;
   }
-
   &__title {
     position: absolute;
-    bottom: 4rem; // Placerar titeln över botten (som är 4rem hög)
-    left: 50%;
+    bottom: 3rem;
+    left: 70%;
     transform: translateX(-50%);
-    z-index: 1; // Högre än videon (0) men lägre än gardinerna (2 och 3)
-    color: #fff; // Se till att texten är vit så den syns mot videon
-    text-align: center;
-    width: 100%;
-    padding: 0 1rem;
-    pointer-events: none; // Gör att man fortfarande kan klicka "igenom" texten om det behövs
+    z-index: 1;
+
+    color: rgba(255, 255, 255, 0.55);
+    -webkit-text-stroke: 1.2px rgba(0, 0, 0, 0.5);
+    font-size: 48px;
+    text-align: left;
+    width: auto;
+    padding: 0;
+
+    pointer-events: none;
   }
 
   &__video {
