@@ -1,0 +1,32 @@
+@use "../../../styles/variables" as v;
+
+.movie-facts {
+  display: flex;
+  gap: v.$space-sm;
+  font-family: v.$font-body;
+  font-size: v.$font-size-small;
+  color: v.$color-gold;
+  margin: 1rem;
+
+  span {
+    display: inline-block;
+    background-color: v.$color-bg-dark;
+    border-radius: v.$border-radius;
+    white-space: nowrap;
+  }
+
+  span+span::before {
+    content: "|";
+    margin-right: 12px;
+    color: v.$color-gold;
+  }
+
+  @include v.respond-to(mobile) {
+    flex-direction: row;
+
+    span+span::before {
+      content: "|";
+      margin-right: 12px;
+    }
+  }
+}

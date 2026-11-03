@@ -29,6 +29,11 @@ $font-size-button: 1.125rem;
 /* Rundade hörn */
 $border-radius: 0.5rem;
 
+// Justera avstånden här
+$space-sm: 0.75rem; // mellan knappar
+$space-md: 1.25rem; // rubrik -> innehåll
+$space-lg: 2.5rem; // mellan sektioner
+
 /* Responsiva brytpunkter */
 $breakpoint-mobile-max: 37.4375rem;
 $breakpoint-tablet-min: 37.5rem;

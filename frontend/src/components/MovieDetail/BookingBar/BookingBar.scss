@@ -1,0 +1,61 @@
+@use "../../../styles/variables" as v;
+
+.booking {
+  background: v.$color-card-bg;
+  width: 100%;
+  padding: 0 18px 18px;
+  border-top: 1px solid v.$color-card-bg;
+
+  .booking-info {
+    margin: 1.5rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: v.$font-body;
+    font-size: v.$font-size-small;
+    color: v.$color-cream;
+    text-transform: uppercase;
+
+    &__separator {
+      margin: 0 8px;
+      color: v.$color-cream;
+    }
+  }
+}
+
+.book-button {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 10px;
+  color: v.$color-cream;
+  background: v.$color-primary-red; 
+  font-family: v.$font-body;
+  font-size: v.$font-size-body;
+  letter-spacing: 0.08em;
+  border-radius: v.$border-radius;
+  border: 1px solid v.$color-gold;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.15);
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$color-gold;
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @include v.respond-to(mobile) {
+    min-height: 40px;
+    padding: 8px;
+    font-size: v.$font-size-small;
+  }
+}
