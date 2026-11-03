@@ -45,6 +45,18 @@ export const pages = {
     path: "/admin",
     label: "admin",
   },
+  adminPerson: {
+    path: "/admin/person",
+    label: "admin/person",
+  },
+  adminMoviePerson: {
+    path: "/admin/movieperson",
+    label: "admin/movieperson",
+  },
+  adminMovies: {
+    path: "/admin/movies",
+    label: "admin/movies",
+  },
 };
 
 export const routeLinks = {

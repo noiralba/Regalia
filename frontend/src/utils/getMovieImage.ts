@@ -20,5 +20,6 @@ export function getMovieImage(
   }
 
   const imagePath = `../assets/images/movies/${fileName}`;
+
   return (moviePosters[imagePath] as string) ?? "";
 }
