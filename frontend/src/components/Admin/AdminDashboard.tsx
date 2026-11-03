@@ -54,25 +54,10 @@ export default function AdminDashboard() {
     }).length ?? null;
 
   const stats = [
-    {
-      label: "Filmer totalt",
-      value: movies?.length,
-      icon: MdMovie,
-      tone: "#ef4444",
-    },
-    {
-      label: "Visas just nu",
-      value: current,
-      icon: MdPlayCircle,
-      tone: "#34d399",
-    },
+    { label: "Filmer totalt", value: movies?.length, icon: MdMovie, tone: "#ef4444" },
+    { label: "Visas just nu", value: current, icon: MdPlayCircle, tone: "#34d399" },
     { label: "Kommande", value: upcoming, icon: MdEvent, tone: "#60a5fa" },
-    {
-      label: "Personer",
-      value: persons?.length,
-      icon: MdPeople,
-      tone: "#a78bfa",
-    },
+    { label: "Personer", value: persons?.length, icon: MdPeople, tone: "#a78bfa" },
   ];
 
   const recentMovies = movies

@@ -9,10 +9,12 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import VipPage from "./pages/VipPage";
 import BookingPage from "./pages/BookingPage";
 import CreateAccountPage from "./pages/Create-Account/CreateAccountPage";
-import CreateShow from "./components/Admin/CreateShow";
+import AdminShows from "./components/Admin/AdminShows";
+import AdminThemes from "./components/Admin/AdminThemes";
 import AdminPersons from "./components/Admin/AdminPersons";
 import AdminMovieConnections from "./components/Admin/AdminMovieConnections";
 import AdminMovies from "./components/Admin/AdminMovies";
+import AdminScreens from "./components/Admin/AdminScreens";
 import AdminLayout from "./components/Admin/AdminLayout";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 
@@ -32,7 +34,7 @@ export const router = createBrowserRouter([
       { path: pages.cancellation.path, element: <CancellationPage /> },
 
       // Alla adminsidor delar AdminLayout (sidomeny + innehållsyta).
-      // Ny adminsida: lägg till en route här + en rad i pages/admin/adminNav.ts
+      // Ny adminsida: lägg till en route här + en rad i components/Admin/adminNav.ts
       {
         path: pages.admin.path,
         element: <AdminLayout />,
@@ -40,11 +42,13 @@ export const router = createBrowserRouter([
           { index: true, element: <AdminDashboard /> },
           { path: pages.adminMovies.path, element: <AdminMovies /> },
           { path: pages.adminPerson.path, element: <AdminPersons /> },
-          { path: pages.showsadmin.path, element: <CreateShow /> },
+          { path: pages.showsadmin.path, element: <AdminShows /> },
+          { path: pages.adminThemes.path, element: <AdminThemes /> },
           {
             path: pages.adminMoviePerson.path,
             element: <AdminMovieConnections />,
           },
+          { path: pages.adminScreens.path, element: <AdminScreens /> },
         ],
       },
 

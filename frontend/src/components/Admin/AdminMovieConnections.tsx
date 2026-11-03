@@ -125,8 +125,7 @@ export default function AdminMovieConnections() {
     queryClient.invalidateQueries({ queryKey: ["movie", selectedMovieId] });
   };
 
-  const showSuccess = (text: string) =>
-    setStatusMessage({ type: "success", text });
+  const showSuccess = (text: string) => setStatusMessage({ type: "success", text });
   const showError = (err: Error) =>
     setStatusMessage({ type: "danger", text: err.message });
 
@@ -309,9 +308,7 @@ export default function AdminMovieConnections() {
                     directorValue === (currentDirector?.id ?? "")
                   }
                 >
-                  {setDirectorMutation.isPending
-                    ? "Sparar..."
-                    : "Spara regissör"}
+                  {setDirectorMutation.isPending ? "Sparar..." : "Spara regissör"}
                 </Button>
               </Form>
             </Tab>
@@ -472,9 +469,7 @@ export default function AdminMovieConnections() {
                       className="w-100 mb-3"
                       disabled={addCastMutation.isPending}
                     >
-                      {addCastMutation.isPending
-                        ? "Lägger till..."
-                        : "Lägg till"}
+                      {addCastMutation.isPending ? "Lägger till..." : "Lägg till"}
                     </Button>
                   </Col>
                 </Row>

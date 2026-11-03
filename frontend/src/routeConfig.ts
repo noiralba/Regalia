@@ -43,7 +43,7 @@ export const pages = {
   },
 
   // ---------------- ADMIN ----------------
-  // /admin är nu översikten. Visningar & teman (CreateShow) ligger på /admin/visningar.
+  // /admin är översikten. Visningar ligger på /admin/visningar och teman på /admin/teman.
   admin: {
     path: "/admin",
     label: "Admin",
@@ -63,6 +63,14 @@ export const pages = {
   adminMovies: {
     path: "/admin/filmer",
     label: "admin/filmer",
+  },
+  adminThemes: {
+    path: "/admin/teman",
+    label: "admin/teman",
+  },
+  adminScreens: {
+    path: "/admin/salonger",
+    label: "admin/salonger",
   },
 };
 
