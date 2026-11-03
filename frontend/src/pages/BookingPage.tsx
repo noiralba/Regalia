@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import type {
   BookingConfirmation,
-  Seat,
   Movies,
   MovieScreening,
 } from "../types/types";
@@ -14,6 +13,7 @@ import SeatMapModal from "../components/SeatMap/SeatMapModal";
 import { getById } from "../api/api";
 import { getMovieImage } from "../utils/getMovieImage";
 import { extractIdFromSlug } from "../utils/slugify";
+import { useSeatPolling } from "../hooks/useSeatPolling";
 
 interface TicketType {
   ticket_type_id: string;
@@ -21,16 +21,6 @@ interface TicketType {
   "Price (SEK)": string;
 }
 
-async function fetchSeats(visningId: string): Promise<Seat[]> {
-  const response = await fetch(
-    `http://localhost:3000/api/seats/available-seats/${visningId}`,
-  );
-  if (!response.ok) {
-    throw new Error("Could not fetch seats");
-  }
-  const data: Seat[] = await response.json();
-  return data;
-}
 function BookingPage() {
   const { showingSlug } = useParams(); // 1. Läs ut hela sluggen
   const visningId = extractIdFromSlug(showingSlug); // 2. Extrahera ut visningen
@@ -40,7 +30,7 @@ function BookingPage() {
   const [error, setError] = useState("");
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
-  const [seats, setSeats] = useState<Seat[]>([]);
+  const { seats, refreshSeats } = useSeatPolling(visningId);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -48,6 +38,31 @@ function BookingPage() {
   const [isBooking, setIsBooking] = useState(false);
   const [bookingConfirmation, setBookingConfirmation] =
     useState<BookingConfirmation | null>(null);
+
+  // Kontrollera om någon annan har bokat en av användarens valda platser
+  useEffect(() => {
+    if (selectedSeats.length === 0 || seats.length === 0) return;
+
+    const unavailableSeats = selectedSeats.filter((selectedId) =>
+      seats.some((seat) => seat.seat_id === selectedId && !seat.Available),
+    );
+
+    if (unavailableSeats.length === 0) return;
+
+    const timeout = setTimeout(() => {
+      // Tar bort de platser som inte längre kan väljas
+      setSelectedSeats((previous) =>
+        previous.filter((id) => !unavailableSeats.includes(id)),
+      );
+
+      // Info till användaren om att platserna har bokats av någon annan
+      setError(
+        "En eller flera av dina valda sittplatser har tyvärr blivit bokade av någon annan. Vänligen välj nya platser.",
+      );
+    }, 0);
+
+    return () => clearTimeout(timeout);
+  }, [seats, selectedSeats]);
 
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
@@ -88,20 +103,7 @@ function BookingPage() {
     }
     fetchTicketTypes();
   }, []);
-  // Hämta stolarna för den valda visningen
-  useEffect(() => {
-    if (!visningId) return;
-    async function loadSeats() {
-      try {
-        const data = await fetchSeats(visningId!);
-        setSeats(data);
-      } catch (error) {
-        console.error(error);
-        setError("Kunde inte hämta stolarna.");
-      }
-    }
-    loadSeats();
-  }, [visningId]);
+
   // FUNKTIONER
   //Ökar/minskar antalet biljetter
   function changeTicketCount(ticketTypeId: string, change: number) {
@@ -116,6 +118,10 @@ function BookingPage() {
   }
   // Markerar eller avmarkerar en sittplats
   function toggleSeat(seatId: string) {
+    // Tar bort felmeddelandet när användaren börjar välja nya platser
+    if (error.includes("blivit bokade av någon annan")) {
+      setError("");
+    }
     setSelectedSeats((previous) => {
       // Om platsen redan är vald tas den bort
       if (previous.includes(seatId)) {
@@ -175,16 +181,20 @@ function BookingPage() {
         },
         body: JSON.stringify(bookingData),
       });
+
       // Hanterar om en sittplats redan har bokats
       if (response.status === 409) {
-        if (visningId) {
-          const updatedSeats = await fetchSeats(visningId);
-          setSeats(updatedSeats);
-        }
+        // Hämtar platsinfo från backend
+        await refreshSeats();
+
+        // Rensar användarens tidigare valda sittplatser
         setSelectedSeats([]);
+
+        // Visar ett felmeddelande så användaren kan välja nya platser
         setError(
-          "En av dina valda platser är redan bokad. Välj nya sittplatser.",
+          "En av dina valda platser är tyvärr redan bokad. Vänligen Välj nya sittplatser.",
         );
+
         return;
       }
       if (!response.ok) {
