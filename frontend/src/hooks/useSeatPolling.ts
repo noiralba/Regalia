@@ -1,13 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Seat } from "../types/types";
 
 // Custom hook som hanterar sittplatser a för en filmvisning
 export function useSeatPolling(visningId: string | undefined) {
   const [seats, setSeats] = useState<Seat[]>([]);
+  // Håller reda på om ett API-anrop redan är igång
+  const isFetching = useRef(false);
 
   // Hämtar aktuell information om sittplatser från backend
   const refreshSeats = useCallback(async () => {
     if (!visningId) return;
+    // Avbryt om ett API-anrop redan är igång
+    if (isFetching.current) return;
+
+    // visar att hämtningen har startats
+    isFetching.current = true;
 
     try {
       const response = await fetch(
@@ -15,7 +22,7 @@ export function useSeatPolling(visningId: string | undefined) {
       );
 
       if (!response.ok) {
-        throw new Error("Kunde inte hämta sittplatserna");
+        throw new Error("Kunde tyvärr inte hämta sittplatserna");
       }
 
       const data: Seat[] = await response.json();
@@ -23,6 +30,9 @@ export function useSeatPolling(visningId: string | undefined) {
       setSeats(data);
     } catch (error) {
       console.error("Fel vid hämtning av sittplatser:", error);
+      } finally {
+  // Markerar att hämtningen är avslutad
+  isFetching.current = false;
     }
   }, [visningId]);
 
