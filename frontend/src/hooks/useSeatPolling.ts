@@ -30,9 +30,9 @@ export function useSeatPolling(visningId: string | undefined) {
       setSeats(data);
     } catch (error) {
       console.error("Fel vid hämtning av sittplatser:", error);
-      } finally {
-  // Markerar att hämtningen är avslutad
-  isFetching.current = false;
+    } finally {
+      // Markerar att hämtningen är avslutad
+      isFetching.current = false;
     }
   }, [visningId]);
 
@@ -40,13 +40,18 @@ export function useSeatPolling(visningId: string | undefined) {
     if (!visningId) return;
 
     // Hämtar sittplatserna när sidan öppnas
-    void refreshSeats();
+    const timeout = setTimeout(() => {
+      void refreshSeats();
+    }, 0);
+
     // Startar intervall som hämtar sittplatser varannan sekund
     const interval = setInterval(() => {
       void refreshSeats();
     }, 2000);
+
     // Stoppar pollingen när användaren lämnar sidan/byter visning
     return () => {
+      clearTimeout(timeout);
       clearInterval(interval);
     };
   }, [visningId, refreshSeats]);
