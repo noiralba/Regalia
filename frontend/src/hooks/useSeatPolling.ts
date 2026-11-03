@@ -44,7 +44,7 @@ export function useSeatPolling(visningId: string | undefined) {
       void refreshSeats();
     }, 0);
 
-    // Startar intervall som hämtar sittplatser varannan sekund
+    // Starta intervall som hämtar sittplatser varannan sekund
     const interval = setInterval(() => {
       void refreshSeats();
     }, 2000);

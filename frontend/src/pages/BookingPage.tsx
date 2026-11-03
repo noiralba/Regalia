@@ -118,6 +118,10 @@ function BookingPage() {
   }
   // Markerar eller avmarkerar en sittplats
   function toggleSeat(seatId: string) {
+    // Tar bort felmeddelandet när användaren börjar välja nya platser
+    if (error.includes("blivit bokade av någon annan")) {
+      setError("");
+    }
     setSelectedSeats((previous) => {
       // Om platsen redan är vald tas den bort
       if (previous.includes(seatId)) {
