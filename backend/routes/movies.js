@@ -13,18 +13,18 @@ const {
   deleteMovie,
 } = require("../services/movieService.js");
 
-
-
 // =========================================================================
 // FILHANTERING (multer + hjälpfunktioner för städning)
 // =========================================================================
 
+// Filerna sparas i frontend/src/assets/images/movies
 const BASE_DIR = path.join(
   __dirname,
   "../../frontend/src/assets/images/movies",
 );
 const THUMB_DIR = path.join(BASE_DIR, "thumbnails");
 
+// URL-prefix som sparas i databasen (samma format som i seed-datan)
 const POSTER_URL = "/images/movies/";
 const THUMB_URL = "/images/movies/thumbnails/";
 
@@ -429,6 +429,54 @@ router.post("/:id/cast", async (req, res) => {
         .json({ error: "Denna person finns redan i filmens rollista." });
     }
     res.status(500).json({ error: "Kunde inte lägga till i rollistan." });
+  }
+});
+
+// PUT: Ändra karaktärsnamn för en skådespelare i filmens rollista
+router.put("/:id/cast/:personId", async (req, res) => {
+  const { id, personId } = req.params;
+  const { character_name } = req.body;
+
+  try {
+    const [existing] = await db.query(
+      "SELECT 1 FROM movie_cast WHERE movie_id = ? AND person_id = ?",
+      [id, personId],
+    );
+    if (existing.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Personen finns inte i filmens rollista." });
+    }
+
+    await db.query(
+      "UPDATE movie_cast SET character_name = ? WHERE movie_id = ? AND person_id = ?",
+      [character_name?.trim() || null, id, personId],
+    );
+    res.json({ message: "Rollen har uppdaterats." });
+  } catch (err) {
+    console.error("Fel vid uppdatering av roll:", err);
+    res.status(500).json({ error: "Kunde inte uppdatera rollen." });
+  }
+});
+
+// DELETE: Ta bort en skådespelare från filmens rollista
+router.delete("/:id/cast/:personId", async (req, res) => {
+  const { id, personId } = req.params;
+
+  try {
+    const [result] = await db.query(
+      "DELETE FROM movie_cast WHERE movie_id = ? AND person_id = ?",
+      [id, personId],
+    );
+    if (result.affectedRows === 0) {
+      return res
+        .status(404)
+        .json({ error: "Personen finns inte i filmens rollista." });
+    }
+    res.json({ message: "Skådespelaren har tagits bort från rollistan." });
+  } catch (err) {
+    console.error("Fel vid borttagning från rollista:", err);
+    res.status(500).json({ error: "Kunde inte ta bort från rollistan." });
   }
 });
 

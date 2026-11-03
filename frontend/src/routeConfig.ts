@@ -41,21 +41,28 @@ export const pages = {
     path: "/avbokning",
     label: "Avbokning",
   },
-  showsadmin: {
+
+  // ---------------- ADMIN ----------------
+  // /admin är nu översikten. Visningar & teman (CreateShow) ligger på /admin/visningar.
+  admin: {
     path: "/admin",
-    label: "admin",
+    label: "Admin",
+  },
+  showsadmin: {
+    path: "/admin/visningar",
+    label: "admin/visningar",
   },
   adminPerson: {
-    path: "/admin/person",
-    label: "admin/person",
+    path: "/admin/personer",
+    label: "admin/personer",
   },
   adminMoviePerson: {
-    path: "/admin/movieperson",
-    label: "admin/movieperson",
+    path: "/admin/rollista",
+    label: "admin/rollista",
   },
   adminMovies: {
-    path: "/admin/movies",
-    label: "admin/movies",
+    path: "/admin/filmer",
+    label: "admin/filmer",
   },
 };
 
