@@ -38,7 +38,9 @@ export default function Layout() {
 
       <Outlet context={{ onLogin: handleLogin }} />
 
-      <Footer />
+      <section className="footer-spacing">
+        <Footer />
+      </section>
     </>
   );
 }

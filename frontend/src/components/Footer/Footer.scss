@@ -1,14 +1,19 @@
 @use "../../styles/variables" as v;
 
+.footer-spacing {
+  margin-top: 10rem;
+}
+
 .footer {
   background-color: v.$color-bg-dark;
   width: 100%;
   padding-top: 4rem;
   padding-bottom: 6rem;
+  border-top: 1px solid v.$color-gold;
 
   .footer-title {
     font-family: v.$font-title;
-    color: v.$color-gold;
+    color: v.$color-cream;
     font-size: 1.25rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -16,21 +21,54 @@
   }
 
   .footer-text,
-  .footer-text span {
+  .footer-text span,
+  .footer-hours-row,
+  .footer-contact-item {
     font-family: v.$font-body;
-    color: v.$color-cream !important;
-    font-size: 0.95rem;
+    color: v.$color-gold;
+    font-size: 1rem;
     line-height: 1.5;
+  }
+
+  .footer-text {
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .footer-hours-row {
+    display: flex;
+    margin-bottom: 0;
+    white-space: nowrap;
+
+    span:first-child {
+      width: 7rem;
+      flex-shrink: 0;
+    }
   }
 
   a,
   .footer-link {
-    color: v.$color-cream !important;
+    color: v.$color-gold !important;
+    font-family: v.$font-body;
+    font-size: 1rem;
     text-decoration: underline;
 
     &:hover {
-      color: v.$color-gold !important;
+      color: v.$color-cream !important;
     }
+  }
+
+  .footer-contact-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-cancellation {
+    margin-top: 0.25rem;
   }
 
   .footer-socials {
@@ -40,12 +78,12 @@
     margin-top: 0.75rem;
 
     a {
-      color: v.$color-cream !important;
+      color: v.$color-gold !important;
       font-size: 1.4rem;
       text-decoration: none;
 
       &:hover {
-        color: v.$color-gold !important;
+        color: v.$color-cream !important;
       }
     }
   }
@@ -62,12 +100,15 @@
     > .col:nth-child(1) {
       order: 1;
     }
+
     > .col:nth-child(2) {
       order: 3;
     }
+
     > .col:nth-child(3) {
       order: 2;
     }
+
     > .col:nth-child(4) {
       order: 4;
     }
@@ -84,12 +125,15 @@
       > .col:nth-child(1) {
         order: 1;
       }
+
       > .col:nth-child(2) {
         order: 2;
       }
+
       > .col:nth-child(3) {
         order: 3;
       }
+
       > .col:nth-child(4) {
         order: 4;
       }
