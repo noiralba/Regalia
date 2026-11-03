@@ -39,6 +39,31 @@ function BookingPage() {
   const [bookingConfirmation, setBookingConfirmation] =
     useState<BookingConfirmation | null>(null);
 
+  // Kontrollera om någon annan har bokat en av användarens valda platser
+  useEffect(() => {
+    if (selectedSeats.length === 0 || seats.length === 0) return;
+
+    const unavailableSeats = selectedSeats.filter((selectedId) =>
+      seats.some((seat) => seat.seat_id === selectedId && !seat.Available),
+    );
+
+    if (unavailableSeats.length === 0) return;
+
+    const timeout = setTimeout(() => {
+      // Tar bort de platser som inte längre kan väljas
+      setSelectedSeats((previous) =>
+        previous.filter((id) => !unavailableSeats.includes(id)),
+      );
+
+      // Info till användaren om att platserna har bokats av någon annan
+      setError(
+        "En eller flera av dina valda sittplatser har tyvärr blivit bokade av någon annan. Vänligen välj nya platser.",
+      );
+    }, 0);
+
+    return () => clearTimeout(timeout);
+  }, [seats, selectedSeats]);
+
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
     if (!visningId) return;
