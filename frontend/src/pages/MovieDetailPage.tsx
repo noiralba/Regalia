@@ -11,8 +11,8 @@ import TrailerPlayer from "../components/TrailerPlayer";
 import MovieDescription from "../components/MovieDetail/MovieDescription";
 import MovieFacts from "../components/MovieDetail/MovieFacts";
 import CastCarousel from "../components/MovieDetail/CastCarousel";
-import ShowtimePicker from "../components/MovieDetail/ShowTimePicker";
-import BookingBar from "../components/MovieDetail/BookingBar";
+import ShowtimePicker from "../components/MovieDetail/ShowtimePicker/ShowtimePicker";
+import BookingBar from "../components/MovieDetail/BookingBar/BookingBar";
 import "../styles/MovieDetailPage.scss";
 
 export default function MovieDetailPage() {
@@ -70,14 +70,6 @@ export default function MovieDetailPage() {
       <MovieFacts movie={movie} />
       <CastCarousel movie={movie} />
 
-      <section
-        className="movie-detail__showtimes"
-        aria-labelledby="showtimes-heading"
-      >
-        <h2 className="movie-detail__heading" id="showtimes-heading">
-          Visningstider
-        </h2>
-
         {dates.length > 0 ? (
           <>
             <ShowtimePicker
@@ -100,7 +92,6 @@ export default function MovieDetailPage() {
         ) : (
           <p>Inga visningar hittades för den här filmen.</p>
         )}
-      </section>
     </main>
   );
 }

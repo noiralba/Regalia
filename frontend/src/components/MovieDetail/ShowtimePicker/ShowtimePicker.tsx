@@ -1,6 +1,8 @@
 // Component to allow users to select a date and a showing time for a movie. It displays available dates and corresponding showings, allowing users to select one of each. The selected date and showing are highlighted, and callbacks are provided for when selections change.
-import type { Showing } from "../../types/types";
-import { formatDate, formatTime } from "../../utils/formatDateTime";
+import type { Showing } from "../../../types/types";
+import { formatDate, formatTime } from "../../../utils/formatDateTime";
+
+import "./ShowtimePicker.scss";
 
 type Props = {
   dates: string[];
@@ -20,12 +22,15 @@ export default function ShowtimePicker({
   onSelectShowing,
 }: Props) {
   return (
-    <>
-      <h3>Välj datum</h3>
-      <nav className="movie-detail__dates" aria-label="Välj datum">
+    < section
+        className="showtime-picker"
+        aria-labelledby="showtimes-heading"
+      >
+      <h2 className="showtime-picker__heading">Välj datum</h2>
+      <nav className="showtime-picker__dates" aria-label="Välj datum">
         {dates.map((date) => (
           <button
-            className="movie-detail__date"
+            className="showtime-picker__date"
             key={date}
             type="button"
             onClick={() => onSelectDate(date)}
@@ -36,17 +41,17 @@ export default function ShowtimePicker({
         ))}
       </nav>
 
-      <h3>Välj visning</h3>
+      <h2 className="showtime-picker__heading">Välj visning</h2>
       {showings.length > 0 ? (
         <section
-          className="movie-detail__times"
+          className="showtime-picker__times"
           aria-label="Tillgängliga visningar"
         >
           {showings.map((showing) => {
             const isSelected = selectedShowing?.show_id === showing.show_id;
             return (
               <button
-                className={`movie-detail__time ${isSelected ? "is-selected" : ""}`}
+                className={`showtime-picker__time ${isSelected ? "is-selected" : ""}`}
                 key={showing.show_id}
                 type="button"
                 onClick={() => onSelectShowing(showing)}
@@ -60,6 +65,6 @@ export default function ShowtimePicker({
       ) : (
         <p>Inga visningar det här datumet.</p>
       )}
-    </>
+    </section>
   );
 }

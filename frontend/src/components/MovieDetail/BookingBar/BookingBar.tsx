@@ -45,7 +45,7 @@ export default function BookingBar({
         disabled={!hasShowing}
         onClick={onBook}
       >
-        BOKA NU
+        Fortsätt
       </button>
     </section>
   );
