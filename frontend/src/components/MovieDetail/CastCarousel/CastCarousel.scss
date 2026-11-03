@@ -1,0 +1,106 @@
+@use "../../../styles/variables" as v;
+
+.cast-carousel {
+  min-width: 0;
+  margin-top: 1.5rem;
+  padding: 1.5rem 2rem 2rem;
+  background: v.$color-card-bg;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  &__heading {
+    margin: 0;
+    font-family: v.$font-title;
+    font-size: v.$font-size-h2;
+    color: v.$color-cream;
+    text-transform: uppercase;
+  }
+
+  &__arrows {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  &__arrow {
+    padding: 0.25rem 0.5rem;
+    background: none;
+    border: none;
+    color: v.$color-gold;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      color: v.$color-cream;
+    }
+
+    &:focus-visible {
+      outline: 2px solid v.$color-gold;
+      outline-offset: 2px;
+    }
+  }
+
+    &__content {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem; // luft mellan korten och scrollbaren
+      scroll-snap-type: x mandatory;
+  
+      &::-webkit-scrollbar {
+        height: 6px;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background-color: v.$color-gold;
+        border-radius: 3px;
+      }
+  
+      &::-webkit-scrollbar-track {
+        background-color: v.$color-bg-dark;
+        border-radius: 3px;
+      }
+    }
+
+  &__card {
+    flex: 0 0 auto;
+    width: 10rem;
+    padding: 0.75rem;
+    background: v.$color-bg-dark;
+    border-radius: v.$border-radius;
+    text-align: left;
+    scroll-snap-align: start;
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: top; // håller ansiktet i bild
+      border-radius: v.$border-radius;
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      margin: 0 0 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(v.$color-gold, 0.4);
+      font-family: v.$font-body;
+      font-size: v.$font-size-body;
+      font-weight: 500;
+      color: v.$color-cream;
+    }
+
+    p {
+      margin: 0;
+      font-family: v.$font-body;
+      font-size: v.$font-size-body;
+      color: v.$color-cream;
+    }
+  }
+}

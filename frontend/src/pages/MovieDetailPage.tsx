@@ -10,7 +10,7 @@ import { slugify, extractIdFromSlug } from "../utils/slugify";
 import TrailerPlayer from "../components/TrailerPlayer";
 import MovieDescription from "../components/MovieDetail/MovieDescription";
 import MovieFacts from "../components/MovieDetail/MovieFacts";
-import CastCarousel from "../components/MovieDetail/CastCarousel";
+import CastCarousel from "../components/MovieDetail/CastCarousel/CastCarousel";
 import ShowtimePicker from "../components/MovieDetail/ShowtimePicker/ShowtimePicker";
 import BookingBar from "../components/MovieDetail/BookingBar/BookingBar";
 import "../styles/MovieDetailPage.scss";
