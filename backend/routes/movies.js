@@ -13,6 +13,7 @@ const {
   deleteMovie,
 } = require("../services/movieService.js");
 
+
 // =========================================================================
 // FILHANTERING (multer + hjälpfunktioner för städning)
 // =========================================================================
@@ -67,6 +68,39 @@ function parseLanguage(input) {
   if (!original && !subtitles) return null;
 
   return JSON.stringify({ original, subtitles });
+}
+
+// Plockar ut YouTube-id:t (11 tecken) ur ett id eller en YouTube-länk.
+// Returnerar: undefined = fältet skickades inte, null = tomt, "x4u1yp3Msao" = giltigt id,
+// false = ogiltigt värde.
+const YOUTUBE_ID = /^[A-Za-z0-9_-]{11}$/;
+
+function extractYoutubeId(input) {
+  if (input === undefined) return undefined;
+  const value = String(input ?? "").trim();
+  if (!value) return null;
+  if (YOUTUBE_ID.test(value)) return value;
+
+  try {
+    const url = new URL(value);
+    const host = url.hostname.replace(/^(www|m|music)\./, "");
+    let id = null;
+
+    if (host === "youtu.be") {
+      id = url.pathname.slice(1).split("/")[0];
+    } else if (host === "youtube.com" || host === "youtube-nocookie.com") {
+      if (url.pathname === "/watch") {
+        id = url.searchParams.get("v");
+      } else {
+        const match = url.pathname.match(/^\/(embed|shorts|live|v)\/([^/?]+)/);
+        if (match) id = match[2];
+      }
+    }
+    if (id && YOUTUBE_ID.test(id)) return id;
+  } catch {
+    /* inte en giltig URL */
+  }
+  return false;
 }
 
 // Gör om ett befintligt JSON-värde från databasen till något som kan skrivas tillbaka
@@ -145,6 +179,14 @@ router.post(
         return res.status(400).json({ error: "Titel är obligatorisk" });
       }
 
+      const trailerId = extractYoutubeId(trailerUrl);
+      if (trailerId === false) {
+        removeUploaded(req.files);
+        return res
+          .status(400)
+          .json({ error: "Ogiltigt YouTube-id eller ogiltig YouTube-länk." });
+      }
+
       const movieId = randomUUID();
       // Kategorierna skickas som en strängifierad array via FormData från React
       const categoryIds = categories ? JSON.parse(categories) : [];
@@ -160,7 +202,7 @@ router.post(
         shortDescription: shortDescription || null,
         longDescription: longDescription || null,
         language: parseLanguage(language) ?? null,
-        trailerUrl: trailerUrl?.trim() || null,
+        trailerUrl: trailerId ?? null,
         director_id: director_id || null,
         posterImage: req.files?.posterImage
           ? POSTER_URL + req.files.posterImage[0].filename
@@ -217,6 +259,14 @@ router.put(
       }
       const currentMovie = existing[0];
 
+      const trailerId = extractYoutubeId(trailerUrl);
+      if (trailerId === false) {
+        removeUploaded(req.files);
+        return res
+          .status(400)
+          .json({ error: "Ogiltigt YouTube-id eller ogiltig YouTube-länk." });
+      }
+
       // Skickas inte "categories" alls lämnas filmens kategorier orörda (null).
       // Skickas en tom lista ("[]") tas alla kategorier bort.
       const categoryIds =
@@ -258,9 +308,7 @@ router.put(
             ? parsedLanguage
             : toJsonValue(currentMovie.language),
         trailerUrl:
-          trailerUrl !== undefined
-            ? trailerUrl.trim() || null
-            : currentMovie.trailerUrl,
+          trailerId !== undefined ? trailerId : currentMovie.trailerUrl,
         director_id:
           director_id !== undefined
             ? director_id || null

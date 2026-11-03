@@ -330,13 +330,16 @@ export default function AdminMovies() {
               </Col>
               <Col md={3}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Trailer-URL</Form.Label>
+                  <Form.Label>Trailer (YouTube-id)</Form.Label>
                   <Form.Control
-                    type="url"
-                    placeholder="https://..."
+                    type="text"
+                    placeholder="t.ex. x4u1yp3Msao"
                     value={trailerUrl}
                     onChange={(e) => setTrailerUrl(e.target.value)}
                   />
+                  <Form.Text muted>
+                    Du kan klistra in hela länken, bara id:t sparas.
+                  </Form.Text>
                 </Form.Group>
               </Col>
               <Col md={3}>
