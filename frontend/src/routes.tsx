@@ -9,12 +9,12 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import VipPage from "./pages/VipPage";
 import BookingPage from "./pages/BookingPage";
 import CreateAccountPage from "./pages/Create-Account/CreateAccountPage";
-import CreateShow from "./pages/CreateShow";
-import AdminPersons from "./pages/AdminPersons";
-import AdminMovieConnections from "./pages/AdminMovieConnections";
-import AdminMovies from "./pages/AdminMovies";
-import AdminLayout from "./pages/admin/AdminLayout";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import CreateShow from "./components/Admin/CreateShow";
+import AdminPersons from "./components/Admin/AdminPersons";
+import AdminMovieConnections from "./components/Admin/AdminMovieConnections";
+import AdminMovies from "./components/Admin/AdminMovies";
+import AdminLayout from "./components/Admin/AdminLayout";
+import AdminDashboard from "./components/Admin/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
