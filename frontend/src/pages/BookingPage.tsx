@@ -304,6 +304,7 @@ function BookingPage() {
           seats={seats}
           selectedSeats={selectedSeats}
           toggleSeat={toggleSeat}
+          screen={showing?.Screen ?? ""}
         />
         {isSeatModalOpen && (
           <SeatMapModal
@@ -311,6 +312,7 @@ function BookingPage() {
             selectedSeats={selectedSeats}
             toggleSeat={toggleSeat}
             onClose={() => setIsSeatModalOpen(false)}
+            screen={showing?.Screen ?? ""}
           />
         )}
       </section>

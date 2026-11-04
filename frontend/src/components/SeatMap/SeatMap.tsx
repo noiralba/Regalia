@@ -5,9 +5,12 @@ interface SeatMapProps {
   seats: Seat[];
   selectedSeats: string[];
   toggleSeat: (seatId: string) => void;
+  screen: string;
 }
 
-function SeatMap({ seats, selectedSeats, toggleSeat }: SeatMapProps) {
+function SeatMap({ seats, selectedSeats, toggleSeat, screen }: SeatMapProps) {
+  const isLargeScreen = screen === "Stora salongen";
+  
   return (
     <div className="booking-page__seat-map">
       <div className="booking-page__screen" aria-hidden="true" />
@@ -32,7 +35,7 @@ function SeatMap({ seats, selectedSeats, toggleSeat }: SeatMapProps) {
                           ? "is-selected"
                           : ""
                       }${
-                        seat["Seat Row"] === "H" ? "is-vip" : "" // <-- LÄGG TILL DENNA RAD
+                        seat["Seat Row"] === "H" ? "is-vip" : ""  
                       }`}
                       key={seat.seat_id}
                       type="button"
@@ -54,9 +57,11 @@ function SeatMap({ seats, selectedSeats, toggleSeat }: SeatMapProps) {
         <span>
           <i className="booking-page__legend-icon" /> Ledig
         </span>
-        <span>
-          <i className="booking-page__legend-icon is-vip" /> Vip (Rad H)
-        </span>
+        {isLargeScreen && (
+          <span>
+            <i className="booking-page__legend-icon is-vip" /> Vip (Rad H)
+          </span>
+        )}
         <span>
           <i className="booking-page__legend-icon is-selected" /> Vald
         </span>
