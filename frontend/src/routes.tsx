@@ -8,7 +8,7 @@ import CalendarPage from "./pages/CalendarPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
 import VipPage from "./pages/VipPage";
 import BookingPage from "./pages/BookingPage";
-import CreateAccountPage from "./pages/Create-Account/CreateAccountPage";
+import CreateAccountPage from "./pages/CreateAccountPage";
 import AdminShows from "./components/Admin/shows/AdminShows";
 import AdminThemes from "./components/Admin/themes/AdminThemes";
 import AdminPersons from "./components/Admin/persons/AdminPersons";
