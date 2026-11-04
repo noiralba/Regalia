@@ -1,7 +1,130 @@
 const express = require("express");
 const router = express.Router();
+const { randomUUID } = require("crypto");
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 const db = require("../db.js");
-const { getMovies } = require("../services/movieService.js");
+const {
+  getMovies,
+  getAllMoviesAdmin,
+  createMovie,
+  updateMovie,
+  deleteMovie,
+} = require("../services/movieService.js");
+
+
+// =========================================================================
+// FILHANTERING (multer + hjälpfunktioner för städning)
+// =========================================================================
+
+// Filerna sparas i frontend/src/assets/images/movies
+const BASE_DIR = path.join(
+  __dirname,
+  "../../frontend/src/assets/images/movies",
+);
+const THUMB_DIR = path.join(BASE_DIR, "thumbnails");
+
+// URL-prefix som sparas i databasen (samma format som i seed-datan)
+const POSTER_URL = "/images/movies/";
+const THUMB_URL = "/images/movies/thumbnails/";
+
+// Skapa mapparna om de saknas (multer gör det inte själv)
+fs.mkdirSync(THUMB_DIR, { recursive: true });
+
+// Ta bort en fil utan att krascha om den redan är borta
+function removeFile(fullPath) {
+  fs.unlink(fullPath, (err) => {
+    if (err && err.code !== "ENOENT") {
+      console.error("Kunde inte ta bort fil:", fullPath, err);
+    }
+  });
+}
+
+// Ta bort filer som multer nyss sparade (används när något går fel)
+function removeUploaded(files) {
+  if (!files) return;
+  Object.values(files)
+    .flat()
+    .forEach((f) => removeFile(f.path));
+}
+
+// language är en JSON-kolumn med formen {"original": "Engelska", "subtitles": "Svenska"}.
+// Returnerar en JSON-sträng, null (båda tomma) eller undefined (fältet skickades inte alls).
+function parseLanguage(input) {
+  if (input === undefined) return undefined;
+  if (input === null || String(input).trim() === "") return null;
+
+  let obj;
+  try {
+    obj = typeof input === "string" ? JSON.parse(input) : input;
+  } catch {
+    return null;
+  }
+  if (!obj || typeof obj !== "object" || Array.isArray(obj)) return null;
+
+  const original = String(obj.original ?? "").trim();
+  const subtitles = String(obj.subtitles ?? "").trim();
+  if (!original && !subtitles) return null;
+
+  return JSON.stringify({ original, subtitles });
+}
+
+// Plockar ut YouTube-id:t (11 tecken) ur ett id eller en YouTube-länk.
+// Returnerar: undefined = fältet skickades inte, null = tomt, "x4u1yp3Msao" = giltigt id,
+// false = ogiltigt värde.
+const YOUTUBE_ID = /^[A-Za-z0-9_-]{11}$/;
+
+function extractYoutubeId(input) {
+  if (input === undefined) return undefined;
+  const value = String(input ?? "").trim();
+  if (!value) return null;
+  if (YOUTUBE_ID.test(value)) return value;
+
+  try {
+    const url = new URL(value);
+    const host = url.hostname.replace(/^(www|m|music)\./, "");
+    let id = null;
+
+    if (host === "youtu.be") {
+      id = url.pathname.slice(1).split("/")[0];
+    } else if (host === "youtube.com" || host === "youtube-nocookie.com") {
+      if (url.pathname === "/watch") {
+        id = url.searchParams.get("v");
+      } else {
+        const match = url.pathname.match(/^\/(embed|shorts|live|v)\/([^/?]+)/);
+        if (match) id = match[2];
+      }
+    }
+    if (id && YOUTUBE_ID.test(id)) return id;
+  } catch {
+    /* inte en giltig URL */
+  }
+  return false;
+}
+
+// Gör om ett befintligt JSON-värde från databasen till något som kan skrivas tillbaka
+function toJsonValue(value) {
+  if (value === null || value === undefined) return null;
+  return typeof value === "string" ? value : JSON.stringify(value);
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // Sortera upp filerna baserat på fältnamnet från frontend
+    cb(null, file.fieldname === "posterThumbnail" ? THUMB_DIR : BASE_DIR);
+  },
+  filename: (req, file, cb) => {
+    // Samma basnamn för poster och miniatyr i samma request, så att
+    // getMovieImage kan byta mapp mellan movies/ och movies/thumbnails/
+    if (!req.uploadBaseName) {
+      req.uploadBaseName = Date.now() + "-" + Math.round(Math.random() * 1e4);
+    }
+    cb(null, req.uploadBaseName + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage });
 
 const CATEGORIES_SUBQUERY = `
   (SELECT COALESCE(JSON_ARRAYAGG(c.name), JSON_ARRAY())
@@ -10,7 +133,251 @@ const CATEGORIES_SUBQUERY = `
    WHERE mc.movie_id = m.id) AS categories
 `;
 
-// GET: Get all movies with optional filters for ageRating, categories, and search term
+// =========================================================================
+// 1. CRUD & ADMIN-ÄNDPUNKTER
+// =========================================================================
+
+// GET: Hämta rålista över alla filmer till admin-tabellen
+router.get("/admin/all", async (req, res) => {
+  try {
+    const movies = await getAllMoviesAdmin();
+    res.json(movies);
+  } catch (err) {
+    console.error("Fel vid hämtning av admin-filmer:", err);
+    res
+      .status(500)
+      .json({ error: "Kunde inte hämta filmer för administration" });
+  }
+});
+
+// POST: Skapa en ny film med uppladdning för poster och miniatyrbild
+router.post(
+  "/",
+  upload.fields([
+    { name: "posterImage", maxCount: 1 },
+    { name: "posterThumbnail", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const {
+        title,
+        productionYear,
+        release_date,
+        end_date,
+        ageRating,
+        duration,
+        shortDescription,
+        longDescription,
+        categories,
+        language,
+        trailerUrl,
+        director_id,
+      } = req.body;
+
+      if (!title) {
+        removeUploaded(req.files);
+        return res.status(400).json({ error: "Titel är obligatorisk" });
+      }
+
+      const trailerId = extractYoutubeId(trailerUrl);
+      if (trailerId === false) {
+        removeUploaded(req.files);
+        return res
+          .status(400)
+          .json({ error: "Ogiltigt YouTube-id eller ogiltig YouTube-länk." });
+      }
+
+      const movieId = randomUUID();
+      // Kategorierna skickas som en strängifierad array via FormData från React
+      const categoryIds = categories ? JSON.parse(categories) : [];
+
+      const newMovie = {
+        id: movieId,
+        title,
+        productionYear: productionYear ? Number(productionYear) : null,
+        release_date: release_date || null,
+        end_date: end_date || null,
+        ageRating: ageRating || null,
+        duration: duration ? Number(duration) : null,
+        shortDescription: shortDescription || null,
+        longDescription: longDescription || null,
+        language: parseLanguage(language) ?? null,
+        trailerUrl: trailerId ?? null,
+        director_id: director_id || null,
+        posterImage: req.files?.posterImage
+          ? POSTER_URL + req.files.posterImage[0].filename
+          : null,
+        posterThumbnail: req.files?.posterThumbnail
+          ? THUMB_URL + req.files.posterThumbnail[0].filename
+          : null,
+      };
+
+      await createMovie(newMovie, categoryIds);
+      res
+        .status(201)
+        .json({ message: "Film skapad framgångsrikt!", movie: newMovie });
+    } catch (err) {
+      // Sparandet misslyckades – ta bort filerna som redan skrivits till disk
+      removeUploaded(req.files);
+      console.error("Fel vid skapande av film:", err);
+      res.status(500).json({ error: "Kunde inte skapa filmen" });
+    }
+  },
+);
+
+// PUT: Uppdatera en film och dess kategorier
+router.put(
+  "/:id",
+  upload.fields([
+    { name: "posterImage", maxCount: 1 },
+    { name: "posterThumbnail", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const {
+        title,
+        productionYear,
+        release_date,
+        end_date,
+        ageRating,
+        duration,
+        shortDescription,
+        longDescription,
+        categories,
+        language,
+        trailerUrl,
+        director_id,
+      } = req.body;
+
+      const [existing] = await db.query("SELECT * FROM movies WHERE id = ?", [
+        id,
+      ]);
+      if (existing.length === 0) {
+        removeUploaded(req.files);
+        return res.status(404).json({ error: "Filmen hittades inte" });
+      }
+      const currentMovie = existing[0];
+
+      const trailerId = extractYoutubeId(trailerUrl);
+      if (trailerId === false) {
+        removeUploaded(req.files);
+        return res
+          .status(400)
+          .json({ error: "Ogiltigt YouTube-id eller ogiltig YouTube-länk." });
+      }
+
+      // Skickas inte "categories" alls lämnas filmens kategorier orörda (null).
+      // Skickas en tom lista ("[]") tas alla kategorier bort.
+      const categoryIds =
+        categories !== undefined ? JSON.parse(categories) : null;
+
+      const parsedLanguage = parseLanguage(language);
+
+      const updateData = {
+        title: title || currentMovie.title,
+        productionYear:
+          productionYear !== undefined
+            ? productionYear
+              ? Number(productionYear)
+              : null
+            : currentMovie.productionYear,
+        release_date:
+          release_date !== undefined
+            ? release_date || null
+            : currentMovie.release_date,
+        end_date:
+          end_date !== undefined ? end_date || null : currentMovie.end_date,
+        ageRating: ageRating !== undefined ? ageRating : currentMovie.ageRating,
+        duration:
+          duration !== undefined
+            ? duration
+              ? Number(duration)
+              : null
+            : currentMovie.duration,
+        shortDescription:
+          shortDescription !== undefined
+            ? shortDescription
+            : currentMovie.shortDescription,
+        longDescription:
+          longDescription !== undefined
+            ? longDescription
+            : currentMovie.longDescription,
+        language:
+          parsedLanguage !== undefined
+            ? parsedLanguage
+            : toJsonValue(currentMovie.language),
+        trailerUrl:
+          trailerId !== undefined ? trailerId : currentMovie.trailerUrl,
+        director_id:
+          director_id !== undefined
+            ? director_id || null
+            : currentMovie.director_id,
+        posterImage: req.files?.posterImage
+          ? POSTER_URL + req.files.posterImage[0].filename
+          : currentMovie.posterImage,
+        posterThumbnail: req.files?.posterThumbnail
+          ? THUMB_URL + req.files.posterThumbnail[0].filename
+          : currentMovie.posterThumbnail,
+      };
+
+      await updateMovie(id, updateData, categoryIds);
+
+      // Uppdateringen lyckades – ta bort de gamla bilderna som ersatts
+      if (req.files?.posterImage && currentMovie.posterImage) {
+        removeFile(
+          path.join(BASE_DIR, path.basename(currentMovie.posterImage)),
+        );
+      }
+      if (req.files?.posterThumbnail && currentMovie.posterThumbnail) {
+        removeFile(
+          path.join(THUMB_DIR, path.basename(currentMovie.posterThumbnail)),
+        );
+      }
+
+      res.json({ message: "Filmen har uppdaterats framgångsrikt!" });
+    } catch (err) {
+      // Uppdateringen misslyckades – ta bort de nya filerna
+      removeUploaded(req.files);
+      console.error("Fel vid uppdatering av film:", err);
+      res.status(500).json({ error: "Kunde inte uppdatera filmen" });
+    }
+  },
+);
+
+// DELETE: Radera en film (och dess bilder)
+router.delete("/:id", async (req, res) => {
+  try {
+    // Hämta bildnamnen innan filmen raderas
+    const [rows] = await db.query(
+      "SELECT posterImage, posterThumbnail FROM movies WHERE id = ?",
+      [req.params.id],
+    );
+
+    const deleted = await deleteMovie(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ error: "Filmen hittades inte" });
+    }
+
+    if (rows[0]?.posterImage) {
+      removeFile(path.join(BASE_DIR, path.basename(rows[0].posterImage)));
+    }
+    if (rows[0]?.posterThumbnail) {
+      removeFile(path.join(THUMB_DIR, path.basename(rows[0].posterThumbnail)));
+    }
+
+    res.json({ message: "Filmen har raderats från databasen." });
+  } catch (err) {
+    console.error("Fel vid radering av film:", err);
+    res.status(500).json({ error: "Kunde inte radera filmen" });
+  }
+});
+
+// =========================================================================
+// 2. BEFINTLIGA ANVÄNDAR- & SÖKÄNDPUNKTER
+// =========================================================================
+
+// GET: Hämta alla filmer med valfria filter för åldersgräns, kategorier och sökord
 router.get("/", async (req, res) => {
   try {
     const { ageRating, categories, search } = req.query;
@@ -61,37 +428,130 @@ router.get("/", async (req, res) => {
     }
 
     const [results] = await db.query(sql, params);
-
     res.json(results);
   } catch (err) {
     console.error("Fel vid hämtning av filmer:", err);
-
-    res.status(500).json({
-      error: "Kunde inte hämta filmerna",
-    });
+    res.status(500).json({ error: "Kunde inte hämta filmerna" });
   }
 });
 
+// PUT: Sätt eller uppdatera regissör för en film
+router.put("/:id/director", async (req, res) => {
+  const movieId = req.params.id;
+  const { director_id } = req.body;
+
+  try {
+    await db.query("UPDATE movies SET director_id = ? WHERE id = ?", [
+      director_id || null,
+      movieId,
+    ]);
+    res.json({ message: "Regissör har uppdaterats för filmen." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Kunde inte spara regissör." });
+  }
+});
+
+// POST: Lägg till en skådespelare i filmens rollista (movie_cast)
+router.post("/:id/cast", async (req, res) => {
+  const movieId = req.params.id;
+  const { person_id, character_name } = req.body;
+
+  if (!person_id) {
+    return res.status(400).json({ error: "person_id är obligatoriskt." });
+  }
+
+  try {
+    await db.query(
+      "INSERT INTO movie_cast (movie_id, person_id, character_name) VALUES (?, ?, ?)",
+      [movieId, person_id, character_name || null],
+    );
+    res
+      .status(201)
+      .json({ message: "Skådespelare har lagts till i rollistan." });
+  } catch (err) {
+    console.error(err);
+    if (err.code === "ER_DUP_ENTRY") {
+      return res
+        .status(409)
+        .json({ error: "Denna person finns redan i filmens rollista." });
+    }
+    res.status(500).json({ error: "Kunde inte lägga till i rollistan." });
+  }
+});
+
+// PUT: Ändra karaktärsnamn för en skådespelare i filmens rollista
+router.put("/:id/cast/:personId", async (req, res) => {
+  const { id, personId } = req.params;
+  const { character_name } = req.body;
+
+  try {
+    const [existing] = await db.query(
+      "SELECT 1 FROM movie_cast WHERE movie_id = ? AND person_id = ?",
+      [id, personId],
+    );
+    if (existing.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Personen finns inte i filmens rollista." });
+    }
+
+    await db.query(
+      "UPDATE movie_cast SET character_name = ? WHERE movie_id = ? AND person_id = ?",
+      [character_name?.trim() || null, id, personId],
+    );
+    res.json({ message: "Rollen har uppdaterats." });
+  } catch (err) {
+    console.error("Fel vid uppdatering av roll:", err);
+    res.status(500).json({ error: "Kunde inte uppdatera rollen." });
+  }
+});
+
+// DELETE: Ta bort en skådespelare från filmens rollista
+router.delete("/:id/cast/:personId", async (req, res) => {
+  const { id, personId } = req.params;
+
+  try {
+    const [result] = await db.query(
+      "DELETE FROM movie_cast WHERE movie_id = ? AND person_id = ?",
+      [id, personId],
+    );
+    if (result.affectedRows === 0) {
+      return res
+        .status(404)
+        .json({ error: "Personen finns inte i filmens rollista." });
+    }
+    res.json({ message: "Skådespelaren har tagits bort från rollistan." });
+  } catch (err) {
+    console.error("Fel vid borttagning från rollista:", err);
+    res.status(500).json({ error: "Kunde inte ta bort från rollistan." });
+  }
+});
+
+// GET: Filtrera på filmstatus (latest, current, upcoming, past)
 router.get("/type/:filter", async (req, res, next) => {
   const { filter } = req.params;
 
-  if (filter !== "latest" && filter !== "upcoming") {
+  const validFilters = ["latest", "current", "upcoming", "past"];
+  if (!validFilters.includes(filter)) {
     return next();
   }
 
   try {
-    const movies = await getMovies({ type: filter, limit: 15 });
+    const statusParam =
+      filter === "latest" || filter === "current" ? "current" : filter;
+
+    const movies = await getMovies({ status: statusParam, limit: 15 });
     res.status(200).json(movies);
   } catch (error) {
     console.error(`GET /movies/type/${filter}:`, error.message);
     return res.status(500).json({
-      error: `Could not retrieve ${filter} movies from the database.`,
+      error: `Kunde inte hämta filmer med status ${filter} från databasen.`,
     });
   }
 });
 
-// GET: Get a specific movie by ID
-
+// GET: Hämta en specifik film via ID med fullständig rollista och regissörsinfo
 router.get("/:id", async (req, res) => {
   const movieId = req.params.id;
 
@@ -100,19 +560,22 @@ router.get("/:id", async (req, res) => {
       `SELECT
         m.*,
         ${CATEGORIES_SUBQUERY},
-        (
-          SELECT JSON_ARRAYAGG(
-            JSON_OBJECT(
-              'id', p.id,
-              'name', p.name,
-              'image', p.image,
-              'character_name', mc.character_name
+        COALESCE(
+          (
+            SELECT JSON_ARRAYAGG(
+              JSON_OBJECT(
+                'id', p.id,
+                'name', p.name,
+                'image', p.image,
+                'character_name', mc.character_name
+              )
             )
-          )
-          FROM movie_cast mc
-          JOIN persons p ON p.id = mc.person_id
-          WHERE mc.movie_id = m.id
-        ) AS cast,
+            FROM movie_cast mc
+            JOIN persons p ON p.id = mc.person_id
+            WHERE mc.movie_id = m.id
+          ),
+          JSON_ARRAY()
+        ) AS \`cast\`,
         (
           SELECT JSON_OBJECT(
             'id', director.id,
@@ -126,11 +589,9 @@ router.get("/:id", async (req, res) => {
       WHERE m.id = ?`,
       [movieId],
     );
-
     if (results.length === 0) {
       return res.status(404).json({ error: "Film hittades inte" });
     }
-
     res.json(results[0]);
   } catch (err) {
     console.error("Fel vid hämtning av film:", err);

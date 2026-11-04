@@ -9,7 +9,13 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import VipPage from "./pages/VipPage";
 import BookingPage from "./pages/BookingPage";
 import CreateAccountPage from "./pages/Create-Account/CreateAccountPage";
-import CreateShow from "./pages/CreateShow";
+import AdminShows from "./components/Admin/shows/AdminShows";
+import AdminThemes from "./components/Admin/themes/AdminThemes";
+import AdminPersons from "./components/Admin/persons/AdminPersons";
+import AdminMovieConnections from "./components/Admin/connections/AdminMovieConnections";
+import AdminMovies from "./components/Admin/movies/AdminMovies";
+import AdminLayout from "./components/Admin/layout/AdminLayout";
+import AdminDashboard from "./components/Admin/dashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +31,25 @@ export const router = createBrowserRouter([
       { path: pages.movieDetails.path, element: <MovieDetailPage /> },
       { path: pages.vip.path, element: <VipPage /> },
       { path: pages.cancellation.path, element: <CancellationPage /> },
-      { path: pages.showsadmin.path, element: <CreateShow /> },
+
+      // Alla adminsidor delar AdminLayout (sidomeny + innehållsyta).
+      // Ny adminsida: lägg till en route här + en rad i components/Admin/layout/adminNav.ts
+      {
+        path: pages.admin.path,
+        element: <AdminLayout />,
+        children: [
+          { index: true, element: <AdminDashboard /> },
+          { path: pages.adminMovies.path, element: <AdminMovies /> },
+          { path: pages.adminPerson.path, element: <AdminPersons /> },
+          { path: pages.showsadmin.path, element: <AdminShows /> },
+          { path: pages.adminThemes.path, element: <AdminThemes /> },
+          {
+            path: pages.adminMoviePerson.path,
+            element: <AdminMovieConnections />,
+          },
+        ],
+      },
+
       { path: "*", element: <h1>404 – Sidan kunde inte hittas</h1> },
     ],
   },
