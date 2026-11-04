@@ -1,7 +1,7 @@
 import { Link, NavLink, Outlet, matchPath, useLocation } from "react-router";
 import { MdArrowBack } from "react-icons/md";
 import { adminNav } from "./adminNav";
-import { pages } from "../../routeConfig";
+import { pages } from "../../../routeConfig";
 import "./AdminLayout.scss";
 
 export default function AdminLayout() {

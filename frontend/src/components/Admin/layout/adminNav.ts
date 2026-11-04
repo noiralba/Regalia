@@ -5,10 +5,9 @@ import {
   MdPeople,
   MdEvent,
   MdTheaters,
-  MdChair,
   MdLabel,
 } from "react-icons/md";
-import { pages } from "../../routeConfig";
+import { pages } from "../../../routeConfig";
 
 export type AdminNavItem = {
   key: string;
@@ -26,7 +25,7 @@ export type AdminNavItem = {
  * Sidomenyn, sidrubriken och snabbåtgärderna på översikten byggs härifrån.
  *
  * Lägga till en ny adminsida:
- *  1. Skapa sidan (t.ex. components/Admin/AdminBookings.tsx)
+ *  1. Skapa sidan (t.ex. components/Admin/bookings/AdminBookings.tsx)
  *  2. Lägg till en path i routeConfig.ts
  *  3. Lägg till en route under /admin i routes.tsx
  *  4. Lägg till en rad här – klart.
@@ -91,18 +90,4 @@ export const adminNav: AdminNavItem[] = [
       hint: "Regissör & skådespelare",
     },
   },
-
-  {
-    key: "screens",
-    label: "Salonger",
-    description: "Skapa salonger och generera platser.",
-    path: pages.adminScreens.path,
-    icon: MdChair,
-    tone: "#fbbf24",
-    quickAction: { title: "Lägg till salong", hint: "Skapa salong med platser" },
-  },
-
-  // ---- Exempel på framtida sidor (avkommentera när de finns) ----
-  // { key: "bookings", label: "Biljetter & Bokningar", description: "...", path: pages.adminBookings.path, icon: MdConfirmationNumber },
-  // { key: "discounts",label: "Rabattkoder",           description: "...", path: pages.adminDiscounts.path,icon: MdLocalOffer },
 ];

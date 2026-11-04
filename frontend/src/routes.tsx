@@ -9,14 +9,13 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import VipPage from "./pages/VipPage";
 import BookingPage from "./pages/BookingPage";
 import CreateAccountPage from "./pages/Create-Account/CreateAccountPage";
-import AdminShows from "./components/Admin/AdminShows";
-import AdminThemes from "./components/Admin/AdminThemes";
-import AdminPersons from "./components/Admin/AdminPersons";
-import AdminMovieConnections from "./components/Admin/AdminMovieConnections";
-import AdminMovies from "./components/Admin/AdminMovies";
-import AdminScreens from "./components/Admin/AdminScreens";
-import AdminLayout from "./components/Admin/AdminLayout";
-import AdminDashboard from "./components/Admin/AdminDashboard";
+import AdminShows from "./components/Admin/shows/AdminShows";
+import AdminThemes from "./components/Admin/themes/AdminThemes";
+import AdminPersons from "./components/Admin/persons/AdminPersons";
+import AdminMovieConnections from "./components/Admin/connections/AdminMovieConnections";
+import AdminMovies from "./components/Admin/movies/AdminMovies";
+import AdminLayout from "./components/Admin/layout/AdminLayout";
+import AdminDashboard from "./components/Admin/dashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +33,7 @@ export const router = createBrowserRouter([
       { path: pages.cancellation.path, element: <CancellationPage /> },
 
       // Alla adminsidor delar AdminLayout (sidomeny + innehållsyta).
-      // Ny adminsida: lägg till en route här + en rad i components/Admin/adminNav.ts
+      // Ny adminsida: lägg till en route här + en rad i components/Admin/layout/adminNav.ts
       {
         path: pages.admin.path,
         element: <AdminLayout />,
@@ -48,7 +47,6 @@ export const router = createBrowserRouter([
             path: pages.adminMoviePerson.path,
             element: <AdminMovieConnections />,
           },
-          { path: pages.adminScreens.path, element: <AdminScreens /> },
         ],
       },
 

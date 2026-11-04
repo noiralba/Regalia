@@ -68,10 +68,6 @@ export const pages = {
     path: "/admin/teman",
     label: "admin/teman",
   },
-  adminScreens: {
-    path: "/admin/salonger",
-    label: "admin/salonger",
-  },
 };
 
 export const routeLinks = {
