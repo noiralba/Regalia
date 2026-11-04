@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Seat } from "../types/types";
 import { findBestAvailableSeats } from "../utils/seatSelection";
 
@@ -8,7 +8,9 @@ export function useSeatSelection(
   screen: string,
 ) {
   // Räknar ut vilka platser som rekommenderas
-  const recommendedSeats = findBestAvailableSeats(seats, ticketCount, screen);
+const recommendedSeats = useMemo(() => {
+  return findBestAvailableSeats(seats, ticketCount, screen);
+}, [seats, ticketCount, screen]);
 
   // Håller reda på vilka platser besökaren har valt
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
@@ -16,6 +18,22 @@ export function useSeatSelection(
   // Håller reda på om besökaren själv har börjat välja platser
   const [hasManuallySelectedSeats, setHasManuallySelectedSeats] =
     useState(false);
+  
+  useEffect(() => {
+  // Vänta tills biljetter, salong och platser finns
+  if (ticketCount === 0 || !screen || seats.length === 0) {
+    return;
+  }
+
+  // Skriv inte över besökarens manuella platsval
+  if (hasManuallySelectedSeats) {
+    return;
+    }
+    
+
+  // Markera de rekommenderade platserna
+  setSelectedSeats(recommendedSeats);
+}, [ticketCount, screen, recommendedSeats, hasManuallySelectedSeats]);
   
 function toggleSeat(seatId: string) {
   setHasManuallySelectedSeats(true);
