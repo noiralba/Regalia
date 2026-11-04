@@ -16,12 +16,32 @@ export function useSeatSelection(
   // Håller reda på om besökaren själv har börjat välja platser
   const [hasManuallySelectedSeats, setHasManuallySelectedSeats] =
     useState(false);
+  
+function toggleSeat(seatId: string) {
+  setHasManuallySelectedSeats(true);
 
+  setSelectedSeats((previous) => {
+    // Avmarkera stolen om den redan är vald
+    if (previous.includes(seatId)) {
+      return previous.filter((id) => id !== seatId);
+    }
+
+    // Tillåt inte fler stolar än antalet biljetter
+    if (previous.length >= ticketCount) {
+      return previous;
+    }
+
+    // Markera den nya stolen
+    return [...previous, seatId];
+  });
+  }
+  
   return {
     recommendedSeats,
     selectedSeats,
     setSelectedSeats,
     hasManuallySelectedSeats,
     setHasManuallySelectedSeats,
+    toggleSeat,
   };
 }

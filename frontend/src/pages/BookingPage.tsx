@@ -36,11 +36,18 @@ function BookingPage() {
     (total, count) => total + count,
     0,
   );
-  const { selectedSeats, setSelectedSeats } = useSeatSelection(
-    seats,
-    totalTickets,
-    showing?.Screen ?? "",
-  );
+const {
+  selectedSeats,
+  setSelectedSeats,
+  toggleSeat: selectSeat,
+  } = useSeatSelection(seats, totalTickets, showing?.Screen ?? "");
+  function toggleSeat(seatId: string) {
+    if (error.includes("blivit bokade av någon annan")) {
+      setError("");
+    }
+
+    selectSeat(seatId);
+  }
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   // Håller reda på om en bokning håller på att skickas
@@ -125,24 +132,7 @@ function BookingPage() {
       setSelectedSeats((previous) => previous.slice(0, -1));
     }
   }
-  // Markerar eller avmarkerar en sittplats
-  function toggleSeat(seatId: string) {
-    // Tar bort felmeddelandet när användaren börjar välja nya platser
-    if (error.includes("blivit bokade av någon annan")) {
-      setError("");
-    }
-    setSelectedSeats((previous) => {
-      // Om platsen redan är vald tas den bort
-      if (previous.includes(seatId)) {
-        return previous.filter((id) => id !== seatId);
-      }
-      // Förhindrar att fler sittplatser väljs än antalet biljetter
-      if (previous.length >= totalTickets) {
-        return previous;
-      }
-      return [...previous, seatId];
-    });
-  }
+
   // handleBooking börjar här. Kontrollerar bokningsuppgifterna och skickar bokningen till backend
   async function handleBooking() {
     if (totalTickets === 0) {
