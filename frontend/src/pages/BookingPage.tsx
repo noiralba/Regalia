@@ -14,6 +14,7 @@ import { getById } from "../api/api";
 import { getMovieImage } from "../utils/getMovieImage";
 import { extractIdFromSlug } from "../utils/slugify";
 import { useSeatPolling } from "../hooks/useSeatPolling";
+import { useSeatSelection } from "../hooks/useSeatSelection";
 
 interface TicketType {
   ticket_type_id: string;
@@ -31,7 +32,15 @@ function BookingPage() {
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
   const { seats, refreshSeats } = useSeatPolling(visningId);
-  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const totalTickets = Object.values(ticketCounts).reduce(
+    (total, count) => total + count,
+    0,
+  );
+  const { selectedSeats, setSelectedSeats } = useSeatSelection(
+    seats,
+    totalTickets,
+    showing?.Screen ?? "",
+  );
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   // Håller reda på om en bokning håller på att skickas
@@ -201,7 +210,6 @@ function BookingPage() {
         throw new Error("Could not create booking");
       }
       // Hämtar bokningsbekräftelsen från backend
-      // Ska senare användas för att visa bekräftelsemodalen
       const data: BookingConfirmation = await response.json();
       setBookingConfirmation(data);
       console.log("Bokning skapad:", data);
@@ -220,10 +228,7 @@ function BookingPage() {
     const price = Number(ticket["Price (SEK)"]);
     return total + count * price;
   }, 0);
-  const totalTickets = Object.values(ticketCounts).reduce(
-    (total, count) => total + count,
-    0,
-  );
+
   return (
     <main className="booking-page">
       <h1>Boka biljetter</h1>
