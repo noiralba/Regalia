@@ -22,6 +22,7 @@
     overflow: hidden;
     z-index: 0;
   }
+
   &__title {
     position: absolute;
     bottom: 3rem;
@@ -35,7 +36,6 @@
     text-align: left;
     width: auto;
     padding: 0;
-
     pointer-events: none;
   }
 
@@ -129,8 +129,27 @@
     }
   }
 
+  // Mobilanpassning
   @include respond-to(mobile) {
+    width: 100%;
     min-height: 20rem;
+    aspect-ratio: auto;
+
+    &__title {
+      left: 1rem;
+      right: 1rem;
+      bottom: 0.75rem;
+      transform: none;
+      width: auto;
+      padding: 0;
+      font-size: 1.75rem;
+      text-align: center;
+      z-index: 4;
+    }
+
+    .arrow-btn {
+      display: none;
+    }
 
     &__curtain {
       box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.35);

@@ -1,6 +1,7 @@
 import type { MovieThumbnails } from "../../types/types";
 import { getMovieImage } from "../../utils/getMovieImage";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { TouchEvent } from "react";
 import { Link } from "react-router";
 import { slugify } from "../../utils/slugify";
 
@@ -17,13 +18,48 @@ type MovieRowProps = {
   movies: MovieThumbnails[];
 };
 
-const PER_PAGE = 5;
-
 export default function MovieRow({ id, label, movies }: MovieRowProps) {
   const [page, setPage] = useState(0);
+  const [perPage, setPerPage] = useState(5);
 
-  const pageCount = Math.ceil(movies.length / PER_PAGE);
-  const visibleMovies = movies.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  useEffect(() => {
+    const updatePerPage = () => {
+      setPerPage(window.innerWidth <= 1024 ? 3 : 5);
+    };
+
+    updatePerPage();
+    window.addEventListener("resize", updatePerPage);
+
+    return () => window.removeEventListener("resize", updatePerPage);
+  }, []);
+
+  const pageCount = Math.ceil(movies.length / perPage);
+  const visibleMovies = movies.slice(page * perPage, (page + 1) * perPage);
+
+  useEffect(() => {
+    setPage(0);
+  }, [perPage]);
+
+  const handleTouchStart = (e: TouchEvent<HTMLElement>) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e: TouchEvent<HTMLElement>) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+
+    const difference = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(difference) < 50) return;
+
+    if (difference > 0) {
+      setPage((p) => Math.min(p + 1, pageCount - 1));
+    } else {
+      setPage((p) => Math.max(p - 1, 0));
+    }
+  };
 
   return (
     <section className="movie-row" aria-labelledby={id}>
@@ -33,7 +69,12 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
         </h2>
       </header>
 
-      <section className="movie-carousel" aria-label={`Filmer: ${label}`}>
+      <section
+        className="movie-carousel"
+        aria-label={`Filmer: ${label}`}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <button
           type="button"
           className="arrow-btn arrow-prev"
@@ -44,6 +85,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
         >
           <MdOutlineArrowBackIos size={30} />
         </button>
+
         <ul className="grid-movies list-unstyled">
           {visibleMovies.map((movie) => {
             const thumbnailUrl = getMovieImage(
@@ -72,12 +114,14 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
                         className="poster-image img-fluid rounded shadow-sm w-100"
                       />
                     </picture>
+
                     <span
                       className="age-badge"
                       aria-label={`Åldersgräns ${movie.ageRating} år`}
                     >
                       {movie.ageRating === 0 ? "Btl" : movie.ageRating}+
                     </span>
+
                     <figcaption className="poster-overlay">
                       <span className="poster-title">{movie.title}</span>
                     </figcaption>
@@ -87,6 +131,7 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
             );
           })}
         </ul>
+
         <button
           type="button"
           className="arrow-btn arrow-next"
