@@ -41,4 +41,10 @@
       background-color: $color-primary-red;
     }
   }
+
+  @include respond-to(mobile) {
+    .form-cancel {
+      width: 100%;
+    }
+  }
 }

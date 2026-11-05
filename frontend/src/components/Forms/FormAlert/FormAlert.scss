@@ -6,4 +6,8 @@
   color: $color-cream;
   background-color: $color-primary-red;
   border: 1px solid $color-gold;
+
+  @include respond-to(mobile) {
+    font-size: $font-size-body;
+  }
 }

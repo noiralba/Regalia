@@ -14,5 +14,15 @@
     text-align: center;
     margin-bottom: $space-md;
   }
+
+  @include respond-to(mobile) {
+    padding: $space-md;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+
 }
 

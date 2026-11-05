@@ -35,4 +35,11 @@
   .modal-footer {
     border-top: 1px solid $color-gold;
   }
+
+  @include v.respond-to(mobile) {
+    .modal-content {
+      margin: $space-sm;
+      padding: $space-sm;
+    }
+  }
 }

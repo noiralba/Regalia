@@ -29,4 +29,8 @@
 &::placeholder {
     color: $color-bg-dark;
   }
+
+  @include respond-to(mobile) {
+    height: 2.5rem;
+  }
 }
