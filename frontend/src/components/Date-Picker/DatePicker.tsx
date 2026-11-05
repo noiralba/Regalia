@@ -1,5 +1,5 @@
-import { useState } from "react";
-import "./DatePicker.scss"
+import { useEffect, useState } from "react";
+import "./DatePicker.scss";
 
 type DatePickerProps = {
   selectedDate: string;
@@ -13,6 +13,26 @@ function addDays(date: Date, days: number) {
   return copy;
 }
 
+function useResponsiveDays(max: number) {
+  const calc = () => {
+    if (typeof window === "undefined") return max;
+    if (window.innerWidth < 480) return Math.min(2, max);
+    if (window.innerWidth < 768) return Math.min(5, max);
+    return max;
+  };
+
+  const [count, setCount] = useState(calc);
+
+  useEffect(() => {
+    const onResize = () => setCount(calc());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [max]);
+
+  return count;
+}
+
 export default function DatePicker({
   selectedDate,
   onSelect,
@@ -20,41 +40,40 @@ export default function DatePicker({
 }: DatePickerProps) {
   const [today] = useState(() => new Date());
   const [startDate, setStartDate] = useState(today);
+  const visible = useResponsiveDays(daysVisible);
 
-  const days = Array.from({ length: daysVisible }, (_, i) =>
-    addDays(startDate, i),
-  );
+  const days = Array.from({ length: visible }, (_, i) => addDays(startDate, i));
 
   const canGoBack = startDate > today;
 
   return (
-    <section className="dates border rounded-2 p-3 p-md-4 mb-4">
-      <h2 className="date-title h6 text-uppercase mb-3">Välj datum</h2>
+    <section className="dates">
+      <h2 className="date-title text-uppercase mb-3">Välj datum</h2>
 
       <nav
         aria-label="Datumväljare"
-        className="date-picker d-flex align-items-stretch gap-2 border rounded-2 p-3"
+        className="date-picker d-flex align-items-stretch gap-2 border rounded-2"
       >
         <button
           type="button"
-          className="date-button btn border rounded-2"
+          className="date-button date-arrow btn border rounded-2"
           aria-label="Föregående datum"
           disabled={!canGoBack}
-          onClick={() => setStartDate((d) => addDays(d, -daysVisible))}
+          onClick={() => setStartDate((d) => addDays(d, -visible))}
         >
           ←
         </button>
 
-        <ul className="list-unstyled d-flex flex-grow-1 gap-2 mb-0 overflow-auto">
+        <ul className="date-list list-unstyled d-flex flex-grow-1 gap-2 mb-0">
           {days.map((day) => {
             const value = day.toLocaleDateString("sv-SE");
             const isSelected = value === selectedDate;
 
             return (
-              <li key={value} className="flex-fill">
+              <li key={value} className="date-item">
                 <button
                   type="button"
-                  className={`date-button btn border rounded-2 w-100 py-2 ${isSelected ? "active" : ""}`}
+                  className={`date-button btn border rounded-2 w-100 h-100 ${isSelected ? "active" : ""}`}
                   aria-pressed={isSelected}
                   onClick={() => onSelect(value)}
                 >
@@ -78,9 +97,9 @@ export default function DatePicker({
 
         <button
           type="button"
-          className="date-button btn border rounded-2"
+          className="date-button date-arrow btn border rounded-2"
           aria-label="Nästa datum"
-          onClick={() => setStartDate((d) => addDays(d, daysVisible))}
+          onClick={() => setStartDate((d) => addDays(d, visible))}
         >
           →
         </button>
