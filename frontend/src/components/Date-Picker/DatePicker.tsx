@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { MdOutlineArrowForwardIos, MdOutlineArrowBackIos } from "react-icons/md";
 import "./DatePicker.scss";
 
 type DatePickerProps = {
@@ -52,16 +53,16 @@ export default function DatePicker({
 
       <nav
         aria-label="Datumväljare"
-        className="date-picker d-flex align-items-stretch gap-2 border rounded-2"
+        className="date-picker d-flex gap-2 "
       >
         <button
           type="button"
-          className="date-button date-arrow btn border rounded-2"
+          className="date-button date-arrow"
           aria-label="Föregående datum"
           disabled={!canGoBack}
           onClick={() => setStartDate((d) => addDays(d, -visible))}
         >
-          ←
+          <MdOutlineArrowBackIos size={20} />
         </button>
 
         <ul className="date-list list-unstyled d-flex flex-grow-1 gap-2 mb-0">
@@ -97,11 +98,11 @@ export default function DatePicker({
 
         <button
           type="button"
-          className="date-button date-arrow btn border rounded-2"
+          className="date-button date-arrow"
           aria-label="Nästa datum"
           onClick={() => setStartDate((d) => addDays(d, visible))}
         >
-          →
+          <MdOutlineArrowForwardIos size={20} />
         </button>
       </nav>
     </section>

@@ -1,4 +1,3 @@
-// import React from "react";
 import { Link } from "react-router";
 import { getMovieImage } from "../../utils/getMovieImage";
 import { slugify } from "../../utils/slugify";
