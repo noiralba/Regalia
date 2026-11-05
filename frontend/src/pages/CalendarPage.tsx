@@ -32,7 +32,7 @@ export default function CalendarPage() {
   });
 
   return (
-    <main>
+    <main className="page-container">
       <DatePicker selectedDate={selectedDate} onSelect={setSelectedDate} />
       <Calendar selectedDate={selectedDate} />
 
