@@ -18,41 +18,59 @@ const recommendedSeats = useMemo(() => {
   // Håller reda på om besökaren själv har börjat välja platser
   const [hasManuallySelectedSeats, setHasManuallySelectedSeats] =
     useState(false);
-  
+
   useEffect(() => {
-  // Vänta tills biljetter, salong och platser finns
-  if (ticketCount === 0 || !screen || seats.length === 0) {
-    return;
-  }
-
-  // Skriv inte över besökarens manuella platsval
-  if (hasManuallySelectedSeats) {
-    return;
+    if (ticketCount === 0) {
+      setSelectedSeats([]);
+      setHasManuallySelectedSeats(false);
+      return;
     }
-    
 
-  // Markera de rekommenderade platserna
-  setSelectedSeats(recommendedSeats);
-}, [ticketCount, screen, recommendedSeats, hasManuallySelectedSeats]);
+    // Vänta tills salong och platser finns
+    if (!screen || seats.length === 0) {
+      return;
+    }
+
+    // Skriv inte över besökarens manuella platsval
+    if (hasManuallySelectedSeats) {
+      return;
+    }
+
+    // Markera de rekommenderade platserna
+    setSelectedSeats(recommendedSeats);
+  }, [
+    ticketCount,
+    screen,
+    seats.length,
+    recommendedSeats,
+    hasManuallySelectedSeats,
+  ]);
   
 function toggleSeat(seatId: string) {
+  const isFirstManualSelection = !hasManuallySelectedSeats;
+
   setHasManuallySelectedSeats(true);
 
   setSelectedSeats((previous) => {
-    // Avmarkera stolen om den redan är vald
+    // Om besökaren klickar på en redan markerad plats,
+    // avmarkera bara den platsen.
     if (previous.includes(seatId)) {
       return previous.filter((id) => id !== seatId);
     }
 
-    // Tillåt inte fler stolar än antalet biljetter
+    // Första manuella valet ersätter den automatiska förmarkeringen.
+    if (isFirstManualSelection) {
+      return [seatId];
+    }
+
+    // Tillåt inte fler platser än antalet biljetter.
     if (previous.length >= ticketCount) {
       return previous;
     }
 
-    // Markera den nya stolen
     return [...previous, seatId];
   });
-  }
+}
   
   return {
     recommendedSeats,
