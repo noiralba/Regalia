@@ -2,54 +2,65 @@
 
 .theme-filmstrip {
   margin-top: 20px;
-  &__strip-wrapper {
-    position: relative;
-    padding: 16px 0;
-    background: #1a1515;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    overflow-x: auto;
 
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  &__title {
+    font-size: v.$font-size-h2;
+    text-transform: uppercase;
+    color: v.$color-cream;
+  }
 
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 10px;
-      background-image: linear-gradient(
-        90deg,
-        #fff 0px,
+  &__description {
+    font-size: v.$font-size-body;
+    color: v.$color-gold;
+  }
+
+&__strip-wrapper {
+  padding: 16px 0;
+  background: v.$color-card-bg;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+&__strip {
+  position: relative; 
+  display: flex;
+  gap: 12px;
+  width: max-content; 
+  min-width: 100%; 
+  margin: 0;
+  padding: 0 10px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background-image: linear-gradient(90deg,
+        #fff 0,
         #fff 12px,
-        // Hålens bredd (12px)
         transparent 12px,
-        transparent 18px
-      );
-      background-size: 18px 100%;
-    }
-
-    &::before {
-      top: 4px;
-    }
-
-    &::after {
-      bottom: 4px;
-    }
+        transparent 18px);
+    background-size: 18px 100%;
+    pointer-events: none;
   }
 
-  &__strip {
-    display: flex;
-    padding: 0 10px;
-    margin: 0;
-    min-width: max-content;
-    justify-content: space-between;
-    gap: 12px;
+  &::before {
+    top: -12px;
   }
+
+  &::after {
+    bottom: -12px;
+  }
+}
 
   &__item {
     padding: 0;
@@ -73,4 +84,38 @@
     height: 100%;
     object-fit: cover;
   }
+
+@include v.respond-to(mobile) {
+  &__strip-wrapper {
+    padding: 14px 0;
+  }
+
+  &__strip {
+    gap: 8px;
+    padding: 0 8px;
+
+    &::before,
+    &::after {
+      height: 8px;
+      background-image: linear-gradient(90deg,
+          #fff 0,
+          #fff 8px,
+          transparent 8px,
+          transparent 14px);
+      background-size: 14px 100%;
+    }
+
+    &::before {
+      top: -11px;
+    }
+
+    &::after {
+      bottom: -11px;
+    }
+  }
+
+  &__poster {
+    width: 110px;
+  }
+}
 }

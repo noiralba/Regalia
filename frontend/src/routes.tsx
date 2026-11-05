@@ -14,7 +14,7 @@ const MovieDetailPage = lazy(() => import("./pages/MovieDetailPage"));
 const VipPage = lazy(() => import("./pages/VipPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const CreateAccountPage = lazy(
-  () => import("./pages/Create-Account/CreateAccountPage"),
+  () => import("./pages/CreateAccountPage"),
 );
 
 // Admin
