@@ -7,6 +7,7 @@ import type { ChangeEvent, SubmitEvent } from "react";
 import FormField from "../FormField/FormField";
 import FormAlert from "../FormAlert/FormAlert";
 import FormActions from "../FormActions/FormActions";
+import SuccessModal from "../SuccessModal/SuccessModal";
 import "./CreateAccountForm.scss";
 
 interface FormDataState {
@@ -29,6 +30,7 @@ export default function CreateAccountForm() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,6 +40,8 @@ export default function CreateAccountForm() {
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
+
+    setShowSuccess(true);
 
     if (formData.password !== formData.confirmPassword) {
       setError("Lösenorden matchar inte.");
@@ -60,8 +64,6 @@ export default function CreateAccountForm() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Något gick fel.");
 
-      alert("Konto skapat framgångsrikt!");
-      navigate("/logga-in");
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Ett oväntat fel inträffade.",
@@ -71,60 +73,74 @@ export default function CreateAccountForm() {
     }
   };
 
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+    navigate("/logga-in");
+  };
+
   return (
-    <Form onSubmit={handleSubmit} className="create-account-form">
-      <h1>Skapa konto</h1>
-      <p>Fyll i dina uppgifter för att skapa ett konto.</p>
-      <FormAlert message={error} />
+    <>
+      <Form onSubmit={handleSubmit} className="create-account-form">
+        <h1>Skapa konto</h1>
+        <p>Fyll i dina uppgifter för att skapa ett konto.</p>
+        <FormAlert message={error} />
 
-      <FormField
-        id="first_name"
-        label="Förnamn"
-        value={formData.first_name}
-        onChange={handleChange}
-        autoComplete="given-name"
-      />
-      <FormField
-        id="last_name"
-        label="Efternamn"
-        value={formData.last_name}
-        onChange={handleChange}
-        autoComplete="family-name"
-      />
-      <FormField
-        id="email"
-        label="E-postadress"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        autoComplete="email"
-      />
-      <FormField
-        id="password"
-        label="Lösenord (minst 15 tecken)"
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-        minLength={15}
-        autoComplete="new-password"
-      />
-      <FormField
-        id="confirmPassword"
-        label="Upprepa lösenord"
-        type="password"
-        value={formData.confirmPassword}
-        onChange={handleChange}
-        autoComplete="new-password"
-      />
+        <FormField
+          id="first_name"
+          label="Förnamn"
+          value={formData.first_name}
+          onChange={handleChange}
+          autoComplete="given-name"
+        />
+        <FormField
+          id="last_name"
+          label="Efternamn"
+          value={formData.last_name}
+          onChange={handleChange}
+          autoComplete="family-name"
+        />
+        <FormField
+          id="email"
+          label="E-postadress"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          autoComplete="email"
+        />
+        <FormField
+          id="password"
+          label="Lösenord (minst 15 tecken)"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          minLength={15}
+          autoComplete="new-password"
+        />
+        <FormField
+          id="confirmPassword"
+          label="Upprepa lösenord"
+          type="password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          autoComplete="new-password"
+        />
 
-      <FormActions
-        loading={loading}
-        submitLabel="Skapa konto"
-        loadingLabel="Skapar konto..."
-        linkTo="/logga-in"
-        linkLabel="Har du redan ett konto?"
-        onCancel={() => navigate(-1)}
+        <FormActions
+          loading={loading}
+          submitLabel="Skapa konto"
+          loadingLabel="Skapar konto..."
+          linkTo="/logga-in"
+          linkLabel="Har du redan ett konto?"
+          onCancel={() => navigate(-1)}
+        />
+      </Form>
+      <SuccessModal
+        show={showSuccess}
+        title="Konto skapat"
+        message="Ditt konto har skapats. Du kan nu logga in."
+        buttonLabel="Gå till inloggning"
+        onClose={handleCloseSuccess}
       />
-    </Form>
+    </>
   );
 }
