@@ -170,3 +170,49 @@
     opacity: 0.65;
   }
 }
+// Mobilanpassning
+@media (max-width: 37.4375rem) {
+  .vip-banner {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .vip-banner-image {
+    height: 16rem;
+  }
+
+  .vip-banner-content {
+    min-height: auto;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .vip-banner-title {
+    font-size: 2.2rem;
+    line-height: 1.15;
+    margin-bottom: 0.4rem;
+  }
+
+  .vip-banner-subtitle {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .vip-banner-description {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .vip-banner-heading {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .vip-banner-actions {
+    margin-top: 1rem;
+    margin-bottom: -0.5rem;
+  }
+}
