@@ -26,7 +26,6 @@ const fetchFilteredMovies = async (
   if (category) queryParams.set("categories", category);
   if (ageRating) queryParams.set("ageRating", ageRating);
 
-  // Bygger strängen t.ex: /api/movies?search=batman&ageRating=15
   return api.get<MovieSearchResult[]>(`/api/movies?${queryParams.toString()}`);
 };
 
@@ -38,7 +37,8 @@ export default function SearchBar() {
   const categoryQuery = searchParams.get("categories") || "";
   const ageQuery = searchParams.get("ageRating") || "";
 
-  const [localSearch, setLocalSearch] = useState(searchQuery);
+  // 1. Initiera statet direkt med värdet från URL:en för att undvika tomma renderingar
+  const [localSearch, setLocalSearch] = useState(() => searchQuery);
 
   // Debounce för sökfältet
   useEffect(() => {
@@ -56,9 +56,7 @@ export default function SearchBar() {
     return () => clearTimeout(handler);
   }, [localSearch, setSearchParams]);
 
-  useEffect(() => {
-    setLocalSearch(searchQuery);
-  }, [searchQuery]);
+  // Den felaktiga useEffecten (setLocalSearch) har tagits bort helt!
 
   const currentFilters = {
     search: searchQuery,
@@ -99,8 +97,8 @@ export default function SearchBar() {
   };
 
   return (
-    <section aria-label="Filmsökning">
-      <form>
+    <section aria-label="Filmsökning" key={searchQuery}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="movie-search">Sök efter film</label>
         <input
           id="movie-search"
