@@ -1,0 +1,50 @@
+
+@use "../../../styles/variables" as *;
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+
+  .form-submit {
+    width: 100%;
+    margin: 0 auto;
+    height: 3rem;
+    color: $color-cream;
+    border: 1px solid $color-gold;
+    margin-top: $space-md;
+    text-transform: uppercase;
+  }
+
+  .form-link {
+    text-align: left;
+    color: $color-gold;
+    font-family: $font-body;
+    font-size: $font-size-body;
+
+    &:hover {
+      color: $color-cream;
+    }
+  }
+
+  .form-cancel {
+    width: 50%;
+    margin: 0 auto;
+    height: 3rem;
+    color: $color-cream;
+    border: 1px solid $color-gold;
+    margin-top: $space-md;
+    text-transform: uppercase;
+    background-color: $color-bg-dark;
+
+    &:hover {
+      background-color: $color-primary-red;
+    }
+  }
+
+  @include respond-to(mobile) {
+    .form-cancel {
+      width: 100%;
+    }
+  }
+}

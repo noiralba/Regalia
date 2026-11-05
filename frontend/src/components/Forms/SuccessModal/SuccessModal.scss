@@ -1,0 +1,45 @@
+@use "../../../styles/variables" as *;
+
+.success-modal {
+
+
+    .modal-header {
+        border-bottom: 1px solid $color-gold;
+      }
+
+  .modal-title {
+    color: $color-bg-dark;
+    font-family: $font-body;
+    font-size: $font-size-body;
+  }
+
+  .modal-content {
+    background-color: $color-cream;
+    color: $color-bg-dark;
+    font-family: $font-body;
+    margin: $space-md;
+    padding: $space-md;
+    border: none;
+  }
+
+  .modal-button {
+    width: 100%;
+    margin: 0 auto;
+    height: 3rem;
+    color: $color-cream;
+    border: 1px solid $color-gold;
+    margin-top: $space-md;
+    text-transform: uppercase;
+  }
+
+  .modal-footer {
+    border-top: 1px solid $color-gold;
+  }
+
+  @include respond-to(mobile) {
+    .modal-content {
+      margin: $space-sm;
+      padding: $space-sm;
+    }
+  }
+}
