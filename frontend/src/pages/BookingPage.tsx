@@ -309,6 +309,7 @@ function changeTicketCount(ticketTypeId: string, change: number) {
           selectedSeats={selectedSeats}
           toggleSeat={toggleSeat}
           screen={showing?.Screen ?? ""}
+          ticketCount={totalTickets}
         />
         {isSeatModalOpen && (
           <SeatMapModal
@@ -317,6 +318,7 @@ function changeTicketCount(ticketTypeId: string, change: number) {
             toggleSeat={toggleSeat}
             onClose={() => setIsSeatModalOpen(false)}
             screen={showing?.Screen ?? ""}
+            ticketCount={totalTickets}
           />
         )}
       </section>

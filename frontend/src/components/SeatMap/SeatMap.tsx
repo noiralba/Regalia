@@ -6,11 +6,18 @@ interface SeatMapProps {
   selectedSeats: string[];
   toggleSeat: (seatId: string) => void;
   screen: string;
+  ticketCount: number;
 }
 
-function SeatMap({ seats, selectedSeats, toggleSeat, screen }: SeatMapProps) {
+function SeatMap({
+  seats,
+  selectedSeats,
+  toggleSeat,
+  screen,
+  ticketCount: _ticketCount,
+}: SeatMapProps) {
   const isLargeScreen = screen === "Stora salongen";
-  
+
   return (
     <div className="booking-page__seat-map">
       <div className="booking-page__screen" aria-hidden="true" />
@@ -34,9 +41,7 @@ function SeatMap({ seats, selectedSeats, toggleSeat, screen }: SeatMapProps) {
                         selectedSeats.includes(seat.seat_id)
                           ? "is-selected"
                           : ""
-                      }${
-                        seat["Seat Row"] === "H" ? "is-vip" : ""  
-                      }`}
+                      }${seat["Seat Row"] === "H" ? "is-vip" : ""}`}
                       key={seat.seat_id}
                       type="button"
                       disabled={seat.Available === 0}
