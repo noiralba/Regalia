@@ -12,6 +12,11 @@ export const queryKeys = {
   categories: ["categories"],
   screens: ["screens"],
   movieDetails: (movieId: string) => ["adminMovieDetails", movieId],
+  publicMovieSearch: (filters: {
+    search: string;
+    categories: string;
+    ageRating: string;
+  }) => ["publicMovieSearch", filters],
 
   // Nycklar som den publika webbplatsen använder (invalideras så att den visar färsk data)
   publicShows: ["shows"],
