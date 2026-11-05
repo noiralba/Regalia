@@ -117,10 +117,10 @@ export default function SearchBar() {
           onChange={(e) => handleFilterChange("ageRating", e.target.value)}
         >
           <option value="">Alla åldrar</option>
-          <option value="0">Barntillåten (0)</option>
-          <option value="7">7+</option>
-          <option value="11">11+</option>
-          <option value="15">15+</option>
+          <option value="0">Barntillåten (0 år)</option>
+          <option value="7">7 år</option>
+          <option value="11">11 år</option>
+          <option value="15">15 år</option>
         </select>
       </form>
 
