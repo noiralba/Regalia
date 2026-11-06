@@ -378,7 +378,11 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const { ageRating, categories, search } = req.query;
+    const {
+      åldersgräns: ageRating,
+      kategorier: categories,
+      sök: search,
+    } = req.query;
 
     let sql = `SELECT * FROM v_movie_search_filter`;
 
@@ -392,7 +396,7 @@ router.get("/", async (req, res) => {
           .status(400)
           .json({ error: "ageRating måste vara ett positivt tal" });
       }
-      conditions.push("ageRating = ?");
+      conditions.push("ageRating = ?"); // change to <= for age range
       params.push(age);
     }
 
