@@ -14,6 +14,7 @@ import { getById } from "../api/api";
 import { getMovieImage } from "../utils/getMovieImage";
 import { extractIdFromSlug } from "../utils/slugify";
 import { useSeatPolling } from "../hooks/useSeatPolling";
+import { useSeatSelection } from "../hooks/useSeatSelection";
 
 interface TicketType {
   ticket_type_id: string;
@@ -31,7 +32,25 @@ function BookingPage() {
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
   const { seats, refreshSeats } = useSeatPolling(visningId);
-  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const totalTickets = Object.values(ticketCounts).reduce(
+    (total, count) => total + count,
+    0,
+  );
+  // hämtar platsval/funktioner från vår egna hook useSeatSelection
+const {
+  selectedSeats,
+  setSelectedSeats,
+  hasManuallySelectedSeats,
+  setHasManuallySelectedSeats,
+  toggleSeat: selectSeat,
+} = useSeatSelection(seats, totalTickets, showing?.Screen ?? "");
+  function toggleSeat(seatId: string) {
+    if (error.includes("blivit bokade av någon annan")) {
+      setError("");
+    }
+
+    selectSeat(seatId);
+  }
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   // Håller reda på om en bokning håller på att skickas
@@ -55,14 +74,13 @@ function BookingPage() {
         previous.filter((id) => !unavailableSeats.includes(id)),
       );
 
-      // Info till användaren om att platserna har bokats av någon annan
       setError(
         "En eller flera av dina valda sittplatser har tyvärr blivit bokade av någon annan. Vänligen välj nya platser.",
       );
     }, 0);
 
     return () => clearTimeout(timeout);
-  }, [seats, selectedSeats]);
+  }, [seats, selectedSeats, setSelectedSeats]);
 
   // Hämta info om vald filmvisnign från backend
   useEffect(() => {
@@ -106,34 +124,25 @@ function BookingPage() {
 
   // FUNKTIONER
   //Ökar/minskar antalet biljetter
-  function changeTicketCount(ticketTypeId: string, change: number) {
-    setTicketCounts((previous) => ({
-      ...previous,
-      [ticketTypeId]: Math.max(0, (previous[ticketTypeId] || 0) + change),
-    }));
-    // Tar bort den senast valda sittplatsen om antalet biljetter minskar
-    if (change < 0) {
-      setSelectedSeats((previous) => previous.slice(0, -1));
-    }
+function changeTicketCount(ticketTypeId: string, change: number) {
+  const newCount = Math.max(0, (ticketCounts[ticketTypeId] || 0) + change);
+  // Räknar ut nya totala antalet biljetter
+  const newTotalTickets =
+    totalTickets - (ticketCounts[ticketTypeId] || 0) + newCount;
+
+  setTicketCounts((previous) => ({
+    ...previous,
+    [ticketTypeId]: newCount,
+  }));
+  // Om alla biljetter tas bort återgår platsvalet till automatiskt läge
+  if (newTotalTickets === 0) {
+    setHasManuallySelectedSeats(false);
+    // körs om användaren minskar antalet manuellt valda biljtter (tar bort senast valda)
+  } else if (change < 0 && hasManuallySelectedSeats) {
+    setSelectedSeats((previous) => previous.slice(0, -1));
   }
-  // Markerar eller avmarkerar en sittplats
-  function toggleSeat(seatId: string) {
-    // Tar bort felmeddelandet när användaren börjar välja nya platser
-    if (error.includes("blivit bokade av någon annan")) {
-      setError("");
-    }
-    setSelectedSeats((previous) => {
-      // Om platsen redan är vald tas den bort
-      if (previous.includes(seatId)) {
-        return previous.filter((id) => id !== seatId);
-      }
-      // Förhindrar att fler sittplatser väljs än antalet biljetter
-      if (previous.length >= totalTickets) {
-        return previous;
-      }
-      return [...previous, seatId];
-    });
-  }
+}
+
   // handleBooking börjar här. Kontrollerar bokningsuppgifterna och skickar bokningen till backend
   async function handleBooking() {
     if (totalTickets === 0) {
@@ -201,7 +210,6 @@ function BookingPage() {
         throw new Error("Could not create booking");
       }
       // Hämtar bokningsbekräftelsen från backend
-      // Ska senare användas för att visa bekräftelsemodalen
       const data: BookingConfirmation = await response.json();
       setBookingConfirmation(data);
       console.log("Bokning skapad:", data);
@@ -220,10 +228,7 @@ function BookingPage() {
     const price = Number(ticket["Price (SEK)"]);
     return total + count * price;
   }, 0);
-  const totalTickets = Object.values(ticketCounts).reduce(
-    (total, count) => total + count,
-    0,
-  );
+
   return (
     <main className="booking-page">
       <h1>Boka biljetter</h1>
@@ -236,7 +241,6 @@ function BookingPage() {
       <div className="booking-page__top">
         <section className="booking-page__showing">
           <h2>Vald film</h2>
-          {error && <p>{error}</p>}
           {!showing && !error && <p>Hämtar visning...</p>}
           {showing && (
             <div className="booking-page__movie">
@@ -304,6 +308,7 @@ function BookingPage() {
           seats={seats}
           selectedSeats={selectedSeats}
           toggleSeat={toggleSeat}
+          screen={showing?.Screen ?? ""}
         />
         {isSeatModalOpen && (
           <SeatMapModal
@@ -311,6 +316,7 @@ function BookingPage() {
             selectedSeats={selectedSeats}
             toggleSeat={toggleSeat}
             onClose={() => setIsSeatModalOpen(false)}
+            screen={showing?.Screen ?? ""}
           />
         )}
       </section>
