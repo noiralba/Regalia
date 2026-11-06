@@ -37,7 +37,6 @@ export default function SearchBar() {
   const categoryQuery = searchParams.get("categories") || "";
   const ageQuery = searchParams.get("ageRating") || "";
 
-  // 1. Initiera statet direkt med värdet från URL:en för att undvika tomma renderingar
   const [localSearch, setLocalSearch] = useState(() => searchQuery);
 
   // Debounce för sökfältet
@@ -55,8 +54,6 @@ export default function SearchBar() {
 
     return () => clearTimeout(handler);
   }, [localSearch, setSearchParams]);
-
-  // Den felaktiga useEffecten (setLocalSearch) har tagits bort helt!
 
   const currentFilters = {
     search: searchQuery,
@@ -97,7 +94,7 @@ export default function SearchBar() {
   };
 
   return (
-    <section aria-label="Filmsökning" key={searchQuery}>
+    <section aria-label="Filmsökning">
       <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="movie-search">Sök efter film</label>
         <input
@@ -122,7 +119,7 @@ export default function SearchBar() {
         </select>
       </form>
 
-      {localSearch.length >= 2 && (
+      {(localSearch.length >= 2 || ageQuery !== "" || categoryQuery !== "") && (
         <section aria-label="Sökresultat">
           {isLoading && <p role="status">Söker...</p>}
 
