@@ -396,7 +396,7 @@ router.get("/", async (req, res) => {
           .status(400)
           .json({ error: "ageRating måste vara ett positivt tal" });
       }
-      conditions.push("ageRating = ?");
+      conditions.push("ageRating = ?"); // change to <= for age range
       params.push(age);
     }
 
