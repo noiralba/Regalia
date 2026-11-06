@@ -95,3 +95,48 @@ export function findBestAvailableSeats(
 
   return bestSeats.map((seat) => seat.seat_id);
 }
+
+// Hittar en grupp intilliggande lediga platser vid hover
+export function findHoverSeats(
+  seats: Seat[],
+  hoveredSeatId: string,
+  ticketCount: number,
+): string[] {
+  if (ticketCount <= 0) return [];
+
+  const hoveredSeat = seats.find((seat) => seat.seat_id === hoveredSeatId);
+
+  if (!hoveredSeat || !hoveredSeat.Available) return [];
+
+  const rowSeats = seats
+    .filter(
+      (seat) =>
+        seat["Seat Row"] === hoveredSeat["Seat Row"] &&
+        seat.Available === 1,
+    )
+    .sort((a, b) => a["Seat Number"] - b["Seat Number"]);
+
+  const hoveredIndex = rowSeats.findIndex(
+    (seat) => seat.seat_id === hoveredSeatId,
+  );
+
+  let bestGroup: Seat[] = [];
+  let bestDistance = Infinity;
+
+  for (let i = 0; i <= rowSeats.length - ticketCount; i++) {
+    const group = rowSeats.slice(i, i + ticketCount);
+
+    if (!areSeatsAdjacent(group)) continue;
+    if (!group.some((seat) => seat.seat_id === hoveredSeatId)) continue;
+
+    const groupCenter = i + (ticketCount - 1) / 2;
+    const distance = Math.abs(groupCenter - hoveredIndex);
+
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestGroup = group;
+    }
+  }
+
+  return bestGroup.map((seat) => seat.seat_id);
+}

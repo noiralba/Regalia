@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { findHoverSeats } from "../../utils/seatSelection";
 import type { Seat } from "../../types/types";
 import "./SeatMap.scss";
 
@@ -7,6 +9,7 @@ interface SeatMapProps {
   toggleSeat: (seatId: string) => void;
   screen: string;
   ticketCount: number;
+  selectSeatGroup?: (seatIds: string[]) => void;
 }
 
 function SeatMap({
@@ -14,15 +17,34 @@ function SeatMap({
   selectedSeats,
   toggleSeat,
   screen,
-  ticketCount: _ticketCount,
+  ticketCount,
+  selectSeatGroup,
 }: SeatMapProps) {
   const isLargeScreen = screen === "Stora salongen";
+  const [hoveredSeatId, setHoveredSeatId] = useState<string | null>(null);
+
+  const hoverSeats = hoveredSeatId
+    ? findHoverSeats(seats, hoveredSeatId, ticketCount)
+    : [];
+  // Väljer hela gruppen av intilliggande platser vid klick
+  function handleSeatClick(seatId: string) {
+    const group = findHoverSeats(seats, seatId, ticketCount);
+
+    if (group.length === ticketCount && selectSeatGroup) {
+      selectSeatGroup(group);
+    } else {
+      toggleSeat(seatId);
+    }
+  }
 
   return (
     <div className="booking-page__seat-map">
       <div className="booking-page__screen" aria-hidden="true" />
 
-      <div className="booking-page__seat-rows">
+      <div
+        className="booking-page__seat-rows"
+        onMouseLeave={() => setHoveredSeatId(null)}
+      >
         {[...new Set(seats.map((seat) => seat["Seat Row"]))]
           .sort()
           .map((row) => (
@@ -41,11 +63,16 @@ function SeatMap({
                         selectedSeats.includes(seat.seat_id)
                           ? "is-selected"
                           : ""
+                      } ${
+                        hoverSeats.includes(seat.seat_id)
+                          ? "is-hover-preview"
+                          : ""
                       }${seat["Seat Row"] === "H" ? "is-vip" : ""}`}
                       key={seat.seat_id}
                       type="button"
                       disabled={seat.Available === 0}
-                      onClick={() => toggleSeat(seat.seat_id)}
+                      onMouseEnter={() => setHoveredSeatId(seat.seat_id)}
+                      onClick={() => handleSeatClick(seat.seat_id)}
                       aria-label={`Rad ${row}, plats ${seat["Seat Number"]}`}
                       aria-pressed={selectedSeats.includes(seat.seat_id)}
                       title={`Rad ${row}, plats ${seat["Seat Number"]}`}

@@ -10,6 +10,7 @@ interface SeatMapModalProps {
   onClose: () => void;
   screen: string;
   ticketCount: number;
+  selectSeatGroup: (seatIds: string[]) => void;
 }
 
 function SeatMapModal({
@@ -19,6 +20,7 @@ function SeatMapModal({
   onClose,
   screen,
   ticketCount,
+  selectSeatGroup,
 }: SeatMapModalProps) {
   return (
     <div className="seat-map-modal__overlay">
@@ -45,6 +47,7 @@ function SeatMapModal({
           toggleSeat={toggleSeat}
           screen={screen}
           ticketCount={ticketCount}
+          selectSeatGroup={selectSeatGroup}
         />
 
         <button

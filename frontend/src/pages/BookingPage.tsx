@@ -51,6 +51,11 @@ const {
 
     selectSeat(seatId);
   }
+
+  function selectSeatGroup(seatIds: string[]) {
+    setSelectedSeats(seatIds);
+  }
+
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   // Håller reda på om en bokning håller på att skickas
@@ -310,6 +315,7 @@ function changeTicketCount(ticketTypeId: string, change: number) {
           toggleSeat={toggleSeat}
           screen={showing?.Screen ?? ""}
           ticketCount={totalTickets}
+          selectSeatGroup={selectSeatGroup}
         />
         {isSeatModalOpen && (
           <SeatMapModal
@@ -319,6 +325,7 @@ function changeTicketCount(ticketTypeId: string, change: number) {
             onClose={() => setIsSeatModalOpen(false)}
             screen={showing?.Screen ?? ""}
             ticketCount={totalTickets}
+            selectSeatGroup={selectSeatGroup}
           />
         )}
       </section>
