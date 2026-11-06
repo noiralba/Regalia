@@ -1,0 +1,36 @@
+
+@use "../../../styles/variables" as *;
+
+.form-field {
+  margin-bottom: $space-md;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: $space-sm;
+  color: $color-cream;
+  font-family: $font-body;
+  font-size: $font-size-body;
+}
+
+.form-control {
+  background-color: $color-cream;
+  border: 1px solid $color-gold;
+  color: $color-bg-dark;
+  height: 3rem;
+  
+  &:focus {
+    border-color: $color-gold;
+    box-shadow: 0 0 0 0.2rem rgba($color-gold, 0.25);
+    background-color: $color-cream;
+    color: $color-bg-dark;
+  }
+
+&::placeholder {
+    color: $color-bg-dark;
+  }
+
+  @include respond-to(mobile) {
+    height: 2.5rem;
+  }
+}

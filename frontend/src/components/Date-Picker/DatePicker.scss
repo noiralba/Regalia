@@ -2,24 +2,71 @@
 
 .dates {
   background-color: v.$color-card-bg;
-  margin: 1rem;
+  margin-bottom: 2rem;
+  border-radius: v.$border-radius;
+  border: 1px solid v.$color-gold;
+  padding: 1rem;
+  height: 16rem;
+
 
   .date-title {
     color: v.$color-cream;
+    margin-top: 1rem;
   }
 
-.date-picker {
-  background-color: v.$color-bg-dark;
-}
-
-.date-button {
-  background-color: v.$color-card-bg;
-
-  &:hover {
-    background-color: v.$color-primary-red;
+  .date-picker {
+    padding: 1rem;
+    height: 10rem;
   }
-}
-small {
-  color: v.$color-gold;
-}
+
+  .date-list {
+    width: 100%; 
+  }
+
+  .date-item {
+    flex: 1 1 0;
+    min-width: 0;
+    background-color: v.$color-bg-dark;
+  }
+
+  .date-button {
+    background-color: transparent;
+    padding: 0.4rem 0.25rem;
+    font-size: v.$font-size-body;
+    min-height: 44px; 
+    border: none;
+
+    &:hover {
+      background-color: v.$color-primary-red;
+    }
+  }
+
+  .date-arrow {
+    flex: 0 0 auto;
+    padding: 0;
+    color: v.$color-gold;
+    
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  small {
+    color: v.$color-gold;
+  }
+
+    @include v.respond-to(mobile) {
+      width: auto;
+      padding: 0.5rem 1rem;
+
+      .date-picker, .date-arrow {
+        border: none;
+        background: transparent;
+        padding: 0;
+      }
+
+      .date-arrow:hover {
+        background-color: transparent;
+      }
+    }
 }

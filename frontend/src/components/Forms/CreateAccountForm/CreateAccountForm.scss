@@ -1,0 +1,28 @@
+
+@use "../../../styles/variables" as *;
+
+.create-account-form {
+  width: 100%;
+  max-width: 50rem;
+  border: 1px solid $color-gold;
+  border-radius: $border-radius;
+  margin: 0 auto;
+  padding: $space-lg;
+  margin-top: $space-lg;
+
+  h1 {
+    text-align: center;
+    margin-bottom: $space-md;
+  }
+
+  @include respond-to(mobile) {
+    padding: $space-md;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+
+}
+
