@@ -91,7 +91,7 @@ function SeatMap({
         </span>
         {isLargeScreen && (
           <span>
-            <i className="booking-page__legend-icon is-vip" /> Vip (Rad H)
+            <i className="booking-page__legend-icon is-vip" /> Loge (Rad H)
           </span>
         )}
         <span>
