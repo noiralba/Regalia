@@ -22,9 +22,9 @@ const fetchFilteredMovies = async (
   ageRating: string,
 ): Promise<MovieSearchResult[]> => {
   const queryParams = new URLSearchParams();
-  if (search) queryParams.set("search", search);
-  if (category) queryParams.set("categories", category);
-  if (ageRating) queryParams.set("ageRating", ageRating);
+  if (search) queryParams.set("sök", search);
+  if (category) queryParams.set("kategorier", category);
+  if (ageRating) queryParams.set("åldersgräns", ageRating);
 
   return api.get<MovieSearchResult[]>(`/api/movies?${queryParams.toString()}`);
 };
@@ -33,9 +33,9 @@ export default function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const searchQuery = searchParams.get("search") || "";
-  const categoryQuery = searchParams.get("categories") || "";
-  const ageQuery = searchParams.get("ageRating") || "";
+  const searchQuery = searchParams.get("sök") || "";
+  const categoryQuery = searchParams.get("kategorier") || "";
+  const ageQuery = searchParams.get("åldersgräns") || "";
 
   const [localSearch, setLocalSearch] = useState(() => searchQuery);
 
@@ -44,9 +44,9 @@ export default function SearchBar() {
     const handler = setTimeout(() => {
       setSearchParams((prev) => {
         if (localSearch.length >= 2) {
-          prev.set("search", localSearch);
+          prev.set("sök", localSearch);
         } else {
-          prev.delete("search");
+          prev.delete("sök");
         }
         return prev;
       });
@@ -88,7 +88,7 @@ export default function SearchBar() {
 
     setLocalSearch("");
     setSearchParams((prev) => {
-      prev.delete("search");
+      prev.delete("sök");
       return prev;
     });
   };
@@ -109,7 +109,7 @@ export default function SearchBar() {
         <select
           id="age-filter"
           value={ageQuery}
-          onChange={(e) => handleFilterChange("ageRating", e.target.value)}
+          onChange={(e) => handleFilterChange("åldersgräns", e.target.value)}
         >
           <option value="">Alla åldrar</option>
           <option value="0">Barntillåten (0 år)</option>

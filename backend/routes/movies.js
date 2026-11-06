@@ -378,7 +378,11 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const { ageRating, categories, search } = req.query;
+    const {
+      åldersgräns: ageRating,
+      kategorier: categories,
+      sök: search,
+    } = req.query;
 
     let sql = `SELECT * FROM v_movie_search_filter`;
 
