@@ -1,11 +1,12 @@
 // A custom hook to fetch movie details and showings based on a given movie ID.
 import { useEffect, useState } from "react";
 import { get, getById } from "../api/api";
-import type { Movies, Showing } from "../types/types";
+import type { Movies, Showing, Person } from "../types/types";
 
 export function useMovieDetail(id?: string) {
   const [movie, setMovie] = useState<Movies | null>(null);
   const [showings, setShowings] = useState<Showing[]>([]);
+  const [persons, setPersons] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,9 +18,12 @@ export function useMovieDetail(id?: string) {
         if (!id) return;
         const movieData = await getById<Movies>("/api/movies", id);
         const movieShowings = await get<Showing[]>(`/api/shows?movie_id=${id}`);
+        const moviePersons = await get<Person[]>(`/api/persons?movie_id=${id}`);
+
         if (cancelled) return;
         setMovie(movieData);
         setShowings(movieShowings);
+        setPersons(moviePersons);
       } catch (error) {
         console.error("Kunde inte hämta filmen eller visningarna:", error);
       } finally {
@@ -33,5 +37,5 @@ export function useMovieDetail(id?: string) {
     };
   }, [id]);
 
-  return { movie, showings, loading };
+  return { movie, showings, persons, loading };
 }

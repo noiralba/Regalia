@@ -2,26 +2,29 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import type { Showing } from "../types/types";
+import type { Showing, Person } from "../types/types";
 import { useMovieDetail } from "../hooks/useMovieDetail";
 import { useSeatAvailability } from "../hooks/useSeatAvailability";
 import { pickNextShowing } from "../utils/showings";
 import { slugify, extractIdFromSlug } from "../utils/slugify";
+import { getPersonWithBio } from "../utils/castMapper";
 import TrailerPlayer from "../components/MovieDetail/TrailerPlayer/TrailerPlayer";
 import MovieDescription from "../components/MovieDetail/MovieDescription/MovieDescription";
 import MovieFacts from "../components/MovieDetail/MovieFacts/MovieFacts";
 import CastCarousel from "../components/MovieDetail/CastCarousel/CastCarousel";
 import ShowtimePicker from "../components/MovieDetail/ShowtimePicker/ShowtimePicker";
 import BookingBar from "../components/MovieDetail/BookingBar/BookingBar";
+import { ActorModal } from "../components/ActorModal/ActorModal";
 
 export default function MovieDetailPage() {
   const { movieSlug } = useParams();
   const id = extractIdFromSlug(movieSlug);
   const navigate = useNavigate();
 
-  const { movie, showings, loading } = useMovieDetail(id);
+  const { movie, persons, showings, loading } = useMovieDetail(id);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedShowing, setSelectedShowing] = useState<Showing | null>(null);
+  const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
   const seats = useSeatAvailability(selectedShowing);
 
   // Förvälj närmaste kommande visning när visningarna har laddats
@@ -42,6 +45,12 @@ export default function MovieDetailPage() {
     setSelectedShowing(
       pickNextShowing(showings.filter((s) => s["Screening Date"] === date)),
     );
+  }
+
+  function handleSelectPerson(personFromCarousel: Person) {
+    const fullPerson =
+      getPersonWithBio(personFromCarousel.id, persons) || personFromCarousel;
+    setSelectedPerson(fullPerson);
   }
 
   function bookShowing() {
@@ -67,7 +76,8 @@ export default function MovieDetailPage() {
         longDescription={movie.longDescription}
       />
       <MovieFacts movie={movie} />
-      <CastCarousel movie={movie} />
+
+      <CastCarousel movie={movie} onSelectPerson={handleSelectPerson} />
 
       {dates.length > 0 ? (
         <>
@@ -91,6 +101,11 @@ export default function MovieDetailPage() {
       ) : (
         <p>Inga visningar hittades för den här filmen.</p>
       )}
+
+      <ActorModal
+        person={selectedPerson}
+        onClose={() => setSelectedPerson(null)}
+      />
     </main>
   );
 }
