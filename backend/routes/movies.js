@@ -13,7 +13,6 @@ const {
   deleteMovie,
 } = require("../services/movieService.js");
 
-
 // =========================================================================
 // FILHANTERING (multer + hjälpfunktioner för städning)
 // =========================================================================
@@ -377,18 +376,17 @@ router.delete("/:id", async (req, res) => {
 // 2. BEFINTLIGA ANVÄNDAR- & SÖKÄNDPUNKTER
 // =========================================================================
 
-// GET: Hämta alla filmer med valfria filter för åldersgräns, kategorier och sökord
 router.get("/", async (req, res) => {
   try {
-    const { ageRating, categories, search } = req.query;
+    const {
+      åldersgräns: ageRating,
+      kategorier: categories,
+      sök: search,
+    } = req.query;
 
-    let sql = `
-      SELECT m.*,
-        ${CATEGORIES_SUBQUERY}
-      FROM movies m
-    `;
+    let sql = `SELECT * FROM v_movie_search_filter`;
 
-    const conditions = [];
+    const conditions = ["(end_date IS NULL OR end_date >= CURDATE())"];
     const params = [];
 
     if (ageRating !== undefined) {
@@ -398,17 +396,12 @@ router.get("/", async (req, res) => {
           .status(400)
           .json({ error: "ageRating måste vara ett positivt tal" });
       }
-      conditions.push("m.ageRating = ?");
+      conditions.push("ageRating = ?"); // change to <= for age range
       params.push(age);
     }
 
     if (categories) {
-      conditions.push(`EXISTS (
-        SELECT 1
-        FROM movie_categories mc2
-        JOIN categories c2 ON c2.id = mc2.category_id
-        WHERE mc2.movie_id = m.id AND c2.name = ?
-      )`);
+      conditions.push("JSON_CONTAINS(categories, JSON_QUOTE(?))");
       params.push(categories);
     }
 
@@ -417,18 +410,25 @@ router.get("/", async (req, res) => {
         return res.status(400).json({ error: "Sökordet är för kort" });
       }
       conditions.push(
-        "(m.title LIKE ? OR m.shortDescription LIKE ? OR m.longDescription LIKE ?)",
+        "(title LIKE ? OR shortDescription LIKE ? OR longDescription LIKE ?)",
       );
       const term = `%${search}%`;
       params.push(term, term, term);
     }
 
-    if (conditions.length > 0) {
-      sql += " WHERE " + conditions.join(" AND ");
-    }
+    sql += " WHERE " + conditions.join(" AND ");
 
     const [results] = await db.query(sql, params);
-    res.json(results);
+
+    const formattedResults = results.map((movie) => ({
+      ...movie,
+      categories:
+        typeof movie.categories === "string"
+          ? JSON.parse(movie.categories)
+          : movie.categories,
+    }));
+
+    res.json(formattedResults);
   } catch (err) {
     console.error("Fel vid hämtning av filmer:", err);
     res.status(500).json({ error: "Kunde inte hämta filmerna" });

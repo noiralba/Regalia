@@ -71,6 +71,12 @@
       color: v.$color-bg-dark;
     }
 
+    &.is-hover-preview:not(.is-unavailable) {
+  background: v.$color-gold;
+  color: v.$color-bg-dark;
+  box-shadow: 0 0 10px v.$color-gold;
+}
+
     &.is-unavailable {
       background: #484044;
       border-color: #484044;

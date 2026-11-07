@@ -1,4 +1,3 @@
-// import React from "react";
 import { Link } from "react-router";
 import { getMovieImage } from "../../utils/getMovieImage";
 import { slugify } from "../../utils/slugify";
@@ -23,11 +22,10 @@ export default function ThemeFilmStrip({
 }: ThemeFilmStripProps) {
   return (
     <section className="theme-filmstrip" aria-label={`Tema ${themeTitle}`}>
-      <div className="container">
         <header className="theme-filmstrip__header mb-4">
           <h2 className="theme-filmstrip__title">{themeTitle}</h2>
           {themeDescription && (
-            <span className="theme-filmstrip__description text-muted ms-3">
+            <span className="theme-filmstrip__description">
               {themeDescription}
             </span>
           )}
@@ -54,7 +52,6 @@ export default function ThemeFilmStrip({
             ))}
           </ul>
         </div>
-      </div>
     </section>
   );
 }

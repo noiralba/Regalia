@@ -8,6 +8,9 @@ interface SeatMapModalProps {
   selectedSeats: string[];
   toggleSeat: (seatId: string) => void;
   onClose: () => void;
+  screen: string;
+  ticketCount: number;
+  selectSeatGroup: (seatIds: string[]) => void;
 }
 
 function SeatMapModal({
@@ -15,6 +18,9 @@ function SeatMapModal({
   selectedSeats,
   toggleSeat,
   onClose,
+  screen,
+  ticketCount,
+  selectSeatGroup,
 }: SeatMapModalProps) {
   return (
     <div className="seat-map-modal__overlay">
@@ -32,13 +38,16 @@ function SeatMapModal({
         >
           ×
         </button>
-        
+
         <h2>Välj sittplatser</h2>
 
         <SeatMap
           seats={seats}
           selectedSeats={selectedSeats}
           toggleSeat={toggleSeat}
+          screen={screen}
+          ticketCount={ticketCount}
+          selectSeatGroup={selectSeatGroup}
         />
 
         <button
