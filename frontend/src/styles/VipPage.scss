@@ -3,8 +3,15 @@
 .vip-page {
   min-height: 100vh;
   padding: 2rem 1rem;
-  background: v.$color-bg-dark;
   color: v.$color-cream;
+  background-color: v.$color-bg-dark;
+  background-image:
+    linear-gradient(rgba(12, 5, 5, 0.58), rgba(12, 5, 5, 0.72)),
+    url("../assets/images/vip/backpic.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .vip-card {
