@@ -1,7 +1,7 @@
 @use "./variables" as v;
 
 .booking-page {
-  max-width: 900px;
+  max-width: v.$content-max-width;
   min-height: 100vh;
   margin: 0 auto;
   padding: 18px;
@@ -10,15 +10,6 @@
   font-family: v.$font-body;
   font-size: 15px;
   line-height: 1.5;
-
-  h1, h2 {
-    color: v.$color-cream;
-    font-family: v.$font-title;
-    font-weight: 400;
-    text-transform: uppercase;
-  }
-  h1 { margin: 12px 0 24px; font-size: 20px; }
-  h2 { margin-bottom: 12px; font-size: 18px; }
 
   &__showing h2,
 &__tickets h2 {
@@ -219,31 +210,5 @@
   display: none;
 }
 
-@media (max-width: 600px) {
-    &__top {
-      grid-template-columns: 1fr;
-    }
-
-    &__summary-content {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 24px;
-    }
-
-    &__open-seats {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  background: v.$color-primary-red;
-  color: v.$color-cream;
-  border: 1px solid v.$color-gold;
-  border-radius: 5px;
-  font-family: v.$font-body;
-  cursor: pointer;
-}
-
-&__seats > .booking-page__seat-map {
-  display: none;
-}
-  }
 }
 

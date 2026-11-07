@@ -1,4 +1,4 @@
-import type { BookingConfirmation } from "../../types/types";
+import type { BookingConfirmation } from "../../../types/types";
 import "./BookingConfirmationModal.scss";
 
 interface BookingConfirmationModalProps {

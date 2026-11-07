@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { findHoverSeats } from "../../utils/seatSelection";
-import type { Seat } from "../../types/types";
+import { findHoverSeats } from "../../../utils/seatSelection";
+import type { Seat } from "../../../types/types";
 import "./SeatMap.scss";
 
 interface SeatMapProps {

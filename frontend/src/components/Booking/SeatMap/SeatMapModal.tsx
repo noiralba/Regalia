@@ -1,4 +1,4 @@
-import type { Seat } from "../../types/types";
+import type { Seat } from "../../../types/types";
 import SeatMap from "./SeatMap";
 import "./SeatMapModal.scss";
 
