@@ -41,7 +41,7 @@ export default function SearchBar() {
 
   const [localSearch, setLocalSearch] = useState(() => searchQuery);
   const [ageMenuOpen, setAgeMenuOpen] = useState(false);
-  const [searchResultsOpen, setSearchResultsOpen] = useState(true);
+  const [searchResultsOpen, setSearchResultsOpen] = useState(false);
 
   const searchBarRef = useRef<HTMLElement>(null);
 
@@ -57,7 +57,7 @@ export default function SearchBar() {
     ageOptions.find((option) => option.value === ageQuery)?.label ||
     "ALLA ÅLDRAR";
 
-  // Stäng menyerna vid klick utanför eller Escape
+  // Stäng båda menyerna vid klick utanför eller Escape
   useEffect(() => {
     if (!ageMenuOpen && !searchResultsOpen) return;
 
@@ -134,16 +134,7 @@ export default function SearchBar() {
   };
 
   const handleMovieClick = (movieId: string) => {
-    setSearchResultsOpen(false);
-    setAgeMenuOpen(false);
-    setLocalSearch("");
-
     navigate(`/filmer/${movieId}`);
-
-    setSearchParams((prev) => {
-      prev.delete("sök");
-      return prev;
-    });
   };
 
   return (
@@ -156,6 +147,7 @@ export default function SearchBar() {
             className="search-input"
             id="movie-search"
             type="search"
+            autoComplete="off"
             placeholder="Ålder, genre eller sökord"
             value={localSearch}
             onFocus={() => setSearchResultsOpen(true)}
@@ -182,9 +174,7 @@ export default function SearchBar() {
             <span
               className={`age-arrow ${ageMenuOpen ? "age-arrow-open" : ""}`}
               aria-hidden="true"
-            >
-              ⌄
-            </span>
+            />
           </button>
 
           {ageMenuOpen && (

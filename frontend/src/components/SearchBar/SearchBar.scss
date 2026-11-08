@@ -3,14 +3,16 @@
 .search-bar {
   position: relative;
   width: 100%;
+  min-width: 0;
   color: v.$color-cream;
   font-family: v.$font-body;
 }
 
 .search-bar-form {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
   width: 100%;
   padding: 0.5rem 0;
   background: transparent;
@@ -20,7 +22,7 @@
 /* Sökfält */
 .search-field {
   display: flex;
-  flex: 0 1 210px;
+  flex: 0 0 180px;
   flex-direction: column;
   min-width: 0;
 }
@@ -29,25 +31,31 @@
   display: none;
 }
 
-.search-input,
-.age-trigger {
+.search-input {
   box-sizing: border-box;
   width: 100%;
-  height: 40px;
-  padding: 0.5rem 0.75rem;
+  height: 36px;
+  padding: 0.4rem 0.5rem;
   color: v.$color-cream;
-  background: #0f0d0e;
+  background: v.$color-bg-dark;
   border: 1px solid v.$color-gold;
   border-radius: 4px;
   font-family: v.$font-body;
-  font-size: 0.85rem;
+  font-size: 0.72rem;
+}
+.search-input:-webkit-autofill,
+.search-input:-webkit-autofill:hover,
+.search-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: v.$color-cream;
+  -webkit-box-shadow: 0 0 0 1000px v.$color-bg-dark inset;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 /* Åldersfilter */
 .age-filter {
   position: relative;
   display: flex;
-  flex: 0 0 145px;
+  flex: 0 0 105px;
   flex-direction: column;
   min-width: 0;
 }
@@ -57,63 +65,64 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.35rem;
+  box-sizing: border-box;
   width: 100%;
-  height: 40px;
+  height: 36px;
   padding: 0;
   color: v.$color-cream;
   background: transparent;
   border: none;
   font-family: v.$font-body;
-  font-size: 0.85rem;
+  font-size: 0.68rem;
   text-align: left;
   cursor: pointer;
 }
 
 .age-arrow {
+  width: 7px;
+  height: 7px;
   flex-shrink: 0;
-  font-size: 1.1rem;
+  margin: -4px 2px 0 0;
+  border-right: 1px solid v.$color-gold;
+  border-bottom: 1px solid v.$color-gold;
+  transform: rotate(45deg);
   transition: transform 180ms ease;
 }
 
 .age-arrow-open {
-  transform: rotate(180deg);
+  transform: rotate(225deg);
+  margin-top: 4px;
 }
 
 /* Öppnad åldersmeny */
 .age-dropdown {
   position: absolute;
   top: calc(100% + 0.4rem);
-  right: 0;
+  left: 0;
   z-index: 1200;
-
   width: max-content;
-  min-width: 160px;
+  min-width: 150px;
   padding: 0.35rem;
-
   color: v.$color-cream;
   background: v.$color-card-bg;
   border: 1px solid v.$color-gold;
   border-radius: 4px;
-
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .age-option {
   display: block;
   width: 100%;
-  padding: 0.65rem 0.75rem;
-
+  padding: 0.6rem;
   color: v.$color-cream;
   background: transparent;
   border: none;
   border-radius: 4px;
-
   font-family: v.$font-body;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
-
   transition: background 180ms ease;
 
   &:hover,
@@ -130,23 +139,21 @@
 /* Sökresultat */
 .search-results {
   position: absolute;
-  top: 100%;
-  left: 1rem;
-  right: 1rem;
+  top: calc(100% + 0.4rem);
+  left: 0;
   z-index: 1100;
-
+  box-sizing: border-box;
+  width: 180px;
+  max-width: calc(100vw - 2rem);
   max-height: 60vh;
   overflow-y: auto;
-
-  margin: 0.4rem 0 0;
+  margin: 0;
   padding: 0.5rem;
-
   color: v.$color-cream;
   background: v.$color-card-bg;
   border: 1px solid v.$color-gold;
   border-radius: 4px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
-
   font-family: v.$font-body;
 
   ul {
@@ -169,17 +176,15 @@
     align-items: flex-start;
     gap: 0.3rem;
     width: 100%;
-    padding: 0.9rem 1rem;
-
+    padding: 0.65rem;
     color: v.$color-cream;
     background: transparent;
     border: 1px solid rgba(168, 134, 74, 0.25);
     border-radius: 4px;
-
     font-family: v.$font-body;
+    font-size: 0.8rem;
     text-align: left;
     cursor: pointer;
-
     transition: background 180ms ease;
 
     &:hover {
@@ -192,49 +197,26 @@
     }
   }
 }
-
 /* Mobil */
 @media (max-width: 768px) {
+  .search-bar-form {
+    gap: 0.35rem;
+  }
+
   .search-field {
-    flex: 1 1 0;
+    flex: 0 1 180px;
     min-width: 0;
   }
-}
 
-.search-field {
-  flex: 1 1 0;
-  min-width: 0;
-}
+  .search-input {
+    min-width: 0;
+  }
 
-.age-filter {
-  flex: 0 0 105px;
-  min-width: 0;
-}
+  .age-filter {
+    flex: 0 0 105px;
+  }
 
-.search-input,
-.age-trigger {
-  height: 36px;
-  font-size: 0.72rem;
-}
-
-.search-input {
-  padding: 0.4rem 0.5rem;
-}
-
-.age-trigger {
-  font-size: 0.68rem;
-}
-
-.age-dropdown {
-  min-width: 150px;
-}
-
-.age-option {
-  padding: 0.6rem;
-  font-size: 0.75rem;
-}
-
-.search-results {
-  left: 0;
-  right: 0;
+  .search-results {
+    width: 180px;
+  }
 }
