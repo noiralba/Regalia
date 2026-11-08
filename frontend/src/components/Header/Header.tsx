@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { pages } from "../../routeConfig";
+import SearchBar from "../SearchBar/SearchBar";
 import styles from "./Header.module.scss";
 import logoSrc from "../../assets/logo.svg";
 
@@ -51,6 +52,10 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
           <img src={logoSrc} alt="Regalia Logo" className={styles.icon} />
           <span className={styles.brandName}>Regalia</span>
         </Link>
+
+        <section className={styles.searchArea} aria-label="Filmsökning">
+          <SearchBar />
+        </section>
 
         <button
           type="button"

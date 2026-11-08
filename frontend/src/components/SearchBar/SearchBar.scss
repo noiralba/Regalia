@@ -1,0 +1,240 @@
+@use "../../styles/variables" as v;
+
+.search-bar {
+  position: relative;
+  width: 100%;
+  color: v.$color-cream;
+  font-family: v.$font-body;
+}
+
+.search-bar-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0;
+  background: transparent;
+  transform: translateY(5px);
+}
+
+/* Sökfält */
+.search-field {
+  display: flex;
+  flex: 0 1 210px;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.search-bar label {
+  display: none;
+}
+
+.search-input,
+.age-trigger {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 0.5rem 0.75rem;
+  color: v.$color-cream;
+  background: #0f0d0e;
+  border: 1px solid v.$color-gold;
+  border-radius: 4px;
+  font-family: v.$font-body;
+  font-size: 0.85rem;
+}
+
+/* Åldersfilter */
+.age-filter {
+  position: relative;
+  display: flex;
+  flex: 0 0 145px;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.age-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  color: v.$color-cream;
+  background: transparent;
+  border: none;
+  font-family: v.$font-body;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.age-arrow {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  transition: transform 180ms ease;
+}
+
+.age-arrow-open {
+  transform: rotate(180deg);
+}
+
+/* Öppnad åldersmeny */
+.age-dropdown {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 1200;
+
+  width: max-content;
+  min-width: 160px;
+  padding: 0.35rem;
+
+  color: v.$color-cream;
+  background: v.$color-card-bg;
+  border: 1px solid v.$color-gold;
+  border-radius: 4px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.age-option {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+
+  color: v.$color-cream;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+
+  font-family: v.$font-body;
+  font-size: 0.85rem;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition: background 180ms ease;
+
+  &:hover,
+  &.age-option-active {
+    background: v.$color-primary-red;
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$color-gold;
+    outline-offset: 2px;
+  }
+}
+
+/* Sökresultat */
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 1rem;
+  right: 1rem;
+  z-index: 1100;
+
+  max-height: 60vh;
+  overflow-y: auto;
+
+  margin: 0.4rem 0 0;
+  padding: 0.5rem;
+
+  color: v.$color-cream;
+  background: v.$color-card-bg;
+  border: 1px solid v.$color-gold;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
+
+  font-family: v.$font-body;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  li button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    width: 100%;
+    padding: 0.9rem 1rem;
+
+    color: v.$color-cream;
+    background: transparent;
+    border: 1px solid rgba(168, 134, 74, 0.25);
+    border-radius: 4px;
+
+    font-family: v.$font-body;
+    text-align: left;
+    cursor: pointer;
+
+    transition: background 180ms ease;
+
+    &:hover {
+      background: v.$color-primary-red;
+    }
+
+    &:focus-visible {
+      outline: 2px solid v.$color-gold;
+      outline-offset: 3px;
+    }
+  }
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+  .search-field {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.search-field {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.age-filter {
+  flex: 0 0 105px;
+  min-width: 0;
+}
+
+.search-input,
+.age-trigger {
+  height: 36px;
+  font-size: 0.72rem;
+}
+
+.search-input {
+  padding: 0.4rem 0.5rem;
+}
+
+.age-trigger {
+  font-size: 0.68rem;
+}
+
+.age-dropdown {
+  min-width: 150px;
+}
+
+.age-option {
+  padding: 0.6rem;
+  font-size: 0.75rem;
+}
+
+.search-results {
+  left: 0;
+  right: 0;
+}
