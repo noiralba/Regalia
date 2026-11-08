@@ -356,7 +356,7 @@ Base URL: `http://localhost:3000/api`
 - `POST /api/users` is public and rate-limited to 5 requests per hour per client IP.
 - `POST /api/auth/login` is public and rate-limited to 10 requests per 15 minutes per client IP.
 - `GET /api/users/:id`, `PATCH /api/users/:id`, `DELETE /api/users/:id` and `GET /api/users/:id/bookings` require a valid JWT and allow access only when `:id` matches the authenticated user ID.
-- Send the JWT in the header: `Authorization: Bearer <JWT_TOKEN>`.
+- Browser authentication uses the HttpOnly `regalia_session` cookie. Protected endpoints also accept `Authorization: Bearer <JWT_TOKEN>` for compatibility.
 - JWTs expire after 1 hour. A missing token returns `401 Unauthorized`; a token for another user ID returns `403 Forbidden`.
 - Passwords are hashed with bcrypt and never included in user responses. Users cannot assign their own role; new accounts receive the `customer` role.
 - These authorization rules cover the Users endpoints listed here. They **do not** secure the separate `/api/bookings` routes.
@@ -415,20 +415,65 @@ Authenticate using email and password. Email is trimmed and normalized to lowerc
 
 **200 OK:**
 
+The backend creates a JWT and stores it in an HttpOnly cookie named `regalia_session`. The cookie has a one-hour lifetime, `SameSite=Lax`, and `Path=/api`. In production, the cookie requires HTTPS (`Secure`).
+
+The JWT is not included in the JSON response.
+
 ```json
 {
-  "token": "<JWT_TOKEN>",
-  "tokenType": "Bearer",
   "expiresIn": 3600
 }
 ```
 
 **Other responses:**
 
-- `400 Bad Request` — missing email or password: `E-postadress och lösenord måste anges.`
-- `401 Unauthorized` — invalid credentials: `Felaktig e-postadress eller lösenord.`
+- `400 Bad Request` — missing email or password.
+- `401 Unauthorized` — invalid credentials.
+- `403 Forbidden` — request from an untrusted origin.
 - `429 Too Many Requests` — too many login attempts.
 - `500 Internal Server Error` — database, server or JWT configuration error.
+
+### GET /api/auth/session
+
+Check whether the current session is valid.
+
+The endpoint verifies the JWT using the existing authentication middleware. The token can be supplied through the session cookie or an Authorization Bearer header.
+
+**200 OK:**
+
+```json
+{
+  "authenticated": true,
+  "expiresAt": 1794171600000
+}
+```
+
+`expiresAt` is the JWT expiration time in milliseconds since the Unix epoch. The value above is illustrative.
+
+**Other responses:**
+
+- `401 Unauthorized` — missing, invalid or expired JWT.
+- `500 Internal Server Error` — JWT configuration error.
+
+### POST /api/auth/logout
+
+Log out by clearing the `regalia_session` cookie.
+
+**204 No Content:** The cookie is cleared. No response body.
+
+The JWT is not revoked server-side; logout removes the browser's session cookie.
+
+**Other responses:**
+
+- `403 Forbidden` — request from an untrusted origin.
+
+### Cookie authentication and CSRF protection
+
+Protected endpoints using `requireAuth` accept JWTs from the HttpOnly session cookie or an existing Authorization Bearer header. The login endpoint no longer returns the JWT in its JSON response.
+
+For state-changing requests involving the session cookie, the backend checks the request origin using `Origin` or `Referer`. Login and logout requests are also checked. Requests from untrusted origins are rejected with `403 Forbidden`.
+
+Set `FRONTEND_ORIGIN` to the trusted frontend URL in production.
 
 ### GET /api/users/:id
 
