@@ -70,11 +70,10 @@ body {
    6. RUBRIKER
 ========================================= */
 
-h1,
 h2,
 h3 {
   font-family: v.$font-title;
-  color: v.$color-gold;
+  color: v.$color-cream;
   text-transform: uppercase;
 }
 
@@ -159,11 +158,11 @@ iframe {
 /* Mobil */
 @include v.respond-to(mobile) {
   h1 {
-    font-size: v.$font-size-h1;
+    font-size: v.$font-size-h2;
   }
 
   h2 {
-    font-size: v.$font-size-h2;
+    font-size: v.$font-size-h3;
   }
 
   h3 {

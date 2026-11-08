@@ -114,3 +114,8 @@ export interface Person {
   bio?: string;
 }
 
+export interface TicketType {
+  ticket_type_id: string;
+  "Ticket Type": string;
+  "Price (SEK)": string;
+}

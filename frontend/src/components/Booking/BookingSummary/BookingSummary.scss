@@ -1,0 +1,70 @@
+@use "../../../styles/variables" as v;
+
+.booking-summary {
+  padding: 24px 20px;
+  margin-bottom: 20px;
+  margin-top: 1rem;
+  background: v.$color-card-bg;
+  border-radius: v.$border-radius;
+
+  h2 {
+    color: v.$color-cream;
+    margin-bottom: 2rem;
+  }
+
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 36px;
+  }
+
+  &__details {
+    color: v.$color-gold;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    margin-bottom: 5px;
+  }
+
+  &__email {
+    p {
+      margin: 0 0 24px;
+      color: v.$color-cream;
+    }
+  }
+
+  &__error {
+    color: v.$color-cream;
+    margin-bottom: 16px;
+  }
+
+  &__confirm {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background: v.$color-primary-red;
+    color: v.$color-cream;
+    border: 1px solid v.$color-gold;
+    border-radius: 5px;
+    font-family: v.$font-body;
+    font-size: v.$font-size-body;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  @include v.respond-to(mobile) {
+    &__content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+  }
+}

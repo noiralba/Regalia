@@ -1,4 +1,4 @@
-import type { Seat } from "../../types/types";
+import type { Seat } from "../../../types/types";
 import SeatMap from "./SeatMap";
 import "./SeatMapModal.scss";
 
@@ -23,8 +23,8 @@ function SeatMapModal({
   selectSeatGroup,
 }: SeatMapModalProps) {
   return (
-    <div className="seat-map-modal__overlay">
-      <div
+    <section className="seat-map-modal__overlay">
+      <article
         className="seat-map-modal"
         role="dialog"
         aria-modal="true"
@@ -38,8 +38,6 @@ function SeatMapModal({
         >
           ×
         </button>
-
-        <h2>Välj sittplatser</h2>
 
         <SeatMap
           seats={seats}
@@ -57,8 +55,8 @@ function SeatMapModal({
         >
           Klar
         </button>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 
