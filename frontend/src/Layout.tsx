@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -10,14 +10,17 @@ type Session = {
 
 export default function Layout() {
   const [session, setSession] = useState<Session | null>(null);
+  const sessionVersion = useRef(0);
 
   function handleLogin(expiresIn: number) {
+    sessionVersion.current += 1;
     setSession({
       expiresAt: Date.now() + expiresIn * 1000,
     });
   }
 
   async function handleLogout() {
+    sessionVersion.current += 1;
     try {
       const response = await fetch("/api/auth/logout", {
         method: "POST",
@@ -35,6 +38,7 @@ export default function Layout() {
 
   useEffect(() => {
     let active = true;
+    const requestVersion = sessionVersion.current;
 
     fetch("/api/auth/session")
       .then((response) => {
@@ -42,7 +46,12 @@ export default function Layout() {
         return response.json() as Promise<{ expiresAt: number }>;
       })
       .then((data) => {
-        if (active && data && data.expiresAt > Date.now()) {
+        if (
+          active &&
+          requestVersion === sessionVersion.current &&
+          data &&
+          data.expiresAt > Date.now()
+        ) {
           setSession({ expiresAt: data.expiresAt });
         }
       })

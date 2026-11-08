@@ -70,6 +70,7 @@ router.post("/login", loginLimiter, async (req, res) => {
 });
 
 router.get("/session", requireAuth, (req, res) => {
+  res.set("Cache-Control", "no-store");
   return res.status(200).json({
     authenticated: true,
     expiresAt: req.sessionExpiresAt,
