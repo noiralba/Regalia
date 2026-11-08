@@ -26,11 +26,11 @@ $gold-bright: #f4e8c4;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.25rem 2rem 0rem;
+  padding: 0.25rem 2rem 0;
   flex-wrap: wrap;
 }
 
-/* ---------- Logotyp ---------- */
+/* Logotyp */
 .brand {
   display: flex;
   align-items: center;
@@ -59,7 +59,15 @@ $gold-bright: #f4e8c4;
   color: transparent;
 }
 
-/* ---------- Hamburgare (dold på desktop) ---------- */
+/* Sökfält */
+.searchArea {
+  flex: 1 1 250px;
+  max-width: 390px;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+/* Hamburgare */
 .toggle {
   display: none;
   align-items: center;
@@ -117,7 +125,7 @@ $gold-bright: #f4e8c4;
   }
 }
 
-// Hamburgare -> kryss
+/* Hamburgare till kryss */
 .toggleOpen .bars span {
   &:nth-child(1) {
     top: 50%;
@@ -137,7 +145,7 @@ $gold-bright: #f4e8c4;
   }
 }
 
-/* ---------- Meny ---------- */
+/* Meny */
 .nav {
   display: flex;
   align-items: center;
@@ -168,7 +176,6 @@ $gold-bright: #f4e8c4;
   }
 }
 
-// "Logga ut" är en <button> men ska se ut som övriga länkar
 .logout {
   padding: 0;
   background: none;
@@ -178,7 +185,7 @@ $gold-bright: #f4e8c4;
   cursor: pointer;
 }
 
-/* ---------- Linje med stjärna ---------- */
+/* Linje med stjärna */
 .divider {
   display: flex;
   align-items: center;
@@ -198,7 +205,7 @@ $gold-bright: #f4e8c4;
   flex-shrink: 0;
 }
 
-/* ---------- Desktop ---------- */
+/* Desktop */
 @media (min-width: 769px) {
   .bar {
     padding: 1.25rem 4rem;
@@ -224,7 +231,7 @@ $gold-bright: #f4e8c4;
   }
 }
 
-/* ---------- Responsiva storlekar ---------- */
+/* Responsiva storlekar */
 @media (max-width: 1200px) {
   .link {
     font-size: 1.4rem;
@@ -232,6 +239,10 @@ $gold-bright: #f4e8c4;
 
   .nav {
     gap: 1.2rem;
+  }
+
+  .searchArea {
+    max-width: 320px;
   }
 }
 
@@ -247,18 +258,57 @@ $gold-bright: #f4e8c4;
   .nav {
     gap: 1rem;
   }
+
+  .searchArea {
+    max-width: 280px;
+  }
 }
 
-/* ---------- Mobil ---------- */
+/* Mobil */
 @media (max-width: 768px) {
-  .toggle {
-    display: inline-flex;
+  .header {
+    padding-bottom: 0.5rem;
   }
 
-  // Menyn fälls ut genom att animera grid-raden från 0fr till 1fr
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .brand {
+    order: 1;
+    flex: 0 0 auto;
+  }
+
+  .icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .brandName {
+    display: none;
+  }
+
+  .searchArea {
+    order: 2;
+    flex: 1 1 0;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .toggle {
+    display: inline-flex;
+    order: 3;
+    flex: 0 0 auto;
+  }
+
   .navWrap {
     flex-basis: 100%;
-    order: 3;
+    order: 4;
     display: grid;
     grid-template-rows: 0fr;
     visibility: hidden;
@@ -301,13 +351,9 @@ $gold-bright: #f4e8c4;
     padding: 0.9rem 0.25rem;
     font-size: 1.3rem;
   }
-
-  .header {
-    padding-bottom: 0.75rem;
-  }
 }
 
-/* ---------- Tillgänglighet ---------- */
+/* Tillgänglighet */
 @media (prefers-reduced-motion: reduce) {
   .link,
   .toggle,

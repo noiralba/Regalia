@@ -8,7 +8,6 @@ import "../styles/HomePage.scss";
 import { useEffect, useState } from "react";
 import type { MovieThumbnails } from "../types/types";
 import { get } from "../api/api";
-import SearchBar from "../components/SearchBar/SearchBar";
 
 function HomePage() {
   const [selectedDate] = useState(() => new Date().toLocaleDateString("sv-SE"));
@@ -44,7 +43,6 @@ function HomePage() {
 
   return (
     <main className="home-page">
-      <SearchBar />
       <section className="home-hero-section">
         <HeroSection />
       </section>
