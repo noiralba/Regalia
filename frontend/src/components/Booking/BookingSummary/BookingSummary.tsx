@@ -1,4 +1,5 @@
 import type { MovieScreening } from "../../../types/types";
+import { FormField } from "../../Forms";
 import "./BookingSummary.scss";
 
 interface BookingSummaryProps {
@@ -28,57 +29,45 @@ function BookingSummary({
     <section className="booking-summary">
       <h2>Din bokning</h2>
 
-      <div className="booking-summary__content">
-        <div className="booking-summary__details">
+      <section className="booking-summary__content">
+        <article className="booking-summary__details">
           {showing && (
             <>
-              <div className="booking-summary__row">
-                <span>Film</span>
-                <span>{showing.Movie}</span>
-              </div>
-              <div className="booking-summary__row">
-                <span>Visning</span>
-                <span>
+              <figure className="booking-summary__row">
+                <p>Film</p>
+                <p>{showing.Movie}</p>
+                <p>Visning</p>
+                <p>
                   {showing["Screening Date"]} • {showing["Start Time"]}
-                </span>
-              </div>
-              <div className="booking-summary__row">
-                <span>Salong</span>
-                <span>{showing.Screen}</span>
-              </div>
-              <div className="booking-summary__row">
-                <span>Platser</span>
-                <span>{seatLabels || "Inga platser valda"}</span>
-              </div>
-              <div className="booking-summary__row">
-                <span>Biljetter</span>
-                <span>{totalTickets} st</span>
-              </div>
-              <div className="booking-summary__row">
-                <span>TOTALT</span>
-                <span>{totalPrice} kr</span>
-              </div>
+                </p>
+                <p>Salong</p>
+                <p>{showing.Screen}</p>
+                <p>Platser</p>
+                <p>{seatLabels || "Inga platser valda"}</p>
+                <p>Biljetter</p>
+                <p>{totalTickets} st</p>
+                <b>TOTALT</b>
+                <b>{totalPrice} kr</b>
+              </figure>
             </>
           )}
-        </div>
+        </article>
 
-        <div className="booking-summary__email">
+        <article className="booking-summary__email">
           <p>
             Fyll i din e-postadress för att slutföra bokningen. Din
             bokningsbekräftelse skickas till den angivna adressen.
           </p>
-          <label htmlFor="email">E-postadress</label>
-          <input
-            className="booking-summary__input"
-            type="email"
+          <FormField
             id="email"
+            label="E-postadress"
+            type="email"
             value={email}
             onChange={(event) => onEmailChange(event.target.value)}
-            placeholder="namn@exempel.se"
-            required
+            autoComplete="email"
           />
-        </div>
-      </div>
+        </article>
+      </section>
 
       {error && <p className="booking-summary__error">{error}</p>}
 

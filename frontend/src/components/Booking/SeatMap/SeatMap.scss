@@ -1,6 +1,13 @@
 @use "../../../styles/variables" as v;
 
 .booking-page {
+
+  &__seats {
+    background-color: v.$color-card-bg;
+    padding: 2rem;
+    border-radius: v.$border-radius;
+  }
+
   &__seat-map {
     overflow-x: auto;
     padding: 28px 16px 22px;
@@ -98,7 +105,7 @@
     margin: 24px 0 0;
     white-space: nowrap;
 
-    span {
+    p {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -133,6 +140,10 @@
   @include v.respond-to(mobile) {
     &__top {
       grid-template-columns: 1fr;
+    }
+
+    &__seat-map {
+      border: none;
     }
 
     &__summary-content {

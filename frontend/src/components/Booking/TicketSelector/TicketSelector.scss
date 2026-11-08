@@ -4,8 +4,7 @@
 .booking-page__top {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr; // rad 1 = rubrik, rad 2 = innehåll
-  // column-gap: 20px;
+  grid-template-rows: auto 1fr; 
 }
 
 .ticket-selector {
@@ -16,54 +15,60 @@
   border-radius: 0 8px 8px 0;
 
   h2 {
+    margin-bottom: 2rem;
+  }
+
+&__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 32px 32px 32px;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(v.$color-gold, 0.15);
+
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 400;
     color: v.$color-cream;
   }
 
-
-  &__row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 80px 24px 24px 24px;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-
-    h3 {
-      margin: 0;
-      color: v.$color-gold;
-      font-family: v.$font-body;
-      font-size: 16px;
-      font-weight: 400;
-    }
-
-    p {
-      margin: 0;
-      color: v.$color-gold;
-    }
-
-    span {
-      color: v.$color-gold;
-      text-align: center;
-    }
-
-    button {
-      width: 24px;
-      height: 24px;
-      color: v.$color-cream;
-      background: transparent;
-      border: 1px solid v.$color-gold;
-      border-radius: 3px;
-      cursor: pointer;
-
-      &:disabled {
-        opacity: 1;
-        cursor: not-allowed;
-      }
-    }
+  p {
+    margin: 0;
+    color: v.$color-gold;
+    text-align: right; 
   }
 
-  &__total {
-    margin-top: 20px;
-    font-weight: 600;
+  span {
     color: v.$color-gold;
+    text-align: center;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    line-height: 1;
+    color: v.$color-cream;
+    background: transparent;
+    border: 1px solid v.$color-gold;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 1;
+      cursor: not-allowed;
+    }
+  }
+}
+
+  &__total {
+    margin-top: 2rem;
+      font-size: 1.25rem;
+      text-align: right;
   }
 }

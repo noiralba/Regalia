@@ -216,7 +216,7 @@ function BookingPage() {
 
   return (
     <main className="page-container">
-      <h1>Boka biljetter</h1>
+      <h1 className="text-uppercase mb-4">Boka biljetter</h1>
 
       {bookingConfirmation && (
         <BookingConfirmationModal
@@ -236,10 +236,10 @@ function BookingPage() {
       </article>
 
       <section className="booking-page__seats">
-        <h2>Välj sittplatser</h2>
+        <h2 className="mt-4">Välj sittplatser</h2>
 
         {showing && (
-          <p className="booking-page__screen-name">{showing.Screen}</p>
+          <p className="text-uppercase">{showing.Screen}</p>
         )}
 
         <button
