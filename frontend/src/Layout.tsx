@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import CookieModal from "./components/Cookie modal/CookieModal";
 
 type Session = {
   token: string;
@@ -33,6 +34,7 @@ export default function Layout() {
 
   return (
     <>
+      <CookieModal />
       <ScrollToTop />
       <Header isLoggedIn={session !== null} onLogout={() => setSession(null)} />
 

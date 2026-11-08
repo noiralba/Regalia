@@ -5,11 +5,11 @@ import "./styles/custom.scss";
 function App() {
   return (
     <>
-      <main className="">
+      {/* <main className="">
         <HomePage />
       </main>
 
-      <CookieModal />
+      <CookieModal /> */}
     </>
   );
 }
