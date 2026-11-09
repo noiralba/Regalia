@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const requireTrustedOrigin = require("../middleware/requireTrustedOrigin");
+
+router.use(requireTrustedOrigin);
 
 const seatsRoutes = require("./seats");
 const screenRoutes = require("./screens");

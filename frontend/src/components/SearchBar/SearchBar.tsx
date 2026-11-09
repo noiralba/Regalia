@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../Admin/shared/api";
 import { queryKeys } from "../Admin/shared/queryKeys";
 import { toStringArray } from "../Admin/shared/parse";
+import "./SearchBar.scss";
 
 interface MovieSearchResult {
   movie_id: string;
@@ -22,9 +23,10 @@ const fetchFilteredMovies = async (
   ageRating: string,
 ): Promise<MovieSearchResult[]> => {
   const queryParams = new URLSearchParams();
-  if (search) queryParams.set("search", search);
-  if (category) queryParams.set("categories", category);
-  if (ageRating) queryParams.set("ageRating", ageRating);
+
+  if (search) queryParams.set("sök", search);
+  if (category) queryParams.set("kategorier", category);
+  if (ageRating) queryParams.set("åldersgräns", ageRating);
 
   return api.get<MovieSearchResult[]>(`/api/movies?${queryParams.toString()}`);
 };
@@ -33,30 +35,74 @@ export default function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const searchQuery = searchParams.get("search") || "";
-  const categoryQuery = searchParams.get("categories") || "";
-  const ageQuery = searchParams.get("ageRating") || "";
+  const searchQuery = searchParams.get("sök") || "";
+  const categoryQuery = searchParams.get("kategorier") || "";
+  const ageQuery = searchParams.get("åldersgräns") || "";
 
-  // 1. Initiera statet direkt med värdet från URL:en för att undvika tomma renderingar
   const [localSearch, setLocalSearch] = useState(() => searchQuery);
+  const [ageMenuOpen, setAgeMenuOpen] = useState(false);
+  const [searchResultsOpen, setSearchResultsOpen] = useState(false);
 
-  // Debounce för sökfältet
+  const searchBarRef = useRef<HTMLElement>(null);
+
+  const ageOptions = [
+    { value: "", label: "ALLA ÅLDRAR" },
+    { value: "0", label: "Barntillåten (0 år)" },
+    { value: "7", label: "7 år" },
+    { value: "11", label: "11 år" },
+    { value: "15", label: "15 år" },
+  ];
+
+  const selectedAge =
+    ageOptions.find((option) => option.value === ageQuery)?.label ||
+    "ALLA ÅLDRAR";
+
+  // Stäng båda menyerna vid klick utanför eller Escape
+  useEffect(() => {
+    if (!ageMenuOpen && !searchResultsOpen) return;
+
+    const handleClickOutside = (event: PointerEvent) => {
+      if (
+        searchBarRef.current &&
+        !searchBarRef.current.contains(event.target as Node)
+      ) {
+        setAgeMenuOpen(false);
+        setSearchResultsOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setAgeMenuOpen(false);
+        setSearchResultsOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [ageMenuOpen, searchResultsOpen]);
+
+  // Fördröj sökningen med 300 ms
   useEffect(() => {
     const handler = setTimeout(() => {
       setSearchParams((prev) => {
         if (localSearch.length >= 2) {
-          prev.set("search", localSearch);
+          prev.set("sök", localSearch);
         } else {
-          prev.delete("search");
+          prev.delete("sök");
         }
+
         return prev;
       });
     }, 300);
 
     return () => clearTimeout(handler);
   }, [localSearch, setSearchParams]);
-
-  // Den felaktiga useEffecten (setLocalSearch) har tagits bort helt!
 
   const currentFilters = {
     search: searchQuery,
@@ -82,80 +128,115 @@ export default function SearchBar() {
       } else {
         prev.delete(key);
       }
+
       return prev;
     });
   };
 
   const handleMovieClick = (movieId: string) => {
     navigate(`/filmer/${movieId}`);
-
-    setLocalSearch("");
-    setSearchParams((prev) => {
-      prev.delete("search");
-      return prev;
-    });
   };
 
   return (
-    <section aria-label="Filmsökning" key={searchQuery}>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="movie-search">Sök efter film</label>
-        <input
-          id="movie-search"
-          type="search"
-          placeholder="Sök på ålder, genre eller sökord"
-          value={localSearch}
-          onChange={(e) => setLocalSearch(e.target.value)}
-        />
+    <section className="search-bar" aria-label="Filmsökning" ref={searchBarRef}>
+      <form className="search-bar-form" onSubmit={(e) => e.preventDefault()}>
+        <section className="search-field">
+          <label htmlFor="movie-search">Sök efter film</label>
 
-        <label htmlFor="age-filter">Filtrera efter ålder</label>
-        <select
-          id="age-filter"
-          value={ageQuery}
-          onChange={(e) => handleFilterChange("ageRating", e.target.value)}
-        >
-          <option value="">Alla åldrar</option>
-          <option value="0">Barntillåten (0 år)</option>
-          <option value="7">7 år</option>
-          <option value="11">11 år</option>
-          <option value="15">15 år</option>
-        </select>
-      </form>
+          <input
+            className="search-input"
+            id="movie-search"
+            type="search"
+            autoComplete="off"
+            placeholder="Ålder, genre eller sökord"
+            value={localSearch}
+            onFocus={() => setSearchResultsOpen(true)}
+            onChange={(e) => {
+              setLocalSearch(e.target.value);
+              setSearchResultsOpen(true);
+            }}
+          />
+        </section>
 
-      {localSearch.length >= 2 && (
-        <section aria-label="Sökresultat">
-          {isLoading && <p role="status">Söker...</p>}
+        <section className="age-filter">
+          <button
+            type="button"
+            className="age-trigger"
+            aria-expanded={ageMenuOpen}
+            aria-haspopup="true"
+            onClick={() => {
+              setAgeMenuOpen((open) => !open);
+              setSearchResultsOpen(true);
+            }}
+          >
+            <span>{selectedAge}</span>
 
-          {isError && <p role="alert">{error.message}</p>}
+            <span
+              className={`age-arrow ${ageMenuOpen ? "age-arrow-open" : ""}`}
+              aria-hidden="true"
+            />
+          </button>
 
-          {movies && movies.length === 0 && (
-            <p>Inga filmer matchade din sökning.</p>
-          )}
-
-          {movies && movies.length > 0 && (
-            <ul>
-              {movies.map((movie) => {
-                const parsedCategories = toStringArray(movie.categories);
-
-                return (
-                  <li key={movie.movie_id}>
-                    <button
-                      type="button"
-                      onClick={() => handleMovieClick(movie.movie_id)}
-                    >
-                      <span>{movie.title}</span>
-                      <span>
-                        {movie.ageRating ? `${movie.ageRating} år` : "U"} •{" "}
-                        {parsedCategories.join(", ")}
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+          {ageMenuOpen && (
+            <section className="age-dropdown" aria-label="Välj åldersgräns">
+              {ageOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`age-option ${
+                    ageQuery === option.value ? "age-option-active" : ""
+                  }`}
+                  onClick={() => {
+                    handleFilterChange("åldersgräns", option.value);
+                    setAgeMenuOpen(false);
+                  }}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </section>
           )}
         </section>
-      )}
+      </form>
+
+      {searchResultsOpen &&
+        (localSearch.length >= 2 ||
+          ageQuery !== "" ||
+          categoryQuery !== "") && (
+          <section className="search-results" aria-label="Sökresultat">
+            {isLoading && <p role="status">Söker...</p>}
+
+            {isError && <p role="alert">{error.message}</p>}
+
+            {movies && movies.length === 0 && (
+              <p>Inga filmer matchade din sökning.</p>
+            )}
+
+            {movies && movies.length > 0 && (
+              <ul>
+                {movies.map((movie) => {
+                  const parsedCategories = toStringArray(movie.categories);
+
+                  return (
+                    <li key={movie.movie_id}>
+                      <button
+                        type="button"
+                        onClick={() => handleMovieClick(movie.movie_id)}
+                      >
+                        <span>{movie.title}</span>
+
+                        <span>
+                          {movie.ageRating ? `${movie.ageRating} år` : "U"} •{" "}
+                          {parsedCategories.join(", ")}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </section>
+        )}
     </section>
   );
 }

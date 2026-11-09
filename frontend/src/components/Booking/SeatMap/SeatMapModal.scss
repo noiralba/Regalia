@@ -1,0 +1,76 @@
+@use "../../../styles/variables" as v;
+
+.seat-map-modal {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 650px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain; // bakgrunden scrollar inte med
+  padding: 24px;
+  background: v.$color-card-bg; // ta bort om bakgrunden redan sätts på annat håll
+  border-radius: 8px;
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  &__close-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; // minst 44px för att vara lätt att trycka på
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: v.$color-cream;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  &__close {
+    display: block;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: v.$color-primary-red;
+    color: v.$color-cream;
+    border: 1px solid v.$color-gold;
+    border-radius: 5px;
+    font-family: v.$font-body;
+    cursor: pointer;
+  }
+
+  @include v.respond-to(mobile) {
+    max-height: 100dvh;
+    height: 100dvh; // fyller hela skärmen
+    padding: 56px 16px 16px; // plats överst för stäng-ikonen
+    border-radius: 0;
+
+    &__overlay {
+      padding: 0;
+      align-items: stretch;
+    }
+
+    &__close {
+      position: sticky;
+      bottom: 0;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+  }
+}

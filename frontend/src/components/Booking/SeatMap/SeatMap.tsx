@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { findHoverSeats } from "../../utils/seatSelection";
-import type { Seat } from "../../types/types";
+import { findHoverSeats } from "../../../utils/seatSelection";
+import type { Seat } from "../../../types/types";
 import "./SeatMap.scss";
 
 interface SeatMapProps {
@@ -38,7 +38,7 @@ function SeatMap({
   }
 
   return (
-    <div className="booking-page__seat-map">
+    <section className="booking-page__seat-map">
       <div className="booking-page__screen" aria-hidden="true" />
 
       <div
@@ -49,7 +49,7 @@ function SeatMap({
           .sort()
           .map((row) => (
             <div className="booking-page__seat-row" key={row}>
-              <span className="booking-page__row-label">Rad {row}</span>
+              <p className="booking-page__row-label">Rad {row}</p>
 
               <div className="booking-page__seat-buttons">
                 {seats
@@ -85,23 +85,23 @@ function SeatMap({
           ))}
       </div>
 
-      <div className="booking-page__legend">
-        <span>
+      <article className="booking-page__legend">
+        <p>
           <i className="booking-page__legend-icon" /> Ledig
-        </span>
+        </p>
         {isLargeScreen && (
-          <span>
+          <p>
             <i className="booking-page__legend-icon is-vip" /> Loge (Rad H)
-          </span>
+          </p>
         )}
-        <span>
+        <p>
           <i className="booking-page__legend-icon is-selected" /> Vald
-        </span>
-        <span>
+        </p>
+        <p>
           <i className="booking-page__legend-icon is-unavailable" /> Upptagen
-        </span>
-      </div>
-    </div>
+        </p>
+      </article>
+    </section>
   );
 }
 

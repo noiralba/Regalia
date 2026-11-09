@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const db = require("./db");
 const apiRoutes = require("./routes/api");
 
@@ -8,11 +9,12 @@ const port = 3000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:4173"],
   }),
 );
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api", apiRoutes);
 
 app.get("/api", (req, res) => {

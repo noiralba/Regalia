@@ -4,7 +4,9 @@ function requireAuth(req, res, next) {
   const authorization = req.get("Authorization") || "";
   const match = authorization.match(/^Bearer ([^\s]+)$/i);
 
-  if (!match) {
+  const token = match?.[1] ?? req.cookies?.regalia_session;
+
+  if (!token) {
     return res.status(401).json({
       error: "Du behöver logga in.",
     });
@@ -19,7 +21,7 @@ function requireAuth(req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(match[1], process.env.JWT_SECRET, {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, {
       algorithms: ["HS256"],
       issuer: "regalia",
       audience: "regalia-api",
@@ -32,7 +34,7 @@ function requireAuth(req, res, next) {
     }
 
     req.user = { id: decoded.sub };
-
+    req.sessionExpiresAt = decoded.exp * 1000;
     next();
   } catch {
     return res.status(401).json({

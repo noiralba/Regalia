@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../db");
 const { loginLimiter } = require("../middleware/rateLimit");
+const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
@@ -48,9 +49,15 @@ router.post("/login", loginLimiter, async (req, res) => {
       audience: "regalia-api",
     });
 
+    res.cookie("regalia_session", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/api",
+      maxAge: 60 * 60 * 1000,
+    });
+
     return res.status(200).json({
-      token,
-      tokenType: "Bearer",
       expiresIn: 3600,
     });
   } catch (error) {
@@ -60,6 +67,25 @@ router.post("/login", loginLimiter, async (req, res) => {
       error: "Ett serverfel uppstod. Försök igen senare.",
     });
   }
+});
+
+router.get("/session", requireAuth, (req, res) => {
+  res.set("Cache-Control", "no-store");
+  return res.status(200).json({
+    authenticated: true,
+    expiresAt: req.sessionExpiresAt,
+  });
+});
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("regalia_session", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/api",
+  });
+
+  return res.sendStatus(204);
 });
 
 module.exports = router;

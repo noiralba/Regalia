@@ -1,16 +1,15 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import { post } from "../../api/api";
-import "./LoginPage.scss"
+import "./LoginPage.scss";
 
 type LoginResponse = {
-  token: string;
   expiresIn: number;
 };
 
 export default function LoginPage() {
   const { onLogin } = useOutletContext<{
-    onLogin: (token: string, expiresIn: number) => void;
+    onLogin: (expiresIn: number) => void;
   }>();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +28,7 @@ export default function LoginPage() {
         { email: string; password: string }
       >("/api/auth/login", { email, password });
 
-      onLogin(result.token, result.expiresIn);
+      onLogin(result.expiresIn);
       navigate("/");
     } catch (error) {
       const message = error instanceof Error ? error.message : "";
@@ -79,11 +78,7 @@ export default function LoginPage() {
             required
           />
         </article>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={loading}
-        >
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? "Loggar in..." : "Logga in"}
         </button>
 

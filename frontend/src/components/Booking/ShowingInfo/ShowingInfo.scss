@@ -1,0 +1,113 @@
+@use "../../../styles/variables" as v;
+
+.booking-page__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.showing-info {
+  min-width: 0;
+  background-color: v.$color-card-bg;
+  padding: 1rem;
+  border-radius: 8px 0 0 8px;
+  margin-bottom: 1rem;
+  border-left: 1px solid v.$color-card-bg;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+
+  &__movie {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__poster {
+    flex: 0 0 180px;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border: 1px solid rgba(v.$color-gold, 0.4);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__details {
+    min-width: 0;
+
+    h3 {
+      margin: 0 0 16px;
+      font-family: v.$font-title;
+      font-size: 1.5rem; // större titel
+      line-height: 1.2;
+      color: v.$color-cream;
+      text-transform: uppercase;
+    }
+  }
+
+  &__meta {
+    margin: 0;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 14px;
+    }
+
+    dt {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: v.$color-gold;
+      opacity: 0.7;
+    }
+
+    dd {
+      margin: 2px 0 0;
+      font-size: 1.1rem;
+      color: v.$color-cream;
+    }
+  }
+
+  @include v.respond-to(mobile) {
+    border-radius: 8px 8px 0 0; 
+    margin-bottom: 0; 
+    padding: 1rem;
+
+    &__movie {
+      gap: 12px;
+    }
+
+    &__poster {
+      flex: 0 0 110px; 
+    }
+
+    &__details h3 {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    &__meta {
+      div {
+        margin-bottom: 10px;
+      }
+
+      dt {
+        font-size: 0.7rem;
+      }
+
+      dd {
+        font-size: 1rem;
+      }
+    }
+  }
+}

@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+
 import popcorn from "../assets/images/vip/popcorn.webp";
 import drinks from "../assets/images/vip/drinks.webp";
 import food from "../assets/images/vip/food.webp";
-import foodMenu from "../assets/images/vip/matmeny.webp";
-import drinkMenu from "../assets/images/vip/dryckmeny.webp";
-import snacksMenu from "../assets/images/vip/snacksmeny.webp";
+
+import foodMenu from "../assets/images/vip/matmeny.png";
+import drinkMenu from "../assets/images/vip/dryckmeny.png";
+import snacksMenu from "../assets/images/vip/snacksmeny.png";
+
 import "../styles/VipPage.scss";
 
 type MenuTab = "mat" | "dryck" | "snacks";
@@ -29,11 +32,30 @@ function VipPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuTab>("mat");
 
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+
+    if (!dialog) return;
+
+    if (menuOpen && !dialog.open) {
+      dialog.showModal();
+    }
+
+    if (!menuOpen && dialog.open) {
+      dialog.close();
+    }
+  }, [menuOpen]);
 
   function openMenu() {
     setActiveMenu("mat");
     setMenuOpen(true);
+  }
+
+  function closeMenu() {
+    setMenuOpen(false);
   }
 
   return (
@@ -57,15 +79,15 @@ function VipPage() {
         </section>
 
         <header className="vip-header">
-          <h1>REGALIAS LOGE</h1>
+          <h1>UPPLEV FILMEN FRÅN VÅR LOGE</h1>
         </header>
 
         <section className="vip-description">
           <p>
-            Till utvalda visningar finns ett antal VIP-platser där du har
-            möjlighet att förbeställa varm mat och svalkande dryck från vår
-            bistro. Under visningen kan du även komplettera din beställning via
-            platsens QR-kod. Allt serveras direkt till dig i salongen.
+            På REGALIA vill vi göra biobesöket till något alldeles extra. Med
+            våra exklusiva logeplatser får du njuta av filmen i en mer privat
+            och lyxig miljö, det beställs mat, dryck och snacks direkt till
+            bordet.
           </p>
 
           <ol>
@@ -90,61 +112,69 @@ function VipPage() {
 
         <footer className="vip-actions">
           <button type="button" onClick={openMenu} aria-haspopup="dialog">
-            Meny
+            MENY
           </button>
-
-          {/* <button type="button" onClick={() => navigate("/booking")}>
-            Boka
-          </button> */}
         </footer>
       </article>
 
-      {menuOpen && (
-        <dialog className="vip-menu-overlay" open aria-label="Regalias meny">
-          <section className="vip-menu-stage" aria-label="Menybild">
+      <dialog
+        ref={dialogRef}
+        className="vip-menu-overlay"
+        aria-label="Regalias meny"
+        onCancel={closeMenu}
+      >
+        <button
+          className="vip-menu-close"
+          type="button"
+          onClick={closeMenu}
+          aria-label="Stäng menyn"
+        >
+          ×
+        </button>
+
+        <section className="vip-menu-stage" aria-label="Menybild">
+          <img
+            className="vip-menu-image"
+            src={menuImages[activeMenu].src}
+            alt={menuImages[activeMenu].alt}
+          />
+
+          <nav className="vip-menu-tabs" aria-label="Byt meny">
             <button
-              className="vip-menu-close"
               type="button"
-              onClick={() => setMenuOpen(false)}
-              aria-label="Stäng menyn"
+              className={`vip-menu-tab section-label ${
+                activeMenu === "mat" ? "active" : ""
+              }`}
+              aria-pressed={activeMenu === "mat"}
+              onClick={() => setActiveMenu("mat")}
             >
-              ×
+              MAT
             </button>
 
-            <img
-              className="vip-menu-image"
-              src={menuImages[activeMenu].src}
-              alt={menuImages[activeMenu].alt}
-            />
+            <button
+              type="button"
+              className={`vip-menu-tab section-label ${
+                activeMenu === "dryck" ? "active" : ""
+              }`}
+              aria-pressed={activeMenu === "dryck"}
+              onClick={() => setActiveMenu("dryck")}
+            >
+              DRYCK
+            </button>
 
-            <nav className="vip-menu-tabs" aria-label="Byt meny">
-              <button
-                type="button"
-                className="vip-menu-tab vip-menu-tab-mat"
-                aria-label="Visa matmenyn"
-                aria-pressed={activeMenu === "mat"}
-                onClick={() => setActiveMenu("mat")}
-              />
-
-              <button
-                type="button"
-                className="vip-menu-tab vip-menu-tab-dryck"
-                aria-label="Visa dryckesmenyn"
-                aria-pressed={activeMenu === "dryck"}
-                onClick={() => setActiveMenu("dryck")}
-              />
-
-              <button
-                type="button"
-                className="vip-menu-tab vip-menu-tab-snacks"
-                aria-label="Visa snacksmenyn"
-                aria-pressed={activeMenu === "snacks"}
-                onClick={() => setActiveMenu("snacks")}
-              />
-            </nav>
-          </section>
-        </dialog>
-      )}
+            <button
+              type="button"
+              className={`vip-menu-tab section-label ${
+                activeMenu === "snacks" ? "active" : ""
+              }`}
+              aria-pressed={activeMenu === "snacks"}
+              onClick={() => setActiveMenu("snacks")}
+            >
+              SNACKS
+            </button>
+          </nav>
+        </section>
+      </dialog>
     </main>
   );
 }

@@ -4,27 +4,24 @@ import type {
   BookingConfirmation,
   Movies,
   MovieScreening,
+  TicketType,
 } from "../types/types";
-import BookingConfirmationModal from "../components/BookingConfirmationModal/BookingConfirmationModal";
+import BookingConfirmationModal from "../components/Booking/BookingConfirmationModal/BookingConfirmationModal";
+import ShowingInfo from "../components/Booking/ShowingInfo/ShowingInfo";
+import TicketSelector from "../components/Booking/TicketSelector/TicketSelector";
+import BookingSummary from "../components/Booking/BookingSummary/BookingSummary";
+import SeatMap from "../components/Booking/SeatMap/SeatMap";
+import SeatMapModal from "../components/Booking/SeatMap/SeatMapModal";
 import { pages } from "../routeConfig";
-import "../styles/BookingPage.scss";
-import SeatMap from "../components/SeatMap/SeatMap";
-import SeatMapModal from "../components/SeatMap/SeatMapModal";
 import { getById } from "../api/api";
-import { getMovieImage } from "../utils/getMovieImage";
 import { extractIdFromSlug } from "../utils/slugify";
 import { useSeatPolling } from "../hooks/useSeatPolling";
 import { useSeatSelection } from "../hooks/useSeatSelection";
-
-interface TicketType {
-  ticket_type_id: string;
-  "Ticket Type": string;
-  "Price (SEK)": string;
-}
+// import "./BookingPage.scss";
 
 function BookingPage() {
-  const { showingSlug } = useParams(); // 1. Läs ut hela sluggen
-  const visningId = extractIdFromSlug(showingSlug); // 2. Extrahera ut visningen
+  const { showingSlug } = useParams();
+  const visningId = extractIdFromSlug(showingSlug);
   const navigate = useNavigate();
   const [showing, setShowing] = useState<MovieScreening | null>(null);
   const [movie, setMovie] = useState<Movies | null>(null);
@@ -36,19 +33,18 @@ function BookingPage() {
     (total, count) => total + count,
     0,
   );
-  // hämtar platsval/funktioner från vår egna hook useSeatSelection
-const {
-  selectedSeats,
-  setSelectedSeats,
-  hasManuallySelectedSeats,
-  setHasManuallySelectedSeats,
-  toggleSeat: selectSeat,
-} = useSeatSelection(seats, totalTickets, showing?.Screen ?? "");
+  const {
+    selectedSeats,
+    setSelectedSeats,
+    hasManuallySelectedSeats,
+    setHasManuallySelectedSeats,
+    toggleSeat: selectSeat,
+  } = useSeatSelection(seats, totalTickets, showing?.Screen ?? "");
+
   function toggleSeat(seatId: string) {
     if (error.includes("blivit bokade av någon annan")) {
       setError("");
     }
-
     selectSeat(seatId);
   }
 
@@ -58,7 +54,6 @@ const {
 
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-  // Håller reda på om en bokning håller på att skickas
   const [isBooking, setIsBooking] = useState(false);
   const [bookingConfirmation, setBookingConfirmation] =
     useState<BookingConfirmation | null>(null);
@@ -74,11 +69,9 @@ const {
     if (unavailableSeats.length === 0) return;
 
     const timeout = setTimeout(() => {
-      // Tar bort de platser som inte längre kan väljas
       setSelectedSeats((previous) =>
         previous.filter((id) => !unavailableSeats.includes(id)),
       );
-
       setError(
         "En eller flera av dina valda sittplatser har tyvärr blivit bokade av någon annan. Vänligen välj nya platser.",
       );
@@ -87,7 +80,7 @@ const {
     return () => clearTimeout(timeout);
   }, [seats, selectedSeats, setSelectedSeats]);
 
-  // Hämta info om vald filmvisnign från backend
+  // Hämta info om vald filmvisning från backend
   useEffect(() => {
     if (!visningId) return;
     async function fetchShowing() {
@@ -109,6 +102,7 @@ const {
     }
     fetchShowing();
   }, [visningId]);
+
   // Hämta biljettyper och priser från backend
   useEffect(() => {
     async function fetchTicketTypes() {
@@ -127,48 +121,43 @@ const {
     fetchTicketTypes();
   }, []);
 
-  // FUNKTIONER
-  //Ökar/minskar antalet biljetter
-function changeTicketCount(ticketTypeId: string, change: number) {
-  const newCount = Math.max(0, (ticketCounts[ticketTypeId] || 0) + change);
-  // Räknar ut nya totala antalet biljetter
-  const newTotalTickets =
-    totalTickets - (ticketCounts[ticketTypeId] || 0) + newCount;
+  // Ökar/minskar antalet biljetter
+  function changeTicketCount(ticketTypeId: string, change: number) {
+    const newCount = Math.max(0, (ticketCounts[ticketTypeId] || 0) + change);
+    const newTotalTickets =
+      totalTickets - (ticketCounts[ticketTypeId] || 0) + newCount;
 
-  setTicketCounts((previous) => ({
-    ...previous,
-    [ticketTypeId]: newCount,
-  }));
-  // Om alla biljetter tas bort återgår platsvalet till automatiskt läge
-  if (newTotalTickets === 0) {
-    setHasManuallySelectedSeats(false);
-    // körs om användaren minskar antalet manuellt valda biljtter (tar bort senast valda)
-  } else if (change < 0 && hasManuallySelectedSeats) {
-    setSelectedSeats((previous) => previous.slice(0, -1));
+    setTicketCounts((previous) => ({
+      ...previous,
+      [ticketTypeId]: newCount,
+    }));
+
+    // Om alla biljetter tas bort återgår platsvalet till automatiskt läge
+    if (newTotalTickets === 0) {
+      setHasManuallySelectedSeats(false);
+    } else if (change < 0 && hasManuallySelectedSeats) {
+      // Minskar användaren manuellt valda biljetter tas senast valda plats bort
+      setSelectedSeats((previous) => previous.slice(0, -1));
+    }
   }
-}
 
-  // handleBooking börjar här. Kontrollerar bokningsuppgifterna och skickar bokningen till backend
   async function handleBooking() {
     if (totalTickets === 0) {
       setError("Du måste välja minst en biljett.");
       return;
     }
-    // Antalet valda sittplatser måste motsvara antalet biljetter
     if (selectedSeats.length !== totalTickets) {
       setError("Du måste välja lika många sittplatser som biljetter.");
       return;
     }
-    // Kontrollerar att e-postadressen har ett giltigt format
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setError("Vänligen ange en giltig e-postadress.");
       return;
     }
-    // Förhindrar flera bokningsanrop samtidigt
     if (isBooking) return;
     setError("");
     setIsBooking(true);
-    // Skapar en lista med biljettyper, en för varje vald biljett
+
     const selectedTicketTypes: string[] = [];
     ticketTypes.forEach((ticket) => {
       const count = ticketCounts[ticket.ticket_type_id] || 0;
@@ -176,8 +165,7 @@ function changeTicketCount(ticketTypeId: string, change: number) {
         selectedTicketTypes.push(ticket.ticket_type_id);
       }
     });
-    // Kopplar varje vald sittplats till en biljettyp
-    // Detta är info som skickas till backend
+
     const bookingData = {
       show_id: visningId,
       user_email: email,
@@ -186,119 +174,72 @@ function changeTicketCount(ticketTypeId: string, change: number) {
         ticket_type_id: selectedTicketTypes[index],
       })),
     };
-    // Skicka bokningen till backend
+
     try {
       const response = await fetch("http://localhost:3000/api/bookings", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingData),
       });
 
-      // Hanterar om en sittplats redan har bokats
       if (response.status === 409) {
-        // Hämtar platsinfo från backend
         await refreshSeats();
-
-        // Rensar användarens tidigare valda sittplatser
         setSelectedSeats([]);
-
-        // Visar ett felmeddelande så användaren kan välja nya platser
         setError(
-          "En av dina valda platser är tyvärr redan bokad. Vänligen Välj nya sittplatser.",
+          "En av dina valda platser är tyvärr redan bokad. Vänligen välj nya sittplatser.",
         );
-
         return;
       }
       if (!response.ok) {
         throw new Error("Could not create booking");
       }
-      // Hämtar bokningsbekräftelsen från backend
       const data: BookingConfirmation = await response.json();
       setBookingConfirmation(data);
-      console.log("Bokning skapad:", data);
     } catch (error) {
       console.error(error);
       setError("Kunde inte genomföra bokningen.");
     } finally {
-      // Återställer knappen
       setIsBooking(false);
     }
   }
+
   // BERÄKNINGAR
-  // Beräknar totalpriset biljetter och pris
   const totalPrice = ticketTypes.reduce((total, ticket) => {
     const count = ticketCounts[ticket.ticket_type_id] || 0;
-    const price = Number(ticket["Price (SEK)"]);
-    return total + count * price;
+    return total + count * Number(ticket["Price (SEK)"]);
   }, 0);
 
+  const seatLabels = seats
+    .filter((seat) => selectedSeats.includes(seat.seat_id))
+    .map((seat) => `${seat["Seat Row"]}${seat["Seat Number"]}`)
+    .join(", ");
+
   return (
-    <main className="booking-page">
-      <h1>Boka biljetter</h1>
+    <main className="page-container">
+      <h1 className="text-uppercase mb-4">Boka biljetter</h1>
+
       {bookingConfirmation && (
         <BookingConfirmationModal
           confirmation={bookingConfirmation}
           onClose={() => navigate(pages.home.path)}
         />
       )}
-      <div className="booking-page__top">
-        <section className="booking-page__showing">
-          <h2>Vald film</h2>
-          {!showing && !error && <p>Hämtar visning...</p>}
-          {showing && (
-            <div className="booking-page__movie">
-              <div className="booking-page__poster">
-                {movie && (
-                  <img
-                    src={getMovieImage(movie.posterImage)}
-                    alt={`Filmaffisch för ${movie.title}`}
-                  />
-                )}
-              </div>
-              <div className="booking-page__movie-details">
-                <h3>{showing.Movie}</h3>
-                <p>Datum: {showing["Screening Date"]}</p>
-                <p>Tid: {showing["Start Time"]}</p>
-                <p>Salong: {showing.Screen}</p>
-              </div>
-            </div>
-          )}
-        </section>
-        <section className="booking-page__tickets">
-          <h2>Välj biljetter</h2>
-          {ticketTypes.map((ticket) => (
-            <article
-              className="booking-page__ticket-row"
-              key={ticket.ticket_type_id}
-            >
-              <h3>{ticket["Ticket Type"]}</h3>
-              <p>{Number(ticket["Price (SEK)"])} kr</p>
-              <button
-                type="button"
-                onClick={() => changeTicketCount(ticket.ticket_type_id, -1)}
-                disabled={!ticketCounts[ticket.ticket_type_id]}
-              >
-                -
-              </button>
-              <span>{ticketCounts[ticket.ticket_type_id] || 0}</span>
-              <button
-                type="button"
-                onClick={() => changeTicketCount(ticket.ticket_type_id, 1)}
-              >
-                +
-              </button>
-            </article>
-          ))}
-          <p>Totalt: {totalPrice} kr</p>
-        </section>
-      </div>
+
+      <article className="booking-page__top">
+        <ShowingInfo showing={showing} movie={movie} hasError={!!error} />
+        <TicketSelector
+          ticketTypes={ticketTypes}
+          ticketCounts={ticketCounts}
+          totalPrice={totalPrice}
+          onChangeCount={changeTicketCount}
+        />
+      </article>
+
       <section className="booking-page__seats">
-        <h2>Välj sittplatser</h2>
+        <h2 className="mt-4">Välj sittplatser</h2>
 
         {showing && (
-          <p className="booking-page__screen-name">{showing.Screen}</p>
+          <p className="text-uppercase">{showing.Screen}</p>
         )}
 
         <button
@@ -330,86 +271,19 @@ function changeTicketCount(ticketTypeId: string, change: number) {
         )}
       </section>
 
-      <section className="booking-page__summary">
-        <h2>Din bokning</h2>
-
-        <div className="booking-page__summary-content">
-          <div className="booking-page__summary-details">
-            {showing && (
-              <>
-                <div className="booking-page__summary-row">
-                  <span>Film</span>
-                  <span>{showing.Movie}</span>
-                </div>
-
-                <div className="booking-page__summary-row">
-                  <span>Visning</span>
-                  <span>
-                    {showing["Screening Date"]} • {showing["Start Time"]}
-                  </span>
-                </div>
-
-                <div className="booking-page__summary-row">
-                  <span>Salong</span>
-                  <span>{showing.Screen}</span>
-                </div>
-
-                <div className="booking-page__summary-row">
-                  <span>Platser</span>
-                  <span>
-                    {seats
-                      .filter((seat) => selectedSeats.includes(seat.seat_id))
-                      .map(
-                        (seat) => `${seat["Seat Row"]}${seat["Seat Number"]}`,
-                      )
-                      .join(", ") || "Inga platser valda"}
-                  </span>
-                </div>
-
-                <div className="booking-page__summary-row">
-                  <span>Biljetter</span>
-                  <span>{totalTickets} st</span>
-                </div>
-
-                <div className="booking-page__summary-row">
-                  <span>TOTALT</span>
-                  <span>{totalPrice} kr</span>
-                </div>
-              </>
-            )}
-          </div>
-
-          <div className="booking-page__summary-email">
-            <p>
-              Fyll i din e-postadress för att slutföra bokningen. Din
-              bokningsbekräftelse skickas till den angivna adressen.
-            </p>
-
-            <label htmlFor="email">E-postadress</label>
-            <input
-              className="booking-page__email"
-              type="email"
-              id="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="namn@exempel.se"
-              required
-            />
-          </div>
-        </div>
-
-        {error && <p className="booking-page__summary-error">{error}</p>}
-
-        <button
-          className="booking-page__confirm-button"
-          type="button"
-          onClick={handleBooking}
-          disabled={isBooking}
-        >
-          {isBooking ? "Bokar..." : "Bekräfta bokning"}
-        </button>
-      </section>
+      <BookingSummary
+        showing={showing}
+        seatLabels={seatLabels}
+        totalTickets={totalTickets}
+        totalPrice={totalPrice}
+        email={email}
+        onEmailChange={setEmail}
+        error={error}
+        isBooking={isBooking}
+        onConfirm={handleBooking}
+      />
     </main>
   );
 }
+
 export default BookingPage;

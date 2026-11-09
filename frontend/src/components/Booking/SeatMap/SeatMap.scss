@@ -1,6 +1,13 @@
-@use "../../styles/variables" as v;
+@use "../../../styles/variables" as v;
 
 .booking-page {
+
+  &__seats {
+    background-color: v.$color-card-bg;
+    padding: 2rem;
+    border-radius: v.$border-radius;
+  }
+
   &__seat-map {
     overflow-x: auto;
     padding: 28px 16px 22px;
@@ -72,10 +79,10 @@
     }
 
     &.is-hover-preview:not(.is-unavailable) {
-  background: v.$color-gold;
-  color: v.$color-bg-dark;
-  box-shadow: 0 0 10px v.$color-gold;
-}
+      background: v.$color-gold;
+      color: v.$color-bg-dark;
+      box-shadow: 0 0 10px v.$color-gold;
+    }
 
     &.is-unavailable {
       background: #484044;
@@ -98,7 +105,7 @@
     margin: 24px 0 0;
     white-space: nowrap;
 
-    span {
+    p {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -125,4 +132,40 @@
       border-color: #484044;
     }
   }
+
+  &__open-seats {
+    display: none;
+  }
+
+  @include v.respond-to(mobile) {
+    &__top {
+      grid-template-columns: 1fr;
+    }
+
+    &__seat-map {
+      border: none;
+    }
+
+    &__summary-content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    &__open-seats {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: v.$color-primary-red;
+      color: v.$color-cream;
+      border: 1px solid v.$color-gold;
+      border-radius: 5px;
+      font-family: v.$font-body;
+      cursor: pointer;
+    }
+
+    &__seats>.booking-page__seat-map {
+      display: none;
+    }
+  }
+
 }

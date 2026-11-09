@@ -1,253 +1,279 @@
-/* =================================
-   VIP-SIDA OCH MÖRK BAKGRUND
-================================= */
+@use "./variables" as v;
 
 .vip-page {
-  position: relative;
-  isolation: isolate;
   min-height: 100vh;
-  padding: 2rem 1.5rem;
-  color: #e8d8b5;
-
+  padding: 2rem 1rem;
+  color: v.$color-cream;
+  background-color: v.$color-bg-dark;
   background-image:
     linear-gradient(rgba(12, 5, 5, 0.58), rgba(12, 5, 5, 0.72)),
-    url("../assets/images/vip/backpick.webp");
-
+    url("/src/assets/images/vip/backpic.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-.vip-page::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: rgba(0, 0, 0, 0.16);
-  pointer-events: none;
-}
-
-/* =================================
-   INFORMATIONS KORT
-================================= */
-
 .vip-card {
-  position: relative;
-  width: min(100%, 1000px);
+  width: 100%;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 1.5rem 2rem 2rem;
-  color: #e8d8b5;
-  background: rgba(24, 15, 16, 0.96);
-  border: 1px solid rgba(184, 145, 66, 0.7);
-  border-radius: 3px;
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.55);
+  padding: 2rem;
+  background: v.$color-card-bg;
+  border: 1px solid rgba(168, 134, 74, 0.35);
+  border-radius: 8px;
 }
-
-/* =================================
-   NAVIGATION
-================================= */
 
 .vip-navigation {
   display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
 }
 
 .vip-back {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 30px;
-  color: #c5a15a;
+  color: v.$color-gold;
   background: transparent;
   border: none;
-  font-size: 1.3rem;
+  font-size: 2rem;
   cursor: pointer;
-}
 
-.vip-back:hover {
-  color: #f5dfaa;
+  &:hover {
+    color: v.$color-cream;
+  }
 }
-
-/* =================================
-   BILDER PÅ VIP-SIDAN
-================================= */
 
 .vip-images {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
-}
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 
-.vip-images img {
-  display: block;
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  object-position: center;
-  border: 1px solid rgba(184, 145, 66, 0.45);
-  border-radius: 3px;
+  img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
 }
-
-/* =================================
-   RUBRIK OCH INFORMATION
-================================= */
 
 .vip-header {
-  margin: 1.2rem 0 0.8rem;
+  margin-top: 2rem;
   text-align: center;
-}
 
-.vip-header h1 {
-  margin: 0;
-  color: #e8d8b5;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.7rem, 3vw, 2.4rem);
-  font-weight: 600;
-  letter-spacing: 0.035em;
+  h1 {
+    color: v.$color-gold;
+    font-family: v.$font-title;
+    font-size: 2.5rem;
+    letter-spacing: v.$letter-spacing;
+  }
 }
 
 .vip-description {
-  max-width: 680px;
-  margin: 0 auto;
-  color: #d6c9b6;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
+  max-width: 850px;
+  margin: 2rem auto;
+  font-family: v.$font-body;
+  line-height: 1.8;
 
-.vip-description p {
-  margin: 0 0 0.9rem;
-}
+  p {
+    margin-bottom: 1.5rem;
+  }
 
-.vip-description ol {
-  margin: 0 0 1rem;
-  padding-left: 1.3rem;
-}
+  ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 
-.vip-description li {
-  padding-left: 0.1rem;
-  margin-bottom: 0.25rem;
+  li {
+    padding-left: 0.4rem;
+    margin-bottom: 0.7rem;
+  }
 }
-
-/* =================================
-   MENY- OCH BOKA-KNAPPAR
-================================= */
 
 .vip-actions {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
+  width: 100%;
+  margin-top: 2rem;
+
+  button {
+    width: 100%;
+    min-width: 140px;
+    padding: 0.8rem 2rem;
+    color: v.$color-cream;
+    background: v.$color-primary-red;
+    border: 1px solid v.$color-gold;
+    font-family: v.$font-body;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 180ms ease;
+
+    &:hover {
+      background: v.$color-gold;
+      animation: button-blink 0.3s ease-in-out;
+    }
+
+    &:focus-visible {
+      outline: 2px solid v.$color-cream;
+      outline-offset: 3px;
+    }
+  }
 }
 
-.vip-actions button {
-  min-width: 115px;
-  padding: 0.55rem 1.3rem;
-  color: #f0dfb8;
-  background: #681c2c;
-  border: 1px solid #bd984e;
-  border-radius: 3px;
-  font: inherit;
-  cursor: pointer;
-  transition: background 180ms ease;
-}
-
-.vip-actions button:hover {
-  background: #84283b;
-}
-
-/* =================================
-   HELSKÄRMSMODAL
-================================= */
-
+/* Menyfönster */
 .vip-menu-overlay {
   position: fixed;
-  top: 60px;
-  left: 0;
-  width: 100vw;
-  height: calc(100vh - 60px);
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-  display: flex;
+  inset: 0;
+  z-index: 9999;
+  display: none;
   justify-content: center;
   align-items: flex-start;
-  overflow-y: auto;
-  border: none;
-  padding: 20px 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
   margin: 0;
+  padding: 212px 1rem 1rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.97);
+  overflow: hidden;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.97);
+  }
 }
 
-.vip-menu-overlay::backdrop {
-  background: rgba(0, 0, 0, 0.94);
-}
-
-/* =================================
-   STÄNG-KNAPP
-================================= */
-
-.vip-menu-close {
-  position: fixed;
-  top: 135px;
-  right: 30px;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.85);
-  border: 2px solid #d4af37;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  color: #ffffff;
-  font-size: 1.8rem;
+.vip-menu-overlay[open] {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-
-.vip-menu-close:hover {
-  background: #681c2c;
-}
-
-/* =================================
-   MENYBILD OCH KLICKBARA RUBRIKER
-================================= */
 
 .vip-menu-stage {
   position: relative;
-  width: 100%;
-  max-width: 800px;
+  isolation: isolate;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
 }
 
 .vip-menu-image {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
-  margin: 0 auto;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100dvh - 230px);
   object-fit: contain;
-  border: 2px solid #bd984e;
+  border: none;
+  border-radius: 0;
 }
 
-/* =================================
-   TILLGÄNGLIGHET
-================================= */
-
-.vip-back:focus-visible,
-.vip-actions button:focus-visible,
-.vip-menu-close:focus-visible {
-  outline: 2px solid #f1d28a;
-  outline-offset: 3px;
+.vip-menu-tabs {
+  position: absolute;
+  top: 10%;
+  left: 8%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 84%;
+  height: 22%;
 }
 
-/* =================================
-   MOBILANPASSNING
-================================= */
+.vip-menu-tab {
+  padding: 0.5rem;
+  color: v.$color-gold;
+  background: transparent;
+  border: none;
+  font-family: v.$font-title;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease,
+    transform 0.2s ease;
 
+  &:hover,
+  &.active {
+    color: v.$color-cream;
+    text-shadow: 0 0 10px rgba(168, 134, 74, 0.8);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    animation: button-blink 0.3s ease-in-out;
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$color-cream;
+    outline-offset: 3px;
+  }
+}
+
+/* Stäng-knapp */
+.vip-menu-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid v.$color-gold;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    background: v.$color-primary-red;
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$color-cream;
+    outline-offset: 3px;
+  }
+}
+
+/* Animationer */
+@keyframes vip-title-shimmer {
+  0% {
+    background-position: 200% center;
+  }
+
+  100% {
+    background-position: -200% center;
+  }
+}
+
+@keyframes button-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Mobil */
 @media (max-width: 600px) {
   .vip-page {
     padding: 1rem 0.6rem;
@@ -260,14 +286,18 @@
 
   .vip-images {
     gap: 0.45rem;
-  }
 
-  .vip-images img {
-    height: 115px;
+    img {
+      height: 115px;
+    }
   }
 
   .vip-header {
     margin-top: 1.2rem;
+
+    h1 {
+      font-size: 1.8rem;
+    }
   }
 
   .vip-description {
@@ -279,13 +309,28 @@
   }
 
   .vip-menu-overlay {
-    padding: 0.5rem;
+    padding: 120px 0.5rem 0.5rem;
+  }
+
+  .vip-menu-image {
+    max-height: calc(100dvh - 135px);
+  }
+
+  .vip-menu-tabs {
+    gap: 0.35rem;
+  }
+
+  .vip-menu-tab {
+    padding: 0.4rem 0.25rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.03em;
   }
 
   .vip-menu-close {
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 38px;
-    height: 38px;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
   }
 }
