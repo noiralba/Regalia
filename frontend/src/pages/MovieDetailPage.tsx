@@ -27,12 +27,16 @@ export default function MovieDetailPage() {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
   const seats = useSeatAvailability(selectedShowing);
 
-  // Förvälj närmaste kommande visning när visningarna har laddats
   useEffect(() => {
-    const first = pickNextShowing(showings);
-    setSelectedDate(first?.["Screening Date"] ?? null);
-    setSelectedShowing(first);
-  }, [showings]);
+    if (showings.length > 0 && !selectedShowing) {
+      const first = pickNextShowing(showings);
+      if (first) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSelectedShowing(first);
+        setSelectedDate(first["Screening Date"]);
+      }
+    }
+  }, [showings, selectedShowing]);
 
   const dates = [...new Set(showings.map((s) => s["Screening Date"]))].sort();
 
