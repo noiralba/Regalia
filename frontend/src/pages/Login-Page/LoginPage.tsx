@@ -5,6 +5,7 @@ import "./LoginPage.scss";
 import { pages } from "../../routeConfig";
 import FormField from "../../components/Forms/FormField/FormField";
 import FormActions from "../../components/Forms/FormActions/FormActions";
+import FormAlert from "../../components/Forms/FormAlert/FormAlert";
 
 type LoginResponse = {
   expiresIn: number;
@@ -78,7 +79,7 @@ export default function LoginPage() {
           onCancel={() => navigate(pages.home.path)}
         />
 
-        {error && <p role="alert">{error}</p>}
+        <FormAlert message={error} variant="danger" />
       </form>
     </main>
   );
