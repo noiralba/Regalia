@@ -3,6 +3,18 @@ import { useNavigate } from "react-router";
 import type { BookingSearch } from "../types/types";
 import { get, del } from "../api/api";
 
+const primaryButtonStyle: React.CSSProperties = {
+  backgroundColor: "#6e1726",
+  borderColor: "#a8864a",
+  color: "#ecdbb0",
+};
+
+const secondaryButtonStyle: React.CSSProperties = {
+  backgroundColor: "#100d0e",
+  borderColor: "#a8864a",
+  color: "#ecdbb0",
+};
+
 export default function CancellationPage() {
   const [bookingNumber, setBookingNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -77,15 +89,6 @@ export default function CancellationPage() {
     }
   }
 
-  // function handleReset() {
-  //   setBookingNumber("");
-  //   setEmail("");
-  //   setBooking(null);
-  //   setNotFound(false);
-  //   setConfirmingCancel(false);
-  //   setCancelled(false);
-  // }
-
   if (cancelled) {
     return (
       <main className="container py-4">
@@ -95,7 +98,8 @@ export default function CancellationPage() {
         </p>
         <button
           type="button"
-          className="btn btn-secondary"
+          className="btn me-2"
+          style={secondaryButtonStyle}
           onClick={() => navigate("/")}
         >
           Tillbaka
@@ -129,14 +133,16 @@ export default function CancellationPage() {
             )}
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn me-2"
+              style={secondaryButtonStyle}
               onClick={() => navigate(-1)}
             >
               Avbryt
             </button>
             <button
               type="button"
-              className="btn btn-danger"
+              className="btn me-2"
+              style={primaryButtonStyle}
               onClick={() => setConfirmingCancel(true)}
             >
               Avboka
@@ -151,14 +157,16 @@ export default function CancellationPage() {
             <article className="d-flex gap-2">
               <button
                 type="button"
-                className="btn btn-danger"
+                className="btn me-2"
+                style={primaryButtonStyle}
                 onClick={handleConfirmCancel}
               >
                 Ja, avboka
               </button>
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn me-2"
+                style={secondaryButtonStyle}
                 onClick={() => setConfirmingCancel(false)}
               >
                 Nej, behåll
@@ -166,14 +174,6 @@ export default function CancellationPage() {
             </article>
           </section>
         )}
-        {/* 
-        <button
-          type="button"
-          className="btn btn-link mt-3 ps-0"
-          onClick={handleReset}
-        >
-          Sök efter en annan bokning
-        </button> */}
       </main>
     );
   }
@@ -221,12 +221,13 @@ export default function CancellationPage() {
           />
         </section>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn me-2" style={primaryButtonStyle}>
           Sök bokning
         </button>
         <button
           type="button"
-          className="btn btn-secondary"
+          className="btn me-2"
+          style={secondaryButtonStyle}
           onClick={() => navigate(-1)}
         >
           Avbryt

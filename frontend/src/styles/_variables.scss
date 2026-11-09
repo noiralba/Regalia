@@ -41,7 +41,7 @@ $breakpoint-tablet-max: 64rem;
 $breakpoint-desktop-min: 64.0625rem;
 
 /* Gemensam innehållsbredd */
-$content-max-width: 100rem;
+$content-max-width: 90rem;
 
 /* Responsiv mixin */
 @mixin respond-to($media) {

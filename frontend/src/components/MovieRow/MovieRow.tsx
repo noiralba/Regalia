@@ -20,7 +20,12 @@ type MovieRowProps = {
 
 export default function MovieRow({ id, label, movies }: MovieRowProps) {
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth <= 1024 ? 3 : 5,
+  );
+  const [prevPerPage, setPrevPerPage] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth <= 1024 ? 3 : 5,
+  );
 
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -30,18 +35,18 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
       setPerPage(window.innerWidth <= 1024 ? 3 : 5);
     };
 
-    updatePerPage();
     window.addEventListener("resize", updatePerPage);
 
     return () => window.removeEventListener("resize", updatePerPage);
   }, []);
 
+  if (perPage !== prevPerPage) {
+    setPrevPerPage(perPage);
+    setPage(0);
+  }
+
   const pageCount = Math.ceil(movies.length / perPage);
   const visibleMovies = movies.slice(page * perPage, (page + 1) * perPage);
-
-  useEffect(() => {
-    setPage(0);
-  }, [perPage]);
 
   const handleTouchStart = (e: TouchEvent<HTMLElement>) => {
     touchStartX.current = e.changedTouches[0].screenX;
