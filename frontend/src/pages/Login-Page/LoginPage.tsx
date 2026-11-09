@@ -2,7 +2,9 @@ import { useState, type FormEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import { post } from "../../api/api";
 import "./LoginPage.scss";
+import { pages } from "../../routeConfig";
 import FormField from "../../components/Forms/FormField/FormField";
+import FormActions from "../../components/Forms/FormActions/FormActions";
 
 type LoginResponse = {
   expiresIn: number;
@@ -67,9 +69,14 @@ export default function LoginPage() {
           onChange={(event) => setPassword(event.target.value)}
           autoComplete="current-password"
         />
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? "Loggar in..." : "Logga in"}
-        </button>
+        <FormActions
+          loading={loading}
+          submitLabel="Logga in"
+          loadingLabel="Loggar in..."
+          linkTo={pages.register.path}
+          linkLabel="Skapa konto"
+          onCancel={() => navigate(pages.home.path)}
+        />
 
         {error && <p role="alert">{error}</p>}
       </form>
