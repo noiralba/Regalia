@@ -1,237 +1,287 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import type { BookingSearch } from "../types/types";
-import { get, del } from "../api/api";
+import { useCancellation } from "../hooks/useCancellation";
+
+const colors = {
+  background: "#100d0e",
+  card: "#1a1416",
+  red: "#6e1726",
+  gold: "#a8864a",
+  cream: "#ecdbb0",
+};
+
+const pageStyle: React.CSSProperties = {
+  minHeight: "100vh",
+  padding: "2rem 1rem",
+  color: colors.cream,
+  backgroundColor: colors.background,
+  fontFamily: '"Manrope", sans-serif',
+};
+
+const headingStyle: React.CSSProperties = {
+  color: colors.gold,
+  fontFamily: '"Monomakh", serif',
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+};
+
+const cardStyle: React.CSSProperties = {
+  backgroundColor: colors.card,
+  border: "1px solid rgba(168, 134, 74, 0.35)",
+  borderRadius: "8px",
+  appearance: "none",
+};
+
+const buttonStyle: React.CSSProperties = {
+  color: colors.cream,
+  backgroundColor: colors.red,
+  border: `1px solid ${colors.gold}`,
+  borderRadius: "8px",
+  fontFamily: '"Manrope", sans-serif',
+  fontWeight: 700,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+};
+
+const inputStyle: React.CSSProperties = {
+  color: colors.background,
+  backgroundColor: colors.cream,
+  border: `1px solid ${colors.gold}`,
+};
 
 export default function CancellationPage() {
   const [bookingNumber, setBookingNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [bookings, setBookings] = useState<BookingSearch[]>([]);
-  const [booking, setBooking] = useState<BookingSearch | null>(null);
-  const [notFound, setNotFound] = useState(false);
   const [confirmingCancel, setConfirmingCancel] = useState(false);
-  const [cancelled, setCancelled] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [cancelError, setCancelError] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchBookings() {
-      try {
-        const data = await get<Record<string, string>[]>("/api/bookings");
+  const {
+    booking,
+    loading,
+    error,
+    notFound,
+    cancelError,
+    cancelled,
+    searchBooking,
+    cancelBooking,
+  } = useCancellation();
 
-        setBookings(
-          data.map((b) => ({
-            bookingNumber: b["Booking Number"],
-            email: b["Email"],
-          })),
-        );
-      } catch (err) {
-        console.error("Kunde inte hämta bokningar:", err);
-        setError("Bokningarna kunde inte laddas.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchBookings();
-  }, []);
-
-  if (loading) return <p>Laddar...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p style={pageStyle}>Laddar...</p>;
+  if (error) return <p style={pageStyle}>{error}</p>;
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setNotFound(false);
-
-    const found = bookings.find(
-      (b) =>
-        b.bookingNumber === bookingNumber.trim() &&
-        b.email.toLowerCase() === email.trim().toLowerCase(),
-    );
-
-    if (found) {
-      setBooking(found);
-    } else {
-      setNotFound(true);
-    }
+    searchBooking(bookingNumber, email);
   }
 
   async function handleConfirmCancel() {
-    if (!booking) return;
-
-    try {
-      await del(`/api/bookings/${encodeURIComponent(booking.bookingNumber)}`);
-
-      setBookings((prev) =>
-        prev.filter((b) => b.bookingNumber !== booking.bookingNumber),
-      );
-      setCancelled(true);
-      setConfirmingCancel(false);
-      setBooking(null);
-    } catch (err) {
-      console.error("Kunde inte avboka:", err);
-      setCancelError("Bokningen kunde inte avbokas. Försök igen.");
-      setConfirmingCancel(false);
-    }
+    await cancelBooking();
+    setConfirmingCancel(false);
   }
-
-  // function handleReset() {
-  //   setBookingNumber("");
-  //   setEmail("");
-  //   setBooking(null);
-  //   setNotFound(false);
-  //   setConfirmingCancel(false);
-  //   setCancelled(false);
-  // }
 
   if (cancelled) {
     return (
-      <main className="container py-4">
-        <h1 className="mb-3">Avbokning</h1>
-        <p className="alert alert-success" role="alert">
-          Din bokning är avbokad.
-        </p>
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={() => navigate("/")}
+      <main className="container py-5" style={pageStyle}>
+        <section
+          className="p-4 mx-auto"
+          style={{ ...cardStyle, maxWidth: "650px" }}
         >
-          Tillbaka
-        </button>
+          <h1 className="mb-3 text-center" style={headingStyle}>
+            Avbokning
+          </h1>
+          <p
+            className="alert text-center"
+            role="alert"
+            style={{
+              color: colors.cream,
+              backgroundColor: colors.card,
+              border: `1px solid ${colors.gold}`,
+            }}
+          >
+            Din bokning är avbokad.
+          </p>
+          <button
+            type="button"
+            className="btn"
+            style={buttonStyle}
+            onClick={() => navigate("/")}
+          >
+            Tillbaka
+          </button>
+        </section>
       </main>
     );
   }
 
   if (booking) {
     return (
-      <main className="container py-4">
-        <h1 className="mb-3">Din bokning</h1>
+      <main className="container py-5" style={pageStyle}>
+        <section
+          className="p-4 mx-auto"
+          style={{ ...cardStyle, maxWidth: "650px" }}
+        >
+          <h1 className="mb-3" style={headingStyle}>
+            Din bokning
+          </h1>
 
-        <section className="card mb-3 col-12 col-md-6 col-lg-4">
-          <article className="card-body">
-            <p className="mb-1">
-              <strong>Bokningsnummer:</strong> {booking.bookingNumber}
-            </p>
-          </article>
-        </section>
-
-        {!confirmingCancel ? (
-          <section className="d-flex gap-2">
-            {cancelError && (
-              <p
-                className="alert alert-danger col-12 col-md-6 col-lg-4"
-                role="alert"
-              >
-                {cancelError}
+          <section className="card mb-3" style={cardStyle}>
+            <article className="card-body">
+              <p className="mb-1">
+                <strong style={{ color: colors.gold }}>Bokningsnummer:</strong>{" "}
+                {booking.bookingNumber}
               </p>
-            )}
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => navigate(-1)}
-            >
-              Avbryt
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => setConfirmingCancel(true)}
-            >
-              Avboka
-            </button>
-          </section>
-        ) : (
-          <section
-            className="alert alert-warning col-12 col-md-6 col-lg-4"
-            role="alert"
-          >
-            <p className="mb-3">Är du säker på att du vill avboka?</p>
-            <article className="d-flex gap-2">
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={handleConfirmCancel}
-              >
-                Ja, avboka
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => setConfirmingCancel(false)}
-              >
-                Nej, behåll
-              </button>
             </article>
           </section>
-        )}
-        {/* 
-        <button
-          type="button"
-          className="btn btn-link mt-3 ps-0"
-          onClick={handleReset}
-        >
-          Sök efter en annan bokning
-        </button> */}
+
+          {!confirmingCancel ? (
+            <section className="d-flex flex-wrap gap-2">
+              {cancelError && (
+                <p
+                  className="alert col-12"
+                  role="alert"
+                  style={{
+                    color: colors.cream,
+                    backgroundColor: colors.card,
+                    border: "1px solid #dc3545",
+                  }}
+                >
+                  {cancelError}
+                </p>
+              )}
+              <button
+                type="button"
+                className="btn"
+                style={buttonStyle}
+                onClick={() => navigate(-1)}
+              >
+                Avbryt
+              </button>
+              <button
+                type="button"
+                className="btn"
+                style={buttonStyle}
+                onClick={() => setConfirmingCancel(true)}
+              >
+                Avboka
+              </button>
+            </section>
+          ) : (
+            <section
+              className="alert"
+              role="alert"
+              style={{
+                color: colors.cream,
+                backgroundColor: colors.background,
+                border: `1px solid ${colors.gold}`,
+              }}
+            >
+              <p className="mb-3">Är du säker på att du vill avboka?</p>
+              <article className="d-flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  className="btn"
+                  style={buttonStyle}
+                  onClick={handleConfirmCancel}
+                >
+                  Ja, avboka
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  style={buttonStyle}
+                  onClick={() => setConfirmingCancel(false)}
+                >
+                  Nej, behåll
+                </button>
+              </article>
+            </section>
+          )}
+        </section>
       </main>
     );
   }
 
   return (
-    <main className="container py-4">
-      <h1 className="mb-3">Avboka bokning</h1>
-      <p className="mb-4">
-        Fyll i ditt bokningsnummer och din e-postadress för att hitta din
-        bokning.
-      </p>
-
-      {notFound && (
-        <p className="alert alert-danger col-12 col-md-6 col-lg-4" role="alert">
-          Vi hittade ingen bokning med de uppgifterna.
+    <main className="container py-5" style={pageStyle}>
+      <section
+        className="p-4 mx-auto"
+        style={{ ...cardStyle, maxWidth: "650px" }}
+      >
+        <h1 className="mb-3 text-center" style={headingStyle}>
+          Avboka bokning
+        </h1>
+        <p className="mb-4 text-center">
+          Fyll i ditt bokningsnummer och din e-postadress för att hitta din
+          bokning.
         </p>
-      )}
 
-      <form onSubmit={handleSubmit} className="col-12 col-md-6 col-lg-4">
-        <section className="mb-3">
-          <label htmlFor="bookingNumber" className="form-label">
-            Bokningsnummer
-          </label>
-          <input
-            id="bookingNumber"
-            type="text"
-            className="form-control"
-            value={bookingNumber}
-            onChange={(e) => setBookingNumber(e.target.value)}
-            required
-          />
-        </section>
+        {notFound && (
+          <p
+            className="alert"
+            role="alert"
+            style={{
+              color: colors.cream,
+              backgroundColor: colors.card,
+              border: "1px solid #dc3545",
+            }}
+          >
+            Vi hittade ingen bokning med de uppgifterna.
+          </p>
+        )}
 
-        <section className="mb-3">
-          <label htmlFor="email" className="form-label">
-            E-postadress
-          </label>
-          <input
-            id="email"
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </section>
+        <form onSubmit={handleSubmit}>
+          <section className="mb-3">
+            <label
+              htmlFor="bookingNumber"
+              className="form-label"
+              style={{ color: colors.gold }}
+            >
+              Bokningsnummer
+            </label>
+            <input
+              id="bookingNumber"
+              type="text"
+              className="form-control"
+              style={inputStyle}
+              value={bookingNumber}
+              onChange={(e) => setBookingNumber(e.target.value)}
+              required
+            />
+          </section>
 
-        <button type="submit" className="btn btn-primary">
-          Sök bokning
-        </button>
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={() => navigate(-1)}
-        >
-          Avbryt
-        </button>
-      </form>
+          <section className="mb-3">
+            <label
+              htmlFor="email"
+              className="form-label"
+              style={{ color: colors.gold }}
+            >
+              E-postadress
+            </label>
+            <input
+              id="email"
+              type="email"
+              className="form-control"
+              style={inputStyle}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </section>
+
+          <button type="submit" className="btn me-2" style={buttonStyle}>
+            Sök bokning
+          </button>
+          <button
+            type="button"
+            className="btn"
+            style={buttonStyle}
+            onClick={() => navigate(-1)}
+          >
+            Avbryt
+          </button>
+        </form>
+      </section>
     </main>
   );
 }
