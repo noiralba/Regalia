@@ -2,7 +2,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 
-import App from "./App";
+
 import Layout from "./Layout";
 import { pages } from "./routeConfig";
 import HomePage from "./pages/HomePage";
@@ -35,7 +35,6 @@ export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-      // { path: pages.home.path, element: <App /> },
       { path: pages.home.path, element: <HomePage /> },
 
       {
