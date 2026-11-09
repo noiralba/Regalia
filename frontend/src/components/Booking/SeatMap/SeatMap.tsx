@@ -67,7 +67,7 @@ function SeatMap({
                         hoverSeats.includes(seat.seat_id)
                           ? "is-hover-preview"
                           : ""
-                      }${seat["Seat Row"] === "H" ? "is-vip" : ""}`}
+                      } ${seat["Seat Row"] === "H" ? "is-vip" : ""}`}
                       key={seat.seat_id}
                       type="button"
                       disabled={seat.Available === 0}
@@ -77,7 +77,7 @@ function SeatMap({
                       aria-pressed={selectedSeats.includes(seat.seat_id)}
                       title={`Rad ${row}, plats ${seat["Seat Number"]}`}
                     >
-                      {seat["Seat Number"]}
+                      {seat["Seat Row"] === "H" ? "★" : seat["Seat Number"]}
                     </button>
                   ))}
               </div>
