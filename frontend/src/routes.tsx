@@ -2,9 +2,10 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 
-import App from "./App";
+
 import Layout from "./Layout";
 import { pages } from "./routeConfig";
+import HomePage from "./pages/HomePage";
 
 // Publika sidor
 const LoginPage = lazy(() => import("./pages/Login-Page/LoginPage"));
@@ -13,9 +14,7 @@ const CalendarPage = lazy(() => import("./pages/CalendarPage"));
 const MovieDetailPage = lazy(() => import("./pages/MovieDetailPage"));
 const VipPage = lazy(() => import("./pages/VipPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
-const CreateAccountPage = lazy(
-  () => import("./pages/CreateAccountPage"),
-);
+const CreateAccountPage = lazy(() => import("./pages/CreateAccountPage"));
 
 // Admin
 const AdminShows = lazy(() => import("./components/Admin/shows/AdminShows"));
@@ -36,7 +35,7 @@ export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-      { path: pages.home.path, element: <App /> },
+      { path: pages.home.path, element: <HomePage /> },
 
       {
         path: pages.booking.path,
