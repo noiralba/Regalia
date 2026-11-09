@@ -29,7 +29,6 @@ const cardStyle: React.CSSProperties = {
   backgroundColor: colors.card,
   border: "1px solid rgba(168, 134, 74, 0.35)",
   borderRadius: "8px",
-  appearance: "none",
 };
 
 const buttonStyle: React.CSSProperties = {
@@ -90,6 +89,7 @@ export default function CancellationPage() {
           <h1 className="mb-3 text-center" style={headingStyle}>
             Avbokning
           </h1>
+
           <p
             className="alert text-center"
             role="alert"
@@ -101,6 +101,7 @@ export default function CancellationPage() {
           >
             Din bokning är avbokad.
           </p>
+
           <button
             type="button"
             className="btn"
@@ -149,6 +150,7 @@ export default function CancellationPage() {
                   {cancelError}
                 </p>
               )}
+
               <button
                 type="button"
                 className="btn"
@@ -157,6 +159,7 @@ export default function CancellationPage() {
               >
                 Avbryt
               </button>
+
               <button
                 type="button"
                 className="btn"
@@ -177,6 +180,7 @@ export default function CancellationPage() {
               }}
             >
               <p className="mb-3">Är du säker på att du vill avboka?</p>
+
               <article className="d-flex flex-wrap gap-2">
                 <button
                   type="button"
@@ -186,6 +190,7 @@ export default function CancellationPage() {
                 >
                   Ja, avboka
                 </button>
+
                 <button
                   type="button"
                   className="btn"
@@ -211,6 +216,7 @@ export default function CancellationPage() {
         <h1 className="mb-3 text-center" style={headingStyle}>
           Avboka bokning
         </h1>
+
         <p className="mb-4 text-center">
           Fyll i ditt bokningsnummer och din e-postadress för att hitta din
           bokning.
@@ -239,6 +245,7 @@ export default function CancellationPage() {
             >
               Bokningsnummer
             </label>
+
             <input
               id="bookingNumber"
               type="text"
@@ -258,6 +265,7 @@ export default function CancellationPage() {
             >
               E-postadress
             </label>
+
             <input
               id="email"
               type="email"
@@ -272,6 +280,7 @@ export default function CancellationPage() {
           <button type="submit" className="btn me-2" style={buttonStyle}>
             Sök bokning
           </button>
+
           <button
             type="button"
             className="btn"
