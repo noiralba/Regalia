@@ -123,16 +123,16 @@ function VipPage() {
         aria-label="Regalias meny"
         onCancel={closeMenu}
       >
-        <button
-          className="vip-menu-close"
-          type="button"
-          onClick={closeMenu}
-          aria-label="Stäng menyn"
-        >
-          ×
-        </button>
-
         <section className="vip-menu-stage" aria-label="Menybild">
+          <button
+            className="vip-menu-close"
+            type="button"
+            onClick={closeMenu}
+            aria-label="Stäng menyn"
+          >
+            ×
+          </button>
+
           <img
             className="vip-menu-image"
             src={menuImages[activeMenu].src}
