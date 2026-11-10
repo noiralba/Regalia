@@ -15,7 +15,9 @@ function requireTrustedOrigin(req, res, next) {
 
   const allowedOrigin =
     process.env.FRONTEND_ORIGIN ||
-    (process.env.NODE_ENV === "production" ? null : "http://localhost:5173");
+    (process.env.NODE_ENV === "production"
+      ? null
+      : ["http://localhost:5173", "http://localhost:4173"]);
 
   let requestOrigin = req.get("Origin");
 
@@ -29,7 +31,7 @@ function requireTrustedOrigin(req, res, next) {
     }
   }
 
-  if (!allowedOrigin || requestOrigin !== allowedOrigin) {
+  if (!allowedOrigin.includes(requestOrigin)) {
     return res.status(403).json({
       error: "Begäran nekad.",
     });
