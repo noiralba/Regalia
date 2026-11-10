@@ -1,22 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import CookieModal from "./components/Cookie modal/CookieModal";
+import { pages } from "./routeConfig";
 
 type Session = {
   expiresAt: number;
+  email?: string;
+  userId?: string;
 };
 
 export default function Layout() {
   const [session, setSession] = useState<Session | null>(null);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const sessionVersion = useRef(0);
+  const navigate = useNavigate();
 
-  function handleLogin(expiresIn: number) {
+  function handleLogin(expiresIn: number, email: string, userId: string) {
     sessionVersion.current += 1;
     setSession({
       expiresAt: Date.now() + expiresIn * 1000,
+      email: email,
+      userId: userId,
     });
   }
 
@@ -25,6 +32,7 @@ export default function Layout() {
     try {
       const response = await fetch("/api/auth/logout", {
         method: "POST",
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -32,6 +40,7 @@ export default function Layout() {
       }
 
       setSession(null);
+      navigate(pages.home.path);
     } catch {
       window.alert("Det gick inte att logga ut. Försök igen.");
     }
@@ -44,7 +53,11 @@ export default function Layout() {
     fetch("/api/auth/session")
       .then((response) => {
         if (!response.ok) return null;
-        return response.json() as Promise<{ expiresAt: number }>;
+        return response.json() as Promise<{
+          expiresAt: number;
+          email: string;
+          id: string;
+        }>;
       })
       .then((data) => {
         if (
@@ -53,10 +66,17 @@ export default function Layout() {
           data &&
           data.expiresAt > Date.now()
         ) {
-          setSession({ expiresAt: data.expiresAt });
+          setSession({
+            expiresAt: data.expiresAt,
+            email: data.email,
+            userId: data.id,
+          });
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (active) setIsAuthenticating(false);
+      });
 
     return () => {
       active = false;
@@ -70,17 +90,33 @@ export default function Layout() {
 
     const timer = window.setTimeout(() => {
       setSession(null);
+      navigate(pages.login.path);
     }, timeLeft);
 
     return () => window.clearTimeout(timer);
-  }, [session]);
+  }, [session, navigate]);
 
   return (
     <>
       <CookieModal />
       <ScrollToTop />
-      <Header isLoggedIn={session !== null} onLogout={handleLogout} />
-      <Outlet context={{ onLogin: handleLogin }} />
+      <Header
+        isLoggedIn={isAuthenticating ? false : session !== null}
+        onLogout={handleLogout}
+      />
+      {isAuthenticating ? (
+        <main>
+          <p role="status">Verifierar session...</p>
+        </main>
+      ) : (
+        <Outlet
+          context={{
+            onLogin: handleLogin,
+            userEmail: session?.email,
+            userId: session?.userId,
+          }}
+        />
+      )}
 
       <section className="footer-spacing">
         <Footer />

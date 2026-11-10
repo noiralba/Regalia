@@ -2,7 +2,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 
-
 import Layout from "./Layout";
 import { pages } from "./routeConfig";
 import HomePage from "./pages/HomePage";
@@ -15,6 +14,7 @@ const MovieDetailPage = lazy(() => import("./pages/MovieDetailPage"));
 const VipPage = lazy(() => import("./pages/VipPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const CreateAccountPage = lazy(() => import("./pages/CreateAccountPage"));
+const UserBookingsPage = lazy(() => import("./pages/UserBookings"));
 
 // Admin
 const AdminShows = lazy(() => import("./components/Admin/shows/AdminShows"));
@@ -36,6 +36,15 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: pages.home.path, element: <HomePage /> },
+
+      {
+        path: pages.myPages.path,
+        element: (
+          <Suspense fallback={<div>Laddar bokning...</div>}>
+            <UserBookingsPage />
+          </Suspense>
+        ),
+      },
 
       {
         path: pages.booking.path,

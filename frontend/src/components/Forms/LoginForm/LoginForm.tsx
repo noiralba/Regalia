@@ -11,11 +11,12 @@ import "./LoginForm.scss";
 
 type LoginResponse = {
   expiresIn: number;
+  userId: string;
 };
 
 export default function LoginForm() {
   const { onLogin } = useOutletContext<{
-    onLogin: (expiresIn: number) => void;
+    onLogin: (expiresIn: number, email: string, userId: string) => void;
   }>();
 
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ export default function LoginForm() {
         { email: string; password: string }
       >("/api/auth/login", { email, password });
 
-      onLogin(result.expiresIn);
+      onLogin(result.expiresIn, email, result.userId);
       navigate("/");
     } catch (error) {
       const message = error instanceof Error ? error.message : "";

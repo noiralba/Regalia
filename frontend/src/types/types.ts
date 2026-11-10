@@ -119,3 +119,12 @@ export interface TicketType {
   "Ticket Type": string;
   "Price (SEK)": string;
 }
+
+// kanske ta bort?
+export interface BookingUsers {
+  booking_id: string;
+  movie_title: string;
+  show_date: string;
+  show_time: string;
+  seat_count: number;
+}

@@ -30,7 +30,7 @@ router.post("/login", loginLimiter, async (req, res) => {
 
   try {
     const [users] = await db.execute(
-      "SELECT id, password FROM users WHERE email = ? LIMIT 1",
+      "SELECT id, email, password FROM users WHERE email = ? LIMIT 1",
       [email.trim().toLowerCase()],
     );
 
@@ -41,24 +41,33 @@ router.post("/login", loginLimiter, async (req, res) => {
         error: "Felaktig e-postadress eller lösenord.",
       });
     }
-
-    const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
-      algorithm: "HS256",
-      expiresIn: "1h",
-      issuer: "regalia",
-      audience: "regalia-api",
+    console.log("LOGIN_DEBUG - User från DB:", {
+      id: user?.id,
+      email: user?.email,
     });
+
+    const token = jwt.sign(
+      { sub: user.id, email: user.email, id: user.id },
+      process.env.JWT_SECRET,
+      {
+        algorithm: "HS256",
+        expiresIn: "1h",
+        issuer: "regalia",
+        audience: "regalia-api",
+      },
+    );
 
     res.cookie("regalia_session", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      path: "/api",
+      // path: "/api",
       maxAge: 60 * 60 * 1000,
     });
 
     return res.status(200).json({
       expiresIn: 3600,
+      userId: user.id,
     });
   } catch (error) {
     console.error("POST /auth/login:", error.message);
@@ -71,9 +80,14 @@ router.post("/login", loginLimiter, async (req, res) => {
 
 router.get("/session", requireAuth, (req, res) => {
   res.set("Cache-Control", "no-store");
+
+  console.log("SESSION_DEBUG - req.user innehåll:", req.user);
+
   return res.status(200).json({
     authenticated: true,
     expiresAt: req.sessionExpiresAt,
+    email: req.user.email,
+    id: req.user.id,
   });
 });
 

@@ -12,6 +12,7 @@ interface BookingSummaryProps {
   error: string;
   isBooking: boolean;
   onConfirm: () => void;
+  isLoggedIn: boolean;
 }
 
 function BookingSummary({
@@ -24,6 +25,7 @@ function BookingSummary({
   error,
   isBooking,
   onConfirm,
+  isLoggedIn,
 }: BookingSummaryProps) {
   return (
     <section className="booking-summary">
@@ -65,6 +67,7 @@ function BookingSummary({
             value={email}
             onChange={(event) => onEmailChange(event.target.value)}
             autoComplete="email"
+            readOnly={isLoggedIn}
           />
         </article>
       </section>

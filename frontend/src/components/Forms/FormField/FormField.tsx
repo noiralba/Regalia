@@ -13,6 +13,7 @@ interface FormFieldProps {
   minLength?: number;
   required?: boolean;
   autoComplete?: string;
+  readOnly?: boolean;
 }
 
 export default function FormField({
@@ -24,6 +25,7 @@ export default function FormField({
   minLength,
   required = true,
   autoComplete,
+  readOnly = false,
 }: FormFieldProps) {
   return (
     <Form.Group className="form-field" controlId={id}>
@@ -36,6 +38,7 @@ export default function FormField({
         minLength={minLength}
         required={required}
         autoComplete={autoComplete}
+        readOnly={readOnly}
         className="form-control"
       />
     </Form.Group>

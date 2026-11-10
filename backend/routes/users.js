@@ -110,9 +110,7 @@ router.get("/:id/bookings", requireAuth, requireOwnUser, async (req, res) => {
   const offsetValue = req.query.offset ?? "0";
 
   if (!["upcoming", "past"].includes(period)) {
-    return res.status(400).json({
-      error: "Ogiltig period.",
-    });
+    return res.status(400).json({ error: "Ogiltig period." });
   }
 
   if (
@@ -120,15 +118,13 @@ router.get("/:id/bookings", requireAuth, requireOwnUser, async (req, res) => {
     !/^(0|[1-9]\d*)$/.test(offsetValue) ||
     !Number.isSafeInteger(Number(offsetValue))
   ) {
-    return res.status(400).json({
-      error: "Ogiltigt offset-värde.",
-    });
+    return res.status(400).json({ error: "Ogiltigt offset-värde." });
   }
 
   if (period === "upcoming" && req.query.offset !== undefined) {
-    return res.status(400).json({
-      error: "Offset kan endast användas för tidigare bokningar.",
-    });
+    return res
+      .status(400)
+      .json({ error: "Offset kan endast användas för tidigare bokningar." });
   }
 
   const offset = Number(offsetValue);
@@ -136,21 +132,13 @@ router.get("/:id/bookings", requireAuth, requireOwnUser, async (req, res) => {
   const direction = period === "upcoming" ? "ASC" : "DESC";
 
   try {
+    // Vi läser direkt från vyn och använder de dolda rådatumen för filtrering och sortering
     const sql = `
-      SELECT
-        b.id AS booking_id,
-        m.title AS movie_title,
-        DATE_FORMAT(s.date, '%Y-%m-%d') AS show_date,
-        TIME_FORMAT(s.time, '%H:%i:%s') AS show_time,
-        COUNT(bs.id) AS seat_count
-      FROM bookings b
-      JOIN booked_seats bs ON bs.booking_id = b.id
-      JOIN shows s ON s.id = bs.show_id
-      JOIN movies m ON m.id = s.movie_id
-      WHERE b.user_id = ?
-        AND TIMESTAMP(s.date, s.time) ${comparison} NOW()
-      GROUP BY b.id, s.id, m.title, s.date, s.time
-      ORDER BY s.date ${direction}, s.time ${direction}, b.id ${direction}
+      SELECT booking_id, movie_title, show_date, show_time, seat_count
+      FROM v_booking_details
+      WHERE user_id = ?
+        AND TIMESTAMP(raw_date, raw_time) ${comparison} NOW()
+      ORDER BY raw_date ${direction}, raw_time ${direction}, booking_id ${direction}
       ${period === "past" ? "LIMIT ? OFFSET ?" : ""}
     `;
 
@@ -165,10 +153,7 @@ router.get("/:id/bookings", requireAuth, requireOwnUser, async (req, res) => {
     });
   } catch (error) {
     console.error("GET /users/:id/bookings:", error.message);
-
-    return res.status(500).json({
-      error: "Ett serverfel uppstod.",
-    });
+    return res.status(500).json({ error: "Ett serverfel uppstod." });
   }
 });
 

@@ -1,3 +1,5 @@
+import type { BookingUsers } from "../../../types/types";
+
 /**
  * ENDA stället där adminsidorna pratar med servern.
  *  - Vanliga objekt skickas som JSON.
@@ -13,7 +15,7 @@ export async function request<T = unknown>(
   url: string,
   { method = "GET", body }: RequestOptions = {},
 ): Promise<T> {
-  const headers: Record<string, string> = {};
+  const headers: Record<string, string> = { Origin: "http://localhost:5173" };
   let requestBody: BodyInit | undefined;
 
   if (body instanceof FormData) {
@@ -23,7 +25,12 @@ export async function request<T = unknown>(
     headers["Content-Type"] = "application/json";
   }
 
-  const response = await fetch(url, { method, headers, body: requestBody });
+  const response = await fetch(url, {
+    method,
+    headers,
+    body: requestBody,
+    credentials: "include",
+  });
 
   if (!response.ok) {
     let message = "Något gick fel. Försök igen.";
@@ -48,4 +55,9 @@ export const api = {
   put: <T = unknown>(url: string, body?: unknown) =>
     request<T>(url, { method: "PUT", body }),
   delete: <T = unknown>(url: string) => request<T>(url, { method: "DELETE" }),
+
+  getUserBookings: (userId: string) =>
+    request<{ bookings: BookingUsers[] }>(
+      `http://localhost:3000/api/users/${userId}/bookings`,
+    ),
 };
