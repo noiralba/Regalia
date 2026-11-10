@@ -81,7 +81,7 @@ export default function CreateAccountForm() {
   return (
     <>
       <Form onSubmit={handleSubmit} className="create-account-form">
-        <h1>Skapa konto</h1>
+        <h1 className="text-uppercase">Skapa konto</h1>
         <p>Fyll i dina uppgifter för att skapa ett konto.</p>
         <FormAlert message={error} />
 
@@ -130,7 +130,8 @@ export default function CreateAccountForm() {
           submitLabel="Skapa konto"
           loadingLabel="Skapar konto..."
           linkTo="/logga-in"
-          linkLabel="Har du redan ett konto?"
+          linkLabel="Logga in"
+          linkPrefix="Har du redan ett konto?"
           onCancel={() => navigate(-1)}
         />
       </Form>
