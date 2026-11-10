@@ -38,12 +38,12 @@ function BookingPage() {
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
 
   const [email, setEmail] = useState(userEmail || "");
+  const [prevUserEmail, setPrevUserEmail] = useState(userEmail);
 
-  useEffect(() => {
-    if (userEmail) {
-      setEmail(userEmail);
-    }
-  }, [userEmail]);
+  if (userEmail !== prevUserEmail) {
+    setPrevUserEmail(userEmail);
+    setEmail(userEmail || "");
+  }
 
   const { seats, refreshSeats } = useSeatPolling(visningId);
   const totalTickets = Object.values(ticketCounts).reduce(

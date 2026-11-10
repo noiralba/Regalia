@@ -94,7 +94,7 @@ export default function Layout() {
     }, timeLeft);
 
     return () => window.clearTimeout(timer);
-  }, [session]);
+  }, [session, navigate]);
 
   return (
     <>
