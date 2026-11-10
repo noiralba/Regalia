@@ -22,7 +22,7 @@ export const UserBookings: React.FC = () => {
     return <p>Du har inga kommande bokningar just nu.</p>;
 
   return (
-    <section aria-labelledby="bookings-heading">
+    <section className="page-container" aria-labelledby="bookings-heading">
       <h2 id="bookings-heading">Mina bokningar</h2>
       <ul>
         {bookings.map((booking) => (

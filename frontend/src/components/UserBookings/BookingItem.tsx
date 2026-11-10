@@ -1,5 +1,6 @@
 import React from "react";
 import type { BookingUsers } from "../../types/types"; // Justera sökvägen till dina typer
+import "./BookingItem.scss"
 
 interface BookingItemProps {
   booking: BookingUsers;
@@ -7,8 +8,8 @@ interface BookingItemProps {
 
 export const BookingItem: React.FC<BookingItemProps> = ({ booking }) => {
   return (
-    <li>
-      <article>
+    <li className="user-bookings">
+      <article className="user-bookings__info">
         <h3>{booking.movie_title}</h3>
         <p>
           <strong>Bokningsnummer:</strong> {booking.booking_id}

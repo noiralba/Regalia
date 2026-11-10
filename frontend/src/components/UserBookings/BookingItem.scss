@@ -1,0 +1,25 @@
+@use "../../styles/variables" as v;
+
+.user-bookings {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid v.$color-gold;
+  margin-bottom: 2rem;
+  color: v.$color-bg-dark;
+  padding: 2rem;
+  width: 50vw;
+
+  &__info {
+    background-color: v.$color-cream;
+    width: 40vw;
+    padding: 3rem;
+    border-radius: v.$border-radius;
+
+    h3,
+    p {
+      color: v.$color-bg-dark;
+    }
+  }
+}
