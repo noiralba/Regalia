@@ -80,6 +80,7 @@ export default function LoginForm() {
         loadingLabel="Loggar in..."
         linkTo={pages.register.path}
         linkLabel="Skapa konto"
+        linkPrefix="Har du inget konto?"
         onCancel={() => navigate(pages.home.path)}
       />
 
