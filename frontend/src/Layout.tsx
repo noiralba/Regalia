@@ -7,16 +7,20 @@ import CookieModal from "./components/Cookie modal/CookieModal";
 
 type Session = {
   expiresAt: number;
+  email?: string;
+  userId?: string;
 };
 
 export default function Layout() {
   const [session, setSession] = useState<Session | null>(null);
   const sessionVersion = useRef(0);
 
-  function handleLogin(expiresIn: number) {
+  function handleLogin(expiresIn: number, email: string, userId: string) {
     sessionVersion.current += 1;
     setSession({
       expiresAt: Date.now() + expiresIn * 1000,
+      email: email,
+      userId: userId,
     });
   }
 
@@ -25,6 +29,7 @@ export default function Layout() {
     try {
       const response = await fetch("/api/auth/logout", {
         method: "POST",
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -44,7 +49,11 @@ export default function Layout() {
     fetch("/api/auth/session")
       .then((response) => {
         if (!response.ok) return null;
-        return response.json() as Promise<{ expiresAt: number }>;
+        return response.json() as Promise<{
+          expiresAt: number;
+          email: string;
+          id: string;
+        }>;
       })
       .then((data) => {
         if (
@@ -53,7 +62,11 @@ export default function Layout() {
           data &&
           data.expiresAt > Date.now()
         ) {
-          setSession({ expiresAt: data.expiresAt });
+          setSession({
+            expiresAt: data.expiresAt,
+            email: data.email,
+            userId: data.id,
+          });
         }
       })
       .catch(() => {});
@@ -80,7 +93,13 @@ export default function Layout() {
       <CookieModal />
       <ScrollToTop />
       <Header isLoggedIn={session !== null} onLogout={handleLogout} />
-      <Outlet context={{ onLogin: handleLogin }} />
+      <Outlet
+        context={{
+          onLogin: handleLogin,
+          userEmail: session?.email,
+          userId: session?.userId,
+        }}
+      />
 
       <section className="footer-spacing">
         <Footer />

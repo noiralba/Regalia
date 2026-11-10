@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useOutletContext } from "react-router";
 import type {
   BookingConfirmation,
   Movies,
@@ -19,15 +19,32 @@ import { useSeatPolling } from "../hooks/useSeatPolling";
 import { useSeatSelection } from "../hooks/useSeatSelection";
 // import "./BookingPage.scss";
 
+interface LayoutContext {
+  userId?: string;
+  userEmail?: string;
+}
+
 function BookingPage() {
   const { showingSlug } = useParams();
   const visningId = extractIdFromSlug(showingSlug);
   const navigate = useNavigate();
+
+  const { userId, userEmail } = useOutletContext<LayoutContext>();
+
   const [showing, setShowing] = useState<MovieScreening | null>(null);
   const [movie, setMovie] = useState<Movies | null>(null);
   const [error, setError] = useState("");
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
+
+  const [email, setEmail] = useState(userEmail || "");
+
+  useEffect(() => {
+    if (userEmail) {
+      setEmail(userEmail);
+    }
+  }, [userEmail]);
+
   const { seats, refreshSeats } = useSeatPolling(visningId);
   const totalTickets = Object.values(ticketCounts).reduce(
     (total, count) => total + count,
@@ -53,7 +70,7 @@ function BookingPage() {
   }
 
   const [isSeatModalOpen, setIsSeatModalOpen] = useState(false);
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [isBooking, setIsBooking] = useState(false);
   const [bookingConfirmation, setBookingConfirmation] =
     useState<BookingConfirmation | null>(null);
@@ -169,6 +186,7 @@ function BookingPage() {
     const bookingData = {
       show_id: visningId,
       user_email: email,
+      user_id: userId || null,
       seats: selectedSeats.map((seatId, index) => ({
         seat_id: seatId,
         ticket_type_id: selectedTicketTypes[index],
@@ -238,9 +256,7 @@ function BookingPage() {
       <section className="booking-page__seats">
         <h2 className="mt-4">Välj sittplatser</h2>
 
-        {showing && (
-          <p className="text-uppercase">{showing.Screen}</p>
-        )}
+        {showing && <p className="text-uppercase">{showing.Screen}</p>}
 
         <button
           type="button"
@@ -281,6 +297,7 @@ function BookingPage() {
         error={error}
         isBooking={isBooking}
         onConfirm={handleBooking}
+        isLoggedIn={Boolean(userEmail)}
       />
     </main>
   );

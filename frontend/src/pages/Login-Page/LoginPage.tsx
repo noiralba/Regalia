@@ -5,12 +5,14 @@ import "./LoginPage.scss";
 
 type LoginResponse = {
   expiresIn: number;
+  userId: string;
 };
 
 export default function LoginPage() {
   const { onLogin } = useOutletContext<{
-    onLogin: (expiresIn: number) => void;
+    onLogin: (expiresIn: number, email: string, userId: string) => void;
   }>();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,7 +30,7 @@ export default function LoginPage() {
         { email: string; password: string }
       >("/api/auth/login", { email, password });
 
-      onLogin(result.expiresIn);
+      onLogin(result.expiresIn, email, result.userId);
       navigate("/");
     } catch (error) {
       const message = error instanceof Error ? error.message : "";

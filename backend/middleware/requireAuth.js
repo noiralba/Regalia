@@ -1,6 +1,11 @@
 const jwt = require("jsonwebtoken");
 
 function requireAuth(req, res, next) {
+  console.log(
+    "AUTH_MIDDLEWARE_DEBUG - Cookies mottagna på server:",
+    req.cookies,
+  );
+
   const authorization = req.get("Authorization") || "";
   const match = authorization.match(/^Bearer ([^\s]+)$/i);
 
@@ -33,7 +38,7 @@ function requireAuth(req, res, next) {
       });
     }
 
-    req.user = { id: decoded.sub };
+    req.user = { id: decoded.sub, email: decoded.email };
     req.sessionExpiresAt = decoded.exp * 1000;
     next();
   } catch {
