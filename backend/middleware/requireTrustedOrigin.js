@@ -21,6 +21,7 @@ function requireTrustedOrigin(req, res, next) {
           "http://localhost:5173",
           "http://localhost:4173",
           "http://192.168.1.163:5173",
+          "http://192.168.1.163:4173",
         ]);
 
   let requestOrigin = req.get("Origin");
