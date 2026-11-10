@@ -17,7 +17,11 @@ function requireTrustedOrigin(req, res, next) {
     process.env.FRONTEND_ORIGIN ||
     (process.env.NODE_ENV === "production"
       ? null
-      : ["http://localhost:5173", "http://localhost:4173"]);
+      : [
+          "http://localhost:5173",
+          "http://localhost:4173",
+          "http://192.168.1.163:5173",
+        ]);
 
   let requestOrigin = req.get("Origin");
 
