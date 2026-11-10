@@ -1,7 +1,6 @@
 @use "../../../styles/variables" as v;
 
 .booking-page {
-
   &__seats {
     background-color: v.$color-card-bg;
     padding: 2rem;
@@ -63,13 +62,16 @@
     color: v.$color-cream;
     font-size: 11px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &.is-vip {
-      color: v.$color-cream;
       background-color: v.$color-primary-red;
 
       &.is-selected {
-        background: v.$color-bg-dark;
+        background: v.$color-gold;
+        color: v.$color-bg-dark;
       }
     }
 
@@ -163,9 +165,8 @@
       cursor: pointer;
     }
 
-    &__seats>.booking-page__seat-map {
+    &__seats > .booking-page__seat-map {
       display: none;
     }
   }
-
 }

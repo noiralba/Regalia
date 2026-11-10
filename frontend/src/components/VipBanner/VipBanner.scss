@@ -136,13 +136,17 @@
     text-decoration: none;
     transition:
       background-color 0.2s ease,
-      color 0.2s ease;
+      color 0.2s ease,
+      border-color 0.2s ease;
 
-    &:hover {
-      animation: button-blink 0.3s ease-in-out;
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
       background-color: v.$color-primary-red;
       color: v.$color-cream;
       border-color: v.$color-cream;
+      box-shadow: none;
     }
 
     &:focus-visible {
@@ -151,7 +155,6 @@
   }
 }
 
-// Animationen ligger utanför .vip-banner
 @keyframes vip-title-shimmer {
   0% {
     background-position: 0% center;
@@ -165,11 +168,7 @@
     background-position: 0% center;
   }
 }
-@keyframes button-blink {
-  50% {
-    opacity: 0.65;
-  }
-}
+
 // Mobilanpassning
 @media (max-width: 37.4375rem) {
   .vip-banner {

@@ -16,6 +16,18 @@
   background: $color-bg-dark;
   overflow: hidden;
 
+  &__link {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 3px solid $color-gold;
+      outline-offset: -3px;
+    }
+  }
+
   &__video-wrapper {
     position: absolute;
     inset: 0;

@@ -3,9 +3,17 @@ const videoModules = import.meta.glob("../assets/videos/*.{mp4,webm}", {
   import: "default",
 });
 
+const movieIds: Record<string, string> = {
+  "01The_Odyssey": "bb058c9e-8e1c-5458-a144-b2c1a34d4940",
+  "02Resident_Evil": "8c47b045-0053-5ea6-a1e2-a716c32e3f82",
+  "03Street_Fighter": "42780a6f-08ba-4cfd-a539-d1ddd58653cc",
+  "04Coyote_Vs_Acme": "d09c9331-9ef3-4855-b3df-477ae670e539",
+  "05Verity": "4c2133da-b560-5edc-9d8e-c61ea189277a",
+};
 // export const promoTrailers: string[] = Object.values(videoModules) as string[];
 
 export interface Trailer {
+  id?: string;
   src: string;
   title: string;
 }
@@ -24,6 +32,7 @@ export const promoTrailers: Trailer[] = Object.entries(videoModules).map(
       .replace(/\b\w/g, (char) => char.toUpperCase()); // Gör första bokstaven i varje ord stor
 
     return {
+      id: movieIds[fileName],
       src: src as string,
       title: formattedTitle,
     };
