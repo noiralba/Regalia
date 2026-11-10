@@ -8,6 +8,7 @@ async function sendBookingConfirmation(toEmail, orderData) {
     movie_title: orderData["Movie"],
     show_date: orderData["Screening Date"],
     show_time: orderData["Start Time"],
+    screens: orderData["Screen"],
     seats_list: orderData["Seats"],
     total_price: orderData["Total Price (SEK)"],
   };
