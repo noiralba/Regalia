@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
+import { slugify } from "../../utils/slugify";
 import "./HeroSection.scss";
 import { promoTrailers } from "../../data/promoTrailers";
 
@@ -97,8 +99,17 @@ export default function HeroSection() {
         </section>
       )}
 
-      {showVideo && <h2 className="hero__title">{currentTrailer.title}</h2>}
+      {currentTrailer && (
+        <h2 className="hero__title">{currentTrailer.title}</h2>
+      )}
 
+      {currentTrailer?.id && (
+        <Link
+          to={`/filmer/${slugify(currentTrailer.title)}-${currentTrailer.id}`}
+          className="hero__link"
+          aria-label={`Visa detaljer om ${currentTrailer.title}`}
+        />
+      )}
       <section
         className="hero__curtain hero__curtain--left"
         aria-hidden="true"
