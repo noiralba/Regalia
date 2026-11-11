@@ -63,7 +63,6 @@
     text-transform: uppercase;
     margin-bottom: 0.5rem;
 
-    // Kontinuerligt guldskimmer
     background: linear-gradient(
       110deg,
       v.$color-cream 20%,
@@ -92,7 +91,7 @@
   }
 
   &-description {
-    color: v.$color-gold;
+    color: v.$color-cream;
     font-family: v.$font-body;
     font-size: v.$font-size-body;
     line-height: 1.6;
@@ -104,13 +103,14 @@
       color: inherit;
       font-family: inherit;
       font-size: inherit;
+      opacity: 0.9;
       margin-bottom: 0.25rem;
     }
   }
 
   &-heading {
     font-family: v.$font-title;
-    color: v.$color-cream;
+    color: v.$color-gold;
     font-size: 1.75rem;
     font-weight: 400;
     letter-spacing: 0.04em;
@@ -123,6 +123,7 @@
   }
 
   &-btn {
+    display: block;
     width: 100%;
     background-color: v.$color-primary-red;
     color: v.$color-cream;
@@ -134,19 +135,21 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-decoration: none;
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease,
-      border-color 0.2s ease;
+    text-align: center;
+    box-shadow: none;
+    transition: none;
 
+    &:link,
+    &:visited,
     &:hover,
-    &:focus,
     &:active,
-    &:visited {
+    &:focus {
       background-color: v.$color-primary-red;
       color: v.$color-cream;
-      border-color: v.$color-cream;
+      border-color: v.$color-gold;
+      text-decoration: none;
       box-shadow: none;
+      opacity: 1;
     }
 
     &:focus-visible {
