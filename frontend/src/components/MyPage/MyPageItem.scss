@@ -13,15 +13,14 @@
     text-align: center;
     margin-bottom: 2rem;
   }
-
 }
 
-.user-bookings{
+.user-bookings {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
 
   &__info {
     background-color: v.$color-cream;
