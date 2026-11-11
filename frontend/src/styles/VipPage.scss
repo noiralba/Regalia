@@ -20,8 +20,9 @@
   margin: 0 auto;
   padding: 2rem;
   background: v.$color-card-bg;
-  border: 1px solid rgba(168, 134, 74, 0.35);
+  border: 1px solid v.$color-gold;
   border-radius: 8px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
 }
 
 .vip-navigation {
@@ -31,14 +32,28 @@
 }
 
 .vip-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
   color: v.$color-gold;
   background: transparent;
-  border: none;
-  font-size: 2rem;
+  border: 1px solid rgba(168, 134, 74, 0.4);
+  border-radius: 4px;
+  font-size: 1.25rem;
   cursor: pointer;
+  transition: all 0.2s ease;
 
   &:hover {
-    color: v.$color-cream;
+    background: v.$color-gold;
+    color: v.$color-bg-dark;
+    border-color: v.$color-gold;
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$color-cream;
+    outline-offset: 3px;
   }
 }
 
@@ -52,7 +67,9 @@
     width: 100%;
     height: 220px;
     object-fit: cover;
+    object-position: center 40%;
     border-radius: 4px;
+    border: 1px solid rgba(v.$color-gold, 0.25);
   }
 }
 
@@ -61,31 +78,58 @@
   text-align: center;
 
   h1 {
-    color: v.$color-gold;
+    color: v.$color-cream;
     font-family: v.$font-title;
     font-size: 2.5rem;
     letter-spacing: v.$letter-spacing;
+    font-weight: 200;
+    text-transform: uppercase;
   }
 }
 
 .vip-description {
-  max-width: 850px;
+  max-width: 750px;
   margin: 2rem auto;
   font-family: v.$font-body;
   line-height: 1.8;
+  text-align: center;
 
-  p {
+  .vip-intro-text {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .vip-steps-wrapper {
+    display: flex;
+    justify-content: center;
     margin-bottom: 1.5rem;
   }
 
-  ol {
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
+  .vip-steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    display: inline-block;
+
+    li {
+      margin-bottom: 0.75rem;
+      opacity: 0.9;
+
+      span {
+        color: v.$color-gold;
+        font-weight: 700;
+        margin-right: 0.5rem;
+      }
+    }
   }
 
-  li {
-    padding-left: 0.4rem;
-    margin-bottom: 0.7rem;
+  .vip-footer-text {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    color: v.$color-gold;
+    opacity: 0.85;
   }
 }
 
@@ -97,20 +141,29 @@
 
   button {
     width: 100%;
-    min-width: 140px;
+    max-width: 300px;
     padding: 0.8rem 2rem;
     color: v.$color-cream;
     background: v.$color-primary-red;
-    border: 1px solid v.$color-gold;
+    border: 1px solid v.$color-gold !important;
+    border-radius: 4px;
     font-family: v.$font-body;
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     cursor: pointer;
-    transition: background 180ms ease;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease;
 
-    &:hover {
-      background: v.$color-gold;
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+      background: v.$color-primary-red;
+      color: v.$color-cream;
+      border-color: v.$color-cream !important;
       animation: button-blink 0.3s ease-in-out;
     }
 
@@ -262,11 +315,15 @@
 /* Animationer */
 @keyframes vip-title-shimmer {
   0% {
-    background-position: 200% center;
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
   }
 
   100% {
-    background-position: -200% center;
+    background-position: 0% center;
   }
 }
 
@@ -313,7 +370,7 @@
   }
 
   .vip-actions button {
-    min-width: 105px;
+    max-width: 100%;
   }
 
   .vip-menu-overlay {
