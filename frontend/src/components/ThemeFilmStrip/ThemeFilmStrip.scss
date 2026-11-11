@@ -1,121 +1,178 @@
 @use "../../styles/variables" as v;
 
 .theme-filmstrip {
-  margin-top: 20px;
+  // margin-top: v.$section-spacing;
+  width: 100%;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: v.$space-md;
+  }
 
   &__title {
+    font-family: v.$font-title;
     font-size: v.$font-size-h2;
     text-transform: uppercase;
     color: v.$color-cream;
+    letter-spacing: v.$letter-spacing;
+    margin: 0;
   }
 
   &__description {
-    font-size: v.$font-size-body;
+    font-family: v.$font-body;
+    font-size: 0.85rem;
     color: v.$color-gold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.9;
   }
 
-&__strip-wrapper {
-  padding: 16px 0;
-  background: v.$color-card-bg;
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  overflow-x: auto;
+  &__strip-wrapper {
+    position: relative;
+    background: #0d0a0b;
+    border-radius: v.$border-radius;
+    border-top: 1px solid rgba(v.$color-gold, 0.2);
+    border-bottom: 1px solid rgba(v.$color-gold, 0.2);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9);
+    width: 100%;
 
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-&__strip {
-  position: relative; 
-  display: flex;
-  gap: 12px;
-  width: max-content; 
-  min-width: 100%; 
-  margin: 0;
-  padding: 0 10px;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 10px;
-    background-image: linear-gradient(90deg,
-        #fff 0,
-        #fff 12px,
-        transparent 12px,
-        transparent 18px);
-    background-size: 18px 100%;
-    pointer-events: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
-  &::before {
-    top: -12px;
-  }
+  &__strip {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+    margin: 0;
+    padding: 16px;
 
-  &::after {
-    bottom: -12px;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background-image: linear-gradient(
+        90deg,
+        rgba(v.$color-gold, 0.75) 0,
+        rgba(v.$color-gold, 0.75) 10px,
+        transparent 10px,
+        transparent 18px
+      );
+      background-size: 18px 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    &::before {
+      top: 4px;
+    }
+
+    &::after {
+      bottom: 4px;
+    }
   }
-}
 
   &__item {
     padding: 0;
-    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    flex: 1 1 0px;
+    max-width: 160px;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    border-radius: 6px;
+
+    &:focus-visible {
+      @include v.focus-ring;
+    }
   }
 
   &__poster {
-    width: 145px;
+    width: 100%;
     aspect-ratio: 2 / 3;
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
-    background: #000;
+    border-radius: 6px;
+    background: v.$color-bg-dark;
+    border: 1px solid rgba(v.$color-gold, 0.2);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
+
+    .theme-filmstrip__item:hover & {
+      border-color: v.$color-gold;
+      box-shadow: 0 8px 22px rgba(v.$color-gold, 0.3);
+    }
   }
 
   &__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
+    filter: brightness(0.9);
+    transition:
+      filter 0.3s ease,
+      transform 0.3s ease;
 
-@include v.respond-to(mobile) {
-  &__strip-wrapper {
-    padding: 14px 0;
-  }
-
-  &__strip {
-    gap: 8px;
-    padding: 0 8px;
-
-    &::before,
-    &::after {
-      height: 8px;
-      background-image: linear-gradient(90deg,
-          #fff 0,
-          #fff 8px,
-          transparent 8px,
-          transparent 14px);
-      background-size: 14px 100%;
-    }
-
-    &::before {
-      top: -11px;
-    }
-
-    &::after {
-      bottom: -11px;
+    .theme-filmstrip__item:hover & {
+      filter: brightness(1.05);
+      transform: scale(1.03);
     }
   }
 
-  &__poster {
-    width: 110px;
+  @include v.respond-to(mobile) {
+    &__strip-wrapper {
+      padding: 0;
+    }
+
+    &__strip {
+      width: max-content;
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 14px 10px;
+
+      &::before,
+      &::after {
+        height: 8px;
+        background-size: 14px 100%;
+      }
+
+      &::before {
+        top: 3px;
+      }
+
+      &::after {
+        bottom: 3px;
+      }
+    }
+
+    &__item {
+      flex: 0 0 auto;
+      max-width: none;
+    }
+
+    &__poster {
+      width: 110px;
+    }
   }
-}
 }
