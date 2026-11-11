@@ -2,6 +2,8 @@ import HeroSection from "../components/hero/HeroSection";
 import MovieRow from "../components/MovieRow/MovieRow";
 import VipBanner from "../components/VipBanner/VipBanner";
 import Calendar from "../components/Calender/Calender";
+import { useOutletContext } from "react-router";
+import Header from "../components/Header/Header";
 
 import "../styles/HomePage.scss";
 
@@ -10,6 +12,10 @@ import type { MovieThumbnails } from "../types/types";
 import { get } from "../api/api";
 
 function HomePage() {
+    const { isLoggedIn, onLogout } = useOutletContext<{
+      isLoggedIn: boolean;
+      onLogout: () => void;
+    }>();
   const [selectedDate] = useState(() => new Date().toLocaleDateString("sv-SE"));
 
   const [nowPlaying, setNowPlaying] = useState<MovieThumbnails[]>([]);
@@ -46,6 +52,8 @@ function HomePage() {
       <section className="home-hero-section">
         <HeroSection />
       </section>
+
+      <Header isLoggedIn={isLoggedIn} onLogout={onLogout} />
 
       <section className="home-content">
         <section className="page-section">
