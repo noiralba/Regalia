@@ -28,7 +28,7 @@ const menuImages = {
   },
 };
 
-function VipPage() {
+export default function VipPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuTab>("mat");
 
@@ -83,30 +83,30 @@ function VipPage() {
         </header>
 
         <section className="vip-description">
-          <p>
-            På REGALIA vill vi göra biobesöket till något alldeles extra. Med
-            våra exklusiva logeplatser får du njuta av filmen i en mer privat
-            och lyxig miljö, det beställs mat, dryck och snacks direkt till
-            bordet.
+          <p className="vip-intro-text">
+            Njut av filmen i en mer privat och lyxig miljö med mat, dryck och
+            snacks serverat direkt till logen.
           </p>
 
-          <ol>
-            <li>Välj först en titel och sedan en visning i listan nedan.</li>
-            <li>Välj en plats med VIP-symbol.</li>
-            <li>
-              Gå till nästa steg och lägg till vad du vill förbeställa genom att
-              skicka en förfrågan till vår bistro.
-            </li>
-            <li>
-              Din beställning serveras till din plats i salongen. Observera att
-              varm mat serveras efter filmens start.
-            </li>
-          </ol>
+          <div className="vip-steps-wrapper">
+            <ol className="vip-steps-list">
+              <li>
+                <span>1.</span> Välj en filmtitel och en visning.
+              </li>
+              <li>
+                <span>2.</span> Välj en plats markerad med VIP-symbol.
+              </li>
+              <li>
+                <span>3.</span> Förbeställ mat och dryck direkt till din plats.
+              </li>
+              <li>
+                <span>4.</span> Varm mat serveras efter filmens start.
+              </li>
+            </ol>
+          </div>
 
-          <p>
-            Det går även bra att beställa mat, dryck och snacks i vår foajébar
-            före, under och efter visningen. Foajébaren har öppet till kl.
-            22.00.
+          <p className="vip-footer-text">
+            Foajébaren är öppen till kl. 22.00 för drop-in och beställningar.
           </p>
         </section>
 
@@ -178,5 +178,3 @@ function VipPage() {
     </main>
   );
 }
-
-export default VipPage;

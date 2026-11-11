@@ -20,8 +20,8 @@ export default function VipBanner() {
               <h2 className="vip-banner-title">REGALIAS LOGE</h2>
 
               <p className="vip-banner-subtitle">
-                Egen loge&nbsp;&nbsp;|&nbsp;&nbsp;Eget
-                sällskap&nbsp;&nbsp;|&nbsp;&nbsp;En kväll att minnas
+                Egen loge&nbsp;&nbsp;&bull;&nbsp;&nbsp;Eget
+                sällskap&nbsp;&nbsp;&bull;&nbsp;&nbsp;En kväll att minnas
               </p>
             </header>
 
@@ -37,12 +37,11 @@ export default function VipBanner() {
                 göra biobesöket extra speciellt.
               </p>
             </article>
-
-            <nav className="vip-banner-actions" aria-label="VIP-erbjudande">
-              <Link to="/vip" className="vip-banner-btn btn">
+            <div className="vip-banner-actions">
+              <Link to="/vip" className="vip-banner-btn">
                 TA MIG TILL LOGE
               </Link>
-            </nav>
+            </div>
           </section>
         </section>
       </article>

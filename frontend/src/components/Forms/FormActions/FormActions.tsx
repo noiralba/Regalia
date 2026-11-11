@@ -8,8 +8,8 @@ interface FormActionsProps {
   loading: boolean;
   submitLabel: string;
   loadingLabel: string;
-  linkTo: string;
-  linkLabel: string;
+  linkTo?: string;
+  linkLabel?: string;
   linkPrefix?: string; // Valfri text före länken LOgga in/SKapa konto
   onCancel: () => void;
 }
@@ -33,12 +33,14 @@ export default function FormActions({
       >
         {loading ? loadingLabel : submitLabel}
       </Button>
-      <p className="form-link-text">
-        {linkPrefix && <span>{linkPrefix} </span>}
-        <Link to={linkTo} className="form-link">
-          {linkLabel}
-        </Link>
-      </p>
+      {linkTo && linkLabel && (
+        <p className="form-link-text">
+          {linkPrefix && <span>{linkPrefix} </span>}
+          <Link to={linkTo} className="form-link">
+            {linkLabel}
+          </Link>
+        </p>
+      )}
       <Button
         className="form-cancel"
         type="button"
