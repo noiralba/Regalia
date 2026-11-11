@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router";
 import { useFetchUserBookingHistory } from "../hooks/useFetchUserBookingHistory";
 import { useCancelBooking } from "../hooks/useCancelBooking";
 import { MyPageItem } from "../components/MyPage/MyPageItem";
+import { useFetchUserFirstName } from "../hooks/useFetchUserFirstName";
 import "../components/MyPage/MyPageItem.scss"
 
 interface LayoutContext {
@@ -12,6 +13,7 @@ interface LayoutContext {
 
 export const MyPage: React.FC = () => {
   const { userId } = useOutletContext<LayoutContext>();
+  const firstName = useFetchUserFirstName(userId);
   const {
     upcomingBookings,
     pastBookings,
@@ -34,6 +36,7 @@ export const MyPage: React.FC = () => {
   return (
     <section className="page-container" aria-labelledby="bookings-heading">
       <h1 className="text-uppercase text-center mb-4">Mina sidor</h1>
+      {firstName && <p className="myPage-greeting">Hej, {firstName}!</p>}
 
       <section aria-labelledby="upcoming-heading">
         {upcomingBookings.length === 0 ? (
