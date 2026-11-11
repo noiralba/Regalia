@@ -106,13 +106,10 @@ router.get("/:id", requireAuth, requireOwnUser, async (req, res) => {
 });
 
 router.get("/:id/bookings", requireAuth, requireOwnUser, async (req, res) => {
-  const period = req.query.period ?? "upcoming";
   const offsetValue = req.query.offset ?? "0";
+  const limit = 2; // Antal tidigare bokningar som visas per laddning
 
-  if (!["upcoming", "past"].includes(period)) {
-    return res.status(400).json({ error: "Ogiltig period." });
-  }
-
+  // Validera att offset är ett giltigt heltal (0 eller större)
   if (
     typeof offsetValue !== "string" ||
     !/^(0|[1-9]\d*)$/.test(offsetValue) ||
@@ -121,35 +118,56 @@ router.get("/:id/bookings", requireAuth, requireOwnUser, async (req, res) => {
     return res.status(400).json({ error: "Ogiltigt offset-värde." });
   }
 
-  if (period === "upcoming" && req.query.offset !== undefined) {
-    return res
-      .status(400)
-      .json({ error: "Offset kan endast användas för tidigare bokningar." });
-  }
-
   const offset = Number(offsetValue);
-  const comparison = period === "upcoming" ? ">=" : "<";
-  const direction = period === "upcoming" ? "ASC" : "DESC";
 
   try {
-    // Vi läser direkt från vyn och använder de dolda rådatumen för filtrering och sortering
     const sql = `
-      SELECT booking_id, movie_title, show_date, show_time, seat_count
-      FROM v_booking_details
+      SELECT 
+        booking_id, 
+        booking_number,
+        status,
+        movie_title, 
+        show_date, 
+        show_time, 
+        screen_name,
+        seat_count,
+        seats,
+        total_price_sek,
+        raw_date,
+        raw_time
+      FROM v_user_booking_history
       WHERE user_id = ?
-        AND TIMESTAMP(raw_date, raw_time) ${comparison} NOW()
-      ORDER BY raw_date ${direction}, raw_time ${direction}, booking_id ${direction}
-      ${period === "past" ? "LIMIT ? OFFSET ?" : ""}
+      ORDER BY raw_date ASC, raw_time ASC, booking_id ASC
     `;
 
-    const parameters =
-      period === "past" ? [req.params.id, 3, offset] : [req.params.id];
+    const [results] = await db.query(sql, [req.params.id]);
+    const now = new Date();
 
-    const [results] = await db.query(sql, parameters);
+    const upcoming = [];
+    const allPast = [];
+
+    for (const row of results) {
+      const showDateTime = new Date(`${row.show_date}T${row.show_time}:00`);
+      const { raw_date: _raw_date, raw_time: _raw_time, ...booking } = row;
+
+      if (showDateTime >= now && booking.status !== "CANCELLED") {
+        upcoming.push(booking);
+      } else {
+        allPast.push(booking);
+      }
+    }
+
+    // Vänd ordningen så att den senaste passerade visningen ligger först
+    allPast.reverse();
+
+    // Applicera paginering på past-listan utifrån offset
+    const paginatedPast = allPast.slice(offset, offset + limit);
+    const hasMore = offset + limit < allPast.length;
 
     return res.status(200).json({
-      bookings: period === "past" ? results.slice(0, 2) : results,
-      hasMore: period === "past" && results.length > 2,
+      upcoming,
+      past: paginatedPast,
+      hasMore,
     });
   } catch (error) {
     console.error("GET /users/:id/bookings:", error.message);

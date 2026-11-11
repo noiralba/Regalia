@@ -121,10 +121,21 @@ export interface TicketType {
 }
 
 // kanske ta bort?
-export interface BookingUsers {
+export interface UserBookingHistory {
   booking_id: string;
+  booking_number: string;
+  status: string;
   movie_title: string;
   show_date: string;
   show_time: string;
+  screen_name: string;
   seat_count: number;
+  seats: string;
+  total_price_sek: number;
+}
+
+export interface UserBookingHistoryResponse {
+  upcoming: UserBookingHistory[];
+  past: UserBookingHistory[];
+  hasMore: boolean;
 }

@@ -14,7 +14,7 @@ const MovieDetailPage = lazy(() => import("./pages/MovieDetailPage"));
 const VipPage = lazy(() => import("./pages/VipPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const CreateAccountPage = lazy(() => import("./pages/CreateAccountPage"));
-const UserBookingsPage = lazy(() => import("./pages/UserBookings"));
+const MyPage = lazy(() => import("./pages/MyPage"));
 
 // Admin
 const AdminShows = lazy(() => import("./components/Admin/shows/AdminShows"));
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
         path: pages.myPages.path,
         element: (
           <Suspense fallback={<div>Laddar bokning...</div>}>
-            <UserBookingsPage />
+            <MyPage />
           </Suspense>
         ),
       },

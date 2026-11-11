@@ -1,4 +1,4 @@
-import type { BookingUsers } from "../../../types/types";
+import type { UserBookingHistoryResponse } from "../../../types/types";
 
 /**
  * ENDA stället där adminsidorna pratar med servern.
@@ -56,8 +56,8 @@ export const api = {
     request<T>(url, { method: "PUT", body }),
   delete: <T = unknown>(url: string) => request<T>(url, { method: "DELETE" }),
 
-  getUserBookings: (userId: string) =>
-    request<{ bookings: BookingUsers[] }>(
-      `http://localhost:3000/api/users/${userId}/bookings`,
+  getUserBookings: (userId: string, offset = 0) =>
+    request<UserBookingHistoryResponse>(
+      `http://localhost:3000/api/users/${userId}/bookings?offset=${offset}`,
     ),
 };
