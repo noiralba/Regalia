@@ -43,15 +43,17 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
   return (
     <header className={`${styles.header} ${isHome ? styles.headerHome : ""}`}>
       <section className={styles.bar}>
-        <Link
-          to={pages.home.path}
-          className={styles.brand}
-          aria-label="Regalia – startsida"
-          onClick={close}
-        >
-          <img src={logoSrc} alt="Regalia Logo" className={styles.icon} />
-          <span className={styles.brandName}>Regalia</span>
-        </Link>
+        {!isHome && (
+          <Link
+            to={pages.home.path}
+            className={styles.brand}
+            aria-label="Regalia – startsida"
+            onClick={close}
+          >
+            <img src={logoSrc} alt="Regalia Logo" className={styles.icon} />
+            <span className={styles.brandName}>Regalia</span>
+          </Link>
+        )}
 
         <section className={styles.searchArea} aria-label="Filmsökning">
           <SearchBar />
