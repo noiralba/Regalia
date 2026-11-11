@@ -1,8 +1,8 @@
 import React from "react";
-import type { BookingUsers } from "../../types/types";
+import type { UserBookingHistory } from "../../types/types";
 
 interface MyPageItemProps {
-  booking: BookingUsers;
+  booking: UserBookingHistory;
 }
 
 export const MyPageItem: React.FC<MyPageItemProps> = ({ booking }) => {
