@@ -7,7 +7,7 @@ import { pages } from "./routeConfig";
 import HomePage from "./pages/HomePage";
 
 // Publika sidor
-const LoginPage = lazy(() => import("./pages/Login-Page/LoginPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
 const CancellationPage = lazy(() => import("./pages/CancellationPage"));
 const CalendarPage = lazy(() => import("./pages/CalendarPage"));
 const MovieDetailPage = lazy(() => import("./pages/MovieDetailPage"));

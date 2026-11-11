@@ -1,6 +1,7 @@
 import React from "react";
 import { useOutletContext } from "react-router";
 import { useFetchUserBookingHistory } from "../hooks/useFetchUserBookingHistory";
+import { useCancelBooking } from "../hooks/useCancelBooking";
 import { MyPageItem } from "../components/MyPage/MyPageItem";
 import "../components/MyPage/MyPageItem.scss"
 
@@ -21,6 +22,8 @@ export const MyPage: React.FC = () => {
     loadMorePast,
   } = useFetchUserBookingHistory(userId);
 
+    const { cancelBooking } = useCancelBooking();
+
   if (!userId) {
     return <p role="alert">Du måste logga in för att se dina bokningar.</p>;
   }
@@ -39,7 +42,11 @@ export const MyPage: React.FC = () => {
           <ul className="myPage-list">
             <h2 id="upcoming-heading">Kommande bokningar</h2>
             {upcomingBookings.map((booking) => (
-              <MyPageItem key={booking.booking_id} booking={booking} />
+              <MyPageItem
+                key={booking.booking_id}
+                booking={booking}
+                onCancel={cancelBooking}
+              />
             ))}
           </ul>
         )}
@@ -55,11 +62,11 @@ export const MyPage: React.FC = () => {
               {pastBookings.map((booking) => (
                 <MyPageItem key={booking.booking_id} booking={booking} />
               ))}
-                
+
               {hasMore && (
                 <button
-                    type="button"
-                    className="myPage-button"
+                  type="button"
+                  className="myPage-button"
                   onClick={loadMorePast}
                   disabled={isLoadingMore}
                 >

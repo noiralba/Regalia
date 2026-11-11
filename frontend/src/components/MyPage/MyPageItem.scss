@@ -1,5 +1,11 @@
 @use "../../styles/variables" as v;
 
+.myPage-greeting {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: v.$color-cream;
+}
+
 .myPage-list {
   margin: 0 auto;
   border: 1px solid v.$color-gold;
@@ -46,5 +52,38 @@
     p {
       color: v.$color-bg-dark;
     }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__primary {
+    background-color: v.$color-primary-red;
+    border: 1px solid v.$color-bg-dark;
+    color: v.$color-cream;
+  }
+
+  &__secondary {
+    background-color: v.$color-card-bg;
+    color: v.$color-cream;
+    border: 1px solid v.$color-gold;
+
+    &:hover {
+      background-color: v.$color-primary-red;
+    }
+  }
+
+  &__cancel {
+  width: 100%;
+  border: 1px solid v.$color-bg-dark;
+  text-transform: uppercase;
+  color: v.$color-cream;
+  margin-top: 1rem;
+
+  &:hover {
+    color: v.$color-cream;
+  }
   }
 }
