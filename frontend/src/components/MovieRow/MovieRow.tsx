@@ -3,11 +3,6 @@ import { getMovieImage } from "../../utils/getMovieImage";
 import { Link } from "react-router";
 import { slugify } from "../../utils/slugify";
 
-import {
-  MdOutlineArrowBackIos,
-  MdOutlineArrowForwardIos,
-} from "react-icons/md";
-
 import "./MovieRow.scss";
 
 type MovieRowProps = {
