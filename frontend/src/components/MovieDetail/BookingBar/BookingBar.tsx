@@ -1,5 +1,3 @@
-// Component to display a booking bar for a movie showing. It shows the number of available seats and provides a button to book tickets. The button is disabled if there are no showings available.
-
 import "./BookingBar.scss";
 
 type Props = {
@@ -22,22 +20,23 @@ export default function BookingBar({
   return (
     <section className="booking" aria-live="polite">
       {hasShowing && (
-        <p className="booking-info">
+        <div className="booking-info">
           {Screen && <span>{Screen}</span>}
-          <p className="booking-info__separator">|</p>
+          <span className="booking-info__separator">|</span>
           {availableSeats > 0 ? (
-            <span>{availableSeats} av {totalSeats}</span>
+            <span>
+              {availableSeats} av {totalSeats}
+            </span>
           ) : (
-        <p>
-          {seatsLoading
-            ? "Hämtar platsinformation..."
-            : totalSeats > 0
-              ? `${availableSeats} av ${totalSeats}`
-              : "Platsinformation saknas"}
-              </p>
+            <span>
+              {seatsLoading
+                ? "Hämtar platsinformation..."
+                : totalSeats > 0
+                  ? `${availableSeats} av ${totalSeats}`
+                  : "Platsinformation saknas"}
+            </span>
           )}
-        </p>
-
+        </div>
       )}
       <button
         className="book-button"

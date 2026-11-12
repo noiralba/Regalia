@@ -59,7 +59,7 @@
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
-      object-position: top;
+      object-position: center;
       border-radius: v.$border-radius;
       margin-bottom: 1rem;
     }
@@ -105,7 +105,7 @@
     }
 
     &__card {
-      flex: 0 0 min(70vw, 14rem); 
+      flex: 0 0 min(70vw, 14rem);
 
       padding: 0.625rem;
 
