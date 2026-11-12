@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink } from "react-router";
 import { pages } from "../../routeConfig";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./Header.module.scss";
@@ -15,9 +15,6 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
-
-  const isHome = location.pathname === pages.home.path;
 
   const close = () => setOpen(false);
 
@@ -41,9 +38,8 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
   }, [open]);
 
   return (
-    <header className={`${styles.header} ${isHome ? styles.headerHome : ""}`}>
+    <header className={`${styles.header} ${styles.headerHome}`}>
       <section className={styles.bar}>
-        {!isHome && (
           <Link
             to={pages.home.path}
             className={styles.brand}
@@ -53,7 +49,7 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
             <img src={logoSrc} alt="Regalia Logo" className={styles.icon} />
             <span className={styles.brandName}>Regalia</span>
           </Link>
-        )}
+  
 
         <section className={styles.searchArea} aria-label="Filmsökning">
           <SearchBar />
@@ -139,7 +135,6 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
         </nav>
       </section>
 
-      {!isHome && (
         <section className={styles.divider} aria-hidden="true">
           <span className={styles.line} />
 
@@ -149,7 +144,6 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
 
           <span className={styles.line} />
         </section>
-      )}
     </header>
   );
 }
