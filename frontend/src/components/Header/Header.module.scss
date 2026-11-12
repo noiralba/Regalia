@@ -13,11 +13,11 @@
 
 .headerHome {
   padding: 0;
-  margin: 0;
-}
+  margin-top: -2.5rem;
 
-.headerHome .bar {
-  transform: translateY(-20px);
+  .bar {
+    padding-top: 1rem;
+  }
 }
 
 .bar {
@@ -199,6 +199,7 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 3rem;
 }
 
