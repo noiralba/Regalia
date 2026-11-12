@@ -1,7 +1,10 @@
 import React from "react";
 import { useOutletContext } from "react-router";
 import { useFetchUserBookingHistory } from "../hooks/useFetchUserBookingHistory";
+import { useCancelBooking } from "../hooks/useCancelBooking";
 import { MyPageItem } from "../components/MyPage/MyPageItem";
+import { useFetchUserFirstName } from "../hooks/useFetchUserFirstName";
+import "../components/MyPage/MyPageItem.scss"
 
 interface LayoutContext {
   userId?: string;
@@ -10,6 +13,7 @@ interface LayoutContext {
 
 export const MyPage: React.FC = () => {
   const { userId } = useOutletContext<LayoutContext>();
+  const firstName = useFetchUserFirstName(userId);
   const {
     upcomingBookings,
     pastBookings,
@@ -19,6 +23,8 @@ export const MyPage: React.FC = () => {
     error,
     loadMorePast,
   } = useFetchUserBookingHistory(userId);
+
+    const { cancelBooking } = useCancelBooking();
 
   if (!userId) {
     return <p role="alert">Du måste logga in för att se dina bokningar.</p>;
@@ -30,43 +36,49 @@ export const MyPage: React.FC = () => {
   return (
     <section className="page-container" aria-labelledby="bookings-heading">
       <h1 className="text-uppercase text-center mb-4">Mina sidor</h1>
+      {firstName && <p className="myPage-greeting">Hej, {firstName}!</p>}
 
       <section aria-labelledby="upcoming-heading">
-        <h2 id="upcoming-heading">Kommande bokningar</h2>
         {upcomingBookings.length === 0 ? (
           <p>Du har inga kommande bokningar just nu.</p>
         ) : (
-          <ul>
+          <ul className="myPage-list">
+            <h2 id="upcoming-heading">Kommande bokningar</h2>
             {upcomingBookings.map((booking) => (
-              <MyPageItem key={booking.booking_id} booking={booking} />
+              <MyPageItem
+                key={booking.booking_id}
+                booking={booking}
+                onCancel={cancelBooking}
+              />
             ))}
           </ul>
         )}
       </section>
 
       <section aria-labelledby="past-heading">
-        <h2 id="past-heading">Bokningshistorik</h2>
         {pastBookings.length === 0 ? (
           <p>Du har inga tidigare bokningar.</p>
         ) : (
           <>
-            <ul>
+            <ul className="myPage-list">
+              <h2 id="past-heading">Bokningshistorik</h2>
               {pastBookings.map((booking) => (
                 <MyPageItem key={booking.booking_id} booking={booking} />
               ))}
-            </ul>
 
-            {hasMore && (
-              <button
-                type="button"
-                onClick={loadMorePast}
-                disabled={isLoadingMore}
-              >
-                {isLoadingMore
-                  ? "Laddar fler..."
-                  : "Visa fler tidigare bokningar"}
-              </button>
-            )}
+              {hasMore && (
+                <button
+                  type="button"
+                  className="myPage-button"
+                  onClick={loadMorePast}
+                  disabled={isLoadingMore}
+                >
+                  {isLoadingMore
+                    ? "Laddar fler..."
+                    : "Visa fler tidigare bokningar"}
+                </button>
+              )}
+            </ul>
           </>
         )}
       </section>

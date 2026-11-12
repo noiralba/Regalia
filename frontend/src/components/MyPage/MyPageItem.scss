@@ -1,6 +1,13 @@
 @use "../../styles/variables" as v;
 
-.user-bookings-list {
+.myPage-greeting {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: v.$color-cream;
+  font-size: v.$font-title;
+}
+
+.myPage-list {
   margin: 0 auto;
   border: 1px solid v.$color-gold;
   border-radius: v.$border-radius;
@@ -12,6 +19,20 @@
   h2 {
     text-align: center;
     margin-bottom: 2rem;
+  }
+
+  .myPage-button {
+    margin: 0 auto;
+    width: 100%;
+    background-color: v.$color-primary-red;
+    border: 1px solid v.$color-gold;
+    color: v.$color-cream;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: #5f1422;
+    }
   }
 }
 
@@ -32,5 +53,38 @@
     p {
       color: v.$color-bg-dark;
     }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__primary {
+    background-color: v.$color-primary-red;
+    border: 1px solid v.$color-bg-dark;
+    color: v.$color-cream;
+  }
+
+  &__secondary {
+    background-color: v.$color-card-bg;
+    color: v.$color-cream;
+    border: 1px solid v.$color-gold;
+
+    &:hover {
+      background-color: v.$color-primary-red;
+    }
+  }
+
+  &__cancel {
+  width: 100%;
+  border: 1px solid v.$color-bg-dark;
+  text-transform: uppercase;
+  color: v.$color-cream;
+  margin-top: 1rem;
+
+  &:hover {
+    color: v.$color-cream;
+  }
   }
 }
