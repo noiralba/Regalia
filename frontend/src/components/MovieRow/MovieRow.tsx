@@ -26,14 +26,6 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
       </header>
 
       <section className="movie-carousel" aria-label={`Filmer: ${label}`}>
-        {/* <button
-          type="button"
-          className="arrow-btn arrow-prev"
-          aria-label="Föregående"
-        >
-          <MdOutlineArrowBackIos size={30} />
-        </button> */}
-
         <ul className="grid-movies list-unstyled">
           {movies.map((movie) => {
             const thumbnailUrl = getMovieImage(
@@ -79,14 +71,6 @@ export default function MovieRow({ id, label, movies }: MovieRowProps) {
             );
           })}
         </ul>
-
-        {/* <button
-          type="button"
-          className="arrow-btn arrow-next"
-          aria-label="Nästa"
-        >
-          <MdOutlineArrowForwardIos size={30} />
-        </button> */}
       </section>
     </section>
   );

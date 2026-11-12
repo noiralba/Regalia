@@ -70,7 +70,6 @@
     width: 50%;
     pointer-events: none;
 
-    // Textura de terciopelo con pliegues más marcados y tridimensionales
     background:
       repeating-linear-gradient(
         90deg,
@@ -111,7 +110,6 @@
       border-bottom: 2px solid rgba($color-gold, 0.6);
       z-index: 3;
 
-      // Forma drapeada superior más elegante tipo teatro
       border-bottom-left-radius: 40% 35px;
       border-bottom-right-radius: 40% 35px;
 
