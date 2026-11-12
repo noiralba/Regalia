@@ -86,7 +86,7 @@ export default function Header({ isLoggedIn, onLogout }: HeaderProps) {
                 onClick={close}
                 className={navLinkClass}
               >
-                På bio nu
+                Boka 
               </NavLink>
             </li>
 

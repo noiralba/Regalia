@@ -148,7 +148,7 @@ export default function SearchBar() {
             id="movie-search"
             type="search"
             autoComplete="off"
-            placeholder="Ålder, genre eller sökord"
+            placeholder="Titel, genre eller sökord"
             value={localSearch}
             onFocus={() => setSearchResultsOpen(true)}
             onChange={(e) => {
