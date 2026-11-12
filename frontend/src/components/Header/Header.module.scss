@@ -21,6 +21,11 @@ $gold-bright: #f4e8c4;
   margin-bottom: 0;
 }
 
+.headerHome .bar {
+  padding-top: 0;
+  transform: translateY(-20px);
+}
+
 .bar {
   display: flex;
   flex-wrap: nowrap;

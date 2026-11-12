@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useNavigate, useLocation } from "react-router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
@@ -17,6 +17,8 @@ export default function Layout() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const sessionVersion = useRef(0);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === pages.home.path;
 
   function handleLogin(expiresIn: number, email: string, userId: string) {
     sessionVersion.current += 1;
@@ -100,10 +102,13 @@ export default function Layout() {
     <>
       <CookieModal />
       <ScrollToTop />
-      <Header
-        isLoggedIn={isAuthenticating ? false : session !== null}
-        onLogout={handleLogout}
-      />
+      {!isHome && (
+        <Header
+          isLoggedIn={isAuthenticating ? false : session !== null}
+          onLogout={handleLogout}
+        />
+      )}
+
       {isAuthenticating ? (
         <main>
           <p role="status">Verifierar session...</p>
@@ -114,6 +119,8 @@ export default function Layout() {
             onLogin: handleLogin,
             userEmail: session?.email,
             userId: session?.userId,
+            isLoggedIn: session !== null,
+            onLogout: handleLogout,
           }}
         />
       )}
