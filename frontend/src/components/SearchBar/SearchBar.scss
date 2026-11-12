@@ -16,7 +16,6 @@
   width: 100%;
   padding: 0.5rem 0;
   background: transparent;
-  // transform: translateY(5px);
 }
 
 /* Sökfält */
@@ -156,6 +155,27 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
   font-family: v.$font-body;
 
+  scrollbar-width: thin;
+  scrollbar-color: v.$color-gold v.$color-bg-dark;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: v.$color-bg-dark;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: v.$color-gold;
+    border-radius: 4px;
+
+    &:hover {
+      background: darken(v.$color-gold, 10%);
+    }
+  }
+
   ul {
     padding: 0;
     margin: 0;
@@ -197,6 +217,7 @@
     }
   }
 }
+
 /* Mobil */
 @media (max-width: 768px) {
   .search-bar-form {
