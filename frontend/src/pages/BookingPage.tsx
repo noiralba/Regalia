@@ -77,7 +77,8 @@ function BookingPage() {
 
   // Kontrollera om någon annan har bokat en av användarens valda platser
   useEffect(() => {
-    if (selectedSeats.length === 0 || seats.length === 0) return;
+    if (bookingConfirmation || selectedSeats.length === 0 || seats.length === 0)
+      return;
 
     const unavailableSeats = selectedSeats.filter((selectedId) =>
       seats.some((seat) => seat.seat_id === selectedId && !seat.Available),
@@ -95,7 +96,7 @@ function BookingPage() {
     }, 0);
 
     return () => clearTimeout(timeout);
-  }, [seats, selectedSeats, setSelectedSeats]);
+  }, [seats, selectedSeats, setSelectedSeats, bookingConfirmation]);
 
   // Hämta info om vald filmvisning från backend
   useEffect(() => {
