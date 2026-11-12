@@ -15,6 +15,11 @@
     border-radius: 3px;
   }
 
+  &__map-inner {
+    min-width: max-content;
+    margin: 0 auto;
+  }
+
   &__screen {
     width: min(85%, 580px);
     height: 24px;
