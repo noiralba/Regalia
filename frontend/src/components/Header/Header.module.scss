@@ -1,9 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap");
-
-$bg: #0f0d0e;
-$gold: #a98a4e;
-$gold-light: #e0cfa2;
-$gold-bright: #f4e8c4;
+@use "../../styles/variables" as *;
 
 .header {
   position: sticky;
@@ -11,18 +6,17 @@ $gold-bright: #f4e8c4;
   z-index: 1000;
   padding-bottom: 0.5rem;
   margin-bottom: 0.75rem;
-  color: $gold-light;
-  background: $bg;
-  font-family: "Playfair Display", "Times New Roman", serif;
+  color: $color-gold;
+  background: $color-bg-dark;
+  font-family: $font-title;
 }
 
 .headerHome {
-  padding-bottom: 0;
-  margin-bottom: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .headerHome .bar {
-  padding-top: 0;
   transform: translateY(-20px);
 }
 
@@ -32,7 +26,7 @@ $gold-bright: #f4e8c4;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.25rem 4rem 1.25rem;
+  padding: 3rem 4rem 0 4rem;
 }
 
 /* Logotyp */
@@ -45,7 +39,7 @@ $gold-bright: #f4e8c4;
   text-decoration: none;
 
   &:focus-visible {
-    outline: 2px solid $gold-light;
+    outline: 2px solid $color-gold;
     outline-offset: 4px;
   }
 }
@@ -58,8 +52,7 @@ $gold-bright: #f4e8c4;
 }
 
 .brandName {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: $font-size-h2;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   background: linear-gradient(90deg, #c4a45f, #9a7b42);
@@ -86,7 +79,7 @@ $gold-bright: #f4e8c4;
   width: 2.75rem;
   height: 2.75rem;
   padding: 0;
-  color: $gold-light;
+  color: $color-cream;
   background: none;
   border: 0;
   border-radius: 50%;
@@ -94,11 +87,11 @@ $gold-bright: #f4e8c4;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background: rgba($gold, 0.15);
+    background: rgba($color-gold, 0.15);
   }
 
   &:focus-visible {
-    outline: 2px solid $gold-light;
+    outline: 2px solid $color-gold;
     outline-offset: 2px;
   }
 }
@@ -173,9 +166,8 @@ $gold-bright: #f4e8c4;
 }
 
 .link {
-  color: $gold-light;
-  font-size: 1.25rem;
-  font-weight: 600;
+  color: $color-gold;
+  font-size: $font-size-h2;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   text-decoration: none;
@@ -184,11 +176,11 @@ $gold-bright: #f4e8c4;
 
   &:hover,
   &.active {
-    color: $gold-bright;
+    color: $color-cream;
   }
 
   &:focus-visible {
-    outline: 2px solid $gold-light;
+    outline: 2px solid $color-cream;
     outline-offset: 4px;
   }
 }
@@ -207,19 +199,20 @@ $gold-bright: #f4e8c4;
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .line {
   flex: 1;
   height: 1px;
-  background: $gold;
+  background: $color-gold;
 }
 
 .star {
   flex-shrink: 0;
   width: 1.4rem;
   height: 1.4rem;
-  fill: $gold;
+  fill: $color-gold;
 }
 
 /* Mellanstora skärmar */
@@ -318,7 +311,7 @@ $gold-bright: #f4e8c4;
       transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
 
     li + li {
-      border-top: 1px solid rgba($gold, 0.3);
+      border-top: 1px solid rgba($color-gold, 0.3);
     }
   }
 
