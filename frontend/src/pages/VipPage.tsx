@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 import popcorn from "../assets/images/vip/popcorn.webp";
-import drinks from "../assets/images/vip/drinks.webp";
+import drinks from "../assets/images/vip/regaliatrivana.png";
 import food from "../assets/images/vip/food.webp";
 
 import foodMenu from "../assets/images/vip/matmeny.png";
@@ -73,40 +73,43 @@ export default function VipPage() {
         </nav>
 
         <section className="vip-images" aria-label="Bilder från logen">
-          <img src={popcorn} alt="Popcorn" />
           <img src={drinks} alt="Drinkar" />
+          <img src={popcorn} alt="Popcorn" />
           <img src={food} alt="Mat serverad i logen" />
         </section>
 
         <header className="vip-header">
-          <h1>UPPLEV FILMEN FRÅN VÅR LOGE</h1>
+          <h1>UPPLEV FILMEN FRÅN VÅRA VIP-PLATSER</h1>
         </header>
 
         <section className="vip-description">
           <p className="vip-intro-text">
-            Njut av filmen i en mer privat och lyxig miljö med mat, dryck och
-            snacks serverat direkt till logen.
+            Njut av filmen i en mer lyxig miljö med mat, dryck och snacks
+            serverat direkt till bordet.
           </p>
 
           <div className="vip-steps-wrapper">
             <ol className="vip-steps-list">
               <li>
-                <span>1.</span> Välj en filmtitel och en visning.
+                <span>1.</span> Välj en film, tid & datum, välj sedan platser
+                med VIP-symbol.
+              </li>
+              {/* <li>
+                <span>2.</span>
+              </li> */}
+              <li>
+                <span>3.</span> Förbeställ mat via info@regala.com, eller
+                beställ på plats när ni hämtar ut biljetter.
               </li>
               <li>
-                <span>2.</span> Välj en plats markerad med VIP-symbol.
-              </li>
-              <li>
-                <span>3.</span> Förbeställ mat och dryck direkt till din plats.
-              </li>
-              <li>
-                <span>4.</span> Varm mat serveras efter filmens start.
+                <span>3.</span> Varm mat serveras efter filmens start.
               </li>
             </ol>
           </div>
 
           <p className="vip-footer-text">
-            Foajébaren är öppen till kl. 22.00 för drop-in och beställningar.
+            Foajébaren är öppen till kl. 22.00. & det går alltid bra att
+            beställa dryck via TRIVANAS QR-kod på VIP-borden
           </p>
         </section>
 
