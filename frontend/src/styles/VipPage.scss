@@ -96,7 +96,12 @@
 
   .vip-intro-text {
     margin-bottom: 1.5rem;
-    opacity: 0.9;
+    color: v.$color-gold;
+    font-family: v.$font-title;
+    font-size: 1.15rem;
+    font-weight: 500;
+    opacity: 1;
+    white-space: nowrap;
   }
 
   .vip-steps-wrapper {
@@ -175,6 +180,7 @@
 }
 
 /* Menyfönster */
+
 .vip-menu-overlay {
   position: fixed;
   inset: 0;
@@ -280,6 +286,7 @@
 }
 
 /* Stäng-knapp */
+
 .vip-menu-close {
   position: absolute;
   top: 0.5rem;
@@ -313,6 +320,7 @@
 }
 
 /* Animationer */
+
 @keyframes vip-title-shimmer {
   0% {
     background-position: 0% center;
@@ -339,6 +347,7 @@
 }
 
 /* Mobil */
+
 @media (max-width: 600px) {
   .vip-page {
     padding: 1rem 0.6rem;
@@ -367,6 +376,10 @@
 
   .vip-description {
     font-size: 0.85rem;
+
+    .vip-intro-text {
+      white-space: normal;
+    }
   }
 
   .vip-actions button {
@@ -400,9 +413,27 @@
 }
 
 /* Mindre surfplattor */
+
 @media (min-width: 601px) and (max-width: 900px) {
   .vip-menu-close {
     top: -3rem;
     right: -5rem;
+  }
+}
+/* Finjustering av avstånd på VIP-sidan */
+
+.vip-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.vip-description {
+  margin-top: 0.8rem;
+
+  .vip-intro-text {
+    margin-bottom: 1.2rem;
+  }
+
+  .vip-steps-list li {
+    margin-bottom: 0.4rem;
   }
 }
