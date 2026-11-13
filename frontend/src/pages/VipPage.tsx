@@ -98,7 +98,7 @@ export default function VipPage() {
                 <span>2.</span>
               </li> */}
               <li>
-                <span>3.</span> Förbeställ mat via info@regala.com, eller
+                <span>3.</span> Förbeställ mat via info@regalia.se, eller
                 beställ på plats när ni hämtar ut biljetter.
               </li>
               <li>
