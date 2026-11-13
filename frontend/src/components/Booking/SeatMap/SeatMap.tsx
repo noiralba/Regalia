@@ -143,7 +143,7 @@ function SeatMap({
 
           {isLargeScreen && (
             <p>
-              <i className="booking-page__legend-icon is-vip" /> Loge (Rad H)
+              <i className="booking-page__legend-icon is-vip" /> Vip (Rad H)
             </p>
           )}
           <p>

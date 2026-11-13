@@ -17,10 +17,10 @@ export default function VipBanner() {
 
           <section className="col-lg-6 vip-banner-content">
             <header className="mb-3">
-              <h2 className="vip-banner-title">REGALIAS LOGE</h2>
+              <h2 className="vip-banner-title">REGALIAS VIP</h2>
 
               <p className="vip-banner-subtitle">
-                Egen loge&nbsp;&nbsp;&bull;&nbsp;&nbsp;Eget
+                Egna fåtöljer&nbsp;&nbsp;&bull;&nbsp;&nbsp;Eget
                 sällskap&nbsp;&nbsp;&bull;&nbsp;&nbsp;En kväll att minnas
               </p>
             </header>
@@ -32,14 +32,14 @@ export default function VipBanner() {
 
               <p>
                 Genom vårt samarbete med Restaurang Trivana kan du beställa mat
-                och dryck direkt till logen, kombinera filmen med en god middag.
-                Perfekt för en dejtkväll, en stund med en vän eller när du vill
-                göra biobesöket extra speciellt.
+                och dryck direkt till bordet, kombinera filmen med en god
+                middag. Perfekt för en dejtkväll, en stund med en vän eller när
+                du vill göra biobesöket extra speciellt.
               </p>
             </article>
             <div className="vip-banner-actions">
               <Link to="/vip" className="vip-banner-btn">
-                TA MIG TILL LOGE
+                TA MIG TILL VIPEN
               </Link>
             </div>
           </section>
