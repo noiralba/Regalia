@@ -22,23 +22,26 @@ export default function ShowtimePicker({
   onSelectShowing,
 }: Props) {
   return (
-    < section
-        className="showtime-picker"
-        aria-labelledby="showtimes-heading"
-      >
+    <section className="showtime-picker" aria-labelledby="showtimes-heading">
       <h2 className="showtime-picker__heading">Välj datum</h2>
       <nav className="showtime-picker__dates" aria-label="Välj datum">
-        {dates.map((date) => (
-          <button
-            className="showtime-picker__date"
-            key={date}
-            type="button"
-            onClick={() => onSelectDate(date)}
-            aria-pressed={selectedDate === date}
-          >
-            {formatDate(date)}
-          </button>
-        ))}
+        {dates.map((date) => {
+          const { dateText, weekdayText } = formatDate(date);
+          return (
+            <button
+              className="showtime-picker__date"
+              key={date}
+              type="button"
+              onClick={() => onSelectDate(date)}
+              aria-pressed={selectedDate === date}
+            >
+              <span className="showtime-picker__date-day">{dateText}</span>
+              <span className="showtime-picker__date-weekday">
+                {weekdayText}
+              </span>
+            </button>
+          );
+        })}
       </nav>
 
       <h2 className="showtime-picker__heading">Välj visning</h2>
