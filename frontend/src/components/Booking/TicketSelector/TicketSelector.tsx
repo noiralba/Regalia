@@ -19,7 +19,11 @@ function TicketSelector({
       <h2>Välj biljetter</h2>
       {ticketTypes.map((ticket) => (
         <article className="ticket-selector__row" key={ticket.ticket_type_id}>
-          <h3>{ticket["Ticket Type"]}</h3>
+          <h3>
+            {ticket["Ticket Type"]}
+            {ticket["Ticket Type"]?.trim().toUpperCase() === "BARN" &&
+              " (0-12 år)"}
+          </h3>
           <p>{Number(ticket["Price (SEK)"])} kr</p>
           <button
             type="button"

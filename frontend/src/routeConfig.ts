@@ -35,7 +35,7 @@ export const pages = {
   },
   vip: {
     path: "/vip",
-    label: "Regalias loge",
+    label: "Regalias vip",
   },
   cancellation: {
     path: "/avbokning",

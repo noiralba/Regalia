@@ -92,10 +92,19 @@ router.get("/session", requireAuth, (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("regalia_session", {
+  const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
+  };
+
+  res.clearCookie("regalia_session", {
+    ...cookieOptions,
+    path: "/",
+  });
+
+  res.clearCookie("regalia_session", {
+    ...cookieOptions,
     path: "/api",
   });
 

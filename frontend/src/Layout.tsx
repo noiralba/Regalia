@@ -100,7 +100,6 @@ export default function Layout() {
 
   return (
     <>
-      <CookieModal />
       <ScrollToTop />
       {!isHome && (
         <Header
@@ -128,6 +127,7 @@ export default function Layout() {
       <section className="footer-spacing">
         <Footer />
       </section>
+      <CookieModal />
     </>
   );
 }

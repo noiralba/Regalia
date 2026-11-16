@@ -27,7 +27,7 @@ export const MyPage: React.FC = () => {
     const { cancelBooking } = useCancelBooking();
 
   if (!userId) {
-    return <p role="alert">Du måste logga in för att se dina bokningar.</p>;
+    return <p className="myPage-alert" role="alert">Du måste logga in för att se dina bokningar.</p>;
   }
 
   if (isLoading) return <p role="status">Laddar bokningar...</p>;
@@ -40,7 +40,9 @@ export const MyPage: React.FC = () => {
 
       <section aria-labelledby="upcoming-heading">
         {upcomingBookings.length === 0 ? (
-          <p>Du har inga kommande bokningar just nu.</p>
+          <p className="myPage-alert">
+            Du har inga kommande bokningar just nu.
+          </p>
         ) : (
           <ul className="myPage-list">
             <h2 id="upcoming-heading">Kommande bokningar</h2>
@@ -57,7 +59,7 @@ export const MyPage: React.FC = () => {
 
       <section aria-labelledby="past-heading">
         {pastBookings.length === 0 ? (
-          <p>Du har inga tidigare bokningar.</p>
+          <p className="myPage-alert">Du har inga tidigare bokningar.</p>
         ) : (
           <>
             <ul className="myPage-list">
