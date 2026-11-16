@@ -12,7 +12,6 @@ export function useCancellation() {
   const [cancelError, setCancelError] = useState<string | null>(null);
   const [cancelled, setCancelled] = useState(false);
 
-  // Hämta bokningar från backend
   useEffect(() => {
     async function fetchBookings() {
       try {
@@ -22,6 +21,9 @@ export function useCancellation() {
           data.map((b) => ({
             bookingNumber: b["Booking Number"],
             email: b["Email"],
+            movieTitle: b["Movie Title"] || b["Movie"] || "",
+            screeningDate: b["Screening Date"] || b["Date"] || "",
+            startTime: b["Start Time"] || b["Time"] || "",
           })),
         );
       } catch (err) {
@@ -35,7 +37,6 @@ export function useCancellation() {
     fetchBookings();
   }, []);
 
-  // Sök efter en bokning med bokningsnummer och e-postadress
   function searchBooking(bookingNumber: string, email: string) {
     setNotFound(false);
     setCancelError(null);
@@ -57,7 +58,6 @@ export function useCancellation() {
     return false;
   }
 
-  // Avboka vald bokning
   async function cancelBooking() {
     if (!booking) return;
 
@@ -69,7 +69,6 @@ export function useCancellation() {
       );
 
       setCancelled(true);
-      setBooking(null);
       setCancelError(null);
       return true;
     } catch (err) {

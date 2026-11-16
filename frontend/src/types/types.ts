@@ -84,7 +84,11 @@ export interface Booking {
   seats: string[];
 }
 
-export type BookingSearch = Pick<Booking, "bookingNumber" | "email">;
+export type BookingSearch = Pick<Booking, "bookingNumber" | "email"> & {
+  movieTitle: string;
+  screeningDate: string;
+  startTime: string;
+};
 
 export interface BookingConfirmation {
   "Booking Number": string;
