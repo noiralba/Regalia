@@ -42,6 +42,11 @@ export const pages = {
     label: "Avbokning",
   },
 
+  privacyPolicy: {
+    path: "/integritetspolicy",
+    label: "Integritetspolicy",
+  },
+
   // ---------------- ADMIN ----------------
   // /admin är översikten. Visningar ligger på /admin/visningar och teman på /admin/teman.
   admin: {

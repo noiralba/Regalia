@@ -54,6 +54,11 @@ export default function Footer() {
                 Avboka
               </Link>
             </p>
+            <p className="footer-contact-item">
+              <Link to="/integritetspolicy" className="footer-link">
+                Integritetspolicy
+              </Link>
+            </p>
           </article>
 
           <article className="col">
