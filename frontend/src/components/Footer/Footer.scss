@@ -13,7 +13,7 @@
 
   .footer-title {
     font-family: v.$font-title;
-    color: v.$color-cream;
+    color: v.$color-gold;
     font-size: 1.25rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -25,7 +25,7 @@
   .footer-hours-row,
   .footer-contact-item {
     font-family: v.$font-body;
-    color: v.$color-gold;
+    color: v.$color-cream;
     font-size: 1rem;
     line-height: 1.5;
   }
@@ -53,13 +53,13 @@
 
   a,
   .footer-link {
-    color: v.$color-gold !important;
+    color: v.$color-cream !important;
     font-family: v.$font-body;
     font-size: 1rem;
     text-decoration: underline;
 
     &:hover {
-      color: v.$color-cream !important;
+      color: v.$color-gold !important;
     }
   }
 
@@ -78,12 +78,12 @@
     margin-top: 0.75rem;
 
     a {
-      color: v.$color-gold !important;
+      color: v.$color-cream !important;
       font-size: 1.4rem;
       text-decoration: none;
 
       &:hover {
-        color: v.$color-cream !important;
+        color: v.$color-gold !important;
       }
     }
   }
@@ -142,7 +142,6 @@
   }
 }
 
-// Mobilanpassning
 @media (max-width: 37.4375rem) {
   .footer-spacing {
     margin-top: 1.5rem;
