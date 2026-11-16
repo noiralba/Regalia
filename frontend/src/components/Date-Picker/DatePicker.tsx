@@ -66,7 +66,7 @@ export default function DatePicker({
         </button>
 
         <ul className="date-list list-unstyled d-flex flex-grow-1 gap-2 mb-0">
-          {days.map((day) => {
+          {days.map((day, i) => {
             const value = day.toLocaleDateString("sv-SE");
             const isSelected = value === selectedDate;
 
@@ -88,7 +88,13 @@ export default function DatePicker({
                       .toUpperCase()}`}
                   </time>
                   <small className="d-block text-capitalize">
-                    {day.toLocaleDateString("sv-SE", { weekday: "short" })}
+                    {i === 0
+                      ? "Idag"
+                      : i === 1
+                        ? "Imorgon"
+                        : day.toLocaleDateString("sv-SE", {
+                            weekday: "short",
+                          })}
                   </small>
                 </button>
               </li>
