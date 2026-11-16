@@ -15,6 +15,7 @@ const VipPage = lazy(() => import("./pages/VipPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const CreateAccountPage = lazy(() => import("./pages/CreateAccountPage"));
 const MyPage = lazy(() => import("./pages/MyPage"));
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 
 // Admin
 const AdminShows = lazy(() => import("./components/Admin/shows/AdminShows"));
@@ -105,6 +106,15 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div>Laddar...</div>}>
             <CancellationPage />
+          </Suspense>
+        ),
+      },
+
+      {
+        path: pages.privacyPolicy.path,
+        element: (
+          <Suspense fallback={<div>Laddar...</div>}>
+            <PrivacyPolicyPage />
           </Suspense>
         ),
       },

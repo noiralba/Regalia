@@ -1,0 +1,168 @@
+@use "../../styles/variables" as *;
+
+.privacy-policy {
+  background-color: $color-card-bg;
+  border: 1px solid $color-gold;
+  border-radius: $border-radius;
+  padding: 2rem;
+  max-width: 52rem;
+  margin-inline: auto;
+  line-height: 1.7;
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  // Vanlig punktlista (t.ex. "Dina rättigheter")
+  &__rights-list {
+    padding-left: 1.25rem;
+
+    li {
+      margin-top: 0.4rem;
+      list-style-type: "★  ";
+      border-bottom: 1px solid rgba($color-cream, 0.12);
+      padding-block: 0.75rem;
+
+        &::marker {
+            color: $color-gold;
+          }
+    }
+  }
+
+  &__link {
+    color: $color-gold;
+  }
+
+  &__title,
+  &__updated {
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__section {
+    border-bottom: 1px solid rgba($color-cream, 0.15);
+  }
+
+  &__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1rem;
+    cursor: pointer;
+    list-style: none; // döljer standardpilen
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    // Pil nedåt
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-right: 2px solid $color-gold;
+      border-bottom: 2px solid $color-gold;
+      transform: rotate(45deg);
+      transition: transform 0.2s;
+    }
+
+    // Pil uppåt när sektionen är öppen
+    .privacy-policy__section[open] &::after {
+      transform: rotate(-135deg);
+    }
+
+    &:focus-visible {
+      outline: 3px solid $color-cream;
+      outline-offset: 2px;
+    }
+  }
+
+  &__section-title {
+    margin: 0;
+    color: $color-gold;
+  }
+
+  &__section-content {
+    padding-bottom: 1.25rem;
+  }
+
+  // ----- PolicyBlock: ett "kort" per underrubrik -----
+  &__block {
+    margin-top: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: $color-bg-dark;
+    border-left: 3px solid $color-gold;
+    border-radius: 0 0.5rem 0.5rem 0;
+
+    @include respond-to(mobile) {
+      padding: 1rem;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__block-title {
+    margin: 0 0 1rem;
+    font-family: $font-body;
+    font-size: $font-size-h3;
+    font-weight: 700;
+    color: $color-cream;
+  }
+
+  // ----- DataList: rubrik till vänster, värde till höger -----
+  &__list {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+
+    li {
+      display: grid;
+      grid-template-columns: 11rem 1fr;
+      gap: 0.25rem 1.5rem;
+      padding-block: 0.75rem;
+      border-top: 1px solid rgba($color-cream, 0.12);
+
+      &:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      // På mobil ligger rubrik och värde under varandra
+      @include respond-to(mobile) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &__label {
+    font-size: $font-size-small;
+    font-weight: 700;
+    color: $color-gold;
+  }
+
+  &__value {
+    color: $color-cream;
+  }
+
+  // Listan i avsnitt 3 ligger direkt i sektionen, inte i ett kort
+  &__section-content>&__list {
+    padding: 1rem 1.5rem;
+    background: $color-bg-dark;
+    border-left: 3px solid $color-gold;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  @include respond-to(mobile) {
+    .privacy-policy {
+      margin: 40px 0 0;
+    }
+  }
+}
