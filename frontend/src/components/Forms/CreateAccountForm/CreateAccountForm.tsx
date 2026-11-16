@@ -63,7 +63,6 @@ export default function CreateAccountForm() {
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Något gick fel.");
-
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Ett oväntat fel inträffade.",
@@ -109,11 +108,11 @@ export default function CreateAccountForm() {
         />
         <FormField
           id="password"
-          label="Lösenord (minst 15 tecken)"
+          label="Lösenord (minst 8 tecken)"
           type="password"
           value={formData.password}
           onChange={handleChange}
-          minLength={15}
+          minLength={8}
           autoComplete="new-password"
         />
         <FormField
