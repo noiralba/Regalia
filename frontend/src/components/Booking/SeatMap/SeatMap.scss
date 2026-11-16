@@ -78,6 +78,8 @@
 
     &.is-vip {
       background-color: v.$color-primary-red;
+      font-size: 17px;
+      font-weight: bold;
 
       &.is-selected {
         background: v.$color-gold;
