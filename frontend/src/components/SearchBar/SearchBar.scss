@@ -40,7 +40,11 @@
   border: 1px solid v.$color-gold;
   border-radius: 4px;
   font-family: v.$font-body;
-  font-size: 0.72rem;
+  font-size: 0.85rem;
+    &::placeholder {
+    color: v.$color-cream;
+    opacity: 1;
+  }
 }
 .search-input:-webkit-autofill,
 .search-input:-webkit-autofill:hover,
@@ -72,7 +76,7 @@
   background: transparent;
   border: none;
   font-family: v.$font-body;
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   text-align: left;
   cursor: pointer;
 }
@@ -225,16 +229,17 @@
   }
 
   .search-field {
-    flex: 0 1 180px;
+    flex: 1 1 180px;
     min-width: 0;
   }
 
   .search-input {
     min-width: 0;
+    font-size: 0.72rem;
   }
 
   .age-filter {
-    flex: 0 0 105px;
+    flex: 0 0 100px;
   }
 
   .search-results {
