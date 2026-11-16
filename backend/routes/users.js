@@ -20,9 +20,9 @@ router.post("/", registerLimiter, async (req, res) => {
     });
   }
 
-  if (Array.from(password).length < 15) {
+  if (Array.from(password).length < 8) {
     return res.status(400).json({
-      error: "Lösenordet måste innehålla minst 15 tecken.",
+      error: "Lösenordet måste innehålla minst 8 tecken.",
     });
   }
 

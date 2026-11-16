@@ -24,11 +24,11 @@ Registers a user. The API generates the UUID.
 
 Required fields: `first_name`, `last_name`, `email`, `password`.
 
-| Field | Limit |
-| ----- | ----- |
-| `first_name`, `last_name` | max 100 JavaScript string units each |
-| `email` | max 150 |
-| `password` | at least 15 Unicode code points, at most 72 UTF-8 bytes (bcrypt limit) |
+| Field                     | Limit                                                                 |
+| ------------------------- | --------------------------------------------------------------------- |
+| `first_name`, `last_name` | max 100 JavaScript string units each                                  |
+| `email`                   | max 150                                                               |
+| `password`                | at least 8 Unicode code points, at most 72 UTF-8 bytes (bcrypt limit) |
 
 **Request body**
 
@@ -62,7 +62,7 @@ Required fields: `first_name`, `last_name`, `email`, `password`.
 Example `400` for a short password:
 
 ```json
-{ "error": "Lösenordet måste innehålla minst 15 tecken." }
+{ "error": "Lösenordet måste innehålla minst 8 tecken." }
 ```
 
 ---
@@ -195,11 +195,11 @@ Returns the authenticated user's upcoming or past bookings for **Mina sidor**. T
 
 **Authorization:** session cookie or `Bearer <JWT_TOKEN>`
 
-| Query parameter | Meaning |
-| --------------- | ------- |
+| Query parameter   | Meaning                                                                                             |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
 | `period=upcoming` | Upcoming showings (default). All upcoming bookings in chronological order. `offset` is not allowed. |
-| `period=past` | Past showings, newest first, 2 bookings per page |
-| `offset=0` | Start position for `period=past` (default 0). Use `offset=2`, `offset=4`, ... for **Visa fler** |
+| `period=past`     | Past showings, newest first, 2 bookings per page                                                    |
+| `offset=0`        | Start position for `period=past` (default 0). Use `offset=2`, `offset=4`, ... for **Visa fler**     |
 
 ```text
 GET /api/users/:id/bookings?period=upcoming
