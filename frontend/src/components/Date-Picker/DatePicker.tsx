@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { MdOutlineArrowForwardIos, MdOutlineArrowBackIos } from "react-icons/md";
+import {
+  MdOutlineArrowForwardIos,
+  MdOutlineArrowBackIos,
+} from "react-icons/md";
 import "./DatePicker.scss";
 
 type DatePickerProps = {
@@ -51,10 +54,7 @@ export default function DatePicker({
     <section className="dates">
       <h2 className="date-title text-uppercase mb-3">Välj datum</h2>
 
-      <nav
-        aria-label="Datumväljare"
-        className="date-picker d-flex gap-2 "
-      >
+      <nav aria-label="Datumväljare" className="date-picker d-flex gap-2 ">
         <button
           type="button"
           className="date-button date-arrow"
@@ -82,10 +82,10 @@ export default function DatePicker({
                     dateTime={value}
                     className="d-block fw-semibold text-uppercase"
                   >
-                    {day.toLocaleDateString("sv-SE", {
-                      day: "numeric",
-                      month: "short",
-                    })}
+                    {`${day.getDate()} ${day
+                      .toLocaleDateString("sv-SE", { month: "short" })
+                      .replace(".", "")
+                      .toUpperCase()}`}
                   </time>
                   <small className="d-block text-capitalize">
                     {day.toLocaleDateString("sv-SE", { weekday: "short" })}
