@@ -115,7 +115,10 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      <div className="hero__curtain hero__curtain--right" aria-hidden="true" />
+      <section
+        className="hero__curtain hero__curtain--right"
+        aria-hidden="true"
+      />
     </section>
   );
 }

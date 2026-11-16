@@ -26,18 +26,14 @@ function ShowingInfo({ showing, movie, hasError }: ShowingInfoProps) {
           <figure className="showing-info__details">
             <h3>{showing.Movie}</h3>
             <dl className="showing-info__meta">
-              <div>
-                <dt>Datum</dt>
-                <dd>{showing["Screening Date"]}</dd>
-              </div>
-              <div>
-                <dt>Tid</dt>
-                <dd>{showing["Start Time"]}</dd>
-              </div>
-              <div>
-                <dt>Salong</dt>
-                <dd>{showing.Screen}</dd>
-              </div>
+              <dt>Datum</dt>
+              <dd>{showing["Screening Date"]}</dd>
+
+              <dt>Tid</dt>
+              <dd>{showing["Start Time"]}</dd>
+
+              <dt>Salong</dt>
+              <dd>{showing.Screen}</dd>
             </dl>
           </figure>
         </article>

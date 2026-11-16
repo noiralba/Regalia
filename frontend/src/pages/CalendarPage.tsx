@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+
 import Calendar from "../components/Calender/Calender";
 import DatePicker from "../components/Date-Picker/DatePicker";
 import ThemeFilmStrip from "../components/ThemeFilmStrip/ThemeFilmStrip";
@@ -34,9 +35,10 @@ export default function CalendarPage() {
   return (
     <main className="page-container">
       <DatePicker selectedDate={selectedDate} onSelect={setSelectedDate} />
+
       <Calendar selectedDate={selectedDate} />
 
-      <div className="themes-section mt-5">
+      <section className="themes-section mt-5" aria-label="Filmer efter tema">
         {themeGroups
           ?.filter((group) => group.movies.length > 0)
           .map((group) => (
@@ -47,7 +49,7 @@ export default function CalendarPage() {
               movies={group.movies}
             />
           ))}
-      </div>
+      </section>
     </main>
   );
 }

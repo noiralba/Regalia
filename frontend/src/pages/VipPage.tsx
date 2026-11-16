@@ -72,45 +72,39 @@ export default function VipPage() {
           </button>
         </nav>
 
-        <section className="vip-images" aria-label="Bilder från logen">
+        <figure className="vip-images" aria-label="Bilder från logen">
           <img src={drinks} alt="Drinkar" />
           <img src={popcorn} alt="Popcorn" />
           <img src={food} alt="Mat serverad i logen" />
-        </section>
+        </figure>
 
         <header className="vip-header">
           <h1>UPPLEV FILMEN FRÅN VÅRA VIP-PLATSER</h1>
         </header>
 
-        <section className="vip-description">
+        <section className="vip-description" aria-label="Information om VIP">
           <p className="vip-intro-text">
             Njut av filmen i en mer lyxig miljö med mat, dryck och snacks
             serverat direkt till bordet.
           </p>
 
-          <div className="vip-steps-wrapper">
+          <section className="vip-steps-wrapper" aria-label="Så fungerar det">
             <ol className="vip-steps-list">
               <li>
-                <span>1.</span> Välj en film, tid & datum, välj sedan platser
-                med VIP-symbol.
-              </li>
-              {/* <li>
-                <span>2.</span>
-              </li> */}
-              <li>
-                <span>3.</span> Förbeställ mat via info@regalia.se, eller
-                beställ på plats när ni hämtar ut biljetter.
+                Välj en film, tid och datum, välj sedan platser med VIP-symbol.
               </li>
               <li>
-                <span>3.</span> Varm mat serveras efter filmens start.
+                Förbeställ mat via info@regalia.se, eller beställ på plats när
+                ni hämtar ut biljetter.
               </li>
+              <li>Varm mat serveras efter filmens start.</li>
             </ol>
-          </div>
+          </section>
 
-          <p className="vip-footer-text">
-            Foajébaren är öppen till kl. 22.00. & det går alltid bra att
-            beställa dryck via TRIVANAS QR-kod på VIP-borden
-          </p>
+          <aside className="vip-footer-text">
+            Foajébaren är öppen till kl. 22.00. Det går alltid bra att beställa
+            dryck via TRIVANAS QR-kod på VIP-borden.
+          </aside>
         </section>
 
         <footer className="vip-actions">
@@ -126,7 +120,7 @@ export default function VipPage() {
         aria-label="Regalias meny"
         onCancel={closeMenu}
       >
-        <section className="vip-menu-stage" aria-label="Menybild">
+        <section className="vip-menu-stage" aria-label="Meny">
           <button
             className="vip-menu-close"
             type="button"
@@ -136,11 +130,13 @@ export default function VipPage() {
             ×
           </button>
 
-          <img
-            className="vip-menu-image"
-            src={menuImages[activeMenu].src}
-            alt={menuImages[activeMenu].alt}
-          />
+          <figure>
+            <img
+              className="vip-menu-image"
+              src={menuImages[activeMenu].src}
+              alt={menuImages[activeMenu].alt}
+            />
+          </figure>
 
           <nav className="vip-menu-tabs" aria-label="Byt meny">
             <button

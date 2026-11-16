@@ -31,7 +31,7 @@ export default function ThemeFilmStrip({
         )}
       </header>
 
-      <div className="theme-filmstrip__strip-wrapper">
+      <section className="theme-filmstrip__strip-wrapper">
         <ul className="theme-filmstrip__strip list-unstyled">
           {movies.map((movie) => (
             <li className="theme-filmstrip__item" key={movie.id}>
@@ -51,7 +51,7 @@ export default function ThemeFilmStrip({
             </li>
           ))}
         </ul>
-      </div>
+      </section>
     </section>
   );
 }

@@ -37,11 +37,12 @@ export default function VipBanner() {
                 du vill göra biobesöket extra speciellt.
               </p>
             </article>
-            <div className="vip-banner-actions">
+
+            <footer className="vip-banner-actions">
               <Link to="/vip" className="vip-banner-btn">
                 TA MIG TILL VIPEN
               </Link>
-            </div>
+            </footer>
           </section>
         </section>
       </article>
