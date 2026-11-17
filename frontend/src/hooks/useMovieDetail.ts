@@ -1,6 +1,6 @@
 // A custom hook to fetch movie details and showings based on a given movie ID.
 import { useEffect, useState } from "react";
-import { get, getById } from "../api/api";
+import { api } from "../api/api";
 import type { Movies, Showing, Person } from "../types/types";
 
 export function useMovieDetail(id?: string) {
@@ -16,9 +16,9 @@ export function useMovieDetail(id?: string) {
       setLoading(true);
       try {
         if (!id) return;
-        const movieData = await getById<Movies>("/api/movies", id);
-        const movieShowings = await get<Showing[]>(`/api/shows?movie_id=${id}`);
-        const moviePersons = await get<Person[]>(`/api/persons?movie_id=${id}`);
+        const movieData = await api.getById<Movies>("/api/movies", id);
+        const movieShowings = await api.get<Showing[]>(`/api/shows?movie_id=${id}`);
+        const moviePersons = await api.get<Person[]>(`/api/persons?movie_id=${id}`);
 
         if (cancelled) return;
         setMovie(movieData);

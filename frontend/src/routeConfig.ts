@@ -46,33 +46,6 @@ export const pages = {
     path: "/integritetspolicy",
     label: "Integritetspolicy",
   },
-
-  // ---------------- ADMIN ----------------
-  // /admin är översikten. Visningar ligger på /admin/visningar och teman på /admin/teman.
-  admin: {
-    path: "/admin",
-    label: "Admin",
-  },
-  showsadmin: {
-    path: "/admin/visningar",
-    label: "admin/visningar",
-  },
-  adminPerson: {
-    path: "/admin/personer",
-    label: "admin/personer",
-  },
-  adminMoviePerson: {
-    path: "/admin/rollista",
-    label: "admin/rollista",
-  },
-  adminMovies: {
-    path: "/admin/filmer",
-    label: "admin/filmer",
-  },
-  adminThemes: {
-    path: "/admin/teman",
-    label: "admin/teman",
-  },
 };
 
 export const routeLinks = {

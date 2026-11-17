@@ -1,9 +1,9 @@
-import { del } from "../api/api";
+import { api } from "../api/api";
 
 export function useCancelBooking(onCancelled?: () => void) {
   async function cancelBooking(bookingNumber: string): Promise<boolean> {
     try {
-      await del(`/api/bookings/${encodeURIComponent(bookingNumber)}`);
+      await api.delete(`/api/bookings/${encodeURIComponent(bookingNumber)}`);
       onCancelled?.();
       return true;
     } catch (err) {

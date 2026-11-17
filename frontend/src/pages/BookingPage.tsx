@@ -13,7 +13,7 @@ import BookingSummary from "../components/Booking/BookingSummary/BookingSummary"
 import SeatMap from "../components/Booking/SeatMap/SeatMap";
 import SeatMapModal from "../components/Booking/SeatMap/SeatMapModal";
 import { pages } from "../routeConfig";
-import { getById } from "../api/api";
+import { api } from "../api/api";
 import { extractIdFromSlug } from "../utils/slugify";
 import { useSeatPolling } from "../hooks/useSeatPolling";
 import { useSeatSelection } from "../hooks/useSeatSelection";
@@ -111,7 +111,7 @@ function BookingPage() {
         }
         const data: MovieScreening = await response.json();
         setShowing(data);
-        const movieData = await getById<Movies>("/api/movies", data.movie_id);
+        const movieData = await api.getById<Movies>("/api/movies", data.movie_id);
         setMovie(movieData);
       } catch (error) {
         console.error(error);

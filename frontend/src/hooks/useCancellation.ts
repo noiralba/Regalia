@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { BookingSearch } from "../types/types";
-import { get, del } from "../api/api";
+import { api } from "../api/api";
 
 export function useCancellation() {
   const [bookings, setBookings] = useState<BookingSearch[]>([]);
@@ -15,7 +15,7 @@ export function useCancellation() {
   useEffect(() => {
     async function fetchBookings() {
       try {
-        const data = await get<Record<string, string>[]>("/api/bookings");
+        const data = await api.get<Record<string, string>[]>("/api/bookings");
 
         setBookings(
           data.map((b) => ({
@@ -62,7 +62,7 @@ export function useCancellation() {
     if (!booking) return;
 
     try {
-      await del(`/api/bookings/${encodeURIComponent(booking.bookingNumber)}`);
+      await api.delete(`/api/bookings/${encodeURIComponent(booking.bookingNumber)}`);
 
       setBookings((previous) =>
         previous.filter((b) => b.bookingNumber !== booking.bookingNumber),

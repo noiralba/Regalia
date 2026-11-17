@@ -1,6 +1,6 @@
 // A custom hook to fetch seat availability for a given showing.
 import { useEffect, useState } from "react";
-import { get } from "../api/api";
+import { api } from "../api/api";
 import type { Showing, SeatAvailability } from "../types/types";
 
 export function useSeatAvailability(showing: Showing | null) {
@@ -18,7 +18,7 @@ export function useSeatAvailability(showing: Showing | null) {
       }
       setLoading(true);
       try {
-        const data = await get<SeatAvailability[]>(
+        const data = await api.get<SeatAvailability[]>(
           `/api/seats/available-seats/${showing.show_id}`,
         );
         if (!cancelled) setSeats(data);

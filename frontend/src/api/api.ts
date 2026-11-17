@@ -1,62 +1,65 @@
-export async function request<T>(url: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(url, options);
+import type { UserBookingHistoryResponse } from "../types/types";
 
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`);
+type RequestOptions = {
+  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+  body?: unknown;
+  credentials?: RequestCredentials;
+};
+
+export async function request<T = unknown>(
+  url: string,
+  { method = "GET", body }: RequestOptions = {},
+): Promise<T> {
+  const headers: Record<string, string> = { Origin: "http://localhost:5173" };
+  let requestBody: BodyInit | undefined;
+
+  if (body instanceof FormData) {
+    requestBody = body;
+  } else if (body !== undefined) {
+    requestBody = JSON.stringify(body);
+    headers["Content-Type"] = "application/json";
   }
 
-  // Handle 204 No Content response
+  const response = await fetch(url, {
+    method,
+    headers,
+    body: requestBody,
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    let message = "Något gick fel. Försök igen.";
+    try {
+      const data = await response.json();
+      if (data?.error) message = data.error;
+    } catch {}
+    throw new Error(message);
+  }
+
   if (response.status === 204) {
     return undefined as T;
   }
 
-  return response.json() as Promise<T>;
+  const text = await response.text();
+  return (text ? JSON.parse(text) : null) as T;
 }
 
-// GET
-export function get<T>(url: string): Promise<T> {
-  return request<T>(url);
-}
+export const api = {
+  get: <T>(url: string, options?: Omit<RequestOptions, "method" | "body">) =>
+    request<T>(url, { ...options, method: "GET" }),
 
-// GET by ID
-export function getById<T>(
-  url: string,
-  id: string | number
-): Promise<T> {
-  return request<T>(`${url}/${id}`);
-}
+  getById: <T>(url: string, id: string | number) => request<T>(`${url}/${id}`),
 
-// POST
-export function post<T, B>(
-  url: string,
-  body: B
-): Promise<T> {
-  return request<T>(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
-}
+  post: <T = unknown, B = unknown>(url: string, body?: B) =>
+    request<T>(url, { method: "POST", body }),
 
-// PUT
-export function put<T, B>(
-  url: string,
-  body: B
-): Promise<T> {
-  return request<T>(url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
-}
+  put: <T = unknown, B = unknown>(url: string, body?: B) =>
+    request<T>(url, { method: "PUT", body }),
 
-// DELETE
-export function del<T = void>(url: string): Promise<T> {
-  return request<T>(url, {
-    method: 'DELETE'
-  });
-}
+  delete: <T = void>(url: string) => request<T>(url, { method: "DELETE" }),
+
+  getUserBookings: (userId: string, offset = 0) =>
+    request<UserBookingHistoryResponse>(
+      `http://localhost:3000/api/users/${userId}/bookings?offset=${offset}`,
+    ),
+};

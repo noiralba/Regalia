@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../Admin/shared/api";
-import { queryKeys } from "../Admin/shared/queryKeys";
-import { toStringArray } from "../Admin/shared/parse";
+import { api } from "../../api/api";
+import { queryKeys } from "../../api/queryKeys";
+import { toStringArray } from "../../utils/parse";
 import "./SearchBar.scss";
 
 interface MovieSearchResult {
