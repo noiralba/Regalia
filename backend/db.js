@@ -1,4 +1,8 @@
-require("dotenv").config();
+const path = require("node:path");
+
+require("dotenv").config({
+  path: path.join(__dirname, ".env"),
+});
 
 const mysql = require("mysql2/promise");
 
@@ -11,6 +15,9 @@ const db = mysql.createPool({
   ssl: {
     rejectUnauthorized: false,
   },
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 module.exports = db;
