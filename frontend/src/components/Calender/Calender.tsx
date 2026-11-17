@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { get } from "../../api/api";
+import { api } from "../../api/api";
 import type { MovieScreening, Movies } from "../../types/types";
 import { useLocation, useNavigate } from "react-router";
 import "./Calender.scss";
@@ -48,7 +48,8 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   useEffect(() => {
     let cancelled = false;
 
-    get<Movies[]>("/api/movies")
+    api
+      .get<Movies[]>("/api/movies")
       .then((data) => {
         if (!cancelled) {
           setMovies(data);
@@ -74,7 +75,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
       setError("");
 
       try {
-        const data = await get<MovieScreening[]>(
+        const data = await api.get<MovieScreening[]>(
           `/api/shows?date=${encodeURIComponent(selectedDate)}`,
         );
 

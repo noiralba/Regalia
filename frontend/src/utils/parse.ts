@@ -1,6 +1,3 @@
-// JSON-kolumner från databasen kan komma som objekt/array ELLER som sträng,
-// beroende på databasdrivrutin. De här hjälparna hanterar båda fallen.
-
 export function parseJson<T>(value: unknown, fallback: T): T {
   if (value === null || value === undefined) return fallback;
   if (typeof value === "string") {

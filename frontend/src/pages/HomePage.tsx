@@ -9,7 +9,7 @@ import "../styles/HomePage.scss";
 
 import { useEffect, useState } from "react";
 import type { MovieThumbnails } from "../types/types";
-import { get } from "../api/api";
+import { api } from "../api/api";
 
 function HomePage() {
     const { isLoggedIn, onLogout } = useOutletContext<{
@@ -27,8 +27,8 @@ function HomePage() {
     async function fetchMovies() {
       try {
         const [latest, upcoming] = await Promise.all([
-          get<MovieThumbnails[]>("/api/movies/type/latest"),
-          get<MovieThumbnails[]>("/api/movies/type/upcoming"),
+          api.get<MovieThumbnails[]>("/api/movies/type/latest"),
+          api.get<MovieThumbnails[]>("/api/movies/type/upcoming"),
         ]);
 
         setNowPlaying(latest);

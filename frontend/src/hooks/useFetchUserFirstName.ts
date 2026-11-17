@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { get } from "../api/api";
+import { api } from "../api/api";
 
 interface UserResponse {
   id: string;
@@ -16,7 +16,7 @@ export function useFetchUserFirstName(userId?: string) {
 
     async function fetchFirstName() {
       try {
-        const user = await get<UserResponse>(
+        const user = await api.get<UserResponse>(
           `/api/users/${encodeURIComponent(userId!)}`,
         );
         setFirstName(user.first_name);

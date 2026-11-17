@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "../components/Admin/shared/api";
+import { api } from "../api/api";
 import type { UserBookingHistory } from "../types/types";
 
 export function useFetchUserBookingHistory(userId: string | undefined) {

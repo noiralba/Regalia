@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate, useOutletContext } from "react-router";
-import { post } from "../../../api/api";
+import { api } from "../../../api/api";
 import { pages } from "../../../routeConfig";
 
 import FormField from "../FormField/FormField";
@@ -31,7 +31,7 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
-      const result = await post<
+      const result = await api.post<
         LoginResponse,
         { email: string; password: string }
       >("/api/auth/login", { email, password });
