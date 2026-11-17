@@ -3,17 +3,18 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const db = require("./db");
 const apiRoutes = require("./routes/api");
-const path = require("node:path")
+const path = require("node:path");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // dist ligger i repots frontend-mapp, en nivå ovanför backend-mappen
-const distFolder = path.join(__dirname, '..', 'frontend', 'dist');
+const distFolder = path.join(__dirname, "..", "frontend", "dist");
 
 app.use(
   cors({
     origin: [
+      "http://localhost:3000",
       "http://localhost:5173",
       "http://localhost:4173",
       "http://192.168.68.125:5173",
@@ -46,8 +47,8 @@ testDbConnection();
 
 app.use(express.static(distFolder));
 
-app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(distFolder, 'index.html'));
+app.get("/{*splat}", (req, res) => {
+  res.sendFile(path.join(distFolder, "index.html"));
 });
 
 app.listen(port, () => {
