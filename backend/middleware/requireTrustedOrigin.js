@@ -18,6 +18,7 @@ function requireTrustedOrigin(req, res, next) {
     (process.env.NODE_ENV === "production"
       ? null
       : [
+          "https://bioregalia.se",
           "http://localhost:3000",
           "http://localhost:5173",
           "http://localhost:4173",
