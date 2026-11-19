@@ -50,6 +50,9 @@ export default function DatePicker({
 
   const canGoBack = startDate > today;
 
+  const todayValue = today.toLocaleDateString("sv-SE");
+  const tomorrowValue = addDays(today, 1).toLocaleDateString("sv-SE");
+
   return (
     <section className="dates">
       <h2 className="date-title text-uppercase mb-3">Välj datum</h2>
@@ -66,7 +69,7 @@ export default function DatePicker({
         </button>
 
         <ul className="date-list list-unstyled d-flex flex-grow-1 gap-2 mb-0">
-          {days.map((day, i) => {
+          {days.map((day) => {
             const value = day.toLocaleDateString("sv-SE");
             const isSelected = value === selectedDate;
 
@@ -87,10 +90,11 @@ export default function DatePicker({
                       .replace(".", "")
                       .toUpperCase()}`}
                   </time>
+
                   <small className="d-block text-capitalize">
-                    {i === 0
+                    {value === todayValue
                       ? "Idag"
-                      : i === 1
+                      : value === tomorrowValue
                         ? "Imorgon"
                         : day.toLocaleDateString("sv-SE", {
                             weekday: "short",

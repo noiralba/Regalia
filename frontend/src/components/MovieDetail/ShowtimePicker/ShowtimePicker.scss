@@ -21,16 +21,54 @@
     margin-bottom: v.$space-lg;
   }
 
+  &__date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    width: 8.5rem;
+    min-height: 5rem;
+    padding: 0.6rem 1rem;
+    font-family: v.$font-body;
+    font-size: v.$font-size-small;
+    font-weight: 700;
+    color: v.$color-cream;
+    background-color: v.$color-bg-dark;
+    border: 1px solid v.$color-gold;
+    border-radius: v.$border-radius;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      background-color: v.$color-primary-red;
+    }
+
+    &.is-selected,
+    &[aria-pressed="true"] {
+      background-color: v.$color-primary-red;
+    }
+  }
+
+  &__date-label {
+    color: v.$color-cream;
+    font-size: v.$font-size-small;
+    text-transform: uppercase;
+  }
+
+  &__date-number {
+    color: v.$color-cream;
+    font-size: v.$font-size-body;
+  }
+
   &__times {
     display: grid;
     grid-template-columns: repeat(auto-fill, 8.5rem);
     gap: v.$space-sm 1rem;
   }
 
-  // Delad stil för datum- och tidsknappar
-  &__date,
   &__time {
-    width: 8.5rem; 
+    width: 8.5rem;
     padding: 0.8rem 1rem;
     font-family: v.$font-body;
     font-size: v.$font-size-body;
@@ -53,11 +91,21 @@
   }
 
   @include v.respond-to(mobile) {
+    &__dates {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &__date {
+      width: 100%;
+      min-width: 0;
+      padding: 0.6rem 0.2rem;
+    }
+
     &__times {
       grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
     }
 
-    &__date,
     &__time {
       width: 100%;
     }
