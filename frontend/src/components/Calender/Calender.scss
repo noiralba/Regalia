@@ -1,9 +1,22 @@
 @use "../../styles/variables" as v;
 
+.calendar-panel {
+  margin-top: 4rem;
+  background-color: v.$color-card-bg;
+  border: 1px solid v.$color-gold;
+  border-radius: v.$border-radius;
+  padding: 1rem;
+}
+
 .calender {
   width: 100%;
   max-width: v.$content-max-width;
   margin-inline: auto;
+
+  // Tar bort strecket under den sista synliga filmen
+  .movie-info.movie-info--last {
+    border-bottom: none !important;
+  }
 
   // Datumrubrik – H2
   h2 {
@@ -14,12 +27,42 @@
     margin-bottom: 0;
   }
 
+  // Visa mer
+  .show-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin: 0.5rem auto 0;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    font-family: v.$font-body;
+    font-size: v.$font-size-small;
+    font-weight: 600;
+    letter-spacing: v.$letter-spacing;
+    text-transform: uppercase;
+    color: v.$color-gold;
+    cursor: pointer;
+
+    &:hover {
+      color: v.$color-cream;
+    }
+
+    &__arrow {
+      display: flex;
+      transition: transform 0.25s ease;
+
+      &.rotated {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
   // Kalenderns bakgrund och ram
   .schedule-box {
-    background-color: v.$color-card-bg;
-    border: 1px solid v.$color-gold;
-    border-radius: v.$border-radius;
-    padding-block: 2.5rem !important;
+    padding-top: 2rem !important;
+    padding-bottom: 1rem !important;
   }
 
   // Filmtitel – H3
@@ -89,7 +132,6 @@
     text-transform: uppercase;
     min-height: 4rem;
     letter-spacing: v.$letter-spacing;
-
     background-color: v.$color-primary-red;
     color: v.$color-cream;
     border-color: v.$color-gold;
@@ -117,6 +159,7 @@
     }
   }
 }
+
 @keyframes button-blink {
   50% {
     opacity: 0.65;

@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { get } from "../../api/api";
 import type { MovieScreening, Movies } from "../../types/types";
 import { useLocation, useNavigate } from "react-router";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import "./Calender.scss";
 
 type ShowingWithInfo = MovieScreening & {
@@ -19,30 +20,15 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   const [movies, setMovies] = useState<Movies[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [today] = useState(() => new Date().toLocaleDateString("sv-SE"));
-
-  function formatSelectedDate(dateString: string) {
-    if (dateString === today) return "Visas idag";
-
-    const date = new Date(`${dateString}T00:00`);
-
-    const weekday = date.toLocaleDateString("sv-SE", {
-      weekday: "long",
-    });
-
-    const dayAndMonth = date
-      .toLocaleDateString("sv-SE", {
-        day: "numeric",
-        month: "short",
-      })
-      .replace(".", "");
-
-    return `${weekday} ${dayAndMonth}`;
-  }
+  // Återställ listan när datumet ändras
+  useEffect(() => {
+    setShowAll(false);
+  }, [selectedDate]);
 
   // Hämta filmer en gång
   useEffect(() => {
@@ -129,12 +115,11 @@ export default function Calendar({ selectedDate }: CalendarProps) {
     return [...groups.values()];
   }, [showingsWithInfo]);
 
+  // Visa fem filmer eller hela listan
+  const visibleGroups = showAll ? groupedShowings : groupedShowings.slice(0, 5);
+
   return (
     <section className="calender">
-      <header className="mb-3">
-        <h2>{formatSelectedDate(selectedDate)}</h2>
-      </header>
-
       {loading ? (
         <p>Laddar visningar...</p>
       ) : error ? (
@@ -143,7 +128,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
         <p>Inga visningar för detta datum.</p>
       ) : (
         <section className="schedule-box rounded-2 p-3 p-md-4">
-          {groupedShowings.map((group) => {
+          {visibleGroups.map((group, index) => {
             const movie = group[0];
 
             return (
@@ -154,7 +139,13 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                 <header className="col-12 col-md-4">
                   <h3 className="movie-title text-uppercase">{movie.Movie}</h3>
 
-                  <p className="movie-info mb-0">
+                  <p
+                    className={`movie-info mb-0 ${
+                      index === visibleGroups.length - 1
+                        ? "movie-info--last"
+                        : ""
+                    }`}
+                  >
                     <small>
                       {movie.categories}
                       {movie.ageRating != null && (
@@ -194,9 +185,27 @@ export default function Calendar({ selectedDate }: CalendarProps) {
             );
           })}
 
-          {location.pathname !== "/kalender" && (
-            <footer className="row g-0 mt-3">
-              <section className="col-12 col-md-8 offset-md-4">
+          <footer className="row g-0 mt-3">
+            <section className="col-12 col-md-8 offset-md-4">
+              {groupedShowings.length > 5 && (
+                <button
+                  type="button"
+                  className="show-all"
+                  onClick={() => setShowAll((previous) => !previous)}
+                  aria-expanded={showAll}
+                >
+                  {showAll ? "Visa mindre" : "Visa mer"}
+                  <span
+                    className={
+                      showAll ? "show-all__arrow rotated" : "show-all__arrow"
+                    }
+                  >
+                    <MdKeyboardArrowDown size={24} />
+                  </span>
+                </button>
+              )}
+
+              {location.pathname !== "/kalender" && (
                 <button
                   onClick={() => navigate("/kalender")}
                   type="button"
@@ -204,9 +213,9 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                 >
                   Se fler datum
                 </button>
-              </section>
-            </footer>
-          )}
+              )}
+            </section>
+          </footer>
         </section>
       )}
     </section>

@@ -34,9 +34,11 @@ export default function CalendarPage() {
 
   return (
     <main className="page-container">
-      <DatePicker selectedDate={selectedDate} onSelect={setSelectedDate} />
+      <section className="calendar-panel">
+        <DatePicker selectedDate={selectedDate} onSelect={setSelectedDate} />
 
-      <Calendar selectedDate={selectedDate} />
+        <Calendar selectedDate={selectedDate} />
+      </section>
 
       <section className="themes-section mt-5" aria-label="Filmer efter tema">
         {themeGroups
