@@ -1,6 +1,6 @@
 # Regalia
 
-Regalia is a cinema booking web application developed as a group project by **Group A**: Andrea, Jonathan, Sara, Madeleine, Kire and Maria.
+Regalia is a cinema booking web application developed as a group project by **Group A**: Andrea, Jonathan, Sara, Madeleine, Kirey and Maria.
 
 It consists of a React frontend, a Node/Express backend and a MySQL database.
 

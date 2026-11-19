@@ -12,21 +12,27 @@ const port = process.env.PORT || 3000;
 // dist ligger i repots frontend-mapp, en nivå ovanför backend-mappen
 const distFolder = path.join(__dirname, "..", "frontend", "dist");
 
-app.use(
-  cors({
-    origin: [
+const allowedOrigins = process.env.FRONTEND_ORIGIN
+  ? process.env.FRONTEND_ORIGIN.split(",").map((origin) => origin.trim())
+: [
       "www.bioregalia.se",
       "www.bioregalia.se/",
       "bioregalia.se",
       "bioregalia.se/",
       "https://bioregalia.se",
       "https://bioregalia.se/",
+      "https://bioregalia.se",
+      "https://bioregalia.se",
       "http://localhost:3000",
       "http://localhost:5173",
       "http://localhost:4173",
       "http://192.168.68.125:5173",
       "http://192.168.68.125:4173",
-    ],
+    ];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
