@@ -9,7 +9,7 @@ interface Movie {
   title: string;
   posterImage: string;
 }
-
+//hej
 interface ThemeFilmStripProps {
   themeTitle: string;
   themeDescription?: string;
