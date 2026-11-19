@@ -103,13 +103,7 @@ function BookingPage() {
     if (!visningId) return;
     async function fetchShowing() {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/shows/${visningId}`,
-        );
-        if (!response.ok) {
-          throw new Error("Could not fetch showing");
-        }
-        const data: MovieScreening = await response.json();
+        const data = await api.get<MovieScreening>(`/api/shows/${visningId}`);
         setShowing(data);
         const movieData = await api.getById<Movies>(
           "/api/movies",
@@ -128,11 +122,7 @@ function BookingPage() {
   useEffect(() => {
     async function fetchTicketTypes() {
       try {
-        const response = await fetch("http://localhost:3000/api/ticket-types");
-        if (!response.ok) {
-          throw new Error("Could not fetch ticket types");
-        }
-        const data: TicketType[] = await response.json();
+        const data = await api.get<TicketType[]>("/api/ticket-types");
         setTicketTypes(data);
       } catch (error) {
         console.error(error);
@@ -198,13 +188,19 @@ function BookingPage() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bookingData),
-      });
-
-      if (response.status === 409) {
+      const data = await api.post<BookingConfirmation>(
+        "/api/bookings",
+        bookingData,
+      );
+      setBookingConfirmation(data);
+    } catch (error) {
+      console.error(error);
+      if (
+        error instanceof Error &&
+        (error.message.includes("409") ||
+          error.message.toLowerCase().includes("already booked") ||
+          error.message.toLowerCase().includes("conflict"))
+      ) {
         await refreshSeats();
         setSelectedSeats([]);
         setError(
@@ -212,13 +208,6 @@ function BookingPage() {
         );
         return;
       }
-      if (!response.ok) {
-        throw new Error("Could not create booking");
-      }
-      const data: BookingConfirmation = await response.json();
-      setBookingConfirmation(data);
-    } catch (error) {
-      console.error(error);
       setError("Kunde inte genomföra bokningen.");
     } finally {
       setIsBooking(false);
