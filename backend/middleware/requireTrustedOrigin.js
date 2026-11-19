@@ -37,12 +37,24 @@ function requireTrustedOrigin(req, res, next) {
     try {
       requestOrigin = new URL(req.get("Referer")).origin;
     } catch {
-      return res.status(403).json({ error: "Begäran nekad." });
+      return res
+        .status(403)
+        .json({
+          error: "Begäran nekad.",
+          prodOrigins,
+          allowedOrigins,
+          requestOrigin,
+        });
     }
   }
 
   if (!allowedOrigins.includes(requestOrigin)) {
-    return res.status(403).json({ error: "Begäran nekad." });
+    return res.status(403).json({
+      error: "Begäran nekad!.",
+      prodOrigins,
+      allowedOrigins,
+      requestOrigin,
+    });
   }
 
   next();
