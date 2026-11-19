@@ -35,7 +35,6 @@ export interface MovieThumbnails {
   categories: string[];
 }
 
-//test data
 export interface Showing {
   show_id: string;
   movie_id: string;
@@ -43,20 +42,6 @@ export interface Showing {
   "Screening Date": string;
   "Start Time": string;
   Screen: string;
-}
-
-export interface ScheduleShowing {
-  id: string;
-  movieTitle: string;
-  time: string;
-  salong: string;
-}
-
-// Testdata för schemat
-export interface ScheduleDay {
-  id: string;
-  label: string;
-  showings: ScheduleShowing[];
 }
 
 export interface SeatAvailability {
@@ -124,7 +109,6 @@ export interface TicketType {
   "Price (SEK)": string;
 }
 
-// kanske ta bort?
 export interface UserBookingHistory {
   booking_id: string;
   booking_number: string;
