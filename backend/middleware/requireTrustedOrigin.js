@@ -13,7 +13,20 @@ function requireTrustedOrigin(req, res, next) {
     return next();
   }
 
-  const allowedOrigin = process.env.FRONTEND_ORIGIN || null;
+  const allowedOrigin =
+    process.env.FRONTEND_ORIGIN ||
+    (process.env.NODE_ENV === "production"
+      ? null
+      : [
+          "www.bioregalia.se",
+          "bioregalia.se",
+          "https://bioregalia.se",
+          "http://localhost:3000",
+          "http://localhost:5173",
+          "http://localhost:4173",
+          "http://192.168.68.125:5173",
+          "http://192.168.68.125:4173",
+        ]);
 
   let requestOrigin = req.get("Origin");
 
