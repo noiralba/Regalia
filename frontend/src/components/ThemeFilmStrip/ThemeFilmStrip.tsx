@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import Snowfall from "react-snowfall";
 import { getMovieImage } from "../../utils/getMovieImage";
 import { slugify } from "../../utils/slugify";
 import "./ThemeFilmStrip.scss";
@@ -9,7 +10,7 @@ interface Movie {
   title: string;
   posterImage: string;
 }
-//hej
+
 interface ThemeFilmStripProps {
   themeTitle: string;
   themeDescription?: string;
@@ -23,9 +24,22 @@ export default function ThemeFilmStrip({
 }: ThemeFilmStripProps) {
   return (
     <section className="theme-filmstrip" aria-label={`Tema ${themeTitle}`}>
-      <img src={eventImage} />
+      <img src={eventImage} alt="" />
+
+      <Snowfall
+        snowflakeCount={150}
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          zIndex: 2,
+          pointerEvents: "none",
+        }}
+      />
+
       <header className="theme-filmstrip__header mb-4">
         <h2 className="theme-filmstrip__title">{themeTitle}</h2>
+
         {themeDescription && (
           <span className="theme-filmstrip__description">
             {themeDescription}
