@@ -1,14 +1,22 @@
 @use "../../styles/variables" as v;
 
 .theme-filmstrip {
-  // margin-top: v.$section-spacing;
   width: 100%;
+  min-height: 600px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
   &__header {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     margin-bottom: v.$space-md;
+    padding: 30px 40px;
   }
 
   &__title {
@@ -30,6 +38,7 @@
   }
 
   &__strip-wrapper {
+    margin-top: auto;
     position: relative;
     background: #0d0a0b;
     border-radius: v.$border-radius;

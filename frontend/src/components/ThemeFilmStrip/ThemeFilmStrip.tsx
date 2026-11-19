@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { getMovieImage } from "../../utils/getMovieImage";
 import { slugify } from "../../utils/slugify";
 import "./ThemeFilmStrip.scss";
+import eventImage from "../../assets/images/vip/event.png";
 
 interface Movie {
   id: string;
@@ -21,7 +22,12 @@ export default function ThemeFilmStrip({
   movies,
 }: ThemeFilmStripProps) {
   return (
-    <section className="theme-filmstrip" aria-label={`Tema ${themeTitle}`}>
+    <section
+      className="theme-filmstrip"
+      aria-label={`Tema ${themeTitle}`}
+      //style={{ backgroundImage: `url(${eventImage})` }}
+    >
+      <img src={eventImage} />
       <header className="theme-filmstrip__header mb-4">
         <h2 className="theme-filmstrip__title">{themeTitle}</h2>
         {themeDescription && (
