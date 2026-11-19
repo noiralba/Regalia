@@ -22,11 +22,7 @@ export default function ThemeFilmStrip({
   movies,
 }: ThemeFilmStripProps) {
   return (
-    <section
-      className="theme-filmstrip"
-      aria-label={`Tema ${themeTitle}`}
-      //style={{ backgroundImage: `url(${eventImage})` }}
-    >
+    <section className="theme-filmstrip" aria-label={`Tema ${themeTitle}`}>
       <img src={eventImage} />
       <header className="theme-filmstrip__header mb-4">
         <h2 className="theme-filmstrip__title">{themeTitle}</h2>
