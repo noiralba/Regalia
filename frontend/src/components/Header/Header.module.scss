@@ -270,9 +270,151 @@
     padding-inline: 0;
   }
 }
-/* Mobil (<= 768px) */
+/* Mobil */
 @media (max-width: 768px) {
-  /* ...tus demás reglas móviles... */
+  .header,
+  .headerHome,
+  .headerSubpage {
+    padding: 0.35rem 0 0;
+    padding-bottom: 0;
+    margin: 0;
+  }
+
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    padding: 0.25rem 0.5rem 0.5rem;
+  }
+
+  .brand {
+    order: 1;
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .icon {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .brandName {
+    display: none;
+  }
+
+  .searchArea {
+    order: 2;
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    max-width: 250px;
+    margin: 0;
+
+    form {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 0.25rem;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    section {
+      flex: 1 1 auto;
+      width: auto;
+      min-width: 0;
+      max-width: none;
+    }
+
+    div {
+      flex: 0 0 18px;
+      width: 18px;
+      min-width: 18px;
+      max-width: 18px;
+    }
+
+    input {
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      height: 1.75rem;
+      font-size: 0.72rem;
+      padding: 0.15rem 0.4rem;
+      box-sizing: border-box;
+    }
+
+    select {
+      width: 18px;
+      min-width: 18px;
+      max-width: 18px;
+      height: 1.75rem;
+      font-size: 0.72rem;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  }
+
+  .toggle {
+    display: inline-flex;
+    flex: 0 0 auto;
+    order: 3;
+    width: 2.1rem;
+    height: 2.1rem;
+    margin: 0 0 0 auto;
+  }
+
+  .navWrap {
+    order: 4;
+    display: grid;
+    flex: 0 0 100%;
+    width: 100%;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+      visibility 0s linear 0.45s;
+  }
+
+  .navOpen {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .nav {
+    overflow: hidden;
+    min-height: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition:
+      opacity 0.3s ease,
+      transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+
+    li + li {
+      border-top: 1px solid rgba(v.$color-gold, 0.25);
+    }
+  }
+
+  .navOpen .nav {
+    padding-top: 0.35rem;
+    padding-bottom: 0.2rem;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.08s, 0s;
+  }
+
+  .link {
+    display: block;
+    padding: 0.9rem 0.25rem;
+    font-size: 1.3rem;
+  }
 
   .divider,
   .headerSubpage .divider {
@@ -288,7 +430,13 @@
     padding: 0 0 0.5rem;
     padding-inline: 0;
   }
+
+  .star {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
 }
+
 /* Tillgänglighet */
 @media (prefers-reduced-motion: reduce) {
   .link,
