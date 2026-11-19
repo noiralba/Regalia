@@ -32,7 +32,7 @@ function requireTrustedOrigin(req, res, next) {
         ]);
 
   let requestOrigin = req.get("Origin");
-  console.log({ first, requestOrigin });
+  console.log("first", { requestOrigin });
   if (!requestOrigin) {
     try {
       requestOrigin = new URL(req.get("Referer")).origin;
@@ -42,7 +42,7 @@ function requireTrustedOrigin(req, res, next) {
       });
     }
   }
-  console.log({ second, requestOrigin });
+  console.log("second", { requestOrigin });
   if (!allowedOrigin.includes(requestOrigin)) {
     return res.status(403).json({
       error: "Begäran nekad.",
