@@ -31,9 +31,26 @@ const fetchFilteredMovies = async (
   return api.get<MovieSearchResult[]>(`/api/movies?${queryParams.toString()}`);
 };
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false,
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
+
 export default function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const searchQuery = searchParams.get("sök") || "";
   const categoryQuery = searchParams.get("kategorier") || "";
@@ -46,7 +63,7 @@ export default function SearchBar() {
   const searchBarRef = useRef<HTMLElement>(null);
 
   const ageOptions = [
-    { value: "", label: "ALLA ÅLDRAR" },
+    { value: "", label: "Alla filmer" },
     { value: "0", label: "Barntillåten (0 år)" },
     { value: "7", label: "7 år" },
     { value: "11", label: "11 år" },
@@ -55,9 +72,8 @@ export default function SearchBar() {
 
   const selectedAge =
     ageOptions.find((option) => option.value === ageQuery)?.label ||
-    "ALLA ÅLDRAR";
+    "Åldersgräns";
 
-  // Stäng båda menyerna vid klick utanför eller Escape
   useEffect(() => {
     if (!ageMenuOpen && !searchResultsOpen) return;
 
@@ -87,7 +103,6 @@ export default function SearchBar() {
     };
   }, [ageMenuOpen, searchResultsOpen]);
 
-  // Fördröj sökningen med 300 ms
   useEffect(() => {
     const handler = setTimeout(() => {
       setSearchParams((prev) => {
@@ -134,6 +149,7 @@ export default function SearchBar() {
   };
 
   const handleMovieClick = (movieId: string) => {
+    setSearchResultsOpen(false);
     navigate(`/filmer/${movieId}`);
   };
 
@@ -148,7 +164,7 @@ export default function SearchBar() {
             id="movie-search"
             type="search"
             autoComplete="off"
-            placeholder="Titel, genre eller sökord"
+            placeholder={isMobile ? "Sök film..." : "Sök efter film..."}
             value={localSearch}
             onFocus={() => setSearchResultsOpen(true)}
             onChange={(e) => {
@@ -158,45 +174,67 @@ export default function SearchBar() {
           />
         </section>
 
-        <section className="age-filter">
-          <button
-            type="button"
-            className="age-trigger"
-            aria-expanded={ageMenuOpen}
-            aria-haspopup="true"
-            onClick={() => {
-              setAgeMenuOpen((open) => !open);
-              setSearchResultsOpen(true);
-            }}
-          >
-            <span>{selectedAge}</span>
-
-            <span
-              className={`age-arrow ${ageMenuOpen ? "age-arrow-open" : ""}`}
-              aria-hidden="true"
-            />
-          </button>
-
-          {ageMenuOpen && (
-            <section className="age-dropdown" aria-label="Välj åldersgräns">
+        {isMobile ? (
+          <div className="mobile-age-arrow-wrap">
+            <select
+              className="mobile-age-arrow-select"
+              aria-label="Filtrera efter ålder"
+              value={ageQuery}
+              onChange={(e) => {
+                handleFilterChange("åldersgräns", e.target.value);
+                setSearchResultsOpen(true);
+              }}
+            >
               {ageOptions.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  className={`age-option ${
-                    ageQuery === option.value ? "age-option-active" : ""
-                  }`}
-                  onClick={() => {
-                    handleFilterChange("åldersgräns", option.value);
-                    setAgeMenuOpen(false);
-                  }}
-                >
+                <option key={option.value} value={option.value}>
                   {option.label}
-                </button>
+                </option>
               ))}
-            </section>
-          )}
-        </section>
+            </select>
+            <span className="mobile-down-arrow" aria-hidden="true" />
+          </div>
+        ) : (
+          <section className="age-filter">
+            <button
+              type="button"
+              className="age-trigger"
+              aria-expanded={ageMenuOpen}
+              aria-haspopup="true"
+              onClick={() => {
+                setAgeMenuOpen((open) => !open);
+                setSearchResultsOpen(true);
+              }}
+            >
+              <span>{selectedAge}</span>
+
+              <span
+                className={`age-arrow ${ageMenuOpen ? "age-arrow-open" : ""}`}
+                aria-hidden="true"
+              />
+            </button>
+
+            {ageMenuOpen && (
+              <section className="age-dropdown" aria-label="Välj åldersgräns">
+                {ageOptions.map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    className={`age-option ${
+                      ageQuery === option.value ? "age-option-active" : ""
+                    }`}
+                    onClick={() => {
+                      handleFilterChange("åldersgräns", option.value);
+                      setAgeMenuOpen(false);
+                      setSearchResultsOpen(true);
+                    }}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </section>
+            )}
+          </section>
+        )}
       </form>
 
       {searchResultsOpen &&

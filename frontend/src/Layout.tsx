@@ -99,7 +99,7 @@ export default function Layout() {
   }, [session, navigate]);
 
   return (
-    <>
+    <section>
       <ScrollToTop />
       {!isHome && (
         <Header
@@ -128,6 +128,6 @@ export default function Layout() {
         <Footer />
       </section>
       <CookieModal />
-    </>
+    </section>
   );
 }
