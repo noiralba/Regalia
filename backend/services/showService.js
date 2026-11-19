@@ -13,10 +13,14 @@ async function getMovieScreenings(showId = null, filters = {}, targetDb = db) {
   }
 
   let sql = "SELECT * FROM v_movie_screenings";
-  const queryParams = [];
+  const nowSweden = new Date().toLocaleString("sv-SE", {
+    timeZone: "Europe/Stockholm",
+  });
+
   const whereClauses = [
-    "STR_TO_DATE(CONCAT(`Screening Date`, ' ', `Start Time`), '%Y-%m-%d %H:%i') >= NOW()",
+    "STR_TO_DATE(CONCAT(`Screening Date`, ' ', `Start Time`), '%Y-%m-%d %H:%i') > ?",
   ];
+  const queryParams = [nowSweden];
 
   if (filters.date) {
     whereClauses.push("`Screening Date` = ?");
