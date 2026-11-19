@@ -1,0 +1,40 @@
+@use "../../styles/variables" as v;
+
+.privacy-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-family: v.$font-body;
+  font-size: v.$font-size-small;
+  color: v.$color-cream;
+
+  input[type="checkbox"] {
+    margin-top: 0.25rem;
+    accent-color: v.$color-gold;
+    cursor: pointer;
+
+    &:focus-visible {
+      @include v.focus-ring;
+    }
+  }
+
+  label {
+    line-height: 1.45;
+    cursor: pointer;
+
+    a {
+      color: v.$color-gold;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+
+      &:hover {
+        color: v.$color-cream;
+      }
+
+      &:focus-visible {
+        @include v.focus-ring;
+        border-radius: v.$border-radius;
+      }
+    }
+  }
+}

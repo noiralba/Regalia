@@ -290,6 +290,7 @@ function BookingPage() {
         error={error}
         isBooking={isBooking}
         onConfirm={handleBooking}
+        isLoggedIn={Boolean(userId)}
       />
     </main>
   );

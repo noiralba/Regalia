@@ -1,5 +1,7 @@
+import { useState } from "react";
 import type { MovieScreening } from "../../../types/types";
 import { FormField } from "../../Forms";
+import PrivacyCheckbox from "../../PrivacyCheckbox/PrivacyCheckbox";
 import "./BookingSummary.scss";
 
 interface BookingSummaryProps {
@@ -12,6 +14,7 @@ interface BookingSummaryProps {
   error: string;
   isBooking: boolean;
   onConfirm: () => void;
+  isLoggedIn?: boolean;
 }
 
 function BookingSummary({
@@ -24,7 +27,21 @@ function BookingSummary({
   error,
   isBooking,
   onConfirm,
+  isLoggedIn = false,
 }: BookingSummaryProps) {
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+  const [privacyError, setPrivacyError] = useState("");
+
+  const handleConfirmClick = () => {
+    if (!isLoggedIn && !acceptedPrivacy) {
+      setPrivacyError("Du måste godkänna integritetspolicyn för att boka.");
+      return;
+    }
+
+    setPrivacyError("");
+    onConfirm();
+  };
+
   return (
     <section className="booking-summary">
       <h2>Din bokning</h2>
@@ -65,17 +82,30 @@ function BookingSummary({
             value={email}
             onChange={(event) => onEmailChange(event.target.value)}
             autoComplete="email"
-            
           />
+
+          {!isLoggedIn && (
+            <PrivacyCheckbox
+              id="privacy-booking-guest"
+              checked={acceptedPrivacy}
+              onChange={(checked) => {
+                setAcceptedPrivacy(checked);
+                if (checked) {
+                  setPrivacyError("");
+                }
+              }}
+            />
+          )}
         </article>
       </section>
 
+      {privacyError && <p className="booking-summary__error">{privacyError}</p>}
       {error && <p className="booking-summary__error">{error}</p>}
 
       <button
         className="booking-summary__confirm"
         type="button"
-        onClick={onConfirm}
+        onClick={handleConfirmClick}
         disabled={isBooking}
       >
         {isBooking ? "Bokar..." : "Bekräfta bokning"}

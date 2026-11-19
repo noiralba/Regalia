@@ -14,13 +14,23 @@ function requireTrustedOrigin(req, res, next) {
   }
 
   const allowedOrigin = process.env.FRONTEND_ORIGIN
-    ? process.env.FRONTEND_ORIGIN.split(",").map((origin) => origin.trim())
+    ? process.env.FRONTEND_ORIGIN.split(",")
+        .map((origin) => origin.trim())
+        .filter(Boolean)
     : [
+        "www.bioregalia.se",
+        "www.bioregalia.se/",
+        "bioregalia.se",
+        "bioregalia.se/",
         "https://bioregalia.se",
-        "https://www.bioregalia.se",
+        "https://bioregalia.se/",
+        "https://bioregalia.se",
+        "https://bioregalia.se",
         "http://localhost:3000",
         "http://localhost:5173",
         "http://localhost:4173",
+        "http://192.168.68.125:5173",
+        "http://192.168.68.125:4173",
       ];
 
   let requestOrigin = req.get("Origin");
@@ -34,13 +44,14 @@ function requireTrustedOrigin(req, res, next) {
       });
     }
   }
+
   if (!allowedOrigin.includes(requestOrigin)) {
     return res.status(403).json({
-      error: "Begäran nekad!.",
-      allowedOrigin,
-      requestOrigin,
+      error: "Begäran nekad.",
     });
   }
+
   return next();
 }
+
 module.exports = requireTrustedOrigin;

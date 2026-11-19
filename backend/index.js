@@ -14,12 +14,20 @@ const distFolder = path.join(__dirname, "..", "frontend", "dist");
 
 const allowedOrigins = process.env.FRONTEND_ORIGIN
   ? process.env.FRONTEND_ORIGIN.split(",").map((origin) => origin.trim())
-  : [
+: [
+      "www.bioregalia.se",
+      "www.bioregalia.se/",
+      "bioregalia.se",
+      "bioregalia.se/",
       "https://bioregalia.se",
-      "https://www.bioregalia.se",
+      "https://bioregalia.se/",
+      "https://bioregalia.se",
+      "https://bioregalia.se",
       "http://localhost:3000",
       "http://localhost:5173",
       "http://localhost:4173",
+      "http://192.168.68.125:5173",
+      "http://192.168.68.125:4173",
     ];
 
 app.use(
