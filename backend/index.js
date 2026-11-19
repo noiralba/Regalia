@@ -16,11 +16,8 @@ app.use(
   cors({
     origin: [
       "www.bioregalia.se",
-      "www.bioregalia.se/",
       "bioregalia.se",
-      "bioregalia.se/",
       "https://bioregalia.se",
-      "https://bioregalia.se/",
       "http://localhost:3000",
       "http://localhost:5173",
       "http://localhost:4173",

@@ -1,7 +1,7 @@
 import FormAlert from "../FormAlert/FormAlert";
 import FormField from "../FormField/FormField";
 import FormActions from "../FormActions/FormActions";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -27,7 +27,7 @@ export default function CancelForm() {
     cancelBooking,
   } = useCancellation();
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     searchBooking(bookingNumber, email);
   }
