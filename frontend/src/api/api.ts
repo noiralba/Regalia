@@ -60,6 +60,6 @@ export const api = {
 
   getUserBookings: (userId: string, offset = 0) =>
     request<UserBookingHistoryResponse>(
-      `http://localhost:3000/api/users/${userId}/bookings?offset=${offset}`,
+      `/api/users/${userId}/bookings?offset=${offset}`,
     ),
 };

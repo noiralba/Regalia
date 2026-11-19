@@ -9,6 +9,7 @@ import FormAlert from "../FormAlert/FormAlert";
 import FormActions from "../FormActions/FormActions";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import "./CreateAccountForm.scss";
+import { api } from "../../../api/api";
 
 interface FormDataState {
   first_name: string;
@@ -41,8 +42,6 @@ export default function CreateAccountForm() {
     e.preventDefault();
     setError("");
 
-    setShowSuccess(true);
-
     if (formData.password !== formData.confirmPassword) {
       setError("Lösenorden matchar inte.");
       return;
@@ -50,19 +49,14 @@ export default function CreateAccountForm() {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          first_name: formData.first_name,
-          last_name: formData.last_name,
-          email: formData.email,
-          password: formData.password,
-        }),
+      await api.post("/api/users", {
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        email: formData.email,
+        password: formData.password,
       });
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Något gick fel.");
+      setShowSuccess(true);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Ett oväntat fel inträffade.",

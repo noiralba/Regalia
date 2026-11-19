@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Seat } from "../types/types";
+import { api } from "../api/api";
 
 // Custom hook som hanterar sittplatser a för en filmvisning
 export function useSeatPolling(visningId: string | undefined) {
@@ -17,15 +18,9 @@ export function useSeatPolling(visningId: string | undefined) {
     isFetching.current = true;
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/seats/available-seats/${visningId}`,
+      const data = await api.get<Seat[]>(
+        `/api/seats/available-seats/${visningId}`,
       );
-
-      if (!response.ok) {
-        throw new Error("Kunde tyvärr inte hämta sittplatserna");
-      }
-
-      const data: Seat[] = await response.json();
 
       setSeats(data);
     } catch (error) {
