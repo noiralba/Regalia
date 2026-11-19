@@ -9,6 +9,7 @@ import FormAlert from "../FormAlert/FormAlert";
 import FormActions from "../FormActions/FormActions";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import "./CreateAccountForm.scss";
+import { PrivacyCheckbox } from "../../PrivacyCheckbox/PrivacyCheckbox";
 
 interface FormDataState {
   first_name: string;
@@ -28,6 +29,7 @@ export default function CreateAccountForm() {
     password: "",
     confirmPassword: "",
   });
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -122,6 +124,11 @@ export default function CreateAccountForm() {
           value={formData.confirmPassword}
           onChange={handleChange}
           autoComplete="new-password"
+        />
+        <PrivacyCheckbox
+          id="privacy-create-account"
+          checked={acceptedPrivacy}
+          onChange={setAcceptedPrivacy}
         />
 
         <FormActions

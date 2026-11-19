@@ -111,7 +111,10 @@ function BookingPage() {
         }
         const data: MovieScreening = await response.json();
         setShowing(data);
-        const movieData = await api.getById<Movies>("/api/movies", data.movie_id);
+        const movieData = await api.getById<Movies>(
+          "/api/movies",
+          data.movie_id,
+        );
         setMovie(movieData);
       } catch (error) {
         console.error(error);
@@ -298,6 +301,7 @@ function BookingPage() {
         error={error}
         isBooking={isBooking}
         onConfirm={handleBooking}
+        isLoggedIn={Boolean(userId)}
       />
     </main>
   );
