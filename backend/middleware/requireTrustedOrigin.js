@@ -43,6 +43,7 @@ function requireTrustedOrigin(req, res, next) {
   if (!allowedOrigin.includes(requestOrigin)) {
     return res.status(403).json({
       error: "Begäran nekad!.",
+      requestOrigin,
     });
   }
 
