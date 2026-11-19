@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const db = require("./db");
 const apiRoutes = require("./routes/api");
 const path = require("node:path");
+const { startScheduler } = require("./data/scheduler");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -50,6 +51,7 @@ async function testDbConnection() {
 }
 
 testDbConnection();
+startScheduler();
 
 app.use(express.static(distFolder));
 

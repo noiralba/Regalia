@@ -1,5 +1,4 @@
-
-const refillScreenings = require("./scripts/add-screenings.js");
+const refillScreenings = require("../scripts/add-screenings");
 
 const INTERVAL_MS = 10 * 60 * 1000;
 let running = false;
