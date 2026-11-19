@@ -21,11 +21,10 @@
 /* Sökfält */
 .search-field {
   display: flex;
-  flex: 0 0 180px;
+  flex: 1 1 auto;
   flex-direction: column;
-  min-width: 0;
+  min-width: 180px;
 }
-
 .search-bar label {
   display: none;
 }
@@ -41,17 +40,54 @@
   border-radius: 4px;
   font-family: v.$font-body;
   font-size: 0.85rem;
-    &::placeholder {
+
+  &::placeholder {
     color: v.$color-cream;
     opacity: 1;
   }
 }
+
 .search-input:-webkit-autofill,
 .search-input:-webkit-autofill:hover,
 .search-input:-webkit-autofill:focus {
   -webkit-text-fill-color: v.$color-cream;
   -webkit-box-shadow: 0 0 0 1000px v.$color-bg-dark inset;
   transition: background-color 9999s ease-in-out 0s;
+}
+
+.mobile-age-arrow-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 24px;
+}
+
+.mobile-age-arrow-select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+
+  option {
+    background: v.$color-card-bg;
+    color: v.$color-cream;
+  }
+}
+
+.mobile-down-arrow {
+  width: 7px;
+  height: 7px;
+  border-right: 1.8px solid v.$color-gold;
+  border-bottom: 1.8px solid v.$color-gold;
+  transform: rotate(45deg);
+  margin-top: -2px;
+  pointer-events: none;
 }
 
 /* Åldersfilter */
@@ -79,6 +115,9 @@
   font-size: 0.85rem;
   text-align: left;
   cursor: pointer;
+  span:first-child {
+    white-space: nowrap;
+  }
 }
 
 .age-arrow {
@@ -146,8 +185,10 @@
   left: 0;
   z-index: 1100;
   box-sizing: border-box;
-  width: 180px;
-  max-width: calc(100vw - 2rem);
+  width: 100%;
+  min-width: 210px;
+  width: calc(100% - 105px - 0.8rem);
+  min-height: 100px;
   max-height: 60vh;
   overflow-y: auto;
   margin: 0;
@@ -161,7 +202,6 @@
 
   scrollbar-width: thin;
   scrollbar-color: v.$color-gold v.$color-bg-dark;
-
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -223,26 +263,30 @@
 }
 
 /* Mobil */
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .search-bar-form {
-    gap: 0.35rem;
+    padding: 0;
+    gap: 0.25rem;
+    width: fit-content;
+    max-width: 100%;
   }
 
   .search-field {
-    flex: 1 1 180px;
-    min-width: 0;
+    flex: 0 0 135px;
+    width: 135px;
+    min-width: 135px;
   }
 
   .search-input {
-    min-width: 0;
+    width: 135px;
+    height: 1.75rem;
     font-size: 0.72rem;
+    padding: 0.15rem 0.4rem;
   }
 
-  .age-filter {
-    flex: 0 0 100px;
-  }
-
-  .search-results {
-    width: 180px;
+  .mobile-age-arrow-wrap {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 24px;
   }
 }
