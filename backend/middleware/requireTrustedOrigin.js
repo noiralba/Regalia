@@ -20,7 +20,11 @@ function requireTrustedOrigin(req, res, next) {
       : [
           "www.bioregalia.se",
           "bioregalia.se",
+
           "https://bioregalia.se",
+
+          "https://bioregalia.se",
+
           "http://localhost:3000",
           "http://localhost:5173",
           "http://localhost:4173",
@@ -43,6 +47,7 @@ function requireTrustedOrigin(req, res, next) {
   if (!allowedOrigin.includes(requestOrigin)) {
     return res.status(403).json({
       error: "Begäran nekad!.",
+      allowedOrigin,
       requestOrigin,
     });
   }
