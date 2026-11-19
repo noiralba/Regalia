@@ -21,12 +21,8 @@
 .headerSubpage {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-
-  .divider {
-    margin-top: 0;
-    margin-bottom: 2.25rem;
-  }
 }
+
 .bar {
   display: flex;
   flex-wrap: nowrap;
@@ -229,6 +225,14 @@
   fill: v.$color-gold;
 }
 
+/* Skärmar större än mobil */
+@media (min-width: 769px) {
+  .headerSubpage .divider {
+    margin-top: 0;
+    margin-bottom: 2.25rem;
+  }
+}
+
 /* Mellanstora skärmar */
 @media (max-width: 1200px) and (min-width: 769px) {
   .bar {
@@ -263,8 +267,10 @@
 /* Mobil */
 @media (max-width: 768px) {
   .header,
-  .headerHome {
+  .headerHome,
+  .headerSubpage {
     padding: 0.35rem 0 0;
+    padding-bottom: 0;
     margin: 0;
   }
 
@@ -404,9 +410,11 @@
     font-size: 1.3rem;
   }
 
-  .divider {
+  .divider,
+  .headerSubpage .divider {
     gap: 0.5rem;
     margin-top: -1rem;
+    margin-bottom: 0;
     padding-bottom: 0.5rem;
     padding-inline: 0.75rem;
   }
@@ -416,6 +424,7 @@
     height: 0.95rem;
   }
 }
+
 /* Tillgänglighet */
 @media (prefers-reduced-motion: reduce) {
   .link,
