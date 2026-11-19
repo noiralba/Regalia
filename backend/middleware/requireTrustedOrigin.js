@@ -13,23 +13,24 @@ function requireTrustedOrigin(req, res, next) {
     return next();
   }
 
-  const devOrigins = [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "http://localhost:4173",
-    "http://192.168.68.125:5173",
-    "http://192.168.68.125:4173",
-  ];
+  const allowedOrigin =
+    process.env.FRONTEND_ORIGIN ||
+    (process.env.NODE_ENV === "production"
+      ? null
+      : [
+          // "www.bioregalia.se",
+          // "bioregalia.se",
 
-  const prodOrigins = ["https://bioregalia.se", "https://www.bioregalia.se"];
+          // "https://bioregalia.se",
 
-  const allowedOrigins = process.env.FRONTEND_ORIGIN
-    ? process.env.FRONTEND_ORIGIN.split(",").map((o) =>
-        o.trim().replace(/\/$/, ""),
-      )
-    : process.env.NODE_ENV === "production"
-      ? prodOrigins
-      : [...devOrigins, ...prodOrigins];
+          // "https://bioregalia.se",
+
+          "http://localhost:3000",
+          "http://localhost:5173",
+          "http://localhost:4173",
+          "http://192.168.68.125:5173",
+          "http://192.168.68.125:4173",
+        ]);
 
   let requestOrigin = req.get("Origin");
 
@@ -37,27 +38,18 @@ function requireTrustedOrigin(req, res, next) {
     try {
       requestOrigin = new URL(req.get("Referer")).origin;
     } catch {
-      return res
-        .status(403)
-        .json({
-          error: "Begäran nekad.",
-          prodOrigins,
-          allowedOrigins,
-          requestOrigin,
-        });
+      return res.status(403).json({
+        error: "Begäran nekad.",
+      });
     }
   }
 
-  if (!allowedOrigins.includes(requestOrigin)) {
+  if (!allowedOrigin.includes(requestOrigin)) {
     return res.status(403).json({
       error: "Begäran nekad!.",
-      prodOrigins,
-      allowedOrigins,
+      allowedOrigin,
       requestOrigin,
     });
   }
-
-  next();
 }
-
 module.exports = requireTrustedOrigin;
