@@ -38,7 +38,7 @@ function requireAuth(req, res, next) {
       });
     }
 
-    req.user = { id: decoded.sub, email: decoded.email };
+    req.user = { id: decoded.sub, email: decoded.email, role: decoded.role };
     req.sessionExpiresAt = decoded.exp * 1000;
     next();
   } catch {
