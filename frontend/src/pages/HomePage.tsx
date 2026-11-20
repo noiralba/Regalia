@@ -12,10 +12,10 @@ import type { MovieThumbnails } from "../types/types";
 import { api } from "../api/api";
 
 function HomePage() {
-    const { isLoggedIn, onLogout } = useOutletContext<{
-      isLoggedIn: boolean;
-      onLogout: () => void;
-    }>();
+  const { isLoggedIn, onLogout } = useOutletContext<{
+    isLoggedIn: boolean;
+    onLogout: () => void;
+  }>();
   const [selectedDate] = useState(() => new Date().toLocaleDateString("sv-SE"));
 
   const [nowPlaying, setNowPlaying] = useState<MovieThumbnails[]>([]);
@@ -76,7 +76,7 @@ function HomePage() {
           />
         </section>
 
-        <section className="page-section">
+        <section className="page-section homecalender">
           <Calendar selectedDate={selectedDate} />
         </section>
       </section>

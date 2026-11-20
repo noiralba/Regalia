@@ -13,17 +13,17 @@ export default function Footer() {
             <section className="footer-hours">
               <p className="footer-hours-row">
                 <span>Mån–tors</span>
-                <span>16.00–23.00</span>
+                <span>12.00–00.00</span>
               </p>
 
               <p className="footer-hours-row">
                 <span>Fre–lör</span>
-                <span>10.00–00.00</span>
+                <span>12.00–00.00</span>
               </p>
 
               <p className="footer-hours-row">
                 <span>Sön</span>
-                <span>12.00–23.00</span>
+                <span>12.00–00.00</span>
               </p>
             </section>
           </article>
