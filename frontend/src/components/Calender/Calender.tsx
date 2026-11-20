@@ -186,7 +186,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
             );
           })}
 
-          <footer className="row g-0 mt-3">
+          <footer className="row g-0">
             <section className="col-12 col-md-8 offset-md-4">
               {groupedShowings.length > 5 && (
                 <button
