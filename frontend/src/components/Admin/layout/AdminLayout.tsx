@@ -24,13 +24,6 @@ export default function AdminLayout() {
   const { pathname } = useLocation();
   const context = useOutletContext<AdminOutletContext>();
 
-  console.log(
-    "isLoggedIn: ",
-    context?.isLoggedIn,
-    "userRole ",
-    context?.userRole,
-  );
-
   if (!context?.isLoggedIn || context?.userRole !== "admin") {
     return <Navigate to={pages.home.path} replace />;
   }

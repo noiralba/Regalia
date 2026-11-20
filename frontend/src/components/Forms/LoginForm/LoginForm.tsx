@@ -43,7 +43,7 @@ export default function LoginForm() {
       >("/api/auth/login", { email, password });
 
       onLogin(result.expiresIn, email, result.userId, result.role);
-      console.log(result.role);
+
       if (result.role === "admin") {
         navigate(pages.admin.path);
       } else {

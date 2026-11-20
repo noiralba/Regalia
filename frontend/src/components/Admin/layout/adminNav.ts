@@ -34,7 +34,7 @@ export const adminNav: AdminNavItem[] = [
   {
     key: "dashboard",
     label: "Översikt",
-    description: "Samlad vy över biografens administration.",
+    description: "Samlad vy över Regalias administration.",
     path: pages.admin.path,
     icon: MdDashboard,
     end: true,
