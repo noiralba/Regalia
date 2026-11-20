@@ -1,11 +1,32 @@
-import { Link, NavLink, Outlet, matchPath, useLocation } from "react-router";
+import {
+  Link,
+  NavLink,
+  Navigate,
+  Outlet,
+  matchPath,
+  useLocation,
+  useOutletContext,
+} from "react-router";
 import { MdArrowBack } from "react-icons/md";
 import { adminNav } from "./adminNav";
 import { pages } from "../../../routeConfig";
 import "./AdminLayout.scss";
 
+type AdminOutletContext = {
+  isLoggedIn: boolean;
+  userRole?: string;
+  userEmail?: string;
+  userId?: string;
+  onLogout: () => Promise<void>;
+};
+
 export default function AdminLayout() {
   const { pathname } = useLocation();
+  const context = useOutletContext<AdminOutletContext>();
+
+  if (!context?.isLoggedIn || context?.userRole !== "admin") {
+    return <Navigate to={pages.home.path} replace />;
+  }
 
   // Hitta aktuell sida i menyn för rubrik och beskrivning
   const current =

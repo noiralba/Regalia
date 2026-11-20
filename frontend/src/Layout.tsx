@@ -10,6 +10,7 @@ type Session = {
   expiresAt: number;
   email?: string;
   userId?: string;
+  role?: string;
 };
 
 export default function Layout() {
@@ -19,13 +20,20 @@ export default function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === pages.home.path;
+  const isAdmin = location.pathname.startsWith(pages.admin.path);
 
-  function handleLogin(expiresIn: number, email: string, userId: string) {
+  function handleLogin(
+    expiresIn: number,
+    email: string,
+    userId: string,
+    role?: string,
+  ) {
     sessionVersion.current += 1;
     setSession({
       expiresAt: Date.now() + expiresIn * 1000,
       email: email,
       userId: userId,
+      role,
     });
   }
 
@@ -101,7 +109,7 @@ export default function Layout() {
   return (
     <>
       <ScrollToTop />
-      {!isHome && (
+      {!isHome && !isAdmin && (
         <Header
           isLoggedIn={isAuthenticating ? false : session !== null}
           onLogout={handleLogout}
@@ -118,16 +126,21 @@ export default function Layout() {
             onLogin: handleLogin,
             userEmail: session?.email,
             userId: session?.userId,
+            userRole: session?.role,
             isLoggedIn: session !== null,
             onLogout: handleLogout,
           }}
         />
       )}
 
-      <section className="footer-spacing">
-        <Footer />
-      </section>
-      <CookieModal />
+      {!isAdmin && (
+        <>
+          <section className="footer-spacing">
+            <Footer />
+          </section>
+          <CookieModal />
+        </>
+      )}
     </>
   );
 }

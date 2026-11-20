@@ -30,7 +30,7 @@ router.post("/login", loginLimiter, async (req, res) => {
 
   try {
     const [users] = await db.execute(
-      "SELECT id, email, password FROM users WHERE email = ? LIMIT 1",
+      "SELECT id, email, password, role FROM users WHERE email = ? LIMIT 1",
       [email.trim().toLowerCase()],
     );
 
@@ -47,7 +47,7 @@ router.post("/login", loginLimiter, async (req, res) => {
     });
 
     const token = jwt.sign(
-      { sub: user.id, email: user.email, id: user.id },
+      { sub: user.id, email: user.email, id: user.id, role: user.role },
       process.env.JWT_SECRET,
       {
         algorithm: "HS256",
@@ -68,6 +68,7 @@ router.post("/login", loginLimiter, async (req, res) => {
     return res.status(200).json({
       expiresIn: 3600,
       userId: user.id,
+      role: user.role,
     });
   } catch (error) {
     console.error("POST /auth/login:", error.message);
@@ -88,6 +89,7 @@ router.get("/session", requireAuth, (req, res) => {
     expiresAt: req.sessionExpiresAt,
     email: req.user.email,
     id: req.user.id,
+    role: req.user.role,
   });
 });
 
