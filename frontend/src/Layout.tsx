@@ -67,6 +67,7 @@ export default function Layout() {
           expiresAt: number;
           email: string;
           id: string;
+          role?: string;
         }>;
       })
       .then((data) => {
@@ -80,6 +81,7 @@ export default function Layout() {
             expiresAt: data.expiresAt,
             email: data.email,
             userId: data.id,
+            role: data.role,
           });
         }
       })
@@ -126,6 +128,7 @@ export default function Layout() {
             onLogin: handleLogin,
             userEmail: session?.email,
             userId: session?.userId,
+            userRole: session?.role,
             isLoggedIn: session !== null,
             onLogout: handleLogout,
           }}

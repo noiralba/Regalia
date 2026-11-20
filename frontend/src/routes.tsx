@@ -118,65 +118,65 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: pages.admin.path,
+        element: (
+          <Suspense fallback={<div>Laddar admin...</div>}>
+            <AdminLayout />
+          </Suspense>
+        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<div>Laddar...</div>}>
+                <AdminDashboard />
+              </Suspense>
+            ),
+          },
+          {
+            path: pages.adminMovies.path,
+            element: (
+              <Suspense fallback={<div>Laddar...</div>}>
+                <AdminMovies />
+              </Suspense>
+            ),
+          },
+          {
+            path: pages.adminPerson.path,
+            element: (
+              <Suspense fallback={<div>Laddar...</div>}>
+                <AdminPersons />
+              </Suspense>
+            ),
+          },
+          {
+            path: pages.showsadmin.path,
+            element: (
+              <Suspense fallback={<div>Laddar...</div>}>
+                <AdminShows />
+              </Suspense>
+            ),
+          },
+          {
+            path: pages.adminThemes.path,
+            element: (
+              <Suspense fallback={<div>Laddar...</div>}>
+                <AdminThemes />
+              </Suspense>
+            ),
+          },
+          {
+            path: pages.adminMoviePerson.path,
+            element: (
+              <Suspense fallback={<div>Laddar...</div>}>
+                <AdminMovieConnections />
+              </Suspense>
+            ),
+          },
+        ],
+      },
       { path: "*", element: <h1>404 – Sidan kunde inte hittas</h1> },
-    ],
-  },
-  {
-    path: pages.admin.path,
-    element: (
-      <Suspense fallback={<div>Laddar admin...</div>}>
-        <AdminLayout />
-      </Suspense>
-    ),
-    children: [
-      {
-        index: true,
-        element: (
-          <Suspense fallback={<div>Laddar...</div>}>
-            <AdminDashboard />
-          </Suspense>
-        ),
-      },
-      {
-        path: pages.adminMovies.path,
-        element: (
-          <Suspense fallback={<div>Laddar...</div>}>
-            <AdminMovies />
-          </Suspense>
-        ),
-      },
-      {
-        path: pages.adminPerson.path,
-        element: (
-          <Suspense fallback={<div>Laddar...</div>}>
-            <AdminPersons />
-          </Suspense>
-        ),
-      },
-      {
-        path: pages.showsadmin.path,
-        element: (
-          <Suspense fallback={<div>Laddar...</div>}>
-            <AdminShows />
-          </Suspense>
-        ),
-      },
-      {
-        path: pages.adminThemes.path,
-        element: (
-          <Suspense fallback={<div>Laddar...</div>}>
-            <AdminThemes />
-          </Suspense>
-        ),
-      },
-      {
-        path: pages.adminMoviePerson.path,
-        element: (
-          <Suspense fallback={<div>Laddar...</div>}>
-            <AdminMovieConnections />
-          </Suspense>
-        ),
-      },
     ],
   },
 ]);
