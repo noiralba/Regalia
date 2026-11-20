@@ -45,7 +45,7 @@ export default function Footer() {
 
             <p className="footer-contact-item">
               <a href="tel:0768339012" className="footer-link">
-                0768-339012
+                07688339011
               </a>
             </p>
 
