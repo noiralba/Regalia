@@ -46,6 +46,31 @@ export const pages = {
     path: "/integritetspolicy",
     label: "Integritetspolicy",
   },
+
+  admin: {
+    path: "/admin",
+    label: "Admin",
+  },
+  showsadmin: {
+    path: "/admin/visningar",
+    label: "admin/visningar",
+  },
+  adminPerson: {
+    path: "/admin/personer",
+    label: "admin/personer",
+  },
+  adminMoviePerson: {
+    path: "/admin/rollista",
+    label: "admin/rollista",
+  },
+  adminMovies: {
+    path: "/admin/filmer",
+    label: "admin/filmer",
+  },
+  adminThemes: {
+    path: "/admin/teman",
+    label: "admin/teman",
+  },
 };
 
 export const routeLinks = {

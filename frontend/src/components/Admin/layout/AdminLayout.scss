@@ -1,0 +1,393 @@
+@use "sass:color";
+@use "../../../styles/variables" as v;
+
+// Färger och mått för hela adminytan – hämtade från globala variabler.
+.admin {
+  --admin-bg: #{v.$color-bg-dark};
+  --admin-surface: #{v.$color-card-bg};
+  --admin-border: #{rgba(v.$color-gold, 0.25)};
+  --admin-muted: #{rgba(v.$color-cream, 0.65)};
+  --admin-accent: #{v.$color-gold};
+  --admin-red: #{v.$color-primary-red};
+  --admin-sidebar-width: 250px;
+
+  --bs-body-bg: var(--admin-bg);
+  --bs-body-color: #{v.$color-cream};
+  --bs-border-color: var(--admin-border);
+
+  display: grid;
+  grid-template-columns: var(--admin-sidebar-width) minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--admin-bg);
+  color: var(--bs-body-color);
+  font-family: v.$font-body;
+
+  .card {
+    --bs-card-bg: var(--admin-surface);
+    --bs-card-border-color: var(--admin-border);
+  }
+
+  // ---------- BOOTSTRAP-KOMPONENTER I ADMIN ----------
+  .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #{v.$color-cream};
+    --bs-table-border-color: var(--admin-border);
+    --bs-table-striped-bg: #{rgba(v.$color-cream, 0.03)};
+    --bs-table-striped-color: #{v.$color-cream};
+    --bs-table-hover-bg: #{rgba(v.$color-gold, 0.08)};
+    --bs-table-hover-color: #{v.$color-cream};
+
+    th {
+      font-family: v.$font-title;
+      font-size: 0.85rem;
+      letter-spacing: v.$letter-spacing;
+      text-transform: uppercase;
+      color: v.$color-gold;
+      border-bottom-width: 2px;
+    }
+  }
+
+  .form-control,
+  .form-select {
+    background-color: v.$color-bg-dark;
+    color: v.$color-cream;
+    border-color: var(--admin-border);
+
+    &::placeholder {
+      color: var(--admin-muted);
+    }
+
+    &:focus {
+      background-color: v.$color-bg-dark;
+      color: v.$color-cream;
+      @include v.focus-ring;
+    }
+  }
+
+  .form-label {
+    color: rgba(v.$color-cream, 0.9);
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    --bs-btn-bg: #{v.$color-primary-red};
+    --bs-btn-border-color: #{v.$color-primary-red};
+    --bs-btn-color: #{v.$color-cream};
+    --bs-btn-hover-bg: #{color.adjust(v.$color-primary-red, $lightness: 7%)};
+    --bs-btn-hover-border-color: #{v.$color-gold};
+    --bs-btn-active-bg: #{color.adjust(v.$color-primary-red, $lightness: -5%)};
+  }
+
+  .btn-outline-primary,
+  .btn-outline-secondary {
+    --bs-btn-color: #{v.$color-cream};
+    --bs-btn-border-color: var(--admin-border);
+    --bs-btn-hover-bg: #{rgba(v.$color-gold, 0.15)};
+    --bs-btn-hover-border-color: #{v.$color-gold};
+    --bs-btn-hover-color: #{v.$color-cream};
+  }
+
+  // ---------- SIDOMENY ----------
+  &-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.5rem 1rem;
+    background: var(--admin-bg);
+    border-right: 1px solid var(--admin-border);
+  }
+
+  &-brand {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.75rem;
+    line-height: 1.1;
+
+    &-name {
+      font-family: v.$font-title;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: v.$letter-spacing;
+      color: v.$color-cream;
+    }
+    &-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--admin-accent);
+    }
+  }
+
+  &-nav {
+    flex: 1;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+
+  &-nav-label {
+    display: block;
+    margin: 0 0.75rem 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: v.$letter-spacing;
+    text-transform: uppercase;
+    color: var(--admin-muted);
+  }
+
+  &-nav-link,
+  &-back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: v.$border-radius;
+    color: rgba(v.$color-cream, 0.85);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition:
+      background 0.15s,
+      color 0.15s;
+
+    &:hover {
+      background: rgba(v.$color-gold, 0.08);
+      color: v.$color-cream;
+    }
+    &:focus-visible {
+      @include v.focus-ring;
+    }
+  }
+
+  &-nav-link.active {
+    background: rgba(v.$color-primary-red, 0.35);
+    border-left-color: var(--admin-accent);
+    color: v.$color-cream;
+
+    svg {
+      color: var(--admin-accent);
+    }
+  }
+
+  &-back-link {
+    border-top: 1px solid var(--admin-border);
+    border-radius: 0;
+    padding-top: 1rem;
+    color: v.$color-cream !important;
+  }
+
+  // ---------- INNEHÅLL ----------
+  &-main {
+    padding: 2rem;
+    min-width: 0;
+
+    // Befintliga sidor (AdminMovies m.fl.) har egen Container med marginaler.
+    // Här anpassas de till adminytan utan att sidorna behöver ändras.
+    .container {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      margin-inline: 0;
+      padding-inline: 0;
+      max-width: none;
+    }
+  }
+
+  &-topbar {
+    margin-bottom: 1.75rem;
+
+    h1 {
+      margin: 0;
+      font-family: v.$font-title;
+      font-size: 2rem;
+      font-weight: 700;
+      color: v.$color-gold;
+    }
+    p {
+      margin: 0.25rem 0 0;
+      color: var(--admin-muted);
+    }
+  }
+
+  // ---------- ÖVERSIKT ----------
+  &-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: v.$border-radius;
+
+    &-icon {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      color: var(--tone, var(--admin-accent));
+      background: color-mix(
+        in srgb,
+        var(--tone, var(--admin-accent)) 18%,
+        transparent
+      );
+    }
+    &-label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--admin-muted);
+    }
+    &-value {
+      display: block;
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: v.$color-cream;
+    }
+  }
+
+  &-panel {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: v.$border-radius;
+
+    &-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      h2 {
+        margin: 0;
+        font-family: v.$font-title;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: v.$color-cream;
+      }
+      a {
+        color: var(--admin-accent);
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &-list {
+    li {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--admin-border);
+
+      &:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+    }
+  }
+
+  &-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+  }
+
+  &-quick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(v.$color-cream, 0.02);
+    border: 1px solid var(--admin-border);
+    border-radius: v.$border-radius;
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+
+    svg {
+      color: var(--tone, var(--admin-accent));
+      margin-bottom: 0.25rem;
+    }
+    &:hover {
+      border-color: var(--tone, var(--admin-accent));
+      transform: translateY(-2px);
+    }
+    &:focus-visible {
+      @include v.focus-ring;
+    }
+    &-title {
+      font-weight: 600;
+    }
+    &-hint {
+      font-size: 0.8rem;
+      color: var(--admin-muted);
+    }
+  }
+}
+.badge.bg-info,
+.text-bg-info {
+  background-color: rgba(v.$color-gold, 0.18) !important;
+  color: v.$color-cream !important;
+  border: 1px solid rgba(v.$color-gold, 0.4);
+}
+
+.text-muted,
+.text-secondary {
+  color: v.$color-cream !important;
+}
+
+// ---------- MOBIL / SMAL SKÄRM ----------
+@media (max-width: 991.98px) {
+  .admin {
+    grid-template-columns: 1fr;
+
+    &-sidebar {
+      gap: 1rem;
+      padding: 1rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--admin-border);
+    }
+    &-nav-label {
+      display: none;
+    }
+    &-nav ul {
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 0.5rem;
+    }
+    &-nav-link {
+      white-space: nowrap;
+      border-left: 0;
+      border-bottom: 3px solid transparent;
+
+      &.active {
+        border-bottom-color: var(--admin-accent);
+      }
+    }
+    &-back-link {
+      display: none;
+    }
+    &-main {
+      padding: 1.25rem 1rem;
+    }
+  }
+}
