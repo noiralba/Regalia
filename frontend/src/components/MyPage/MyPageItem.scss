@@ -1,6 +1,6 @@
 @use "../../styles/variables" as v;
 
-.myPage-alert{
+.myPage-alert {
   text-align: center;
 }
 
@@ -9,33 +9,50 @@
   margin-bottom: 2rem;
   color: v.$color-cream;
   font-size: v.$font-title;
+
+  @include v.respond-to(mobile) {
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+  }
 }
 
 .myPage-list {
-  margin: 0 auto;
+  width: 50vw;
+  margin: 0 auto 2rem;
+  padding: 2rem;
   border: 1px solid v.$color-gold;
   border-radius: v.$border-radius;
-  margin-bottom: 2rem;
   color: v.$color-bg-dark;
-  padding: 2rem;
-  width: 50vw;
+
+  @include v.respond-to(mobile) {
+    width: 100%;
+    padding: 1rem;
+  }
 
   h2 {
     text-align: center;
     margin-bottom: 2rem;
+
+    @include v.respond-to(mobile) {
+      margin-bottom: 1rem;
+    }
   }
 
   .myPage-button {
-    margin: 0 auto;
     width: 100%;
+    margin: 0 auto;
+    padding: 1rem 2rem;
     background-color: v.$color-primary-red;
     border: 1px solid v.$color-gold;
     color: v.$color-cream;
-    padding: 1rem 2rem;
     text-transform: uppercase;
 
     &:hover {
       background-color: #5f1422;
+    }
+
+    @include v.respond-to(mobile) {
+      padding: 0.75rem 1rem;
     }
   }
 }
@@ -47,21 +64,35 @@
   gap: 2rem;
   margin-bottom: 2rem;
 
+  @include v.respond-to(mobile) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   &__info {
-    background-color: v.$color-cream;
     width: 40vw;
     padding: 3rem;
+    background-color: v.$color-cream;
     border-radius: v.$border-radius;
 
     h3,
     p {
       color: v.$color-bg-dark;
     }
+
+    @include v.respond-to(mobile) {
+      width: 100%;
+      padding: 1.5rem;
+    }
   }
 
   &__actions {
     display: flex;
     gap: 1rem;
+
+    @include v.respond-to(mobile) {
+      flex-direction: column;
+    }
   }
 
   &__primary {
@@ -72,8 +103,8 @@
 
   &__secondary {
     background-color: v.$color-card-bg;
-    color: v.$color-cream;
     border: 1px solid v.$color-gold;
+    color: v.$color-cream;
 
     &:hover {
       background-color: v.$color-primary-red;
@@ -81,14 +112,14 @@
   }
 
   &__cancel {
-  width: 100%;
-  border: 1px solid v.$color-bg-dark;
-  text-transform: uppercase;
-  color: v.$color-cream;
-  margin-top: 1rem;
-
-  &:hover {
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid v.$color-bg-dark;
     color: v.$color-cream;
-  }
+    text-transform: uppercase;
+
+    &:hover {
+      color: v.$color-cream;
+    }
   }
 }
