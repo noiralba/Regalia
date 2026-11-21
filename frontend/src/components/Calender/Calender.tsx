@@ -20,15 +20,13 @@ export default function Calendar({ selectedDate }: CalendarProps) {
   const [movies, setMovies] = useState<Movies[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [showAll, setShowAll] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
   // Återställ listan när datumet ändras
-  useEffect(() => {
-    setShowAll(false);
-  }, [selectedDate]);
+const [expandedDate, setExpandedDate] = useState<string | null>(null);
+const showAll = expandedDate === selectedDate;
 
   // Hämta filmer en gång
   useEffect(() => {
@@ -192,7 +190,7 @@ export default function Calendar({ selectedDate }: CalendarProps) {
                 <button
                   type="button"
                   className="show-all"
-                  onClick={() => setShowAll((previous) => !previous)}
+                  onClick={() => setExpandedDate(showAll ? null : selectedDate)}
                   aria-expanded={showAll}
                 >
                   {showAll ? "Visa mindre" : "Visa mer"}

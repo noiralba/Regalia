@@ -13,6 +13,7 @@ export const MyPageItem: React.FC<MyPageItemProps> = ({ booking, onCancel }) => 
     const [confirming, setConfirming] = useState(false);
     const [isCancelling, setIsCancelling] = useState(false);
     const [cancelError, setCancelError] = useState("");
+    
 
     const canCancel = Boolean(onCancel) && booking.status !== "CANCELLED";
 

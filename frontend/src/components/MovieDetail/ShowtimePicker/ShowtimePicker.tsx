@@ -1,5 +1,6 @@
 import type { Showing } from "../../../types/types";
 import { formatTime } from "../../../utils/formatDateTime";
+import { useState } from "react";
 
 import "./ShowtimePicker.scss";
 
@@ -12,6 +13,10 @@ type Props = {
   onSelectShowing: (showing: Showing) => void;
 };
 
+function toDateString(date: Date) {
+  return date.toLocaleDateString("sv-SE"); 
+}
+
 export default function ShowtimePicker({
   dates,
   showings,
@@ -20,24 +25,26 @@ export default function ShowtimePicker({
   onSelectDate,
   onSelectShowing,
 }: Props) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const [{ today, tomorrow }] = useState(() => {
+    const now = new Date();
+    const next = new Date(now);
+    next.setDate(next.getDate() + 1);
 
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+    return { today: toDateString(now), tomorrow: toDateString(next) };
+  });
 
   function getDateLabel(dateString: string) {
-    const date = new Date(`${dateString}T00:00:00`);
-
-    if (date.getTime() === today.getTime()) {
+    if (dateString === today) {
       return "IDAG";
     }
 
-    if (date.getTime() === tomorrow.getTime()) {
+    if (dateString === tomorrow) {
       return "IMORGON";
     }
 
-    return date.toLocaleDateString("sv-SE", { weekday: "long" }).toUpperCase();
+    return new Date(`${dateString}T00:00:00`)
+      .toLocaleDateString("sv-SE", { weekday: "long" })
+      .toUpperCase();
   }
 
   function getDateNumber(dateString: string) {
